@@ -32,6 +32,9 @@
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
 [Gates determined based on constitution file]
+ - [ ] Use cases and acceptance tests live in `UC-XX.md` and `UC-XX-AT.md`.
+ - [ ] Architecture follows MVC with clear Model/View/Controller boundaries.
+ - [ ] UI implementation uses only vanilla HTML, CSS, and JavaScript.
 
 ## Project Structure
 
@@ -58,10 +61,10 @@ specs/[###-feature]/
 ```text
 # [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
+├── controllers/
 ├── models/
-├── services/
-├── cli/
-└── lib/
+├── views/
+└── assets/
 
 tests/
 ├── contract/
@@ -78,9 +81,10 @@ backend/
 
 frontend/
 ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
+│   ├── controllers/
+│   ├── models/
+│   ├── views/
+│   └── assets/
 └── tests/
 
 # [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)

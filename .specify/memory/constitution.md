@@ -1,50 +1,70 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+  Sync Impact Report
+  - Version change: N/A (template) -> 1.0.0
+  - Modified principles: N/A (template placeholders)
+  - Added sections: Documentation & Test Artifacts, Development Workflow
+  - Removed sections: None
+  - Templates requiring updates:
+    - ? .specify/templates/plan-template.md
+    - ? .specify/templates/spec-template.md
+    - ? .specify/templates/tasks-template.md
+    - ? .specify/templates/commands/*.md (directory not found)
+  - Follow-up TODOs:
+    - TODO(RATIFICATION_DATE): Original ratification date not found in repo history.
+-->
+# CMS1 Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Use Case File Convention
+All use cases MUST be documented in `UC-XX.md` files at the repository root. `XX`
+MUST be a two-digit, zero-padded identifier (e.g., `UC-01.md`, `UC-12.md`) and
+MUST be unique and sequential for the project.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Acceptance Test File Convention
+Each use case MUST have acceptance tests documented in a matching
+`UC-XX-AT.md` file at the repository root. The `XX` MUST match the
+corresponding use case identifier, and tests MUST trace to the scenarios in the
+paired use case.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. MVC Architecture (NON-NEGOTIABLE)
+The application MUST follow MVC architecture. Models encapsulate data and
+domain rules, Views are vanilla HTML/CSS, and Controllers are vanilla JavaScript
+that mediate user input and coordinate updates between Models and Views.
+Cross-layer coupling (e.g., Views mutating Models directly) is prohibited.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Vanilla Web Stack Only
+Implementation MUST use only vanilla HTML, CSS, and JavaScript. UI frameworks,
+SPA routers, component libraries, and state management libraries are not
+permitted unless the constitution is amended.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Enforced Layer Boundaries
+Source layout MUST preserve explicit Model, View, and Controller boundaries
+(e.g., `src/models`, `src/views`, `src/controllers`). Controllers may import
+Models and update Views; Models must not depend on Views.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Documentation & Test Artifacts
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Use case and acceptance test files are the authoritative source for user
+  journeys and system behavior.
+- Any change to user-facing behavior MUST update the corresponding `UC-XX.md`
+  and `UC-XX-AT.md` files in the same change set.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Plans and specs MUST reference relevant `UC-XX.md` and `UC-XX-AT.md` files and
+  keep them in sync with implementation decisions.
+- Code reviews MUST include a constitution compliance check (file conventions,
+  MVC boundaries, and vanilla stack usage).
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes all other project practices and templates.
+- Amendments require documenting the change, rationale, and migration impact,
+  plus a version bump following semantic versioning.
+- Versioning policy: MAJOR for breaking governance changes, MINOR for new or
+  expanded principles/sections, PATCH for clarifications or typo fixes.
+- Compliance review is mandatory for plans, specs, tasks, and code reviews; any
+  exception requires a formal amendment.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): original date not found | **Last Amended**: 2026-02-01

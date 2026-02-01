@@ -9,6 +9,8 @@ description: "Task list template for feature implementation"
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
 **Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Use Cases**: Tasks MUST reference and keep `UC-XX.md` and `UC-XX-AT.md` in sync
+when user-facing behavior changes.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 

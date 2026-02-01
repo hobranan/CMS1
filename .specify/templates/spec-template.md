@@ -4,6 +4,7 @@
 **Created**: [DATE]  
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
+**Use Case Sources**: `UC-XX.md`, `UC-XX-AT.md`
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -89,6 +90,9 @@
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-006**: System MUST adhere to MVC architecture with explicit Model, View,
+  and Controller boundaries.
+- **FR-007**: UI MUST be implemented with vanilla HTML, CSS, and JavaScript only.
 
 *Example of marking unclear requirements:*
 
