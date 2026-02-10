@@ -1,0 +1,166 @@
+openapi: 3.0.3
+info:
+  title: Assigned Paper Access API
+  version: 1.0.0
+  description: Contracts for assignment-scoped paper, manuscript (view-only), and review-form access.
+paths:
+  /api/v1/referees/{refereeId}/assigned-papers:
+    get:
+      summary: Get papers assigned to logged-in referee
+      parameters:
+        - name: refereeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Assigned papers returned (possibly empty)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  papers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AssignedPaper'
+                  message:
+                    type: string
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: List retrieval failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/papers/{paperId}/manuscript-view:
+    get:
+      summary: Open manuscript in view-only mode for assigned referee
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Manuscript view resource returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManuscriptView'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not assigned to paper
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Manuscript unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: System error during retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/papers/{paperId}/review-form:
+    get:
+      summary: Access pre-generated review form for assigned referee
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pre-generated review form returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewForm'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not assigned to paper
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Review form unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: System error during retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    AssignedPaper:
+      type: object
+      required: [paperId, title, assignmentStatus]
+      properties:
+        paperId:
+          type: string
+        title:
+          type: string
+        assignmentStatus:
+          type: string
+          enum: [active, inactive]
+    ManuscriptView:
+      type: object
+      required: [paperId, contentUrl, accessMode]
+      properties:
+        paperId:
+          type: string
+        contentUrl:
+          type: string
+        accessMode:
+          type: string
+          enum: [view_only]
+    ReviewForm:
+      type: object
+      required: [paperId, reviewFormId, preGenerated]
+      properties:
+        paperId:
+          type: string
+        reviewFormId:
+          type: string
+        preGenerated:
+          type: boolean
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
