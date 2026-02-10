@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: CMS Save Draft API
+  version: 1.1.0
+  description: Contracts for UC-07 manual save, submit-triggered pre-validation save, and final-submission eligibility checks.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/drafts/{draftId}/save:
+    post:
+      summary: Manually save editable draft state
+      operationId: saveDraft
+      tags: [Draft]
+      parameters:
+        - in: path
+          name: draftId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [editable_state]
+              properties:
+                editable_state:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: Save processed (saved or no changes).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveDraftResponse'
+        '400':
+          description: Save-level validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Author not authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Storage/network/system failure; persisted draft unchanged.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/drafts/{draftId}:
+    get:
+      summary: Retrieve persisted draft state
+      operationId: getDraft
+      tags: [Draft]
+      parameters:
+        - in: path
+          name: draftId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Persisted draft state returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [draft_id, editable_state, last_saved_at]
+                properties:
+                  draft_id:
+                    type: string
+                  editable_state:
+                    type: object
+                    additionalProperties: true
+                  last_saved_at:
+                    type: string
+                    format: date-time
+        '404':
+          description: Draft not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/drafts/{draftId}/finalize:
+    post:
+      summary: Attempt final submission (with pre-validation save)
+      operationId: finalizeDraft
+      tags: [Draft]
+      parameters:
+        - in: path
+          name: draftId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [editable_state]
+              properties:
+                editable_state:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: Pre-validation save succeeded and final validation passed; submission finalized.
+        '409':
+          description: Pre-validation save succeeded but final validation failed; submission blocked and saved draft retained.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Pre-validation save-level validation failed; draft not updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SaveDraftResponse:
+      type: object
+      required: [status, message]
+      properties:
+        status:
+          type: string
+          enum: [SAVED, NO_CHANGES]
+        message:
+          type: string
+        last_saved_at:
+          type: string
+          format: date-time
+          nullable: true
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: FINAL_VALIDATION_FAILED
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string
