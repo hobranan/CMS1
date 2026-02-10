@@ -1,0 +1,235 @@
+openapi: 3.0.3
+info:
+  title: Generate Schedule API
+  version: 1.0.0
+  description: Contracts for manual conference schedule generation, draft review, conflict handling, and publication.
+paths:
+  /api/v1/conferences/{conferenceId}/schedule/generate:
+    post:
+      summary: Manually generate conference schedule draft
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateScheduleRequest'
+      responses:
+        '200':
+          description: Draft generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateScheduleResult'
+        '400':
+          description: Missing accepted papers or incomplete parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Draft save failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/conferences/{conferenceId}/schedule/drafts/{draftId}/publish:
+    post:
+      summary: Publish reviewed schedule draft
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: draftId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishScheduleRequest'
+      responses:
+        '200':
+          description: Schedule published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishScheduleResult'
+        '400':
+          description: Unresolved conflicts or invalid publish confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Draft state conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/conferences/{conferenceId}/schedule:
+    get:
+      summary: Retrieve latest published schedule
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Published schedule returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedScheduleResponse'
+        '404':
+          description: No published schedule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    GenerateScheduleRequest:
+      type: object
+      required: [triggerMode]
+      properties:
+        triggerMode:
+          type: string
+          enum: [manual]
+        seed:
+          type: string
+          description: Optional seed for reproducible randomized initial ordering in tests.
+    GenerateScheduleResult:
+      type: object
+      required: [draftId, status, roomColumnCount, slotCountPerRoom, conflicts]
+      properties:
+        draftId:
+          type: string
+        status:
+          type: string
+          enum: [draft]
+        roomColumnCount:
+          type: integer
+        slotCountPerRoom:
+          type: integer
+        slotIntervalMinutes:
+          type: integer
+        conflicts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConflictItem'
+    PublishScheduleRequest:
+      type: object
+      required: [confirmed]
+      properties:
+        confirmed:
+          type: boolean
+          enum: [true]
+    PublishScheduleResult:
+      type: object
+      required: [draftId, status, publishedAt]
+      properties:
+        draftId:
+          type: string
+        status:
+          type: string
+          enum: [published]
+        publishedAt:
+          type: string
+          format: date-time
+    PublishedScheduleResponse:
+      type: object
+      required: [conferenceId, status, rooms]
+      properties:
+        conferenceId:
+          type: string
+        status:
+          type: string
+          enum: [published]
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomColumnView'
+    RoomColumnView:
+      type: object
+      required: [roomId, slots]
+      properties:
+        roomId:
+          type: string
+        slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlotView'
+    SlotView:
+      type: object
+      required: [slotSequence, startTime, endTime]
+      properties:
+        slotSequence:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        paperId:
+          type: string
+          nullable: true
+    ConflictItem:
+      type: object
+      required: [type, severity, details]
+      properties:
+        type:
+          type: string
+        severity:
+          type: string
+          enum: [blocking, warning]
+        details:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
