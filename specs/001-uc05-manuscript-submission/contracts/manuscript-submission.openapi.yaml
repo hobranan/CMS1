@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: CMS Manuscript Submission API
+  version: 1.0.0
+  description: Contracts for UC-05 manuscript submission with metadata validation and upload failure handling.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/submissions:
+    post:
+      summary: Submit manuscript metadata and file for review entry
+      operationId: createSubmission
+      tags: [Submission]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SubmissionRequest'
+      responses:
+        '201':
+          description: Submission finalized and entered into review workflow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionSuccessResponse'
+        '400':
+          description: Metadata or file validation failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Author not authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Submission window closed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Storage/database failure prevented finalization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/submissions/upload-status:
+    post:
+      summary: Report upload interruption state
+      operationId: reportUploadInterruption
+      tags: [Submission]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [submission_id, status]
+              properties:
+                submission_id:
+                  type: string
+                status:
+                  type: string
+                  enum: [INTERRUPTED]
+      responses:
+        '200':
+          description: Interruption recorded; retry guidance returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [code, message]
+                properties:
+                  code:
+                    type: string
+                    example: UPLOAD_INTERRUPTED
+                  message:
+                    type: string
+                    example: Network interruption detected. Retry upload when connectivity is restored.
+  /api/v1/submissions/mine:
+    get:
+      summary: List current author's submissions
+      operationId: listAuthorSubmissions
+      tags: [Submission]
+      responses:
+        '200':
+          description: Author submissions with metadata and manuscript references.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SubmissionSummary'
+components:
+  schemas:
+    SubmissionRequest:
+      type: object
+      required:
+        - author_names
+        - author_affiliations
+        - author_contact_info
+        - abstract_text
+        - keywords
+        - main_reference_source
+        - manuscript_file
+      properties:
+        author_names:
+          type: string
+        author_affiliations:
+          type: string
+        author_contact_info:
+          type: string
+        abstract_text:
+          type: string
+        keywords:
+          type: string
+        main_reference_source:
+          type: string
+        manuscript_file:
+          type: string
+          format: binary
+          description: PDF, Word, or LaTeX file not exceeding 7 MB.
+    SubmissionSuccessResponse:
+      type: object
+      required: [status, submission_id, redirect]
+      properties:
+        status:
+          type: string
+          example: FINALIZED
+        submission_id:
+          type: string
+        redirect:
+          type: string
+          example: /author/home
+    SubmissionSummary:
+      type: object
+      required: [submission_id, status, metadata, manuscript_reference]
+      properties:
+        submission_id:
+          type: string
+        status:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        manuscript_reference:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: VALIDATION_FAILED
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string
