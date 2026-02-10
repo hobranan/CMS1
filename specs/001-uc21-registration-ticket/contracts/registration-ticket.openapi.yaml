@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Registration Ticket API
+  version: 1.0.0
+  description: Contracts for ticket issuance after confirmed payment and ticket PDF retrieval from attendee account area.
+paths:
+  /api/v1/registrations/{registrationId}/ticket/issue:
+    post:
+      summary: Issue registration ticket for confirmed payment
+      parameters:
+        - name: registrationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ticket issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueTicketResponse'
+        '409':
+          description: Payment still pending or unresolved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Ticket generation or storage failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/account/registrations/{registrationId}/ticket:
+    get:
+      summary: Retrieve issued ticket metadata for attendee account view
+      parameters:
+        - name: registrationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ticket metadata returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketMetadataResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Ticket not found or unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/account/registrations/{registrationId}/ticket.pdf:
+    get:
+      summary: View stored ticket PDF from attendee account area
+      parameters:
+        - name: registrationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ticket PDF returned
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Ticket missing or not stored
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Ticket storage temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    IssueTicketResponse:
+      type: object
+      required: [ticketId, ticketReference, registrationState, qrCodePresent, format]
+      properties:
+        ticketId:
+          type: string
+        ticketReference:
+          type: string
+        registrationState:
+          type: string
+          enum: [paid_confirmed]
+        qrCodePresent:
+          type: boolean
+          enum: [true]
+        format:
+          type: string
+          enum: [pdf]
+        deliveryStatus:
+          type: string
+          enum: [sent, failed, not_attempted]
+    TicketMetadataResponse:
+      type: object
+      required: [ticketId, ticketReference, issuedAt, qrCodePresent, format]
+      properties:
+        ticketId:
+          type: string
+        ticketReference:
+          type: string
+        issuedAt:
+          type: string
+          format: date-time
+        qrCodePresent:
+          type: boolean
+        format:
+          type: string
+          enum: [pdf]
+        retrievalAvailable:
+          type: boolean
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
