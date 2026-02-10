@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: Submit Review API
+  version: 1.0.0
+  description: Contracts for review submission, immutable submitted records, and newer-version chaining.
+paths:
+  /api/v1/assignments/{assignmentId}/review-draft:
+    get:
+      summary: Get review draft and informational deadline indicator
+      parameters:
+        - name: assignmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Draft returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewDraft'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Ineligible assignment access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/assignments/{assignmentId}/reviews/submit:
+    post:
+      summary: Submit completed review for active assignment
+      parameters:
+        - name: assignmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitReviewRequest'
+      responses:
+        '200':
+          description: Review submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitReviewResult'
+        '400':
+          description: Validation error (required fields missing/invalid)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Assignment not active or unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Concurrent submission/version conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Database persistence failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ReviewDraft:
+      type: object
+      required: [assignmentId, requiredFields, deadlineIndicator]
+      properties:
+        assignmentId:
+          type: string
+        requiredFields:
+          type: object
+        deadlineIndicator:
+          type: string
+          format: date-time
+          nullable: true
+        deadlineEnforced:
+          type: boolean
+          enum: [false]
+    SubmitReviewRequest:
+      type: object
+      required: [fields, recommendation]
+      properties:
+        fields:
+          type: object
+        recommendation:
+          type: string
+        comments:
+          type: string
+    SubmitReviewResult:
+      type: object
+      required: [reviewId, status, versionNumber, assignmentStatus, notificationStatus]
+      properties:
+        reviewId:
+          type: string
+        status:
+          type: string
+          enum: [submitted]
+        versionNumber:
+          type: integer
+        assignmentStatus:
+          type: string
+          enum: [completed]
+        previousReviewId:
+          type: string
+          nullable: true
+        notificationStatus:
+          type: string
+          enum: [sent, failed]
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
