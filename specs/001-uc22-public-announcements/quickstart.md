@@ -1,32 +1,36 @@
-# Quickstart: View public announcements
+# Quickstart - UC-22 Public Announcements
+
+## Goal
+Allow guests to view public conference announcements in date order and open full announcement details with robust empty/error/unavailable handling.
 
 ## Prerequisites
-- CMS running with web routes enabled.
-- At least one announcement record in storage for happy-path checks.
-- Announcement records include `is_public` and publish timestamp metadata.
+- Dependencies installed
+- Test command available: `npm test && npm run lint`
+- UC files present: `UC-22.md`, `UC-22-AT.md`
 
-## 1. Verify list view (happy path)
-1. Open `Announcements` page as a guest.
-2. Confirm announcements render in reverse chronological order.
-3. Confirm list remains consistent after browser refresh.
+## Implementation Steps
+1. Expose public announcements list endpoint/page without authentication.
+2. Retrieve only announcements marked public from storage.
+3. Sort list newest-first by date with deterministic fallback for same-date records.
+4. Render announcements list with selectable entries.
+5. Implement detail view for selected listed announcement.
+6. Provide explicit navigation path back to list from detail view.
+7. On no public announcements, show no-announcements message.
+8. On list retrieval failure, show system error and suppress list content.
+9. On selected announcement unavailability, show unavailable message and return to list safely.
+10. Ensure list remains consistently visible across refresh and return navigation when data source is healthy.
+11. Support direct URL access to announcements page with same public behavior.
 
-## 2. Verify detail view
-1. Select any announcement from list.
-2. Confirm full announcement content is visible.
-3. Return to list and open another item.
+## Validation Scenarios
+- Guest sees public announcements list ordered by date descending.
+- Guest refreshes and sees consistent list visibility.
+- Guest opens announcement and sees full content.
+- Guest returns from detail to list and continues browsing.
+- No announcements condition shows explicit message.
+- Retrieval failure shows explicit system error and no list.
+- Selected announcement becomes unavailable -> message shown and safe return to list.
+- Identical-date announcements still render in deterministic stable order.
 
-## 3. Verify empty state
-1. Use dataset with no public announcements.
-2. Open `Announcements` page.
-3. Confirm no-announcements message is shown and no list items appear.
-
-## 4. Verify failure handling
-1. Simulate announcement list retrieval failure.
-2. Open `Announcements` page.
-3. Confirm explicit system-error message and no list rendering.
-
-## 5. Verify unavailable detail recovery
-1. Open list with a target announcement present.
-2. Remove or mark target announcement unavailable.
-3. Select target announcement.
-4. Confirm unavailable message and automatic return to list view.
+## Verification
+- Run `npm test && npm run lint`.
+- Execute contract/integration tests for guest access, ordering, detail navigation, no-data/error/unavailable states, and refresh consistency.

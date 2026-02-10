@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: Public Announcements API
+  version: 1.0.0
+  description: Contracts for guest access to public announcement list and detail views.
+paths:
+  /api/v1/public/announcements:
+    get:
+      summary: Get public announcements ordered newest first
+      responses:
+        '200':
+          description: Announcement list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicAnnouncementListResponse'
+        '204':
+          description: No public announcements available
+        '500':
+          description: Announcement retrieval failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/public/announcements/{announcementId}:
+    get:
+      summary: Get public announcement full content
+      parameters:
+        - name: announcementId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Announcement detail returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicAnnouncementDetailResponse'
+        '404':
+          description: Announcement unavailable or not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Detail retrieval failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    PublicAnnouncementListResponse:
+      type: object
+      required: [items, ordering]
+      properties:
+        ordering:
+          type: string
+          enum: [published_at_desc_then_id_desc]
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicAnnouncementItem'
+    PublicAnnouncementItem:
+      type: object
+      required: [announcementId, title, publishedAt]
+      properties:
+        announcementId:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+          nullable: true
+        publishedAt:
+          type: string
+          format: date-time
+    PublicAnnouncementDetailResponse:
+      type: object
+      required: [announcementId, title, content, publishedAt]
+      properties:
+        announcementId:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        publishedAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string

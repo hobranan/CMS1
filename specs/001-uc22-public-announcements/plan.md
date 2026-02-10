@@ -1,23 +1,23 @@
 # Implementation Plan: View public announcements
 
-**Branch**: `001-uc22-public-announcements` | **Date**: 2026-02-08 | **Spec**: `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc22-public-announcements/spec.md`
-**Input**: Feature specification from `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc22-public-announcements/spec.md`
+**Branch**: `001-uc22-public-announcements` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc22-public-announcements/spec.md`
+**Input**: Feature specification from `/specs/001-uc22-public-announcements/spec.md`
 
 ## Summary
 
-Implement a public announcements listing and detail flow that shows only public records in reverse chronological order, supports safe empty/error states, and blocks unavailable entries with clear recovery to list view.
+Implement a guest-accessible announcements experience that lists public announcements in reverse chronological order, supports full announcement detail viewing, and provides clear empty/error/unavailable-state handling with safe return-to-list behavior. The design ensures stable public visibility across refresh and navigation while maintaining deterministic ordering rules.
 
 ## Technical Context
 
 **Language/Version**: Vanilla JavaScript (ES2020+)  
 **Primary Dependencies**: Browser APIs only (no framework libraries)  
-**Storage**: Announcement records in existing CMS database (read path only for this feature)  
-**Testing**: Manual acceptance execution mapped to `UC-22-AT.md` plus browser-based integration checks  
-**Target Platform**: Web browsers (desktop/mobile) via CMS web app  
-**Project Type**: Single web project (MVC)  
-**Performance Goals**: Announcements list and detail render perceived as immediate for normal conference content volumes  
-**Constraints**: Public access without login; only public announcements visible; deterministic date ordering  
-**Scale/Scope**: Announcement feed for one conference instance with frequent pre/during-conference reads
+**Storage**: Existing application database (public announcement records and visibility metadata)  
+**Testing**: `npm test && npm run lint`  
+**Target Platform**: Public web browsers (guest and authenticated users)  
+**Project Type**: Web application (`frontend/` + `backend/`)  
+**Performance Goals**: Announcement list/detail retrieval and rendering complete within normal browsing latency  
+**Constraints**: MVC boundaries required; public announcements accessible without login; date ordering newest-first with deterministic fallback for ties  
+**Scale/Scope**: Public list/detail announcement viewing and associated no-data/error handling
 
 ## Constitution Check
 
@@ -27,44 +27,62 @@ Implement a public announcements listing and detail flow that shows only public 
 - [x] Architecture follows MVC with clear Model/View/Controller boundaries.
 - [x] UI implementation uses only vanilla HTML, CSS, and JavaScript.
 
-### Post-Design Re-Check
-
-- [x] Research decisions preserve public-announcement behavior from `UC-22.md`/`UC-22-AT.md`.
-- [x] Data model and contract design maintain MVC-friendly separation (Model data contracts, Controller orchestration, View rendering).
-- [x] No framework or non-vanilla UI dependency introduced by design artifacts.
-
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc22-public-announcements/
-├── plan.md
-├── research.md
-├── data-model.md
-├── quickstart.md
-├── contracts/
-│   └── announcements.openapi.yaml
-└── tasks.md
+specs/001-uc22-public-announcements/
+|-- plan.md
+|-- research.md
+|-- data-model.md
+|-- quickstart.md
+|-- contracts/
+`-- tasks.md
 ```
 
 ### Source Code (repository root)
 
 ```text
-/mnt/c/Users/ponti/Desktop/CMS1/
-├── src/
-│   ├── controllers/
-│   ├── models/
-│   ├── views/
-│   └── assets/
-└── tests/
-    ├── contract/
-    ├── integration/
-    └── unit/
+backend/
+|-- src/
+|   |-- models/
+|   |-- services/
+|   `-- api/
+`-- tests/
+
+frontend/
+|-- src/
+|   |-- controllers/
+|   |-- models/
+|   |-- views/
+|   `-- assets/
+`-- tests/
+
+tests/
+|-- contract/
+|-- integration/
+`-- unit/
 ```
 
-**Structure Decision**: Single MVC web project. Announcements retrieval logic belongs in models, page orchestration in controllers, and rendering/error states in views.
+**Structure Decision**: Use existing backend/frontend MVC structure with backend public-announcement retrieval/filtering services and frontend guest list/detail navigation with explicit empty/error fallback states.
+
+## Phase 0 Research Output
+
+Resolved in `specs/001-uc22-public-announcements/research.md` with decisions for public-access scope, deterministic date ordering, unavailable-selection handling, and refresh consistency behavior.
+
+## Phase 1 Design Output
+
+- Data model: `specs/001-uc22-public-announcements/data-model.md`
+- Contracts: `specs/001-uc22-public-announcements/contracts/public-announcements.openapi.yaml`
+- Quickstart: `specs/001-uc22-public-announcements/quickstart.md`
+
+## Post-Design Constitution Check
+
+- [x] Use case and acceptance test references remain `UC-22.md` and `UC-22-AT.md`.
+- [x] Design preserves MVC boundaries with controller-mediated model/view interactions.
+- [x] No framework dependency introduced; design remains vanilla HTML/CSS/JavaScript.
 
 ## Complexity Tracking
 
-No constitution violations identified; no exemptions required.
+No constitution violations identified; complexity tracking not required.

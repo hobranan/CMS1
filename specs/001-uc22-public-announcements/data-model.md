@@ -1,36 +1,58 @@
-# Data Model: View public announcements
+# Data Model - UC-22 Public Announcements
 
 ## Entity: PublicAnnouncement
-- Description: Conference announcement record eligible for guest visibility.
 - Fields:
-  - `announcement_id` (string, required, unique): Stable identifier.
-  - `title` (string, required): Announcement headline.
-  - `content` (string, required): Full announcement body text.
-  - `published_at` (datetime, required): Public publish timestamp used for ordering.
-  - `is_public` (boolean, required): Visibility flag for guest access.
-  - `availability_state` (enum, required): `available | unavailable`.
-  - `created_at` (datetime, required): Audit creation timestamp.
-  - `updated_at` (datetime, required): Audit last-update timestamp.
+  - `announcement_id` (string, immutable)
+  - `title` (string, required)
+  - `summary` (string, nullable)
+  - `content` (string, required)
+  - `published_at` (datetime, required)
+  - `is_public` (boolean, required)
+  - `availability_state` (enum: `available`, `unavailable`)
+- Validation rules:
+  - Only `is_public = true` records are included in guest list retrieval.
+  - Detail view allowed only when `availability_state = available`.
 
-## Derived View Model: AnnouncementListItem
-- Description: Lightweight list projection for announcements page.
+## Entity: AnnouncementListProjection
 - Fields:
-  - `announcement_id`
-  - `title`
-  - `published_at`
-  - `summary` (optional short preview)
+  - `items` (array<PublicAnnouncement>, required)
+  - `ordering` (string, required, value: `published_at_desc_then_id_desc`)
+  - `retrieved_at` (datetime, required)
+- Validation rules:
+  - Must be sorted newest-first by date with deterministic fallback for identical dates.
+
+## Entity: AnnouncementDetailProjection
+- Fields:
+  - `announcement_id` (string, required)
+  - `title` (string, required)
+  - `content` (string, required)
+  - `published_at` (datetime, required)
+- Validation rules:
+  - Returned only for currently available public announcements.
+
+## Entity: AnnouncementAccessOutcome
+- Fields:
+  - `request_type` (enum: `list`, `detail`)
+  - `announcement_id` (string, nullable)
+  - `outcome` (enum: `success`, `no_data`, `retrieval_error`, `unavailable`)
+  - `error_code` (string, nullable)
+  - `occurred_at` (datetime, required)
 
 ## Relationships
-- `PublicAnnouncement` -> `AnnouncementListItem` is one-to-one projection for list rendering.
-
-## Validation Rules
-- Only records with `is_public=true` and `availability_state=available` are list/detail eligible.
-- List ordering: `published_at DESC`, then `announcement_id DESC`.
-- Detail request for missing/non-public/non-available record returns unavailable outcome.
+- `AnnouncementListProjection` is derived from many `PublicAnnouncement` records.
+- `AnnouncementDetailProjection` references one `PublicAnnouncement`.
+- `AnnouncementAccessOutcome` records result of list/detail access events.
 
 ## State Transitions
-- `available -> unavailable`: Announcement removed/withdrawn after list load; detail reads must fail gracefully.
-
-## Query Expectations
-- List endpoint returns zero or more `AnnouncementListItem`.
-- Detail endpoint returns one `PublicAnnouncement` or unavailable/system-error result.
+- `list request -> success`
+  - Preconditions: data source healthy, >=1 public announcements.
+  - Effects: ordered list returned.
+- `list request -> no_data`
+  - Preconditions: no public announcements available.
+  - Effects: explicit no-announcements message.
+- `list/detail request -> retrieval_error`
+  - Preconditions: storage/query failure.
+  - Effects: explicit system error, no content payload.
+- `detail request -> unavailable`
+  - Preconditions: announcement removed/unpublished/unavailable after list load.
+  - Effects: unavailable message and safe return path to list.
