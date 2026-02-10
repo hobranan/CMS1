@@ -26,12 +26,12 @@
   - `password_hash` (string, required)
   - `status` (enum: `PENDING_VERIFICATION`, `VERIFIED`, `EXPIRED`, `CANCELLED`)
   - `submitted_at` (datetime, required)
+  - `registration_expires_at` (datetime, required, 7 days from submission)
   - `verified_at` (datetime, nullable)
-  - `expires_at` (datetime, required, 24h from token issuance)
 - Validation rules:
   - Required fields must be present (email, password and any configured required profile fields).
   - Password meets baseline: min 8 chars, at least one letter, at least one number.
-  - `expires_at` must be exactly issuance time + 24 hours.
+  - `registration_expires_at` must be exactly `submitted_at + 7 days`.
 - Relationships:
   - One-to-many with `EmailVerificationToken`.
   - One-to-one eventual conversion into `UserAccount` on success.
@@ -44,14 +44,25 @@
   - `pending_registration_id` (UUID, foreign key)
   - `token_hash` (string, unique, required)
   - `issued_at` (datetime, required)
-  - `expires_at` (datetime, required)
+  - `expires_at` (datetime, required, 24 hours from issuance)
   - `used_at` (datetime, nullable)
   - `invalidated_at` (datetime, nullable)
 - Validation rules:
   - Token must be unexpired and unused at verification time.
   - Any new token issuance invalidates previous active tokens for the same pending registration.
+  - Token cannot be used after `registration_expires_at` of the parent pending registration.
 - Relationships:
   - Belongs to `PendingRegistration`.
+
+## Entity: LoginAttemptResolution (application model)
+
+- Purpose: Encapsulates authentication outcome messaging for pre-verification login attempts.
+- Fields:
+  - `status` (enum: `AUTHENTICATED`, `INVALID_CREDENTIALS`, `EMAIL_UNVERIFIED`)
+  - `message` (string)
+  - `resend_allowed` (boolean)
+- Validation rules:
+  - `resend_allowed` must be true only when `status = EMAIL_UNVERIFIED` and pending registration is not past 7-day expiry.
 
 ## Entity: RegistrationValidationResult (application model)
 
@@ -67,14 +78,20 @@
 
 1. Submission accepted:
    - `PendingRegistration.status`: `PENDING_VERIFICATION`
-   - Verification token issued.
-2. Successful verification within 24h:
+   - `registration_expires_at`: submission + 7 days
+   - Verification token issued (24-hour expiry).
+2. Successful verification while pending registration active:
    - Token marked used.
    - `PendingRegistration.status`: `VERIFIED`
    - `UserAccount` created with status `ACTIVE`.
-3. Token expiration before verification:
+3. Verification token expires before use:
+   - `PendingRegistration.status` remains `PENDING_VERIFICATION` while still within 7-day registration window.
+   - Resend action issues a fresh token.
+4. Pending registration reaches 7-day expiry before verification:
    - `PendingRegistration.status`: `EXPIRED`
-   - Resend action issues a fresh token and sets status back to `PENDING_VERIFICATION`.
-4. Invalid/duplicate/weak input:
+   - Verification and resend are denied until re-registration.
+5. Login attempt before verification:
+   - Authentication returns `EMAIL_UNVERIFIED` with reminder and resend option.
+6. Invalid/duplicate/weak input:
    - No `UserAccount` creation.
    - Validation errors returned and user remains on registration page.

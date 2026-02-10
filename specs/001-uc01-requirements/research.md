@@ -10,7 +10,7 @@
     violates clarified requirement.
   - Optional verification: rejected because requirement is mandatory.
 
-## Decision 2: Use time-bound signed verification tokens with 24-hour TTL
+## Decision 2: Verification link TTL remains 24 hours
 
 - Decision: Issue random, single-use token linked to pending registration, store
   token hash and expiration timestamp, invalidate on first successful use.
@@ -20,7 +20,17 @@
     use and revocation are harder to enforce.
   - Numeric OTP via email: rejected because use case expects confirmation link.
 
-## Decision 3: Keep account in `PENDING_VERIFICATION` state before activation
+## Decision 3: Pending registration remains active for 7 days
+
+- Decision: Registration attempt record expires 7 days after initial submission,
+  regardless of individual token cycles.
+- Rationale: Addresses CHK003 clarification and bounds retained unverified data.
+- Alternatives considered:
+  - Infinite pending period: rejected due to stale account buildup risk.
+  - Expire at 24 hours with token: rejected because resend flow should not force
+    full re-registration within a day.
+
+## Decision 4: Keep account in `PENDING_VERIFICATION` state before activation
 
 - Decision: Persist pending registration data separately and create active user
   account only after successful token validation.
@@ -30,7 +40,7 @@
   - Create full user immediately with `inactive` flag: possible, but rejected to
     minimize exposure of unverified records in the primary user table.
 
-## Decision 4: Password validation baseline and hashing
+## Decision 5: Password validation baseline and hashing
 
 - Decision: Enforce minimum 8 chars, at least one letter and one number, symbols
   allowed (spec assumption), then store only salted password hash.
@@ -39,7 +49,7 @@
   - Lower complexity requirements: rejected as weaker than documented baseline.
   - Storing encrypted plaintext: rejected as insecure compared with one-way hash.
 
-## Decision 5: Error reporting strategy for invalid submissions
+## Decision 6: Error reporting strategy for invalid submissions
 
 - Decision: Return field-level validation errors with stable error codes and
   user-readable messages; allow either all-errors or first-blocking behavior, but
@@ -48,7 +58,7 @@
 - Alternatives considered:
   - Single generic error message only: rejected because it is not actionable.
 
-## Decision 6: Duplicate email handling across pending and active records
+## Decision 7: Duplicate email handling across pending and active records
 
 - Decision: Treat email as unavailable if found in either active users or
   unexpired pending registrations.
@@ -56,13 +66,22 @@
 - Alternatives considered:
   - Check active users only: rejected because it allows duplicate pending flows.
 
-## Decision 7: Expired token recovery
+## Decision 8: Expired token recovery
 
 - Decision: Provide resend-confirmation endpoint to issue new token if current
   token is expired or missing; old tokens are invalidated.
 - Rationale: Supports expired-link scenario in acceptance criteria.
 - Alternatives considered:
   - Require full re-registration on expiration: rejected as avoidable friction.
+
+## Decision 9: Login before verification must guide user to verification completion
+
+- Decision: Reject login attempts for pending registrations with a dedicated
+  `EMAIL_UNVERIFIED` response containing reminder messaging and resend option.
+- Rationale: Addresses CHK017 clarification and prevents confusing auth failure.
+- Alternatives considered:
+  - Generic invalid-credentials response: rejected because it hides corrective action.
+  - Silent auto-resend only: rejected because explicit user feedback is required.
 
 ## Resolved Clarifications
 

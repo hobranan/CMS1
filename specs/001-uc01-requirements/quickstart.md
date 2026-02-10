@@ -21,9 +21,23 @@ curl -X POST http://localhost:3000/api/v1/registrations \
 
 Expected:
 - `202 Accepted`
-- Response indicates confirmation email sent and registration is pending.
+- Response indicates verification is pending and includes `registration_expires_at` (7 days from submission).
 
-## 3. Verify email via confirmation link
+## 3. Attempt login before verification
+
+```bash
+curl -X POST http://localhost:3000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"new_user_01@example.com","password":"ValidSecurePass123"}'
+```
+
+Expected:
+- `403 Forbidden`
+- Code `EMAIL_UNVERIFIED`
+- Message reminds user to verify email
+- Response includes resend option.
+
+## 4. Verify email via confirmation link
 
 ```bash
 curl "http://localhost:3000/api/v1/registrations/verify?token=<token-from-email>"
@@ -33,7 +47,7 @@ Expected:
 - `302` redirect (web flow) or `200` JSON (API flow)
 - Redirect target is login screen.
 
-## 4. Validate expired token behavior
+## 5. Validate expired-token and resend behavior
 
 1. Use a token older than 24 hours.
 2. Verify endpoint returns `410 Gone` with `TOKEN_EXPIRED`.
@@ -45,7 +59,13 @@ curl -X POST http://localhost:3000/api/v1/registrations/resend-confirmation \
   -d '{"email":"new_user_01@example.com"}'
 ```
 
-## 5. Confirm login works after verification
+## 6. Validate registration-attempt expiry behavior
+
+1. Use a pending registration older than 7 days.
+2. Resend endpoint returns `410 Gone` with `REGISTRATION_ATTEMPT_EXPIRED`.
+3. User must restart registration flow.
+
+## 7. Confirm login works after verification
 
 ```bash
 curl -X POST http://localhost:3000/api/v1/auth/login \
@@ -56,7 +76,7 @@ curl -X POST http://localhost:3000/api/v1/auth/login \
 Expected:
 - Successful authentication with newly verified credentials.
 
-## 6. Negative tests
+## 8. Negative tests
 
 - Invalid email format -> `422` with `INVALID_EMAIL_FORMAT`.
 - Duplicate email -> `409` with `EMAIL_ALREADY_REGISTERED`.

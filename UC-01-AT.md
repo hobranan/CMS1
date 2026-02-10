@@ -172,3 +172,40 @@
 **Expected Results:**
 - Login is successful.
 - The user is redirected to their dashboard or home page.
+
+---
+
+## AT-UC01-08 - Login Attempt Before Verification
+
+**Objective:** Verify login is denied with corrective guidance when email is not yet verified.
+
+**Preconditions:**
+- User has submitted registration for `pending_user@example.com`.
+- Email verification has not been completed.
+
+**Steps:**
+1. Navigate to the login screen.
+2. Attempt login with pending registration credentials.
+
+**Expected Results:**
+- Login is denied.
+- User sees reminder that a verification email was sent.
+- User is offered an option to resend verification.
+
+---
+
+## AT-UC01-09 - Unverified Registration Attempt Expired After 7 Days
+
+**Objective:** Verify pending registrations expire after one week and require restart.
+
+**Preconditions:**
+- User has an unverified registration attempt older than 7 days.
+
+**Steps:**
+1. Attempt to resend verification for the expired registration.
+2. Attempt to verify using old token.
+
+**Expected Results:**
+- Resend request is rejected due to expired registration attempt.
+- Old token cannot complete registration.
+- User is prompted to start registration again.
