@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: CMS Upload Manuscript API
+  version: 1.0.0
+  description: Contracts for UC-06 manuscript upload, interruption resume, and attachment association.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/submissions/{submissionId}/manuscript:
+    post:
+      summary: Upload and attach manuscript file to submission draft
+      operationId: uploadManuscript
+      tags: [Upload]
+      parameters:
+        - in: path
+          name: submissionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Upload completed and file attached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadSuccessResponse'
+        '400':
+          description: Validation failure (unsupported extension, oversize, or missing file).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: User not authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Association failed; file not attached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Upload/storage failure.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/submissions/{submissionId}/manuscript/retry:
+    post:
+      summary: Retry interrupted upload with resume policy
+      operationId: retryUpload
+      tags: [Upload]
+      parameters:
+        - in: path
+          name: submissionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [file_fingerprint]
+              properties:
+                file_fingerprint:
+                  type: string
+      responses:
+        '200':
+          description: Retry accepted; response indicates resume or restart mode.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [mode]
+                properties:
+                  mode:
+                    type: string
+                    enum: [RESUME, RESTART]
+                  message:
+                    type: string
+        '404':
+          description: No interrupted upload context found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    UploadSuccessResponse:
+      type: object
+      required: [status, submission_id, attached]
+      properties:
+        status:
+          type: string
+          example: ATTACHED
+        submission_id:
+          type: string
+        attached:
+          type: boolean
+          example: true
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: UNSUPPORTED_EXTENSION
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string
