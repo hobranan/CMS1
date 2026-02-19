@@ -1,108 +1,90 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Submit completed review
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
+**Branch**: `001-uc12-submit-review` | **Date**: 2026-02-19 | **Spec**: `specs/001-uc12-submit-review/spec.md`
+**Input**: Feature specification from `/specs/001-uc12-submit-review/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement referee review submission that validates active-assignment eligibility and required fields, stores immutable submitted reviews, supports newer linked review versions, preserves submission state through notification failures, and keeps deadline indicators informational only with no submission blocking logic.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: Vanilla JavaScript (ES2020+)  
+**Primary Dependencies**: Browser APIs only (no framework libraries)  
+**Storage**: Existing application database (review drafts, submitted immutable reviews, version-link relations, assignment status)  
+**Testing**: `npm test && npm run lint`  
+**Target Platform**: Web browsers for referees/editors and backend review submission APIs  
+**Project Type**: Web application (`frontend/` + `backend/`)  
+**Performance Goals**: Submission and validation feedback within normal form-submission UX expectations  
+**Constraints**: MVC boundaries required; submitted reviews are immutable; newer changes require a new linked submission; deadline display must not affect submission eligibility; db-save failures must not mark submitted  
+**Scale/Scope**: Review submit lifecycle, immutability enforcement, and version-chain behavior for referee assignments
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
- - [ ] Use cases and acceptance tests live in `UC-XX.md` and `UC-XX-AT.md`.
- - [ ] Architecture follows MVC with clear Model/View/Controller boundaries.
- - [ ] UI implementation uses only vanilla HTML, CSS, and JavaScript.
+- [x] Use cases and acceptance tests live in `UC-XX.md` and `UC-XX-AT.md`.
+- [x] Architecture follows MVC with clear Model/View/Controller boundaries.
+- [x] UI implementation uses only vanilla HTML, CSS, and JavaScript.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-specs/[###-feature]/
-├── plan.md              # This file (/speckit.plan command output)
-├── research.md          # Phase 0 output (/speckit.plan command)
-├── data-model.md        # Phase 1 output (/speckit.plan command)
-├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
-└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
+specs/001-uc12-submit-review/
+|-- plan.md
+|-- research.md
+|-- data-model.md
+|-- quickstart.md
+|-- contracts/
+`-- tasks.md
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── controllers/
-├── models/
-├── views/
-└── assets/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
 backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+|-- src/
+|   |-- models/
+|   |-- services/
+|   `-- api/
+`-- tests/
 
 frontend/
-├── src/
-│   ├── controllers/
-│   ├── models/
-│   ├── views/
-│   └── assets/
-└── tests/
+|-- src/
+|   |-- controllers/
+|   |-- models/
+|   |-- views/
+|   `-- assets/
+`-- tests/
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+tests/
+|-- contract/
+|-- integration/
+`-- unit/
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Use existing backend/frontend MVC structure with backend submission orchestration, immutability/version services, and frontend controller/view feedback for submit outcomes and read-only states.
+
+## Phase 0 Research Output
+
+Resolved in `specs/001-uc12-submit-review/research.md` with decisions for assignment eligibility checks, informational deadline handling, immutable submission policy, newer-version linking, and notification/db failure behavior.
+
+## Phase 1 Design Output
+
+- Data model: `specs/001-uc12-submit-review/data-model.md`
+- Contracts: `specs/001-uc12-submit-review/contracts/submit-review.openapi.yaml`
+- Quickstart: `specs/001-uc12-submit-review/quickstart.md`
+
+## Post-Design Constitution Check
+
+- [x] Use case references remain aligned to `UC-12.md` and `UC-12-AT.md`.
+- [x] Design preserves MVC boundaries with controller-mediated model/view updates.
+- [x] No framework dependency introduced; design remains vanilla HTML/CSS/JavaScript.
+- [x] UI guidance enforces `docs/standards/html-css-style-profile.md` compliance for review-related screens.
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+No constitution violations identified; complexity tracking not required.
