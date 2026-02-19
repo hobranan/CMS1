@@ -33,6 +33,7 @@ limit and rejected safely on overload, retrieval failure, or storage failure.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contracts keep workload and policy logic in models/services with controllers orchestrating requests.
  - [x] Proposed implementation stays within vanilla stack and preserves UC/AT traceability.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 

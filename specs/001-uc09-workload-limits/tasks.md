@@ -113,6 +113,8 @@
 - [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-09.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-09-AT.md` if user-facing behavior wording changed during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-09 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`
 
+- [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
