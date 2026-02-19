@@ -26,6 +26,7 @@ Implement a public pricing view that exposes published registration categories a
 - [x] Use cases and acceptance tests live in `UC-XX.md` and `UC-XX-AT.md`.
 - [x] Architecture follows MVC with clear Model/View/Controller boundaries.
 - [x] UI implementation uses only vanilla HTML, CSS, and JavaScript.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
@@ -82,6 +83,7 @@ Resolved in `specs/001-uc19-registration-prices/research.md` with decisions for 
 - [x] Use case and acceptance test references remain `UC-19.md` and `UC-19-AT.md`.
 - [x] Design preserves MVC boundaries with controller-mediated model/view interactions.
 - [x] No framework dependency introduced; design remains vanilla HTML/CSS/JavaScript.
+- [x] UI guidance enforces `docs/standards/html-css-style-profile.md` compliance for affected views.
 
 ## Complexity Tracking
 
