@@ -34,6 +34,7 @@ occurs only when metadata and manuscript reference are stored together.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contracts keep rule enforcement in model/service layer and orchestration in controllers.
  - [x] Proposed approach remains vanilla-stack compliant and keeps UC/AT artifacts authoritative.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
