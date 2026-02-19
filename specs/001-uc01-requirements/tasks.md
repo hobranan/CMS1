@@ -82,9 +82,6 @@
 - [ ] T028 Validate UC-01 narrative and update any changed registration behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01.md`
 - [ ] T029 Validate UC-01 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
 
-- [ ] T030 Validate UC-01 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01.md`
-- [ ] T031 Validate UC-01 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
-
 ---
 
 ## Dependencies & Execution Order
