@@ -118,6 +118,9 @@
 - [ ] T032 Update implementation alignment notes and `UC-04.md` / `UC-04-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/tasks.md`
 - [ ] T033 Run `npm test && npm run lint` and record UC04 execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
 
+- [ ] T034 Validate UC-04 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04.md`
+- [ ] T035 Validate UC-04 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
