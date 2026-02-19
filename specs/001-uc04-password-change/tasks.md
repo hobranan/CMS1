@@ -121,6 +121,8 @@
 - [ ] T034 Validate UC-04 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04.md`
 - [ ] T035 Validate UC-04 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
 
+- [ ] T036 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
