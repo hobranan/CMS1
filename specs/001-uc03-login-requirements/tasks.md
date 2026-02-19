@@ -119,6 +119,9 @@
 - [ ] T033 Update implementation alignment notes and `UC-03.md` / `UC-03-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/tasks.md`
 - [ ] T034 Run `npm test && npm run lint` and capture UC-03 validation summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
 
+- [ ] T035 Validate UC-03 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03.md`
+- [ ] T036 Validate UC-03 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
