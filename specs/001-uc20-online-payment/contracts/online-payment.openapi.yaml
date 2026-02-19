@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Online Registration Payment API
+  version: 1.0.0
+  description: Contracts for registration payment initiation, gateway confirmation handling, and status/reconciliation outcomes.
+paths:
+  /api/v1/registrations/{registrationId}/payment/initiate:
+    post:
+      summary: Initiate online payment for selected registration category
+      parameters:
+        - name: registrationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiatePaymentRequest'
+      responses:
+        '200':
+          description: Payment initiation accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiatePaymentResponse'
+        '400':
+          description: Missing selected category or invalid initiation state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Already paid or duplicate payment attempt conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/payments/gateway/confirm:
+    post:
+      summary: Receive verified payment gateway confirmation callback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayConfirmationRequest'
+      responses:
+        '200':
+          description: Confirmation processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfirmationResult'
+        '400':
+          description: Invalid payload/signature or unsupported state transition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Payment recording failure requiring reconciliation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/registrations/{registrationId}/payment/status:
+    get:
+      summary: Get registration payment status
+      parameters:
+        - name: registrationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current payment/registration status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentStatusResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Registration not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    InitiatePaymentRequest:
+      type: object
+      required: [categoryId]
+      properties:
+        categoryId:
+          type: string
+    InitiatePaymentResponse:
+      type: object
+      required: [attemptId, amount, currency, gatewayRedirectUrl, registrationState]
+      properties:
+        attemptId:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        gatewayRedirectUrl:
+          type: string
+        registrationState:
+          type: string
+          enum: [unpaid, pending]
+    GatewayConfirmationRequest:
+      type: object
+      required: [attemptId, gatewayStatus, gatewayReference, signature]
+      properties:
+        attemptId:
+          type: string
+        gatewayStatus:
+          type: string
+          enum: [success, declined, canceled, invalid, timeout]
+        gatewayReference:
+          type: string
+        signature:
+          type: string
+    GatewayConfirmationResult:
+      type: object
+      required: [attemptId, registrationState, outcome]
+      properties:
+        attemptId:
+          type: string
+        registrationState:
+          type: string
+          enum: [unpaid, pending, paid_confirmed]
+        outcome:
+          type: string
+          enum: [confirmed, declined, canceled, invalid_details, pending_unresolved, reconciliation_required]
+        reconciliationId:
+          type: string
+          nullable: true
+    PaymentStatusResponse:
+      type: object
+      required: [registrationId, registrationState]
+      properties:
+        registrationId:
+          type: string
+        registrationState:
+          type: string
+          enum: [unpaid, pending, paid_confirmed]
+        paymentId:
+          type: string
+          nullable: true
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
