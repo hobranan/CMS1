@@ -1,14 +1,13 @@
 <!--
   Sync Impact Report
-  - Version change: N/A (template) -> 1.0.0
-  - Modified principles: N/A (template placeholders)
-  - Added sections: Documentation & Test Artifacts, Development Workflow
+  - Version change: 1.0.0 -> 1.1.0
+  - Modified principles: Added VI. HTML/CSS Style Authority
+  - Added sections: None
   - Removed sections: None
   - Templates requiring updates:
-    - ? .specify/templates/plan-template.md
-    - ? .specify/templates/spec-template.md
-    - ? .specify/templates/tasks-template.md
-    - ? .specify/templates/commands/*.md (directory not found)
+    - .specify/templates/plan-template.md (constitution check should include style profile compliance)
+    - .specify/templates/spec-template.md (requirements should reference style profile where UI is in scope)
+    - .specify/templates/tasks-template.md (tasks should include style profile conformance checks for UI work)
   - Follow-up TODOs:
     - TODO(RATIFICATION_DATE): Original ratification date not found in repo history.
 -->
@@ -43,6 +42,13 @@ Source layout MUST preserve explicit Model, View, and Controller boundaries
 (e.g., `src/models`, `src/views`, `src/controllers`). Controllers may import
 Models and update Views; Models must not depend on Views.
 
+### VI. HTML/CSS Style Authority
+All HTML/CSS implementation MUST comply with
+`docs/standards/html-css-style-profile.md`. This profile is the enforceable
+project style authority and is derived from
+`HTML CSS Style Guide original.md` for reference context only. If any guidance
+conflicts, the profile document takes precedence for this repository.
+
 ## Documentation & Test Artifacts
 
 - Use case and acceptance test files are the authoritative source for user
@@ -54,8 +60,10 @@ Models and update Views; Models must not depend on Views.
 
 - Plans and specs MUST reference relevant `UC-XX.md` and `UC-XX-AT.md` files and
   keep them in sync with implementation decisions.
+- Frontend-oriented plans, specs, tasks, and code reviews MUST include
+  compliance checks against `docs/standards/html-css-style-profile.md`.
 - Code reviews MUST include a constitution compliance check (file conventions,
-  MVC boundaries, and vanilla stack usage).
+  MVC boundaries, vanilla stack usage, and style-profile compliance).
 
 ## Governance
 
@@ -67,4 +75,4 @@ Models and update Views; Models must not depend on Views.
 - Compliance review is mandatory for plans, specs, tasks, and code reviews; any
   exception requires a formal amendment.
 
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): original date not found | **Last Amended**: 2026-02-01
+**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE): original date not found | **Last Amended**: 2026-02-19
