@@ -26,6 +26,7 @@ Provide an editor workflow to list and open completed reviews for a selected pap
 - [x] Use cases and acceptance tests live in `UC-XX.md` and `UC-XX-AT.md`.
 - [x] Architecture follows MVC with clear Model/View/Controller boundaries.
 - [x] UI implementation uses only vanilla HTML, CSS, and JavaScript.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
@@ -82,6 +83,7 @@ Resolved in `specs/001-uc13-anonymized-review-view/research.md` with decisions f
 - [x] Use case and acceptance test references remain `UC-13.md` and `UC-13-AT.md`.
 - [x] Design preserves MVC boundaries with controller-mediated model/view interactions.
 - [x] No framework dependency introduced; design remains vanilla HTML/CSS/JavaScript.
+- [x] UI guidance enforces `docs/standards/html-css-style-profile.md` compliance for affected views.
 
 ## Complexity Tracking
 
