@@ -123,6 +123,8 @@
 - [ ] T047 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-16.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-16-AT.md` if user-facing behavior wording changed during implementation
 - [ ] T048 Run `npm test && npm run lint` and record UC-16 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
 
+- [ ] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
