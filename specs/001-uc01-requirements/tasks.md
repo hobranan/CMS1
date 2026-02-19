@@ -79,6 +79,8 @@
 - [ ] T025 [P] Add unit tests for password/token utility edge cases in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_security_utils.js`
 - [ ] T026 Update implementation verification steps and expected API outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/quickstart.md`
 - [ ] T027 Run `npm test && npm run lint` and record UC-01 execution notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/validation-report.md`
+- [ ] T028 Validate UC-01 narrative and update any changed registration behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01.md`
+- [ ] T029 Validate UC-01 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
 
 ---
 
