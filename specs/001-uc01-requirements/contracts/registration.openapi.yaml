@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: CMS Registration API
+  version: 1.1.0
+  description: Contracts for UC-01 user registration, email verification, and pre-verification login handling.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/registrations:
+    post:
+      summary: Submit registration details
+      operationId: createRegistration
+      tags: [Registration]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '202':
+          description: Registration accepted; email verification pending.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationAcceptedResponse'
+        '409':
+          description: Email already exists or is currently pending.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/registrations/verify:
+    get:
+      summary: Verify registration email token
+      operationId: verifyRegistrationEmail
+      tags: [Registration]
+      parameters:
+        - in: query
+          name: token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Email verified and account activated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationSuccessResponse'
+        '400':
+          description: Token missing or malformed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Token expired or pending registration no longer active.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/registrations/resend-confirmation:
+    post:
+      summary: Re-issue verification link for pending registration
+      operationId: resendConfirmationLink
+      tags: [Registration]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '202':
+          description: Confirmation re-issued when eligible.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    example: PENDING_VERIFICATION
+        '404':
+          description: No pending registration found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Pending registration expired after 7 days.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many resend attempts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/auth/login:
+    post:
+      summary: Authenticate user credentials
+      operationId: login
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login success.
+        '401':
+          description: Invalid credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Email not yet verified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnverifiedLoginResponse'
+components:
+  schemas:
+    RegistrationRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+          description: Must include at least one letter and one number.
+        profile:
+          type: object
+          additionalProperties: true
+    RegistrationAcceptedResponse:
+      type: object
+      required: [status, message, registration_expires_at]
+      properties:
+        status:
+          type: string
+          example: PENDING_VERIFICATION
+        message:
+          type: string
+          example: Confirmation link sent to provided email.
+        registration_expires_at:
+          type: string
+          format: date-time
+          description: Pending registration expiry (7 days after submission).
+    VerificationSuccessResponse:
+      type: object
+      required: [status, redirect]
+      properties:
+        status:
+          type: string
+          example: VERIFIED
+        redirect:
+          type: string
+          example: /login
+    UnverifiedLoginResponse:
+      type: object
+      required: [code, message, resend_available]
+      properties:
+        code:
+          type: string
+          example: EMAIL_UNVERIFIED
+        message:
+          type: string
+          example: Verify your email using the confirmation message we sent.
+        resend_available:
+          type: boolean
+          example: true
+        resend_endpoint:
+          type: string
+          example: /api/v1/registrations/resend-confirmation
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: INVALID_EMAIL_FORMAT
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string

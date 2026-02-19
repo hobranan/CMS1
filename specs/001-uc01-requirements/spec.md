@@ -3,14 +3,19 @@
 **Feature Branch**: `001-uc01-requirements`  
 **Created**: 2026-02-02  
 **Status**: Draft  
-**Input**: User description: "UC-01.md contains the use case flows (the Main Success Scenario and all Extensions). Extract the functional requirements from these flows. The UC-01-AT.md contains the acceptance tests for the UC-01.md file, you can additionally use this in helping to determine the those requirements. Also, I need a new branch made for this use case."
+**Input**: User description: "UC-01.md contains the use case flows (the Main Success Scenario and all Extensions). Extract the functional requirements from these flows. The UC-01-AT.md contains the acceptance tests for the UC-01.md file, you can additionally use this in helping to determine the those requirements. Also, I need a new branch made for this use case."  
 **Use Case Sources**: `UC-01.md`, `UC-01-AT.md`
 
 ## Clarifications
 
 ### Session 2026-02-02
 
-- Q: Must registration require email verification with a confirmation link that expires in 24 hours? → A: Yes, verification is required before registration success, and links expire after 24 hours.
+- Q: Must registration require email verification with a confirmation link that expires in 24 hours? -> A: Yes, verification is required before registration success, and links expire after 24 hours.
+
+### Session 2026-02-10
+
+- Q: How long can an unverified registration attempt remain active? -> A: Registration attempts expire after 7 days from initial submission.
+- Q: What happens if a user tries to log in before verification? -> A: Login is denied, user is reminded that verification email was sent, and user is offered a resend option.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -34,22 +39,26 @@ data and confirming the user can log in immediately afterward.
 2. **Given** a user receives a valid confirmation link within 24 hours, **When**
    they confirm the email, **Then** the account is created and the user is
    redirected to the login screen.
-2. **Given** a user enters an invalid email format, **When** they submit the
+3. **Given** a user enters an invalid email format, **When** they submit the
    form, **Then** no account is created and an email format error is shown.
-3. **Given** a user enters an email that already exists, **When** they submit
+4. **Given** a user enters an email that already exists, **When** they submit
    the form, **Then** no account is created and a duplicate email error is shown.
-4. **Given** a user enters a password that does not meet security standards,
+5. **Given** a user enters a password that does not meet security standards,
    **When** they submit the form, **Then** no account is created and a password
    requirements error is shown.
-5. **Given** a user leaves required fields missing or invalid, **When** they
+6. **Given** a user leaves required fields missing or invalid, **When** they
    submit the form, **Then** missing/invalid fields are highlighted and the user
    remains on the registration page.
-6. **Given** a user submits multiple invalid inputs, **When** they submit the
+7. **Given** a user submits multiple invalid inputs, **When** they submit the
    form, **Then** all validation errors or the first blocking error is clearly
    shown and no account is created.
-7. **Given** a user attempts to confirm using an expired link, **When** the link
+8. **Given** a user attempts to confirm using an expired link, **When** the link
    is older than 24 hours, **Then** registration is not completed and the user
    is prompted to request a new confirmation link.
+9. **Given** a user attempts login before completing email verification, **When**
+   they submit valid credentials for an unverified registration, **Then** login
+   is denied, a reminder about verification email is shown, and a resend option
+   is offered.
 
 ---
 
@@ -60,6 +69,8 @@ data and confirming the user can log in immediately afterward.
 - Duplicate email entered with other invalid inputs
 - Weak password combined with invalid email
 - Expired email confirmation link
+- Login attempt before email verification
+- Unverified registration attempt older than 7 days
 
 ## Requirements *(mandatory)*
 
@@ -88,6 +99,11 @@ data and confirming the user can log in immediately afterward.
   registration page.
 - **FR-013**: After successful registration, the new credentials MUST allow an
   immediate login.
+- **FR-014**: Unverified registration attempts MUST expire 7 days after initial
+  registration submission.
+- **FR-015**: If login is attempted before email verification, System MUST deny
+  login, remind the user that verification email was sent, and provide an
+  option to resend verification.
 
 ### Assumptions
 
@@ -96,7 +112,8 @@ data and confirming the user can log in immediately afterward.
   one number, and symbols are allowed.
 - The system identifies whether an email is already registered during
   registration validation.
-- The system can re-issue a confirmation link when the prior link is expired.
+- The system can re-issue a confirmation link when the prior link is expired or
+  when login is attempted before verification.
 
 ### Key Entities *(include if feature involves data)*
 
