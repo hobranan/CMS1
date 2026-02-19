@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Decision Notification API
+  version: 1.0.0
+  description: Contracts for author decision visibility and structured decision notifications.
+paths:
+  /api/v1/author/papers/{paperId}/decision:
+    get:
+      summary: Get final decision view for owning author
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Decision view returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionViewResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized paper access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Decision retrieval failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/author/papers/{paperId}/decision-notification:
+    get:
+      summary: Get latest structured decision notification for owning author
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Notification payload returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionNotificationResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized paper access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No final decision or no notification available yet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Notification retrieval failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    DecisionViewResponse:
+      type: object
+      required: [paperId, decisionStatus]
+      properties:
+        paperId:
+          type: string
+        decisionStatus:
+          type: string
+          enum: [accepted, rejected, under_review]
+        decisionComment:
+          type: string
+          nullable: true
+        sourceOfTruth:
+          type: string
+          enum: [cms]
+        message:
+          type: string
+    DecisionNotificationResponse:
+      type: object
+      required: [paperId, decisionStatus, summaryBullets, sectionOrder, deliveryStatus]
+      properties:
+        paperId:
+          type: string
+        decisionStatus:
+          type: string
+          enum: [accepted, rejected]
+        summaryBullets:
+          type: array
+          items:
+            type: string
+        fullReviewContent:
+          type: object
+          nullable: true
+        fullReviewAvailable:
+          type: boolean
+        sectionOrder:
+          type: array
+          items:
+            type: string
+            enum: [decision_header, summary_bullets, full_review]
+        deliveryStatus:
+          type: string
+          enum: [sent, failed]
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string

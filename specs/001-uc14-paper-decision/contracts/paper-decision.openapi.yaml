@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Paper Decision API
+  version: 1.0.0
+  description: Contracts for eligibility checks, final paper decision recording, and notification outcomes.
+paths:
+  /api/v1/papers/{paperId}/decision-context:
+    get:
+      summary: Get paper decision context for editor
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Decision context returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionContextResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized paper access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/papers/{paperId}/decision:
+    post:
+      summary: Confirm and record final paper decision
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordDecisionRequest'
+      responses:
+        '200':
+          description: Decision recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordDecisionResult'
+        '400':
+          description: Invalid request payload or missing confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Ineligible or unauthorized decision attempt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Paper already decided or concurrent decision conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Decision save failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    DecisionContextResponse:
+      type: object
+      required: [paperId, eligible, completedReviewCount, decisionOptions, currentStatus]
+      properties:
+        paperId:
+          type: string
+        eligible:
+          type: boolean
+        completedReviewCount:
+          type: integer
+          minimum: 0
+        currentStatus:
+          type: string
+          enum: [under_review, accepted, rejected]
+        decisionOptions:
+          type: array
+          items:
+            type: string
+            enum: [accept, reject]
+        allowNoReviewOverride:
+          type: boolean
+        ineligibilityReason:
+          type: string
+          nullable: true
+    RecordDecisionRequest:
+      type: object
+      required: [decision, confirmed]
+      properties:
+        decision:
+          type: string
+          enum: [accept, reject]
+        comment:
+          type: string
+          nullable: true
+        confirmed:
+          type: boolean
+          enum: [true]
+    RecordDecisionResult:
+      type: object
+      required: [paperId, decisionId, finalStatus, notificationStatus]
+      properties:
+        paperId:
+          type: string
+        decisionId:
+          type: string
+        finalStatus:
+          type: string
+          enum: [accepted, rejected]
+        notificationStatus:
+          type: string
+          enum: [sent, failed]
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
