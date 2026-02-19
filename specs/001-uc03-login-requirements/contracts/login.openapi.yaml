@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: CMS Login API
+  version: 1.0.0
+  description: Contracts for UC-03 user authentication, lockout handling, and session access checks.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/auth/login:
+    post:
+      summary: Authenticate registered user with email and password
+      operationId: login
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authentication successful and session established.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginSuccessResponse'
+        '400':
+          description: Missing required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid credentials (unknown email or wrong password).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '423':
+          description: Account temporarily locked due to repeated failures.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LockoutResponse'
+        '503':
+          description: Credential store temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/auth/session:
+    get:
+      summary: Validate active authenticated session
+      operationId: getSessionState
+      tags: [Authentication]
+      responses:
+        '200':
+          description: Session active; protected resources accessible.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [authenticated]
+                properties:
+                  authenticated:
+                    type: boolean
+                    example: true
+        '401':
+          description: Session missing or expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    LoginSuccessResponse:
+      type: object
+      required: [status, redirect]
+      properties:
+        status:
+          type: string
+          example: AUTHENTICATED
+        redirect:
+          type: string
+          example: /dashboard
+    LockoutResponse:
+      type: object
+      required: [code, message, retry_after_seconds]
+      properties:
+        code:
+          type: string
+          example: ACCOUNT_LOCKED
+        message:
+          type: string
+          example: Account temporarily locked after repeated failed attempts.
+        retry_after_seconds:
+          type: integer
+          minimum: 1
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: INVALID_CREDENTIALS
+        message:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
