@@ -113,6 +113,9 @@
 - [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-12.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-12-AT.md` if user-facing behavior wording changed during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-12 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc12-submit-review/quickstart.md`
 
+- [ ] T039 Validate UC-12 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-12.md`
+- [ ] T040 Validate UC-12 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-12-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
