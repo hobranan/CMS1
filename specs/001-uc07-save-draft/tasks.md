@@ -116,6 +116,8 @@
 - [ ] T039 Validate UC-07 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-07.md`
 - [ ] T040 Validate UC-07 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-07-AT.md`
 
+- [ ] T041 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc07-save-draft/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
