@@ -3,7 +3,7 @@
 **Feature Branch**: `001-uc07-save-draft`  
 **Created**: 2026-02-08  
 **Status**: Draft  
-**Input**: User description: "UC-07.md contains the use case flows (the Main Success Scenario and all Extensions). Extract the functional requirements from these flows. The UC-07-AT.md contains the acceptance tests for the UC-07.md file, you can additionally use this in helping to determine the those requirements. Also, I need a new branch made for this use case. For preemptive clarifications, this UC-07.md has Open Issues where I want you to just save current entry data in the editable spots but not allow final submission until spots validated, and there will not be an autosave."
+**Input**: User description: "UC-07.md contains the use case flows (the Main Success Scenario and all Extensions). Extract the functional requirements from these flows. The UC-07-AT.md contains the acceptance tests for the UC-07.md file, you can additionally use this in helping to determine the those requirements. Also, I need a new branch made for this use case. For preemptive clarifications, this UC-07.md has Open Issues where I want you to just save current entry data in the editable spots but not allow final submission until spots validated, and there will not be an autosave."  
 **Use Case Sources**: `UC-07.md`, `UC-07-AT.md`
 
 ## Clarifications
@@ -12,6 +12,10 @@
 
 - Q: How should save behavior work for editable fields and final submission? -> A: Manual save stores current entered values in editable fields as draft data, but final submission remains blocked until required fields pass final validation.
 - Q: Is autosave supported? -> A: No autosave is supported; only explicit user-initiated save actions persist draft changes.
+
+### Session 2026-02-10
+
+- Q: What happens when user clicks Submit while unsaved edits exist? -> A: Submit first performs the same persistence action as Save for current edits, then runs final submission validation. If final validation fails, submission is blocked, but the just-edited data remains saved as draft.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -58,6 +62,7 @@ An author can continue editing after saves, and is informed when save fails due 
 1. **Given** storage is unavailable during save, **When** the author selects Save, **Then** the system reports system failure, advises retry later, and does not update draft state.
 2. **Given** network interruption occurs during save, **When** the author selects Save, **Then** the system reports connectivity failure, prompts retry, and does not update draft state.
 3. **Given** a save succeeds, **When** the author continues editing without saving again, **Then** subsequent edits remain unsaved until the next explicit Save action.
+4. **Given** unsaved edits exist and user selects Submit, **When** submit action runs, **Then** current edits are first saved as draft and final submission validation runs next; if validation fails, final submission is blocked while saved edits remain persisted.
 
 ---
 
@@ -69,6 +74,7 @@ An author can continue editing after saves, and is informed when save fails due 
 - Storage error occurs after validation passes.
 - Author exits immediately after Save and returns later.
 - Author edits fields after saving and expects those edits to persist without another Save.
+- Author clicks Submit with unsaved edits and final validation fails.
 
 ## Requirements *(mandatory)*
 
@@ -87,6 +93,8 @@ An author can continue editing after saves, and is informed when save fails due 
 - **FR-011**: System MUST support only explicit user-initiated save and MUST NOT perform autosave.
 - **FR-012**: System MUST block final submission until required submission fields pass final submission validation.
 - **FR-013**: System MUST allow draft save of editable data even when the draft is not yet ready for final submission.
+- **FR-014**: System MUST make Submit action persist current unsaved editable changes using the same save behavior before running final submission validation.
+- **FR-015**: If final submission validation fails after submit-triggered save, System MUST keep the newly saved draft state and return validation errors without finalizing submission.
 
 ### Assumptions
 
@@ -94,6 +102,7 @@ An author can continue editing after saves, and is informed when save fails due 
 - Draft data includes only fields currently editable by the author.
 - Last successful save is the authoritative persisted draft state.
 - Final submission validation rules are defined in the submission/finalization use case.
+- Submit-triggered pre-validation save follows the same persistence and failure rules as explicit Save.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -112,3 +121,4 @@ An author can continue editing after saves, and is informed when save fails due 
 - **SC-003**: 100% of save attempts failing save-level validation, storage, or network checks do not modify the last saved draft state.
 - **SC-004**: 100% of drafts saved successfully remain retrievable after logout/login with content matching the last successful save.
 - **SC-005**: 100% of final submission attempts are blocked until full final validation requirements are met.
+- **SC-006**: 100% of submit attempts with unsaved edits persist those edits before final-validation checks execute.

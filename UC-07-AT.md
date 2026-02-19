@@ -130,3 +130,24 @@
 **Expected Results:**
 - The system allows continued editing.
 - Changes after save are not persisted until the next save.
+
+---
+
+## AT-UC07-08 - Submit Persists Unsaved Edits Before Final Validation
+
+**Objective:** Verify submit action saves unsaved edits before final submission validation runs.
+
+**Preconditions:**
+- Author is logged in.
+- Draft has unsaved edits.
+- Draft still fails final submission validation.
+
+**Steps:**
+1. Modify editable draft fields without pressing Save.
+2. Select **Submit**.
+
+**Expected Results:**
+- The system first persists current edits as draft data.
+- The system then executes final submission validation.
+- Final submission is blocked due to validation failure.
+- Newly edited values remain saved and visible on reload.

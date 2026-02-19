@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: CMS Referee Assignment API
+  version: 1.0.0
+  description: Contracts for UC-08 referee assignment with all-or-nothing finalization.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/papers/{paperId}/assignments:
+    post:
+      summary: Confirm referee assignment set for a paper
+      operationId: assignReferees
+      tags: [Assignment]
+      parameters:
+        - in: path
+          name: paperId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [referee_ids]
+              properties:
+                referee_ids:
+                  type: array
+                  minItems: 1
+                  maxItems: 3
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Assignment and invitations completed.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, assigned_referee_ids]
+                properties:
+                  status:
+                    type: string
+                    example: ASSIGNMENT_FINALIZED
+                  assigned_referee_ids:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Validation failure (too many referees, ineligible, workload exceeded, duplicates, zero selection).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Editor not authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Concurrency conflict or stale eligibility/workload state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Persistence or invitation failure; assignment rolled back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/papers/{paperId}/assignments:
+    get:
+      summary: Get current paper assignment details
+      operationId: getAssignmentDetails
+      tags: [Assignment]
+      parameters:
+        - in: path
+          name: paperId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current assigned referees.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [paper_id, referees]
+                properties:
+                  paper_id:
+                    type: string
+                  referees:
+                    type: array
+                    items:
+                      type: object
+                      required: [referee_id]
+                      properties:
+                        referee_id:
+                          type: string
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: ASSIGNMENT_VALIDATION_FAILED
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string
