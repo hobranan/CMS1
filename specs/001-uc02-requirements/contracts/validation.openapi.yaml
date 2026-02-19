@@ -1,0 +1,128 @@
+openapi: 3.0.3
+info:
+  title: CMS Form Validation API
+  version: 1.0.0
+  description: Contracts for UC-02 validation of user-provided information.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/forms/{formKey}/submissions:
+    post:
+      summary: Validate and submit form data
+      operationId: validateAndSubmitForm
+      tags: [Validation]
+      parameters:
+        - in: path
+          name: formKey
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormSubmissionRequest'
+      responses:
+        '200':
+          description: Submission accepted and persisted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionSuccessResponse'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation failed; no data persisted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/forms/{formKey}/rules:
+    get:
+      summary: Retrieve effective validation metadata for a form
+      operationId: getFormValidationRules
+      tags: [Validation]
+      parameters:
+        - in: path
+          name: formKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Validation rules for form.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormRulesResponse'
+        '404':
+          description: Form definition not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    FormSubmissionRequest:
+      type: object
+      additionalProperties: true
+      description: Field/value payload for the selected form.
+    SubmissionSuccessResponse:
+      type: object
+      required: [status, message]
+      properties:
+        status:
+          type: string
+          example: ACCEPTED
+        message:
+          type: string
+          example: Submission stored successfully.
+    FormRulesResponse:
+      type: object
+      required: [formKey, fields]
+      properties:
+        formKey:
+          type: string
+        fields:
+          type: array
+          items:
+            type: object
+            required: [field, required]
+            properties:
+              field:
+                type: string
+              required:
+                type: boolean
+              format:
+                type: string
+                nullable: true
+              constraints:
+                type: object
+                additionalProperties: true
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: VALIDATION_FAILED
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string
