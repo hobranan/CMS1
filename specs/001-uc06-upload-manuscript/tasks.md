@@ -113,6 +113,8 @@
 - [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-06.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-06-AT.md` if behavior wording changed during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-06 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
 
+- [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
