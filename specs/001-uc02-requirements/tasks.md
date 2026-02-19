@@ -77,6 +77,9 @@
 - [ ] T023 Update UC synchronization checklist and confirm `UC-02.md`/`UC-02-AT.md` alignment notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/tasks.md`
 - [ ] T024 Run `npm test && npm run lint` and write execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
+- [ ] T025 Validate UC-02 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02.md`
+- [ ] T026 Validate UC-02 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
