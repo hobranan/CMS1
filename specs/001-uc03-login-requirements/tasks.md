@@ -122,6 +122,8 @@
 - [ ] T035 Validate UC-03 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03.md`
 - [ ] T036 Validate UC-03 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
 
+- [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order

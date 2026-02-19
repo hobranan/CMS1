@@ -35,6 +35,7 @@ access checks.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contract design keep domain rules in models/services and orchestration in controllers.
  - [x] Proposed implementation stays within vanilla stack and maintains UC/AT traceability.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
