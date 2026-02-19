@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: Anonymized Review View API
+  version: 1.0.0
+  description: Contracts for editor access to completed anonymized paper reviews.
+paths:
+  /api/v1/papers/{paperId}/reviews/completed:
+    get:
+      summary: Get completed anonymized reviews for a paper
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Completed reviews retrieved (possibly empty)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletedReviewListResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized paper access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: List retrieval failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/papers/{paperId}/reviews/completed/{reviewId}:
+    get:
+      summary: Open anonymized completed review detail
+      parameters:
+        - name: paperId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Anonymized completed review detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizedReviewDetail'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Unauthorized paper access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Review not found or unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Review open failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    CompletedReviewListResponse:
+      type: object
+      required: [paperId, reviews, hasCompletedReviews]
+      properties:
+        paperId:
+          type: string
+        hasCompletedReviews:
+          type: boolean
+        message:
+          type: string
+          description: Present for empty state or informational feedback.
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnonymizedReviewListItem'
+    AnonymizedReviewListItem:
+      type: object
+      required: [reviewId, submittedAt, status, identityRemoved]
+      properties:
+        reviewId:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [submitted]
+        recommendation:
+          type: string
+        identityRemoved:
+          type: boolean
+          enum: [true]
+    AnonymizedReviewDetail:
+      type: object
+      required: [reviewId, paperId, submittedAt, status, content, identityRemoved]
+      properties:
+        reviewId:
+          type: string
+        paperId:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [submitted]
+        content:
+          type: object
+        identityRemoved:
+          type: boolean
+          enum: [true]
+        metadata:
+          type: object
+          description: Non-identity metadata only.
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
