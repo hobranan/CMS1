@@ -35,6 +35,7 @@ resendable.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contracts preserve MVC boundaries (controllers call APIs, models store rules/data, views remain passive).
  - [x] Proposed implementation remains framework-free in frontend and keeps use case artifacts authoritative.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
