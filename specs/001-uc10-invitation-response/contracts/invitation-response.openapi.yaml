@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: Invitation Response API
+  version: 1.0.0
+  description: Contracts for responding to review invitations (accept/reject) with actionable-state and expiry enforcement.
+paths:
+  /api/v1/referees/{refereeId}/invitations/pending:
+    get:
+      summary: List pending invitations for a referee
+      parameters:
+        - name: refereeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pending invitations returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invitations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReviewInvitation'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/invitations/{invitationId}/response:
+    post:
+      summary: Submit invitation response (accept or reject)
+      parameters:
+        - name: invitationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationResponseRequest'
+      responses:
+        '200':
+          description: Response recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationResponseResult'
+        '400':
+          description: Non-actionable invitation or invalid state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Invitation state changed concurrently
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Persistence error or internal failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ReviewInvitation:
+      type: object
+      required: [invitationId, paperId, refereeId, issuedAt, expiresAt, status]
+      properties:
+        invitationId:
+          type: string
+        paperId:
+          type: string
+        refereeId:
+          type: string
+        issuedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [pending, accepted, rejected, expired, withdrawn]
+    InvitationResponseRequest:
+      type: object
+      required: [decision]
+      properties:
+        decision:
+          type: string
+          enum: [accept, reject]
+    InvitationResponseResult:
+      type: object
+      required: [invitationId, status, assignmentActive, notificationStatus]
+      properties:
+        invitationId:
+          type: string
+        status:
+          type: string
+          enum: [accepted, rejected]
+        assignmentActive:
+          type: boolean
+        notificationStatus:
+          type: string
+          enum: [sent, failed]
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
