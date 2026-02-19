@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: CMS Referee Workload Limits API
+  version: 1.0.0
+  description: Contracts for UC-09 workload validation during referee assignment.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/papers/{paperId}/assign-referee:
+    post:
+      summary: Assign one referee with workload-limit enforcement
+      operationId: assignRefereeWithLimitCheck
+      tags: [Workload]
+      parameters:
+        - in: path
+          name: paperId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [referee_id]
+              properties:
+                referee_id:
+                  type: string
+      responses:
+        '200':
+          description: Assignment accepted and stored.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, referee_id]
+                properties:
+                  status:
+                    type: string
+                    example: ASSIGNED
+                  referee_id:
+                    type: string
+        '400':
+          description: Assignment rejected for workload-limit violation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Editor not authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Retrieval/storage failure prevents assignment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/referees/{refereeId}/workload:
+    get:
+      summary: Retrieve current workload and applicable limit
+      operationId: getRefereeWorkload
+      tags: [Workload]
+      parameters:
+        - in: path
+          name: refereeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Workload snapshot returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [referee_id, workload, limit]
+                properties:
+                  referee_id:
+                    type: string
+                  workload:
+                    type: integer
+                  limit:
+                    type: integer
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: WORKLOAD_LIMIT_REACHED
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+            required: [code, field, message]
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+                nullable: true
+              message:
+                type: string
