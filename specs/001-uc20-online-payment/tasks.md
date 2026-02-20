@@ -118,6 +118,8 @@
 - [ ] T042 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-20.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-20-AT.md` if user-facing wording changed during implementation
 - [ ] T043 Run `npm test && npm run lint` and record UC-20 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc20-online-payment/quickstart.md`
 
+- [ ] T044 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc20-online-payment/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
