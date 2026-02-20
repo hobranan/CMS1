@@ -32,3 +32,9 @@
 ## Notes
 
 - Validation pass 1: all checklist items pass based on `spec.md`.
+
+## Auto-Answer Log (UC01/UC02 defaults)
+
+- Auto-answered similar requirements-checklist quality questions using the previously confirmed UC-01 and UC-02 decision set.
+- Defaults include: deterministic behavior, measurable criteria, no-partial-update guarantees, recovery/resubmission clarity, accessibility/privacy coverage, and explicit traceability assumptions.
+
