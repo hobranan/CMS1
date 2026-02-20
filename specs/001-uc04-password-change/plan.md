@@ -34,6 +34,7 @@ mandatory re-authentication after successful change.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contracts preserve MVC boundaries (controllers orchestrate, models/services enforce rules).
  - [x] Proposed implementation remains framework-free and keeps UC/AT artifacts authoritative.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
