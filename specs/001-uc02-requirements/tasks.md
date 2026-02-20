@@ -81,6 +81,13 @@
 - [ ] T026 Validate UC-02 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02-AT.md`
 
 - [ ] T027 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/quickstart.md`
+- [ ] T028 [P] Add integration test for rollback/abort behavior on post-validation persistence failure in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_persistence_failure_rollback.js`
+- [ ] T029 [P] Add integration test for last-write-wins concurrent conflicting updates in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_last_write_wins.js`
+- [ ] T030 [P] Add accessibility and immediate-feedback timing checks (<=1s normal load) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc02_validation_feedback_a11y.js`
+- [ ] T031 [P] Add unit tests for sensitive-field redaction in validation errors/logs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_privacy.js`
+- [ ] T032 Implement required-field discoverability from authoritative form metadata in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/required_field_metadata_service.js`
+- [ ] T033 Document per-form inline validation-rule ownership in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
+- [ ] T034 Update FR-to-AT traceability and SC-001..SC-004 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
 ---
 

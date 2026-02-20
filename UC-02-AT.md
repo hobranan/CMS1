@@ -1,190 +1,91 @@
-# Acceptance Test Suite — UC-02 Validate User-Provided Information
+# Acceptance Test Suite - UC-02 Validate User-Provided Information
 
 ## Assumptions / Notes
-- The user is authenticated (logged in) before submitting any form covered by this use case.
-- Validation rules depend on the specific form, but at minimum include:
-  - Required-field completeness checks
-  - Format checks (e.g., email format, allowed characters, numeric ranges)
-  - Business rule/constraint checks (e.g., max lengths, consistency rules)
-- When validation fails, the system does not store or update data and provides clear error feedback.
+
+- User is authenticated for all UC-02 scenarios.
+- Validation checks include required, format, and business rules.
+- Error mode is deterministic all-errors with stable ordering.
 
 ---
 
-## AT-UC02-01 — Valid Submission Accepted (Main Success Scenario)
-
-**Objective:** Verify that valid user-provided information is accepted and stored/updated.
-
-**Preconditions:**
-- User is logged in.
-- The target form is accessible to the user.
-
-**Test Data (example):**
-- All required fields filled with valid values.
-- Any fields with constraints (length/range/format) are within limits.
-
-**Steps:**
-1. Navigate to a CMS form that accepts user input (e.g., profile update form).
-2. Enter valid values into all required fields and optional fields (if used).
-3. Submit the form.
+## AT-UC02-01 - Valid Create/Update Submission Accepted
 
 **Expected Results:**
-- The system checks required fields and validates formats/constraints.
-- The system accepts the submission.
-- The system stores/updates the information in the database.
-- The system displays a success/confirmation message.
+- Submission accepted only after required/format/business checks all pass.
+- Full create/update write persisted.
+- Success confirmation shown.
 
 ---
 
-## AT-UC02-02 — Missing Required Field Rejected (Extension 3a)
-
-**Objective:** Verify that submissions missing required fields are rejected.
-
-**Preconditions:**
-- User is logged in.
-- The target form is accessible.
-
-**Test Data (example):**
-- One required field left blank; all other fields valid.
-
-**Steps:**
-1. Open the target form.
-2. Leave one required field blank.
-3. Fill other fields with valid values.
-4. Submit the form.
+## AT-UC02-02 - Missing Required Field Rejected
 
 **Expected Results:**
-- The system detects missing required field(s).
-- The system rejects the submission.
-- No data is stored/updated.
-- The system highlights missing fields and displays an error message.
+- Required-field failures detected from form metadata.
+- Submission rejected; no persistence.
+- Field-specific correction guidance shown.
 
 ---
 
-## AT-UC02-03 — Invalid Format Rejected (Extension 4a)
-
-**Objective:** Verify that invalid field formats are rejected.
-
-**Preconditions:**
-- User is logged in.
-- The target form is accessible.
-
-**Test Data (example):**
-- Enter an invalid value in a format-validated field (e.g., email field = `bademail`).
-
-**Steps:**
-1. Open the target form.
-2. Enter an invalid formatted value in one field (e.g., invalid email).
-3. Ensure all other required fields are valid.
-4. Submit the form.
+## AT-UC02-03 - Invalid Format Rejected
 
 **Expected Results:**
-- The system detects the invalid format.
-- The system rejects the submission.
-- No data is stored/updated.
-- The system displays an error message indicating which field is invalid and why (at least generally).
+- Format failures detected per form inline rules.
+- Submission rejected; no persistence.
+- Field-specific format feedback shown.
 
 ---
 
-## AT-UC02-04 — Constraint/Business Rule Violation Rejected (Extension 4b)
-
-**Objective:** Verify that rule/constraint violations are rejected.
-
-**Preconditions:**
-- User is logged in.
-- The target form is accessible.
-
-**Test Data (example):**
-- Enter a value that violates a constraint (e.g., exceeds max length, out-of-range number, inconsistent fields).
-
-**Steps:**
-1. Open the target form.
-2. Enter input that violates a known constraint/business rule for one field.
-3. Fill remaining required fields with valid values.
-4. Submit the form.
+## AT-UC02-04 - Business Rule Violation Rejected
 
 **Expected Results:**
-- The system detects the rule/constraint violation.
-- The system rejects the submission.
-- No data is stored/updated.
-- The system displays an error message explaining the violation (or indicating the constraint failure clearly).
+- Business/cross-field violation detected.
+- Submission rejected; no persistence.
+- Field-level rule guidance shown.
 
 ---
 
-## AT-UC02-05 — Multiple Errors Reported (Combined Extensions)
-
-**Objective:** Verify the system handles multiple validation failures in one submission.
-
-**Preconditions:**
-- User is logged in.
-- The target form is accessible.
-
-**Test Data (example):**
-- One required field missing
-- One field has invalid format
-- One field violates a constraint
-
-**Steps:**
-1. Open the target form.
-2. Leave one required field blank.
-3. Enter an invalid formatted value in another field.
-4. Enter a constraint-violating value in a third field.
-5. Submit the form.
+## AT-UC02-05 - Mixed Errors Deterministic Ordering
 
 **Expected Results:**
-- The system rejects the submission.
-- No data is stored/updated.
-- The system reports all validation errors OR reports the first blocking error clearly and consistently (whichever is the system design).
-- The user remains on the form page with actionable feedback.
+- Submission with mixed required/format/business errors is rejected.
+- All field-level errors returned in stable deterministic order.
+- No persistence occurs.
 
 ---
 
-## AT-UC02-06 — No Partial Updates on Validation Failure (Atomicity Check)
-
-**Objective:** Verify that the system does not partially store/update data when validation fails.
-
-**Preconditions:**
-- User is logged in.
-- The target form updates existing information (e.g., profile update).
-- Baseline data exists for the user in the database.
-
-**Test Data (example):**
-- Change Field A to a valid new value.
-- Change Field B to an invalid value (format/constraint violation).
-
-**Steps:**
-1. Open the update form.
-2. Modify Field A with a valid value.
-3. Modify Field B with an invalid value.
-4. Submit the form.
-5. Refresh/reopen the form (or re-fetch the displayed data).
+## AT-UC02-06 - No Partial Updates on Validation Failure
 
 **Expected Results:**
-- The system rejects the submission.
-- Neither Field A nor Field B changes are persisted (no partial update).
-- The user sees validation errors and remains on the form page.
+- If any field fails validation, no partial create/update write persists.
 
 ---
 
-## AT-UC02-07 — Error Feedback is Clear and Field-Specific (Usability Acceptance)
-
-**Objective:** Verify error feedback is understandable and supports correction.
-
-**Preconditions:**
-- User is logged in.
-- The target form is accessible.
-
-**Test Data (example):**
-- Create any validation failure (missing required field or invalid format).
-
-**Steps:**
-1. Open the target form.
-2. Intentionally cause a validation failure.
-3. Submit the form.
+## AT-UC02-07 - Correction and Resubmission Recovery
 
 **Expected Results:**
-- The system provides an error message that indicates:
-  - At least one specific field that needs correction (or highlights it), and
-  - What type of problem occurred (missing/invalid/constraint violation).
-- The user can correct the input and attempt resubmission.
+- User can correct invalid fields and resubmit.
+- Success achieved after correction within defined attempt criteria.
 
 ---
+
+## AT-UC02-08 - Persistence Failure Rollback
+
+**Expected Results:**
+- If persistence fails after validation pass, write is rolled back/aborted atomically.
+- User receives retry guidance.
+
+---
+
+## AT-UC02-09 - Concurrent Conflicting Update Policy
+
+**Expected Results:**
+- Concurrent conflicting updates resolve with last-write-wins final state.
+- Final persisted state matches latest accepted write.
+
+---
+
+## AT-UC02-10 - Traceability and Ownership Artifacts
+
+**Expected Results:**
+- FR-to-AT mapping is present and consistent.
+- Per-form inline rule ownership is documented.
