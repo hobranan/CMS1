@@ -179,6 +179,6 @@ Task: "T030 [US3] Add refresh-consistency integration test in /mnt/c/Users/ponti
 
 ### Validation Gates
 
-- Assigned-paper list and resources are scoped strictly to the authenticated referee’s active assignments.
+- Assigned-paper list and resources are scoped strictly to the authenticated referee's active assignments.
 - Manuscript access remains view-only with no download/export capability.
 - Review forms are pre-generated and never generated on-demand in this flow.
