@@ -68,6 +68,9 @@ import { PublicPricingObservabilityService } from "../services/public-pricing/pu
 import { createPaymentRoutes } from "./payments/routes.js";
 import { PaymentWorkflowStore } from "../models/payment-workflow-store.js";
 import { PaymentObservabilityService } from "../services/payments/payment-observability-service.js";
+import { createTicketRoutes } from "./tickets/routes.js";
+import { TicketStore } from "../models/ticket-store.js";
+import { TicketObservabilityService } from "../services/tickets/ticket-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -227,6 +230,12 @@ export function createRegistrationRoutes(deps) {
   if (!deps.paymentObservabilityService) {
     deps.paymentObservabilityService = new PaymentObservabilityService();
   }
+  if (!deps.ticketStore) {
+    deps.ticketStore = new TicketStore();
+  }
+  if (!deps.ticketObservabilityService) {
+    deps.ticketObservabilityService = new TicketObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -248,6 +257,7 @@ export function createRegistrationRoutes(deps) {
   const publicScheduleRoutes = createPublicScheduleRoutes(deps);
   const publicPricingRoutes = createPublicPricingRoutes(deps);
   const paymentRoutes = createPaymentRoutes(deps);
+  const ticketRoutes = createTicketRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -271,7 +281,8 @@ export function createRegistrationRoutes(deps) {
     ...scheduleEditRoutes,
     ...publicScheduleRoutes,
     ...publicPricingRoutes,
-    ...paymentRoutes
+    ...paymentRoutes,
+    ...ticketRoutes
   };
 }
 

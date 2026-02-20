@@ -37,3 +37,14 @@ Issue attendee ticket confirmations with reference ID and QR code after confirme
 ## Verification
 - Run `npm test && npm run lint`.
 - Execute contract/integration tests for issuance gating, PDF storage/retrieval, delivery failure fallback, and generation/storage failure behavior.
+- Verify ticket pages against `docs/standards/html-css-style-profile.md`:
+  - Labels are explicit and user-actionable.
+  - Pending/failure guidance is direct and non-ambiguous.
+  - Semantic HTML is used for headings and landmark sections.
+
+## Implementation Notes (2026-02-20)
+- Added ticket issue, metadata, and PDF retrieval API routes.
+- Added strict payment-confirmed issuance gating using UC-20 payment state.
+- Added ticket reference + QR generation and PDF storage/retrieval flow.
+- Added fallback behavior for delivery failure, generation failure, and storage unavailability.
+- Final verification command executed: `npm test && npm run lint`.
