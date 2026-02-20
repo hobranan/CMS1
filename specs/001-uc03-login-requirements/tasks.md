@@ -123,6 +123,9 @@
 - [ ] T036 Validate UC-03 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
 
 - [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/quickstart.md`
+- [ ] T038 Add login p95 latency verification step against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_performance.integration.js`
+- [ ] T039 Add telemetry for failed-login recovery-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
+- [ ] T040 Record SC-005 recovery metric calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
 
 ---
 

@@ -96,6 +96,12 @@ A user who cannot be authenticated due to unknown email, wrong password, lockout
 - **FR-017**: System MUST deny login attempts during an active lockout and display a message that the account is temporarily locked and when retry is allowed.
 - **FR-018**: System MUST reset the failed-attempt counter after a successful login or after lockout expiry.
 
+### Non-Functional Requirements
+
+- **NFR-001**: Login decision responses MUST meet a p95 latency target of 400ms under normal operating load.
+- **NFR-002**: System MUST capture metrics for failed-login recovery so SC-005 can be measured from production telemetry.
+- **NFR-003**: Authentication failure responses MUST not reveal whether the email exists in the system.
+
 ### Assumptions
 
 - Username is defined as the registered email address used at account registration.
