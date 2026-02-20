@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| L1 | Validation Scope | LOW | `specs/001-uc01-requirements/spec.md`, `specs/001-uc01-requirements/tasks.md` | SC-004/SC-005 now define measurable outcomes and are mapped to tasks, but final measurement environment baseline (test vs staging telemetry) should be explicitly recorded during implementation. | Record baseline measurement source in `validation-report.md` when executing T036. |
 
 ### Coverage Summary Table
 

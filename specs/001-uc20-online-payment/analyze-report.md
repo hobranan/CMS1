@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| G1 | Coverage Gap | LOW | `specs/001-uc20-online-payment/contracts/online-payment.openapi.yaml:31`, `specs/001-uc20-online-payment/tasks.md:128` | Contract includes `409` duplicate/already-paid initiation conflict; explicit test coverage is required to prevent regressions. | Keep `T035` and add strict response-shape assertions for `409` conflict payloads. |
-| U1 | Underspecification | LOW | `specs/001-uc20-online-payment/plan.md:18`, `specs/001-uc20-online-payment/tasks.md:133` | Plan performance goals are qualitative, so latency acceptance thresholds for `T041` are undefined. | Define numeric initiation/confirmation latency SLOs in `plan.md`. |
 
 ## Coverage Summary Table
 

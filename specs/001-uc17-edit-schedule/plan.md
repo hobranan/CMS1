@@ -15,7 +15,7 @@ Implement an authorized editor schedule-edit workflow for both draft and publish
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Web browsers used by authenticated editors/administrators  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Edit load, validation, and save operations complete within normal editorial workflow latency  
+**Performance Goals**: Edit-load p95 <= 300ms, validation p95 <= 300ms, and save p95 <= 500ms per request
 **Constraints**: MVC boundaries required; published schedules are editable by authorized roles; last-edited date/time must reflect latest successful save  
 **Scale/Scope**: Editing and saving conference schedule updates with conflict validation and lock-policy enforcement
 

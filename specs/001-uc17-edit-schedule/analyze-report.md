@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc17-edit-schedule/plan.md:18`, `specs/001-uc17-edit-schedule/tasks.md:173` | Plan performance target remains qualitative, so latency verification thresholds are not fully defined for T046. | Define numeric SLOs for edit-load/validate/save paths and assert them in integration/perf tests. |
 
 ## Coverage Summary Table
 

@@ -90,7 +90,7 @@
 
 - [ ] T027 [P] [US3] Add integration test for refresh/revisit pricing consistency in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/refresh-revisit-consistency.integration.test.js`
 - [ ] T028 [P] [US3] Add integration test for temporary retrieval failure then recovery behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/failure-then-recovery.integration.test.js`
-- [ ] T029 [P] [US3] Add contract test asserting `discountApplied=false` and no discount fields in response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/no-discount-response.contract.test.js`
+- [ ] T029 [P] [US3] Add contract test asserting `discountApplied=false`, `currency=CAD`, and no discount fields in response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/no-discount-response.contract.test.js`
 
 ### Implementation for User Story 3
 

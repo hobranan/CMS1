@@ -15,7 +15,7 @@ Implement ticket confirmation issuance for attendees after confirmed and recorde
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Web browsers for attendee confirmation/account views and backend post-payment processing  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Ticket issuance and retrieval complete within normal post-payment/account workflow latency  
+**Performance Goals**: Ticket issuance p95 <= 1000ms; ticket PDF retrieval p95 <= 600ms
 **Constraints**: MVC boundaries required; ticket issuance gated by confirmed payment; ticket artifact format is PDF with required reference and QR  
 **Scale/Scope**: Payment-to-ticket issuance lifecycle and persistent attendee ticket retrieval
 

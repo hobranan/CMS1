@@ -96,6 +96,7 @@ An editor is informed of system failures and assignments are never left in a par
 
 - Conference policy allows one to three referees per paper assignment action.
 - Maximum referee workload thresholds come from UC-09 limits stored in database configuration and are evaluated at confirmation time.
+- Concurrent confirmation uses optimistic version checking; stale updates are rejected and must be retried from latest paper state.
 - Conflict-of-interest rules are outside the scope of this use case.
 
 ### Key Entities *(include if feature involves data)*

@@ -15,7 +15,7 @@ Implement a public schedule access flow that exposes only published final schedu
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Public web browsers (authenticated and unauthenticated users)  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Public schedule retrieval and PDF responses complete within normal attendee browsing latency  
+**Performance Goals**: Public schedule list/detail retrieval p95 <= 300ms; PDF render/export response p95 <= 1200ms
 **Constraints**: MVC boundaries required; public access must exclude unpublished content; view/export format is PDF  
 **Scale/Scope**: Public consumption of published final conference schedule and per-session detail access
 

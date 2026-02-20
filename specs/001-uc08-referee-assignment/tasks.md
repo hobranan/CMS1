@@ -110,7 +110,7 @@
 
 - [ ] T035 [P] Update contract examples/error payloads for final assignment behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc08-referee-assignment/contracts/referee-assignment.openapi.yaml`
 - [ ] T036 Update quickstart with implemented concurrency and rollback verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc08-referee-assignment/quickstart.md`
-- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-08.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-08-AT.md` if user-facing behavior wording changed during implementation
+- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-08.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-08-AT.md` and record whether user-facing wording changes were required during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-08 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc08-referee-assignment/quickstart.md`
 - [ ] T039 Add assignment-confirmation p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/assignment/assignment-confirmation-performance.integration.test.js`
 - [ ] T040 Add telemetry for one-attempt-valid-assignment completion metric (SC-005) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/assignment-observability-service.js`

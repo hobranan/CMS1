@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc18-public-schedule-pdf/plan.md:18`, `specs/001-uc18-public-schedule-pdf/tasks.md:121` | Performance expectation is qualitative ("normal browsing latency"), making load/performance verification thresholds unclear. | Add numeric latency target(s) in `plan.md` and assert in `T042` high-volume PDF stability tests. |
 
 ## Coverage Summary Table
 

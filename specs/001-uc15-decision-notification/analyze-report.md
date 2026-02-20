@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| L1 | Quality | LOW | `specs/001-uc15-decision-notification/spec.md` | Non-functional targets are intentionally qualitative for this UC. | Keep as-is for current scope; add numeric SLOs later only if needed by implementation/release gates. |
 
 ## Coverage Summary Table
 
@@ -28,8 +27,8 @@ No unmapped tasks detected.
 
 ## Metrics
 
-- Total Requirements: 12 functional + 3 non-functional
-- Total Tasks: 41
+- Total Requirements: 12 functional + 4 non-functional
+- Total Tasks: 42
 - Coverage % (requirements with >=1 task): 100%
 - Ambiguity Count: 0
 - Duplication Count: 0

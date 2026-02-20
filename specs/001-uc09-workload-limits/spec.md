@@ -67,6 +67,7 @@ An editor receives clear system feedback when workload retrieval or assignment s
 - Workload retrieval succeeds for one request and fails for an immediate retry.
 - Concurrent assignments to same referee approach the configured limit.
 - Assignment storage fails after positive workload validation.
+- Workload limit changes between selection and confirmation must trigger a refresh-required conflict message with no assignment stored.
 
 ## Requirements *(mandatory)*
 
@@ -84,6 +85,7 @@ An editor receives clear system feedback when workload retrieval or assignment s
 - **FR-010**: System MUST reject assignment and show a system error when assignment storage fails.
 - **FR-011**: System MUST ensure no invalid assignment is persisted when validation, retrieval, or storage fails.
 - **FR-012**: System MUST apply updated configured workload limits to subsequent assignment checks without requiring user-side changes.
+- **FR-013**: System MUST return a refresh-required conflict message when confirmation recheck detects workload/limit drift since initial selection.
 
 ### Assumptions
 

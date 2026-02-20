@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc08-referee-assignment/spec.md:69`, `specs/001-uc08-referee-assignment/tasks.md:103` | Concurrent assignment conflict behavior is defined at high level, but no explicit lock/version strategy is documented. | Specify optimistic lock/version check or explicit paper-level lock semantics in design docs. |
-| U2 | Underspecification | LOW | `specs/001-uc08-referee-assignment/tasks.md:111` | T037 is conditional and can lead to inconsistent execution behavior. | Convert to explicit verify-and-record UC/AT sync task regardless of changes. |
 
 ## Coverage Summary Table
 

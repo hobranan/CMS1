@@ -115,6 +115,7 @@
 - [ ] T039 Update quickstart with final fallback/error/ordering verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
 - [ ] T040 Run `npm test && npm run lint` and record UC-15 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
 - [ ] T041 Add FR-to-AT traceability mapping validation in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/spec.md`
+- [ ] T042 Add decision/notification retrieval p95 latency verification against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/decision-notification-performance.integration.spec.js`
 
 ---
 

@@ -95,7 +95,7 @@
 
 - [ ] T032 [P] [US3] Add contract test for pending payment `409` on issue endpoint in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/tickets/post-issue-ticket-pending-payment.contract.test.js`
 - [ ] T033 [P] [US3] Add contract test for ticket generation/storage failure `500` on issue endpoint in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/tickets/post-issue-ticket-failure.contract.test.js`
-- [ ] T034 [P] [US3] Add contract test for ticket storage-unavailable `503` on PDF endpoint in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/tickets/get-ticket-pdf-storage-unavailable.contract.test.js`
+- [ ] T034 [P] [US3] Add contract test for ticket storage-unavailable `503` on PDF endpoint with strict `code/message` assertions in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/tickets/get-ticket-pdf-storage-unavailable.contract.test.js`
 - [ ] T035 [P] [US3] Add integration test for delivery failure preserving CMS retrieval in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/tickets/delivery-failed-cms-retrieval-preserved.integration.test.js`
 - [ ] T036 [P] [US3] Add integration test for generation failure preventing issuance in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/tickets/generation-failure-no-ticket-issued.integration.test.js`
 - [ ] T037 [P] [US3] Add integration test for storage failure warning and retrieval-unavailable guidance in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/tickets/storage-failure-retrieval-warning.integration.test.js`

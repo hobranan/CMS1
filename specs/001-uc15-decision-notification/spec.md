@@ -97,6 +97,7 @@ An author gets clear feedback if decision is not yet available, access is unauth
 - **NFR-001**: System MUST enforce owner-only access for summary and full-review decision content across CMS and notification retrieval paths.
 - **NFR-002**: System MUST record notification-delivery and decision-retrieval failures in system logs for operational troubleshooting.
 - **NFR-003**: System MUST treat decision status, summary bullets, and full review as a single-source payload for consistency.
+- **NFR-004**: Decision view and notification retrieval endpoints MUST meet a p95 latency target of 400ms under normal operating load.
 
 ### Assumptions
 

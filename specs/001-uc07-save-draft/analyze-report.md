@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | LOW | `specs/001-uc07-save-draft/spec.md:85`, `specs/001-uc07-save-draft/spec.md:101` | "save-level validation" is intentionally lighter than final validation but lacks concrete rule boundaries. | Define explicit save-level rule set in spec appendix or referenced validation matrix. |
-| U1 | Underspecification | LOW | `specs/001-uc07-save-draft/tasks.md:111` | T037 is conditional and may produce inconsistent completion behavior across implementations. | Convert T037 into explicit verify-and-record task regardless of whether changes are needed. |
 
 ## Coverage Summary Table
 

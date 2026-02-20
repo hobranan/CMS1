@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc09-workload-limits/spec.md:65`, `specs/001-uc09-workload-limits/tasks.md:103` | Limit changes between selection and confirmation are listed as edge case, but no explicit UI conflict messaging requirements are defined. | Specify user-facing message and remediation path when confirmation recheck differs from initial view. |
-| U2 | Underspecification | LOW | `specs/001-uc09-workload-limits/tasks.md:111` | T037 is conditional and may be skipped inconsistently. | Convert to explicit verify-and-record UC/AT sync task regardless of changes. |
 
 ## Coverage Summary Table
 

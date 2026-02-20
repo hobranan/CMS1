@@ -98,7 +98,7 @@ An author can continue editing after saves, and is informed when save fails due 
 
 ### Assumptions
 
-- Save-level validation is lighter than final-submission validation.
+- Save-level validation is lighter than final-submission validation and is limited to required-field presence, basic format sanity, and reference integrity checks.
 - Draft data includes only fields currently editable by the author.
 - Last successful save is the authoritative persisted draft state.
 - Final submission validation rules are defined in the submission/finalization use case.

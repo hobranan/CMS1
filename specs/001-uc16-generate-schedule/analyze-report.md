@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc16-generate-schedule/plan.md:18`, `specs/001-uc16-generate-schedule/tasks.md:168` | Performance goal is qualitative ("normal workflow latency"), so success threshold for T046 remains unclear. | Define concrete latency SLO (for example, p95 target) in `plan.md` and use it in T046 assertions. |
 
 ## Coverage Summary Table
 

@@ -110,7 +110,7 @@
 
 - [ ] T035 [P] Update API contract examples/error payloads to match final access behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc11-assigned-paper-access/contracts/assigned-paper-access.openapi.yaml`
 - [ ] T036 Update quickstart with final authorization/failure verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc11-assigned-paper-access/quickstart.md`
-- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-11.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-11-AT.md` if user-facing behavior wording changed during implementation
+- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-11.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-11-AT.md` and record whether user-facing behavior wording changes were required during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-11 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc11-assigned-paper-access/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc11-assigned-paper-access/quickstart.md`

@@ -72,7 +72,7 @@
 ### Implementation for User Story 2
 
 - [ ] T023 [US2] Implement invitation-state revalidation immediately before persistence in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/process-invitation-response-service.js`
-- [ ] T024 [US2] Implement invalid-state/expiry error response mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/invitation-response-error-mapper.js`
+- [ ] T024 [US2] Implement invalid-state/expiry error response mapper including canonical stale-state conflict message and refresh guidance in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/invitation-response-error-mapper.js`
 - [ ] T025 [P] [US2] Implement no-pending and blocked-action UI messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-state-feedback.js`
 - [ ] T026 [US2] Remove responded invitations from pending view and update invitation history projection in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-list-projection-service.js`
 
@@ -110,7 +110,7 @@
 
 - [ ] T035 [P] Update contract examples/status codes for finalized invitation response behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/contracts/invitation-response.openapi.yaml`
 - [ ] T036 Update quickstart scenarios with final boundary and failure validation steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
-- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-10.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-10-AT.md` if user-facing behavior wording changed during implementation
+- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-10.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-10-AT.md` and record whether user-facing wording changes were required during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-10 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`

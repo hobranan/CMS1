@@ -43,7 +43,7 @@
 ### Tests for User Story 1
 
 - [ ] T013 [P] [US1] Add contract test for successful public list retrieval `GET /api/v1/public/announcements` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-announcements/get-announcements-list-success.contract.test.js`
-- [ ] T014 [P] [US1] Add contract test for no-announcements `204` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-announcements/get-announcements-list-no-data.contract.test.js`
+- [ ] T014 [P] [US1] Add contract test for no-announcements `204` response with deterministic empty-state semantics in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-announcements/get-announcements-list-no-data.contract.test.js`
 - [ ] T015 [P] [US1] Add integration test for deterministic ordering including identical-date fallback in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-announcements/ordered-list-deterministic.integration.test.js`
 - [ ] T016 [P] [US1] Add integration test for refresh/return consistency in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-announcements/refresh-return-consistency.integration.test.js`
 

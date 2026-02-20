@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| G1 | Coverage Gap | LOW | `specs/001-uc21-registration-ticket/contracts/registration-ticket.openapi.yaml:74`, `specs/001-uc21-registration-ticket/tasks.md:100` | Contract defines `503` storage-unavailable ticket PDF response; explicit contract/integration coverage must remain in task set. | Keep `T034` and ensure response payload assertions cover `code/message` semantics for storage-unavailable states. |
-| U1 | Underspecification | LOW | `specs/001-uc21-registration-ticket/plan.md:18`, `specs/001-uc21-registration-ticket/tasks.md:117` | Plan performance target is qualitative, so latency acceptance thresholds for issuance/retrieval tests are undefined. | Define numeric SLOs for ticket issue and PDF retrieval latencies in `plan.md`. |
 
 ## Coverage Summary Table
 

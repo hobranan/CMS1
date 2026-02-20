@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| L1 | Measurement Baseline | LOW | `specs/001-uc02-requirements/spec.md`, `specs/001-uc02-requirements/tasks.md` | Performance and UX timing targets are now specified and mapped to tasks, but measurement baseline context (test harness vs staging) should be recorded during execution. | Record baseline context in `validation-report.md` when executing T034. |
 
 ### Coverage Summary Table
 

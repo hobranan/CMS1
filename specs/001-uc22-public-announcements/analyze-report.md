@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| G1 | Coverage Gap | LOW | `specs/001-uc22-public-announcements/contracts/public-announcements.openapi.yaml:18`, `specs/001-uc22-public-announcements/tasks.md:47` | Contract uses `204` for no-data list response, and this must remain explicitly asserted to avoid regressions into ambiguous empty-list payload behavior. | Keep explicit no-data `204` contract test (`T014`) and assert frontend empty-state handling remains deterministic. |
-| U1 | Underspecification | LOW | `specs/001-uc22-public-announcements/plan.md:18`, `specs/001-uc22-public-announcements/tasks.md:113` | Performance target is qualitative ("normal browsing latency"), so latency verification thresholds are unspecified. | Define numeric list/detail latency SLOs in `plan.md` for performance tests. |
 
 ## Coverage Summary Table
 

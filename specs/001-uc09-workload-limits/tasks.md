@@ -72,7 +72,7 @@
 ### Implementation for User Story 2
 
 - [ ] T023 [US2] Implement threshold comparator enforcing strict-below rule in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-assignment-decision-service.js`
-- [ ] T024 [US2] Implement workload-limit rejection error mapper with clear guidance in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/workload/workload-error-mapper.js`
+- [ ] T024 [US2] Implement workload-limit rejection error mapper with refresh-required guidance for stale limit/workload rechecks in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/workload/workload-error-mapper.js`
 - [ ] T025 [P] [US2] Implement frontend workload-limit feedback messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/workload-limit-errors.js`
 - [ ] T026 [US2] Record `REJECTED_LIMIT` attempt outcomes for traceability in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-attempt-logging-service.js`
 
@@ -110,7 +110,7 @@
 
 - [ ] T035 [P] Update contract examples/error payloads for finalized workload behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/contracts/workload-limits.openapi.yaml`
 - [ ] T036 Update quickstart with final config-change and failure verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`
-- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-09.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-09-AT.md` if user-facing behavior wording changed during implementation
+- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-09.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-09-AT.md` and record whether user-facing wording changes were required during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-09 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`

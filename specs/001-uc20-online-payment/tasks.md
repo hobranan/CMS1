@@ -96,7 +96,7 @@
 - [ ] T032 [P] [US3] Add contract test for gateway-success + DB-save-failure reconciliation outcome in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/payments/post-gateway-confirm-save-failure.contract.test.js`
 - [ ] T033 [P] [US3] Add integration test for unresolved pending/failed messaging without false confirmation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/payments/unresolved-payment-messaging.integration.test.js`
 - [ ] T034 [P] [US3] Add integration test for reconciliation-item creation on save failure in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/payments/reconciliation-item-created.integration.test.js`
-- [ ] T035 [P] [US3] Add integration test for duplicate attempt blocked after successful payment in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/payments/duplicate-attempt-after-paid-blocked.integration.test.js`
+- [ ] T035 [P] [US3] Add integration test for duplicate attempt blocked after successful payment with strict `409` payload assertions (`code/message`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/payments/duplicate-attempt-after-paid-blocked.integration.test.js`
 
 ### Implementation for User Story 3
 

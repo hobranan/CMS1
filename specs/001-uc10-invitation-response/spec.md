@@ -88,6 +88,7 @@ A referee can cancel before confirming, and database/notification failures are h
 - **FR-012**: System MUST leave invitation status unchanged and show system error when database update fails.
 - **FR-013**: System MUST keep recorded response unchanged when notification sending fails and inform referee about notification issue.
 - **FR-014**: System MUST remove responded invitations from pending view and show updated status consistently in invitation history/list views.
+- **FR-015**: System MUST return a canonical stale-state conflict message ("Invitation state changed. Refresh and try again.") when multi-session/concurrent response attempts detect outdated invitation state.
 
 ### Assumptions
 

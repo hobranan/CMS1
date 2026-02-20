@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc10-invitation-response/spec.md:67`, `specs/001-uc10-invitation-response/tasks.md:103` | Multi-session concurrent response edge case is covered functionally, but no explicit conflict-resolution message standard is specified. | Define canonical conflict message and client refresh guidance for stale invitation state. |
-| U2 | Underspecification | LOW | `specs/001-uc10-invitation-response/tasks.md:111` | T037 is conditional and may be skipped inconsistently. | Convert to explicit verify-and-record UC/AT sync task regardless of changes. |
 
 ## Coverage Summary Table
 

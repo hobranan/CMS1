@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| U1 | Underspecification | LOW | `specs/001-uc11-assigned-paper-access/spec.md:90`, `specs/001-uc11-assigned-paper-access/tasks.md:103` | FR-014 mentions refresh consistency, but not whether stale cached data should be replaced or merged when assignments change mid-session. | Specify refresh conflict policy (server-authoritative replace vs merge) and expected UI behavior. |
-| U2 | Underspecification | LOW | `specs/001-uc11-assigned-paper-access/tasks.md:111` | T037 is conditional and may be skipped inconsistently. | Convert to explicit verify-and-record UC/AT sync task regardless of change status. |
 
 ## Coverage Summary Table
 

@@ -15,7 +15,7 @@ Implement an authenticated attendee payment workflow that initiates gateway chec
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Web browsers for authenticated attendees and backend payment-gateway callback handling  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Payment initiation/confirmation flows respond within normal checkout UX expectations  
+**Performance Goals**: Payment initiation p95 <= 500ms; confirmation/callback processing p95 <= 800ms
 **Constraints**: MVC boundaries required; registration can become Paid/Confirmed only after successful payment recording; unresolved states must never auto-confirm  
 **Scale/Scope**: Online registration fee payment lifecycle and registration-state synchronization
 

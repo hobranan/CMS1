@@ -15,7 +15,7 @@ Implement a public pricing view that exposes published registration categories a
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Public web browsers (guest and authenticated users)  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Public pricing retrieval/render completes within normal browsing latency  
+**Performance Goals**: Public pricing retrieval/render p95 <= 300ms
 **Constraints**: MVC boundaries required; prices are public; display currency is CAD only; no discount calculations  
 **Scale/Scope**: Public registration pricing page and related availability/error handling
 

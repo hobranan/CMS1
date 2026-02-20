@@ -15,7 +15,7 @@ Implement a manual administrator/editor-triggered schedule generation flow that 
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Web browsers used by authenticated administrators/editors  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Manual generation produces reviewable draft within normal editorial workflow latency  
+**Performance Goals**: Manual generation p95 <= 5000ms per request; published schedule retrieval p95 <= 300ms
 **Constraints**: MVC boundaries required; generation must be manual; initial placement randomized; conflicts must block finalization until resolved  
 **Scale/Scope**: Conference schedule draft and publication lifecycle for accepted papers and configured rooms/slots
 

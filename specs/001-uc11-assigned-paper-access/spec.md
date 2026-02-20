@@ -90,6 +90,7 @@ A referee receives clear error feedback when assigned-paper list, manuscript, or
 - **FR-013**: System MUST show a review-form-unavailable error when pre-generated review form cannot be retrieved.
 - **FR-014**: System MUST preserve successful access behavior after page refresh for assigned resources.
 - **FR-015**: System MUST return `401` for unauthenticated assigned-papers list requests, and `200` with an empty list for authenticated referees with no assignments.
+- **FR-016**: On refresh/reload, System MUST replace client cached assigned-resource state with server-authoritative data and show resource-unavailable/removed states when assignments changed.
 
 ### Assumptions
 

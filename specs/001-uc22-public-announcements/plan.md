@@ -15,7 +15,7 @@ Implement a guest-accessible announcements experience that lists public announce
 **Testing**: `npm test && npm run lint`  
 **Target Platform**: Public web browsers (guest and authenticated users)  
 **Project Type**: Web application (`frontend/` + `backend/`)  
-**Performance Goals**: Announcement list/detail retrieval and rendering complete within normal browsing latency  
+**Performance Goals**: Announcement list/detail retrieval and rendering p95 <= 300ms
 **Constraints**: MVC boundaries required; public announcements accessible without login; date ordering newest-first with deterministic fallback for ties  
 **Scale/Scope**: Public list/detail announcement viewing and associated no-data/error handling
 
