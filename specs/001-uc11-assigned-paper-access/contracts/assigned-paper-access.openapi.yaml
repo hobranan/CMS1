@@ -15,7 +15,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Assigned papers returned (possibly empty)
+          description: Assigned papers returned for authenticated referee; empty list when no assignments
           content:
             application/json:
               schema:
@@ -28,7 +28,7 @@ paths:
                   message:
                     type: string
         '401':
-          description: Authentication required
+          description: Authentication required (unauthenticated request)
           content:
             application/json:
               schema:

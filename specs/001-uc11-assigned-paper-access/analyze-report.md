@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | HIGH | `specs/001-uc11-assigned-paper-access/spec.md:84`, `specs/001-uc11-assigned-paper-access/contracts/assigned-paper-access.openapi.yaml:65` | Spec says show authorization error for non-assigned access, while contract encodes `403` for resources but list endpoint only models `401/500`; unauthorized list-access semantics are implicit. | Explicitly document/refine list endpoint unauthorized behavior and align spec + contract error mapping. |
 | G1 | Coverage Gap | MEDIUM | `specs/001-uc11-assigned-paper-access/plan.md:18`, `specs/001-uc11-assigned-paper-access/tasks.md:13` | Plan defines 300ms p95 access/authorization checks, but tasks lack explicit performance validation task. | Add performance test/measurement task in polish phase. |
 | G2 | Coverage Gap | MEDIUM | `specs/001-uc11-assigned-paper-access/spec.md:114`, `specs/001-uc11-assigned-paper-access/tasks.md:126` | SC-005 requires failure responses without unauthorized data exposure, but tasks do not include explicit payload-redaction/assertion checks. | Add security-focused response-shape assertions for all failure modes. |
 | U1 | Underspecification | LOW | `specs/001-uc11-assigned-paper-access/spec.md:90`, `specs/001-uc11-assigned-paper-access/tasks.md:103` | FR-014 mentions refresh consistency, but not whether stale cached data should be replaced or merged when assignments change mid-session. | Specify refresh conflict policy (server-authoritative replace vs merge) and expected UI behavior. |
@@ -40,16 +39,16 @@ No fully unmapped tasks detected.
 - Total Requirements: 14 functional requirements (FR-001..FR-014)
 - Total Tasks: 38
 - Coverage % (requirements with >=1 task): 100%
-- Ambiguity Count: 1
+- Ambiguity Count: 0
 - Duplication Count: 0
 - Critical Issues Count: 0
 
 ## Next Actions
 
-- No CRITICAL blockers found.
-- Resolve HIGH/MEDIUM findings before `/speckit.implement`.
+- No CRITICAL or HIGH blockers found.
+- Resolve MEDIUM findings before `/speckit.implement`.
 - Suggested actions:
-  - Align list-access authorization semantics across spec and contract.
+- Track list-access authorization semantics in contract tests (`401` unauthenticated, `200` empty for authenticated with no assignments).
   - Add performance and failure-payload redaction verification tasks to `specs/001-uc11-assigned-paper-access/tasks.md`.
   - Re-run `/speckit.analyze` after refinements.
 

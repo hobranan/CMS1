@@ -12,6 +12,7 @@
 
 - Q: Are manuscripts downloadable or view-only? -> A: Manuscripts are view-only for assigned referees.
 - Q: When are review forms created? -> A: Review forms are pre-generated and must exist before referee access.
+- Q: What is list-endpoint behavior for unauthenticated vs authenticated referees with no assignments? -> A: Unauthenticated list requests return `401`; authenticated referees with no assignments receive `200` with an empty list and no-assigned-papers message.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -88,6 +89,7 @@ A referee receives clear error feedback when assigned-paper list, manuscript, or
 - **FR-012**: System MUST show a manuscript-unavailable error when manuscript cannot be retrieved.
 - **FR-013**: System MUST show a review-form-unavailable error when pre-generated review form cannot be retrieved.
 - **FR-014**: System MUST preserve successful access behavior after page refresh for assigned resources.
+- **FR-015**: System MUST return `401` for unauthenticated assigned-papers list requests, and `200` with an empty list for authenticated referees with no assignments.
 
 ### Assumptions
 
