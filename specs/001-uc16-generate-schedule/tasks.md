@@ -124,6 +124,7 @@
 - [ ] T048 Run `npm test && npm run lint` and record UC-16 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
 
 - [ ] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
+- [ ] T050 Add contract and UI feedback test for `GET /schedule` unpublished `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/get-published-schedule-not-available.contract.test.js`
 
 ---
 

@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc16-generate-schedule/checklists/requirements.md:34`, `specs/001-uc16-generate-schedule/checklists/generate-schedule.md:9` | General requirements checklist is marked complete, while UC-16-specific quality checklist remains unchecked. | Run and mark `checklists/generate-schedule.md` so checklist status is authoritative before implementation. |
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc16-generate-schedule/contracts/generate-schedule.openapi.yaml:94`, `specs/001-uc16-generate-schedule/tasks.md:153` | Contract includes `GET /schedule` `404` (no published schedule), but tasks do not include explicit contract/integration coverage for that path. | Add a contract test task for `404` no-published-schedule response and corresponding UI feedback handling test. |
 | U1 | Underspecification | LOW | `specs/001-uc16-generate-schedule/plan.md:18`, `specs/001-uc16-generate-schedule/tasks.md:168` | Performance goal is qualitative ("normal workflow latency"), so success threshold for T046 remains unclear. | Define concrete latency SLO (for example, p95 target) in `plan.md` and use it in T046 assertions. |
 
 ## Coverage Summary Table
@@ -39,7 +37,7 @@ No constitution-critical violations detected. UC artifacts, MVC boundaries, and 
 ## Metrics
 
 - Total Requirements: 17 functional requirements (FR-001..FR-017)
-- Total Tasks: 48
+- Total Tasks: 50
 - Coverage % (requirements with >=1 task): 100%
 - Ambiguity Count: 1
 - Duplication Count: 0
@@ -47,8 +45,5 @@ No constitution-critical violations detected. UC artifacts, MVC boundaries, and 
 
 ## Next Actions
 
-- Resolve MEDIUM issues before implementation starts:
-  - Complete UC-16 checklist status updates.
-  - Add explicit `GET /schedule` `404` no-published-schedule test coverage.
 - Resolve LOW issue for measurable performance verification:
   - Define numeric latency target in `plan.md` for T046.
