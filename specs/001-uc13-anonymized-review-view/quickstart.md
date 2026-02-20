@@ -5,7 +5,6 @@ Allow authorized editors to view only completed paper reviews and open full anon
 
 ## Prerequisites
 - Dependencies installed
-- Test command available: `npm test && npm run lint`
 - UC files present: `UC-13.md`, `UC-13-AT.md`
 
 ## Implementation Steps
@@ -30,6 +29,18 @@ Allow authorized editors to view only completed paper reviews and open full anon
 - Single review open failure still allows access to remaining list entries.
 - Refresh preserves authorization check and completed/anonymized behavior.
 
-## Verification
-- Run `npm test && npm run lint`.
-- Execute contract/integration tests for authorization, anonymization, filtering, and failure handling paths.
+## Verification Run (Executed)
+- `node --test tests/contract/review-view/*.test.js tests/contract/anonymized-review-view/*.test.js tests/integration/review-view/*.test.js tests/integration/anonymized-review-view/*.test.js`
+  - Result: 12 passed, 0 failed.
+- `node ./scripts/lint.mjs`
+  - Result: pass.
+
+## HTML/CSS Style Profile Check
+- Verified new HTML templates:
+  - `frontend/src/views/completed-reviews.html`
+  - `frontend/src/views/anonymized-review-detail.html`
+- Alignment confirmed against `docs/standards/html-css-style-profile.md`:
+  - semantic section containers
+  - lowercase element names/attributes
+  - no inline styles
+  - stable id naming

@@ -8,13 +8,15 @@ export class ReviewSubmissionRepository {
     this.submittedById = new Map();
     this.versionLinks = [];
     this.failNextWrite = false;
+    this.failNextRead = false;
   }
 
-  seedAssignment({ assignmentId, refereeId, editorId = "editor-1", status = "active", deadlineIndicator = null }) {
+  seedAssignment({ assignmentId, refereeId, editorId = "editor-1", paperId = null, status = "active", deadlineIndicator = null }) {
     this.assignments.set(assignmentId, {
       assignmentId,
       refereeId,
       editorId,
+      paperId,
       status,
       deadlineIndicator
     });
@@ -32,6 +34,16 @@ export class ReviewSubmissionRepository {
 
   getAssignment(assignmentId) {
     return this.assignments.get(assignmentId) ?? null;
+  }
+
+  listAssignmentsByPaper(paperId) {
+    const result = [];
+    for (const assignment of this.assignments.values()) {
+      if (assignment.paperId === paperId) {
+        result.push(assignment);
+      }
+    }
+    return result;
   }
 
   getDraft(assignmentId) {
@@ -89,6 +101,12 @@ export class ReviewSubmissionRepository {
   }
 
   getSubmittedReview(reviewId) {
+    if (this.failNextRead) {
+      this.failNextRead = false;
+      const err = new Error("REVIEW_DB_READ_FAILURE");
+      err.code = "REVIEW_DB_READ_FAILURE";
+      throw err;
+    }
     return this.submittedById.get(reviewId) ?? null;
   }
 
@@ -103,11 +121,20 @@ export class ReviewSubmissionRepository {
   }
 
   listSubmittedForAssignment(assignmentId) {
+    if (this.failNextRead) {
+      this.failNextRead = false;
+      const err = new Error("REVIEW_DB_READ_FAILURE");
+      err.code = "REVIEW_DB_READ_FAILURE";
+      throw err;
+    }
     return [...(this.submittedByAssignment.get(assignmentId) ?? [])];
   }
 
   failNextSubmissionWrite() {
     this.failNextWrite = true;
   }
-}
 
+  failNextSubmissionRead() {
+    this.failNextRead = true;
+  }
+}

@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Contracts for editor access to completed anonymized paper reviews.
 paths:
-  /api/v1/papers/{paperId}/reviews/completed:
+  /api/v1/papers/{paperId}/completed-reviews:
     get:
       summary: Get completed anonymized reviews for a paper
       parameters:
@@ -39,7 +39,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /api/v1/papers/{paperId}/reviews/completed/{reviewId}:
+  /api/v1/papers/{paperId}/completed-reviews/{reviewId}:
     get:
       summary: Open anonymized completed review detail
       parameters:
@@ -89,58 +89,39 @@ components:
   schemas:
     CompletedReviewListResponse:
       type: object
-      required: [paperId, reviews, hasCompletedReviews]
+      required: [reviews]
       properties:
-        paperId:
-          type: string
-        hasCompletedReviews:
-          type: boolean
         message:
           type: string
-          description: Present for empty state or informational feedback.
         reviews:
           type: array
           items:
             $ref: '#/components/schemas/AnonymizedReviewListItem'
     AnonymizedReviewListItem:
       type: object
-      required: [reviewId, submittedAt, status, identityRemoved]
+      required: [reviewId, assignmentId, paperId, submittedAt, identityRemoved]
       properties:
         reviewId:
           type: string
-        submittedAt:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum: [submitted]
-        recommendation:
-          type: string
-        identityRemoved:
-          type: boolean
-          enum: [true]
-    AnonymizedReviewDetail:
-      type: object
-      required: [reviewId, paperId, submittedAt, status, content, identityRemoved]
-      properties:
-        reviewId:
+        assignmentId:
           type: string
         paperId:
           type: string
         submittedAt:
           type: string
           format: date-time
-        status:
+        recommendation:
           type: string
-          enum: [submitted]
-        content:
+        comments:
+          type: string
+        fields:
           type: object
         identityRemoved:
           type: boolean
           enum: [true]
-        metadata:
-          type: object
-          description: Non-identity metadata only.
+    AnonymizedReviewDetail:
+      allOf:
+        - $ref: '#/components/schemas/AnonymizedReviewListItem'
     ErrorResponse:
       type: object
       required: [code, message]

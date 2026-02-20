@@ -46,6 +46,7 @@ import { InvitationNotificationObservabilityService } from "../services/invitati
 import { createAssignedAccessRoutes } from "./assigned-access/routes.js";
 import { AssignedPaperRepository } from "../models/assigned-paper.js";
 import { createReviewRoutes } from "./reviews/routes.js";
+import { createReviewViewRoutes } from "./review-view/routes.js";
 import { ReviewSubmissionRepository } from "../models/review-draft.js";
 import { ReviewNotificationService } from "../services/reviews/review-notification-service.js";
 import { ReviewSubmissionObservabilityService } from "../services/reviews/review-submission-observability-service.js";
@@ -185,6 +186,7 @@ export function createRegistrationRoutes(deps) {
   const invitationRoutes = createInvitationRoutes(deps);
   const assignedAccessRoutes = createAssignedAccessRoutes(deps);
   const reviewRoutes = createReviewRoutes(deps);
+  const reviewViewRoutes = createReviewViewRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -200,6 +202,9 @@ export function createRegistrationRoutes(deps) {
     ...workloadRoutes,
     ...invitationRoutes,
     ...assignedAccessRoutes,
-    ...reviewRoutes
+    ...reviewRoutes,
+    ...reviewViewRoutes
   };
 }
+
+
