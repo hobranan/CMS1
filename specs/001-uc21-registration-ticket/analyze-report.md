@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc21-registration-ticket/checklists/registration-ticket.md:9` | UC-21 checklist remains unchecked, creating readiness ambiguity before implementation begins. | Execute and mark UC-21 checklist items before `/speckit.implement`. |
 | G1 | Coverage Gap | LOW | `specs/001-uc21-registration-ticket/contracts/registration-ticket.openapi.yaml:74`, `specs/001-uc21-registration-ticket/tasks.md:100` | Contract defines `503` storage-unavailable ticket PDF response; explicit contract/integration coverage must remain in task set. | Keep `T034` and ensure response payload assertions cover `code/message` semantics for storage-unavailable states. |
 | U1 | Underspecification | LOW | `specs/001-uc21-registration-ticket/plan.md:18`, `specs/001-uc21-registration-ticket/tasks.md:117` | Plan performance target is qualitative, so latency acceptance thresholds for issuance/retrieval tests are undefined. | Define numeric SLOs for ticket issue and PDF retrieval latencies in `plan.md`. |
 
@@ -45,7 +44,6 @@ No constitution-critical violations detected. UC references, MVC boundaries, and
 
 ## Next Actions
 
-- Resolve MEDIUM/LOW readiness items:
-  - Complete UC-21 checklist status updates.
+- Resolve LOW readiness items:
   - Keep explicit `503` storage-unavailable response assertions in contract tests.
   - Define numeric latency targets for issuance/retrieval in `plan.md`.
