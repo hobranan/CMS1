@@ -6,10 +6,27 @@ export class ScheduleDraftRepository {
     this.drafts = new Map();
     this.publishedByConference = new Map();
     this.failNextSave = false;
+    this.failNextEditSave = false;
   }
 
-  seedConference({ conferenceId, acceptedPapers = [], rooms = [], parameters = {}, editorIds = [] }) {
-    this.conferences.set(conferenceId, { conferenceId, acceptedPapers, rooms, parameters, editorIds });
+  seedConference({
+    conferenceId,
+    acceptedPapers = [],
+    rooms = [],
+    parameters = {},
+    editorIds = [],
+    editLocked = false,
+    lockReason = null
+  }) {
+    this.conferences.set(conferenceId, {
+      conferenceId,
+      acceptedPapers,
+      rooms,
+      parameters,
+      editorIds,
+      editLocked,
+      lockReason
+    });
   }
 
   getConference(conferenceId) {
@@ -55,5 +72,9 @@ export class ScheduleDraftRepository {
 
   failNextDraftSave() {
     this.failNextSave = true;
+  }
+
+  failNextScheduleEditSave() {
+    this.failNextEditSave = true;
   }
 }

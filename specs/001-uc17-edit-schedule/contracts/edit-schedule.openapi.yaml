@@ -2,215 +2,37 @@ openapi: 3.0.3
 info:
   title: Edit Schedule API
   version: 1.0.0
-  description: Contracts for editing draft/published schedules with validation, timestamp updates, and safe failure handling.
+  description: Contracts for loading editable schedule state, saving schedule edits, and cancelling edit sessions.
 paths:
-  /api/v1/schedules/{scheduleId}/edit-context:
+  /api/v1/conferences/{conferenceId}/schedule/editable:
     get:
-      summary: Get editable schedule context
-      parameters:
-        - name: scheduleId
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: Load editable schedule state
       responses:
         '200':
-          description: Edit context returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EditContextResponse'
+          description: Editable schedule loaded
         '401':
           description: Authentication required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '403':
-          description: Unauthorized or policy-locked
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden role
         '404':
           description: Schedule not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-  /api/v1/schedules/{scheduleId}/edits/validate:
+  /api/v1/conferences/{conferenceId}/schedule/save:
     post:
-      summary: Validate proposed schedule edits
-      parameters:
-        - name: scheduleId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ValidateScheduleEditsRequest'
-      responses:
-        '200':
-          description: Validation result returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidateScheduleEditsResult'
-        '400':
-          description: Invalid payload references
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Authentication required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Unauthorized or policy-locked
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-  /api/v1/schedules/{scheduleId}/edits/save:
-    post:
-      summary: Save validated schedule edits
-      parameters:
-        - name: scheduleId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SaveScheduleEditsRequest'
+      summary: Save schedule edits
       responses:
         '200':
           description: Save successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SaveScheduleEditsResult'
         '400':
-          description: Validation failed or invalid references
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Authentication required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Unauthorized or policy-locked
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          description: Validation/conflict failure
         '409':
-          description: Concurrency conflict (stale version)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          description: Stale version
+        '423':
+          description: Policy lock
         '500':
-          description: Database save failure
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-components:
-  schemas:
-    EditContextResponse:
-      type: object
-      required: [scheduleId, status, version, lastEditedAt, entries]
-      properties:
-        scheduleId:
-          type: string
-        status:
-          type: string
-          enum: [draft, published]
-        version:
-          type: integer
-        lastEditedAt:
-          type: string
-          format: date-time
-        entries:
-          type: array
-          items:
-            type: object
-        conflictIndicators:
-          type: array
-          items:
-            type: object
-    ValidateScheduleEditsRequest:
-      type: object
-      required: [baseVersion, proposedChanges]
-      properties:
-        baseVersion:
-          type: integer
-        proposedChanges:
-          type: object
-    ValidateScheduleEditsResult:
-      type: object
-      required: [valid, conflicts, invalidReferences]
-      properties:
-        valid:
-          type: boolean
-        conflicts:
-          type: array
-          items:
-            type: object
-        invalidReferences:
-          type: array
-          items:
-            type: object
-    SaveScheduleEditsRequest:
-      type: object
-      required: [baseVersion, proposedChanges, confirmed]
-      properties:
-        baseVersion:
-          type: integer
-        proposedChanges:
-          type: object
-        confirmed:
-          type: boolean
-          enum: [true]
-    SaveScheduleEditsResult:
-      type: object
-      required: [scheduleId, status, version, lastEditedAt]
-      properties:
-        scheduleId:
-          type: string
-        status:
-          type: string
-          enum: [draft, published]
-        version:
-          type: integer
-        lastEditedAt:
-          type: string
-          format: date-time
-        conflictStatus:
-          type: string
-    ErrorResponse:
-      type: object
-      required: [code, message]
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+          description: DB save failure
+  /api/v1/conferences/{conferenceId}/schedule/cancel:
+    post:
+      summary: Cancel schedule edit session
+      responses:
+        '200':
+          description: Cancel successful

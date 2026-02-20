@@ -59,6 +59,8 @@ import { createScheduleRoutes } from "./schedule/routes.js";
 import { ScheduleDraftRepository } from "../models/schedule-draft.js";
 import { ScheduleGenerationObservabilityService } from "../services/schedule/schedule-generation-observability-service.js";
 import { applyRoomAvailability } from "../services/schedule/room-availability-service.js";
+import { createScheduleEditRoutes } from "./schedule-edit/routes.js";
+import { ScheduleEditObservabilityService } from "../services/schedule-edit/schedule-edit-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -200,6 +202,12 @@ export function createRegistrationRoutes(deps) {
   if (!deps.roomAvailabilityService) {
     deps.roomAvailabilityService = applyRoomAvailability;
   }
+  if (!deps.scheduleEditVersions) {
+    deps.scheduleEditVersions = new Map();
+  }
+  if (!deps.scheduleEditObservabilityService) {
+    deps.scheduleEditObservabilityService = new ScheduleEditObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -217,6 +225,7 @@ export function createRegistrationRoutes(deps) {
   const decisionRoutes = createDecisionRoutes(deps);
   const decisionNotificationRoutes = createDecisionNotificationRoutes(deps);
   const scheduleRoutes = createScheduleRoutes(deps);
+  const scheduleEditRoutes = createScheduleEditRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -236,7 +245,8 @@ export function createRegistrationRoutes(deps) {
     ...reviewViewRoutes,
     ...decisionRoutes,
     ...decisionNotificationRoutes,
-    ...scheduleRoutes
+    ...scheduleRoutes,
+    ...scheduleEditRoutes
   };
 }
 
