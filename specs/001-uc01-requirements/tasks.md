@@ -83,6 +83,12 @@
 - [ ] T029 Validate UC-01 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
 
 - [ ] T030 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/quickstart.md`
+- [ ] T031 [P] Add contract/integration tests for required `confirm password` and stable all-error ordering in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc01_registration_contract.js` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_validation_failures.js`
+- [ ] T032 Implement resend verification rate-limit rules (3 per 24h rolling window, 60s cooldown) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/resend_verification_service.js`
+- [ ] T033 [P] Add token security tests for CSPRNG generation, hashed token storage, and single-use enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_token_security.js`
+- [ ] T034 [P] Add privacy/logging tests for email masking and secret redaction in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_privacy_logging.js`
+- [ ] T035 [P] Add accessibility checks for registration validation and unverified-login reminders in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc01_registration_a11y.js`
+- [ ] T036 Update FR-to-AT traceability matrix and SC-004/SC-005 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/validation-report.md`
 
 ---
 
