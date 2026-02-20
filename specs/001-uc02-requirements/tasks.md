@@ -18,9 +18,9 @@
 
 **Purpose**: Initialize UC-02 validation scaffolding across backend and frontend MVC layers.
 
-- [ ] T001 Create validation module skeleton files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_service.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/form_validation_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/form_validation_view.js`
-- [ ] T002 Add shared validation constants (error codes, pipeline stage order, response schema keys) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/validation_config.js`
-- [ ] T003 [P] Create contract test fixtures for form submission payloads in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/validation_payloads.js`
+- [X] T001 Create validation module skeleton files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_service.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/form_validation_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/form_validation_view.js`
+- [X] T002 Add shared validation constants (error codes, pipeline stage order, response schema keys) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/validation_config.js`
+- [X] T003 [P] Create contract test fixtures for form submission payloads in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/validation_payloads.js`
 
 ---
 
@@ -30,13 +30,13 @@
 
 **CRITICAL**: No user story work starts before this phase is complete.
 
-- [ ] T004 Implement form/rule repository for `FormDefinition` and `FieldRule` lookup in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/form_definition_repository.js`
-- [ ] T005 [P] Implement validation engine pipeline (required -> format -> business rule) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_engine.js`
-- [ ] T006 [P] Implement structured validation error mapper (`field`, `code`, `message`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_error_mapper.js`
-- [ ] T007 [P] Implement transactional persistence adapter for atomic writes/rollback in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/persistence/atomic_form_persistence_service.js`
-- [ ] T008 Implement submission/auth precheck guard for protected form validation flows in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/middleware/form_auth_guard.js`
-- [ ] T009 Implement submission outcome recorder for `FormSubmission` + `ValidationResult` states in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/form_submission_repository.js`
-- [ ] T010 Add base API error handling for validation and persistence failures in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_error_handler.js`
+- [X] T004 Implement form/rule repository for `FormDefinition` and `FieldRule` lookup in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/form_definition_repository.js`
+- [X] T005 [P] Implement validation engine pipeline (required -> format -> business rule) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_engine.js`
+- [X] T006 [P] Implement structured validation error mapper (`field`, `code`, `message`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_error_mapper.js`
+- [X] T007 [P] Implement transactional persistence adapter for atomic writes/rollback in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/persistence/atomic_form_persistence_service.js`
+- [X] T008 Implement submission/auth precheck guard for protected form validation flows in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/middleware/form_auth_guard.js`
+- [X] T009 Implement submission outcome recorder for `FormSubmission` + `ValidationResult` states in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/form_submission_repository.js`
+- [X] T010 Add base API error handling for validation and persistence failures in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_error_handler.js`
 
 **Checkpoint**: Foundation complete, User Story 1 implementation can begin.
 
@@ -50,19 +50,19 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Add contract tests for validation endpoint behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc02_validation_contract.js`
-- [ ] T012 [P] [US1] Add integration test for valid submission acceptance and successful persistence in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_valid_submission.js`
-- [ ] T013 [P] [US1] Add integration tests for missing/invalid/constraint violations with field-specific errors in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_validation_failures.js`
-- [ ] T014 [P] [US1] Add integration test verifying rollback/no-partial-update behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_atomicity.js`
+- [X] T011 [P] [US1] Add contract tests for validation endpoint behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc02_validation_contract.js`
+- [X] T012 [P] [US1] Add integration test for valid submission acceptance and successful persistence in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_valid_submission.js`
+- [X] T013 [P] [US1] Add integration tests for missing/invalid/constraint violations with field-specific errors in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_validation_failures.js`
+- [X] T014 [P] [US1] Add integration test verifying rollback/no-partial-update behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_atomicity.js`
 
 ### Implementation for User Story 1
 
-- [ ] T015 [US1] Implement end-to-end submission validation orchestration in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_service.js`
-- [ ] T016 [US1] Implement API route/controller for form submission validation and persistence in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_controller.js`
-- [ ] T017 [US1] Implement required-field highlighting and field-level error rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/form_validation_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/form_validation_view.js`
-- [ ] T018 [US1] Implement consistent multi-error display behavior (all-errors mode) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/form_validation_errors_view.js`
-- [ ] T019 [US1] Implement success confirmation flow after atomic persistence success in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/form_submission_success_controller.js`
-- [ ] T020 [US1] Wire validation contract response shape to frontend model adapters in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/models/validation_result_model.js`
+- [X] T015 [US1] Implement end-to-end submission validation orchestration in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_service.js`
+- [X] T016 [US1] Implement API route/controller for form submission validation and persistence in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/validation_controller.js`
+- [X] T017 [US1] Implement required-field highlighting and field-level error rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/form_validation_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/form_validation_view.js`
+- [X] T018 [US1] Implement consistent multi-error display behavior (all-errors mode) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/form_validation_errors_view.js`
+- [X] T019 [US1] Implement success confirmation flow after atomic persistence success in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/form_submission_success_controller.js`
+- [X] T020 [US1] Wire validation contract response shape to frontend model adapters in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/models/validation_result_model.js`
 
 **Checkpoint**: User Story 1 is independently functional and testable (MVP complete).
 
@@ -72,20 +72,20 @@
 
 **Purpose**: Hardening, traceability, and verification updates across UC-02.
 
-- [ ] T021 [P] Add validation observability logs/metrics hooks for reject reasons and latency in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_observability_service.js`
-- [ ] T022 [P] Add unit tests for validation engine rule ordering and deterministic outputs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_engine.js`
+- [X] T021 [P] Add validation observability logs/metrics hooks for reject reasons and latency in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_observability_service.js`
+- [X] T022 [P] Add unit tests for validation engine rule ordering and deterministic outputs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_engine.js`
 - [ ] T023 Update UC synchronization checklist and confirm `UC-02.md`/`UC-02-AT.md` alignment notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/tasks.md`
-- [ ] T024 Run `npm test && npm run lint` and write execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
+- [X] T024 Run `npm test && npm run lint` and write execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
 - [ ] T025 Validate UC-02 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02.md`
 - [ ] T026 Validate UC-02 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02-AT.md`
 
 - [ ] T027 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/quickstart.md`
-- [ ] T028 [P] Add integration test for rollback/abort behavior on post-validation persistence failure in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_persistence_failure_rollback.js`
-- [ ] T029 [P] Add integration test for last-write-wins concurrent conflicting updates in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_last_write_wins.js`
-- [ ] T030 [P] Add accessibility and immediate-feedback timing checks (<=1s normal load) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc02_validation_feedback_a11y.js`
-- [ ] T031 [P] Add unit tests for sensitive-field redaction in validation errors/logs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_privacy.js`
-- [ ] T032 Implement required-field discoverability from authoritative form metadata in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/required_field_metadata_service.js`
+- [X] T028 [P] Add integration test for rollback/abort behavior on post-validation persistence failure in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_persistence_failure_rollback.js`
+- [X] T029 [P] Add integration test for last-write-wins concurrent conflicting updates in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_last_write_wins.js`
+- [X] T030 [P] Add accessibility and immediate-feedback timing checks (<=1s normal load) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc02_validation_feedback_a11y.js`
+- [X] T031 [P] Add unit tests for sensitive-field redaction in validation errors/logs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_privacy.js`
+- [X] T032 Implement required-field discoverability from authoritative form metadata in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/required_field_metadata_service.js`
 - [ ] T033 Document per-form inline validation-rule ownership in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 - [ ] T034 Update FR-to-AT traceability and SC-001..SC-004 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
@@ -160,3 +160,4 @@ Task: "T014 Atomicity integration test in /mnt/c/Users/ponti/Desktop/CMS1/tests/
 - All tasks follow strict checklist format with IDs and explicit file paths.
 - User story tasks include `[US1]` labels.
 - `[P]` used only for safely parallelizable tasks.
+
