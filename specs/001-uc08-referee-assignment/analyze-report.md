@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | HIGH | `specs/001-uc08-referee-assignment/spec.md:97` | Workload thresholds are referenced as external, but no concrete source/versioning rule is specified for assignment-time validation. | Define canonical workload source and snapshot/real-time check policy in spec or plan to avoid inconsistent decisions. |
 | G1 | Coverage Gap | MEDIUM | `specs/001-uc08-referee-assignment/plan.md:20`, `specs/001-uc08-referee-assignment/tasks.md:13` | Plan sets 500ms p95 confirmation goal, but tasks do not include explicit performance verification. | Add performance test/measurement task in polish phase. |
 | G2 | Coverage Gap | MEDIUM | `specs/001-uc08-referee-assignment/spec.md:116`, `specs/001-uc08-referee-assignment/tasks.md:126` | SC-005 (95% one-attempt completion for valid assignments) lacks instrumentation/reporting task coverage. | Add telemetry task to track attempts and completion rate for valid-referee availability scenarios. |
 | U1 | Underspecification | LOW | `specs/001-uc08-referee-assignment/spec.md:69`, `specs/001-uc08-referee-assignment/tasks.md:103` | Concurrent assignment conflict behavior is defined at high level, but no explicit lock/version strategy is documented. | Specify optimistic lock/version check or explicit paper-level lock semantics in design docs. |
@@ -42,14 +41,14 @@ No fully unmapped tasks detected.
 - Total Requirements: 16 functional requirements (FR-001..FR-016)
 - Total Tasks: 38
 - Coverage % (requirements with >=1 task): 100%
-- Ambiguity Count: 1
+- Ambiguity Count: 0
 - Duplication Count: 0
 - Critical Issues Count: 0
 
 ## Next Actions
 
-- No CRITICAL blockers found.
-- Resolve HIGH/MEDIUM findings before `/speckit.implement`.
+- No CRITICAL or HIGH blockers found.
+- Resolve MEDIUM findings before `/speckit.implement`.
 - Suggested actions:
   - Define workload source/check semantics in `specs/001-uc08-referee-assignment/spec.md` or `plan.md`.
   - Add performance and completion-rate metric tasks to `specs/001-uc08-referee-assignment/tasks.md`.

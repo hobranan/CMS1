@@ -2,7 +2,7 @@
 
 ## Assumptions / Notes
 - Editors may assign at most three referees per paper.
-- Each referee has a maximum allowed workload.
+- Each referee workload is validated in real time at confirmation against UC-09 limits from database configuration.
 - Successful assignment triggers review invitations.
 
 ---
@@ -119,6 +119,6 @@
 2. Confirm assignment while notification service fails.
 
 **Expected Results:**
-- Assignments are stored (or rolled back consistently).
+- Assignment is rolled back (no partial assignment remains).
 - The editor is informed that invitations could not be sent.
-- The editor can retry notifications later.
+- The editor can retry assignment after the failure is resolved.

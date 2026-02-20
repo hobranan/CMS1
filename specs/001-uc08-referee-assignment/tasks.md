@@ -24,7 +24,7 @@
 - [ ] T005 Create `AssignmentSet` model with 1..3 selection constraints and duplicate detection in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/assignment-set.js`
 - [ ] T006 [P] Create `PaperRefereeAssignment` model for persisted paper-referee links in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-referee-assignment.js`
 - [ ] T007 [P] Create `AssignmentTransactionResult` model for success/failure/rollback outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/assignment-transaction-result.js`
-- [ ] T008 Implement eligibility and workload validation service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/referee-eligibility-validation-service.js`
+- [ ] T008 Implement eligibility and workload validation service using UC-09 DB-config limits in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/referee-eligibility-validation-service.js`
 - [ ] T009 [P] Implement assignment transaction service with rollback hooks in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/referee-assignment-transaction-service.js`
 - [ ] T010 [P] Implement invitation dispatch adapter with failure signaling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/review-invitation-service.js`
 - [ ] T011 Wire authenticated-editor and paper-state guard middleware into assignment routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/assignments/routes.js`
@@ -96,7 +96,7 @@
 ### Implementation for User Story 3
 
 - [ ] T031 [US3] Implement transactional rollback behavior for persistence+invitation failures in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/referee-assignment-transaction-service.js`
-- [ ] T032 [US3] Implement concurrency revalidation at confirmation time in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/referee-assignment-concurrency-service.js`
+- [ ] T032 [US3] Implement concurrency revalidation at confirmation time using current UC-09 DB-config workload values in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/referee-assignment-concurrency-service.js`
 - [ ] T033 [US3] Implement failure response mapping and retry guidance for system/conflict errors in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/assignments/assignment-failure-response-mapper.js`
 - [ ] T034 [P] [US3] Implement frontend recovery messaging for rollback/conflict outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/assignment/assignment-failure-controller.js`
 

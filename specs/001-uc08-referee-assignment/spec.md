@@ -11,6 +11,7 @@
 ### Session 2026-02-08
 
 - Q: Are partial referee assignments allowed? -> A: No partial assignments are allowed; assignment is all-or-nothing for the selected referee set.
+- Q: What workload source and timing must be used for assignment validation? -> A: Use UC-09 workload limits from database configuration and validate in real time at confirmation.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -80,7 +81,7 @@ An editor is informed of system failures and assignments are never left in a par
 - **FR-004**: System MUST allow selecting up to three referees per paper assignment action.
 - **FR-005**: System MUST reject assignment attempts with more than three selected referees and provide clear error feedback.
 - **FR-006**: System MUST validate referee eligibility before confirmation.
-- **FR-007**: System MUST validate each selected referee has not exceeded maximum allowed workload before confirmation.
+- **FR-007**: System MUST validate each selected referee workload in real time at confirmation against UC-09 workload limits from database configuration.
 - **FR-008**: System MUST reject assignment attempts that include any ineligible or workload-exceeded referee and identify the violating selection(s).
 - **FR-009**: System MUST require explicit editor confirmation before finalizing assignment.
 - **FR-010**: System MUST store referee assignments for the paper only after all validations pass.
@@ -94,7 +95,7 @@ An editor is informed of system failures and assignments are never left in a par
 ### Assumptions
 
 - Conference policy allows one to three referees per paper assignment action.
-- Maximum referee workload thresholds are defined elsewhere and available at validation time.
+- Maximum referee workload thresholds come from UC-09 limits stored in database configuration and are evaluated at confirmation time.
 - Conflict-of-interest rules are outside the scope of this use case.
 
 ### Key Entities *(include if feature involves data)*
