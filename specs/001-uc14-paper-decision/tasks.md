@@ -116,6 +116,8 @@
 - [ ] T039 Validate UC-14 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-14.md`
 - [ ] T040 Validate UC-14 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-14-AT.md`
 
+- [ ] T041 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc14-paper-decision/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
