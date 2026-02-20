@@ -59,3 +59,10 @@
 
 - [ ] CHK028 Is there any unresolved conflict between "store metadata+reference together" and potential draft/save semantics implied elsewhere? [Conflict, Spec §FR-012, Spec §Assumptions]
 - [ ] CHK029 Is a stable requirement and acceptance-criteria ID mapping scheme defined for end-to-end traceability? [Traceability, Gap]
+
+## Auto-Answer Log (UC01/UC02 defaults)
+
+- Auto-answered similar checklist quality questions using the previously confirmed UC-01 and UC-02 decision set.
+- Defaults include: deterministic validation behavior, explicit measurability, no-partial-update guarantees, recovery/resubmission clarity, accessibility/privacy coverage, traceability mapping, and explicit scope assumptions.
+- Where checklist items offered equivalent alternatives, the same prior choices were reused (for example: all-errors mode, unauthorized handling excluded when outside scope, and last-write-wins for concurrent update conflicts).
+
