@@ -34,6 +34,7 @@ true only after both upload and submission association succeed.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contracts keep rules in model/service layers and orchestration in controllers.
  - [x] Proposed implementation remains vanilla-stack compliant and traceable to UC/AT artifacts.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
