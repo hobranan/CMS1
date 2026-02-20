@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Submit Review API
-  version: 1.0.0
+  version: 1.1.0
   description: Contracts for review submission, immutable submitted records, and newer-version chaining.
 paths:
   /api/v1/assignments/{assignmentId}/review-draft:
@@ -14,25 +14,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: Draft returned
+        "200":
+          description: Draft returned.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReviewDraft'
-        '401':
-          description: Authentication required
+                $ref: "#/components/schemas/ReviewDraft"
+        "401":
+          description: Authentication required.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Ineligible assignment access
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Ineligible assignment access.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+                $ref: "#/components/schemas/ErrorResponse"
   /api/v1/assignments/{assignmentId}/reviews/submit:
     post:
       summary: Submit completed review for active assignment
@@ -47,44 +46,79 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SubmitReviewRequest'
+              $ref: "#/components/schemas/SubmitReviewRequest"
       responses:
-        '200':
-          description: Review submitted
+        "200":
+          description: Review submitted or cancel-no-mutation acknowledged.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubmitReviewResult'
-        '400':
-          description: Validation error (required fields missing/invalid)
+                oneOf:
+                  - $ref: "#/components/schemas/SubmitReviewResult"
+                  - $ref: "#/components/schemas/CancelResult"
+        "400":
+          description: Validation error (required fields missing/invalid).
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Assignment not active or unauthorized
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Authentication required.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '409':
-          description: Concurrent submission/version conflict
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Assignment not active or unauthorized.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Database persistence failure
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Database persistence failure.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/v1/reviews/{reviewId}:
+    get:
+      summary: Retrieve immutable submitted review
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Submitted review returned read-only.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmittedReviewReadonly"
+        "401":
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Not authorized to read review.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Submitted review not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     ReviewDraft:
       type: object
-      required: [assignmentId, requiredFields, deadlineIndicator]
+      required: [assignmentId, requiredFields, deadlineIndicator, deadlineEnforced]
       properties:
         assignmentId:
           type: string
@@ -107,6 +141,8 @@ components:
           type: string
         comments:
           type: string
+        confirm_submit:
+          type: boolean
     SubmitReviewResult:
       type: object
       required: [reviewId, status, versionNumber, assignmentStatus, notificationStatus]
@@ -127,8 +163,41 @@ components:
         notificationStatus:
           type: string
           enum: [sent, failed]
-        message:
+    CancelResult:
+      type: object
+      required: [cancelled, mutated]
+      properties:
+        cancelled:
+          type: boolean
+          enum: [true]
+        mutated:
+          type: boolean
+          enum: [false]
+    SubmittedReviewReadonly:
+      type: object
+      required: [reviewId, assignmentId, status, versionNumber, readOnly]
+      properties:
+        reviewId:
           type: string
+        assignmentId:
+          type: string
+        status:
+          type: string
+          enum: [submitted]
+        versionNumber:
+          type: integer
+        previousReviewId:
+          type: string
+          nullable: true
+        recommendation:
+          type: string
+        comments:
+          type: string
+        fields:
+          type: object
+        readOnly:
+          type: boolean
+          enum: [true]
     ErrorResponse:
       type: object
       required: [code, message]
@@ -137,3 +206,7 @@ components:
           type: string
         message:
           type: string
+        errors:
+          type: array
+          items:
+            type: object

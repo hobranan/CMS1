@@ -1,167 +1,188 @@
-# Acceptance Test Suite — UC-12 Submit Completed Review
+# Acceptance Test Suite - UC-12 Submit Completed Review
 
 ## Assumptions / Notes
-- Referees must be logged in and have an active assignment.
-- A review cannot be submitted unless required fields are completed.
-- On successful submission, the review becomes read-only and visible to the editor.
-- The system may enforce deadlines/assignment status rules if implemented.
+- Referees must be authenticated and tied to the assignment.
+- Submission requires active assignment and valid required fields.
+- Displayed deadlines are informational only.
+- Submitted reviews are immutable; newer updates are new linked submissions.
 
 ---
 
-## AT-UC12-01 — Submit Completed Review Successfully (Main Success Scenario)
+## AT-UC12-01 - Submit Completed Review Successfully
 
-**Objective:** Verify a referee can submit a completed review and it is stored as submitted.
+**Objective:** Verify valid review submission succeeds and marks assignment completed.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P1 is assigned to the referee and review form is available.
-- Submission is allowed (assignment active, deadline not passed).
+- Assignment is active.
+- Required review fields are complete.
 
 **Steps:**
-1. Open **Assigned Papers**.
-2. Select Paper P1 and open the review form.
-3. Fill all required review fields with valid values.
-4. Select **Submit Review** and confirm (if applicable).
+1. Open review form.
+2. Fill required fields and recommendation.
+3. Submit review.
 
 **Expected Results:**
-- The system validates required fields.
-- The review is stored as submitted.
-- The assignment/review status shows completed/submitted.
-- A confirmation message is displayed to the referee.
-- The review becomes read-only (cannot be edited after submission).
+- Review is stored as submitted.
+- Assignment status becomes completed.
+- Confirmation is returned.
 
 ---
 
-## AT-UC12-02 — Reject Submission When Required Fields Missing (Extension 3a)
+## AT-UC12-02 - Validation Failure on Incomplete Review
 
-**Objective:** Verify the system blocks submission if the review is incomplete.
-
-**Preconditions:**
-- Referee is logged in.
-- Paper P2 assigned and review form available.
-
-**Steps:**
-1. Open the review form for Paper P2.
-2. Leave at least one required field blank.
-3. Select **Submit Review**.
-
-**Expected Results:**
-- The system blocks submission.
-- Missing/invalid fields are highlighted and an error message is shown.
-- Review remains in draft/unsubmitted state.
-
----
-
-## AT-UC12-03 — Cancel Submission (Extension 4a)
-
-**Objective:** Verify canceling submission does not submit the review.
+**Objective:** Verify incomplete/invalid review submission is blocked with field feedback.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P3 assigned and review form available.
+- Assignment is active.
 
 **Steps:**
-1. Fill the review form for Paper P3 (can be complete or partial).
-2. Select **Submit Review**.
-3. Cancel the confirmation or navigate away before confirming.
+1. Leave required fields blank.
+2. Submit review.
 
 **Expected Results:**
-- No review is marked as submitted.
-- Review remains draft/unsubmitted.
-- Assignment status remains unchanged.
-
----
-
-## AT-UC12-04 — Block Submission When Deadline Passed/Assignment Inactive (Extension 5a)
-
-**Objective:** Verify submission is blocked when submission is not allowed.
-
-**Preconditions:**
-- Referee is logged in.
-- Paper P4 assigned, but submission not allowed (simulate deadline passed or assignment inactive).
-
-**Steps:**
-1. Open the review form for Paper P4.
-2. Fill required fields.
-3. Attempt to submit the review.
-
-**Expected Results:**
-- The system blocks submission.
-- A message indicates the review cannot be submitted.
+- Submission is blocked (`400`).
+- Field-level errors are returned.
 - Review remains unsubmitted.
 
 ---
 
-## AT-UC12-05 — Database Error During Save (Extension 6a)
+## AT-UC12-03 - Cancel Before Confirm
 
-**Objective:** Verify system behavior when saving a submitted review fails.
-
-**Preconditions:**
-- Referee is logged in.
-- Paper P5 assigned and review form available.
-- Ability to simulate database failure on submit.
-
-**Steps:**
-1. Fill required fields for Paper P5 review.
-2. Submit the review while database update fails.
-
-**Expected Results:**
-- The system displays a system error message.
-- Review is not marked as submitted.
-- Assignment status is not updated to completed.
-
----
-
-## AT-UC12-06 — Notification Failure After Submission (Extension 8a)
-
-**Objective:** Verify submission succeeds even if notifications fail.
+**Objective:** Verify cancellation before final confirmation causes no mutation.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P6 assigned and review form available.
-- Ability to simulate notification service failure.
+- Assignment is active.
 
 **Steps:**
-1. Fill required fields for Paper P6 review.
-2. Submit the review while notification service is failing.
+1. Start submit action with `confirm_submit=false`.
 
 **Expected Results:**
-- Review is stored and marked as submitted.
-- The system informs the referee that notifications could not be sent.
-- The review remains submitted and visible in the system.
+- Response returns cancelled/no mutation.
+- Review remains draft/unsubmitted.
 
 ---
 
-## AT-UC12-07 — Editor Can View Submitted Review (Visibility Check)
+## AT-UC12-04 - Inactive Assignment Rejection
 
-**Objective:** Verify the submitted review is accessible to the editor.
+**Objective:** Verify submission is blocked when assignment is inactive.
 
 **Preconditions:**
-- AT-UC12-01 completed successfully for Paper P1.
-- Editor account exists with permissions to view reviews for Paper P1.
+- Referee is logged in.
+- Assignment is not active.
 
 **Steps:**
-1. Log in as editor (or use editor view).
-2. Navigate to Paper P1 reviews.
-3. Open the submitted review.
+1. Attempt to submit valid review.
 
 **Expected Results:**
-- The submitted review is visible to the editor.
-- The review content matches what the referee submitted.
+- Submission is blocked (`403`).
+- Review remains unsubmitted.
 
 ---
 
-## AT-UC12-08 — Persistence Check: Submitted State Persists After Refresh/Logout
+## AT-UC12-05 - Deadline Informational Only
 
-**Objective:** Verify submitted reviews remain submitted after session changes.
+**Objective:** Verify passed deadline indicator does not block active assignment submission.
 
 **Preconditions:**
-- Referee has submitted a review successfully.
+- Referee is logged in.
+- Assignment is active.
+- Deadline indicator is in the past.
 
 **Steps:**
-1. Refresh the page or log out and log back in.
-2. Navigate back to the paper’s review form.
+1. Submit valid review.
 
 **Expected Results:**
-- The review remains marked as submitted.
-- The form is read-only (cannot be edited).
+- Submission succeeds.
+- No deadline-based rejection occurs.
+
+---
+
+## AT-UC12-06 - Database Failure Integrity
+
+**Objective:** Verify database save failure leaves review unsubmitted.
+
+**Preconditions:**
+- Referee is logged in.
+- Assignment is active.
+- Simulate persistence failure.
+
+**Steps:**
+1. Submit valid review.
+
+**Expected Results:**
+- `500` persistence failure response.
+- No submitted review record is created.
+- Assignment status does not transition to completed.
+
+---
+
+## AT-UC12-07 - Notification Failure Post-Commit
+
+**Objective:** Verify notification failure does not roll back committed submission.
+
+**Preconditions:**
+- Referee is logged in.
+- Assignment is active.
+- Simulate notification send failure.
+
+**Steps:**
+1. Submit valid review.
+
+**Expected Results:**
+- Submission remains committed.
+- Notification status is `failed`.
+- Referee receives notification-failure feedback.
+
+---
+
+## AT-UC12-08 - Read-Only Submitted Review
+
+**Objective:** Verify submitted review can be reopened only in read-only mode.
+
+**Preconditions:**
+- Submitted review exists.
+
+**Steps:**
+1. Open submitted review by review id.
+
+**Expected Results:**
+- Review content is returned with `readOnly=true`.
+- Direct edit path is not available.
+
+---
+
+## AT-UC12-09 - Newer Version Linking
+
+**Objective:** Verify newer submitted review versions link to latest prior review.
+
+**Preconditions:**
+- At least one submitted review exists for assignment.
+- Assignment reopened as active for new version submission flow.
+
+**Steps:**
+1. Submit first version.
+2. Submit second version.
+
+**Expected Results:**
+- Second submission has incremented version number.
+- `previousReviewId` points to prior latest submission.
+- Version-chain ordering is preserved.
+
+---
+
+## AT-UC12-10 - Editor Visibility
+
+**Objective:** Verify submitted review is visible to authorized editor.
+
+**Preconditions:**
+- Submitted review exists.
+- Editor is authorized for the assignment.
+
+**Steps:**
+1. Open submitted review as editor.
+
+**Expected Results:**
+- Editor can access submitted review content.

@@ -45,6 +45,10 @@ import { InvitationNotificationService } from "../services/invitations/invitatio
 import { InvitationNotificationObservabilityService } from "../services/invitations/invitation-notification-observability-service.js";
 import { createAssignedAccessRoutes } from "./assigned-access/routes.js";
 import { AssignedPaperRepository } from "../models/assigned-paper.js";
+import { createReviewRoutes } from "./reviews/routes.js";
+import { ReviewSubmissionRepository } from "../models/review-draft.js";
+import { ReviewNotificationService } from "../services/reviews/review-notification-service.js";
+import { ReviewSubmissionObservabilityService } from "../services/reviews/review-submission-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -159,6 +163,15 @@ export function createRegistrationRoutes(deps) {
   if (!deps.assignedPaperRepository) {
     deps.assignedPaperRepository = new AssignedPaperRepository();
   }
+  if (!deps.reviewSubmissionRepository) {
+    deps.reviewSubmissionRepository = new ReviewSubmissionRepository();
+  }
+  if (!deps.reviewNotificationService) {
+    deps.reviewNotificationService = new ReviewNotificationService();
+  }
+  if (!deps.reviewSubmissionObservabilityService) {
+    deps.reviewSubmissionObservabilityService = new ReviewSubmissionObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -171,6 +184,7 @@ export function createRegistrationRoutes(deps) {
   const workloadRoutes = createWorkloadRoutes(deps);
   const invitationRoutes = createInvitationRoutes(deps);
   const assignedAccessRoutes = createAssignedAccessRoutes(deps);
+  const reviewRoutes = createReviewRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -185,6 +199,7 @@ export function createRegistrationRoutes(deps) {
     ...assignmentRoutes,
     ...workloadRoutes,
     ...invitationRoutes,
-    ...assignedAccessRoutes
+    ...assignedAccessRoutes,
+    ...reviewRoutes
   };
 }
