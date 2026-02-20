@@ -10,11 +10,11 @@
 
 **Purpose**: Prepare feature scaffolding across backend/frontend test layers.
 
-- [ ] T001 Create decision-notification feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/`
-- [ ] T002 [P] Register decision view and notification routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/routes.js`
-- [ ] T003 [P] Create frontend decision view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/paper-decision-view.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/paper-decision-controller.js`
-- [ ] T004 [P] Create frontend notification detail view shell in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/decision-notification-view.html`
-- [ ] T005 [P] Add UC-15 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/`
+- [X] T001 Create decision-notification feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/`
+- [X] T002 [P] Register decision view and notification routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/routes.js`
+- [X] T003 [P] Create frontend decision view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/paper-decision-view.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/paper-decision-controller.js`
+- [X] T004 [P] Create frontend notification detail view shell in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/decision-notification-view.html`
+- [X] T005 [P] Add UC-15 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/`
 
 ---
 
@@ -22,11 +22,11 @@
 
 **Purpose**: Implement cross-story core behavior: ownership, states, composition, and error contracts.
 
-- [ ] T006 Create decision state model with `accepted`/`rejected`/`under_review` transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/decision-state.js`
-- [ ] T007 [P] Implement author ownership authorization service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/authorization/author-ownership-policy.js`
-- [ ] T008 [P] Create shared decision retrieval error model in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/errors/decision-retrieval-error.js`
-- [ ] T009 [P] Implement ordered notification body composer (`decision_header -> summary_bullets -> full_review`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/notification-body-composer.js`
-- [ ] T010 Implement API error mapping for unauthorized/under-review/retrieval-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/error-response-mapper.js`
+- [X] T006 Create decision state model with `accepted`/`rejected`/`under_review` transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/decision-state.js`
+- [X] T007 [P] Implement author ownership authorization service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/authorization/author-ownership-policy.js`
+- [X] T008 [P] Create shared decision retrieval error model in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/errors/decision-retrieval-error.js`
+- [X] T009 [P] Implement ordered notification body composer (`decision_header -> summary_bullets -> full_review`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/notification-body-composer.js`
+- [X] T010 Implement API error mapping for unauthorized/under-review/retrieval-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/error-response-mapper.js`
 
 **Checkpoint**: Foundation complete; user stories can proceed.
 
@@ -40,17 +40,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Add contract test for successful `GET /api/v1/author/papers/{paperId}/decision` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-paper-decision.contract.spec.js`
-- [ ] T012 [P] [US1] Add integration test for accepted decision visibility in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/accepted-decision.integration.spec.js`
-- [ ] T013 [P] [US1] Add integration test for rejected decision visibility in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/rejected-decision.integration.spec.js`
+- [X] T011 [P] [US1] Add contract test for successful `GET /api/v1/author/papers/{paperId}/decision` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-paper-decision.contract.spec.js`
+- [X] T012 [P] [US1] Add integration test for accepted decision visibility in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/accepted-decision.integration.spec.js`
+- [X] T013 [P] [US1] Add integration test for rejected decision visibility in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/rejected-decision.integration.spec.js`
 
 ### Implementation for User Story 1
 
-- [ ] T014 [P] [US1] Implement owning-author decision query repository in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-decision-repository.js`
-- [ ] T015 [US1] Implement decision-view controller for owned paper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/get-paper-decision.js`
-- [ ] T016 [P] [US1] Implement decision view-model mapper in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/models/decision-notification/decision-view-model.js`
-- [ ] T017 [US1] Implement decision page controller for accepted/rejected rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/paper-decision-controller.js`
-- [ ] T018 [US1] Implement decision detail UI states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/paper-decision-view.html`
+- [X] T014 [P] [US1] Implement owning-author decision query repository in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-decision-repository.js`
+- [X] T015 [US1] Implement decision-view controller for owned paper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/get-paper-decision.js`
+- [X] T016 [P] [US1] Implement decision view-model mapper in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/models/decision-notification/decision-view-model.js`
+- [X] T017 [US1] Implement decision page controller for accepted/rejected rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/paper-decision-controller.js`
+- [X] T018 [US1] Implement decision detail UI states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/paper-decision-view.html`
 
 **Checkpoint**: US1 is independently functional and testable.
 
@@ -64,17 +64,17 @@
 
 ### Tests for User Story 2
 
-- [ ] T019 [P] [US2] Add contract test for successful `GET /api/v1/author/papers/{paperId}/decision-notification` ordering payload in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-decision-notification.contract.spec.js`
-- [ ] T020 [P] [US2] Add integration test verifying summary-before-full-review composition in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-order.integration.spec.js`
-- [ ] T021 [P] [US2] Add integration test verifying summary bullets and full review come from the same decision source in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-source-consistency.integration.spec.js`
+- [X] T019 [P] [US2] Add contract test for successful `GET /api/v1/author/papers/{paperId}/decision-notification` ordering payload in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-decision-notification.contract.spec.js`
+- [X] T020 [P] [US2] Add integration test verifying summary-before-full-review composition in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-order.integration.spec.js`
+- [X] T021 [P] [US2] Add integration test verifying summary bullets and full review come from the same decision source in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-source-consistency.integration.spec.js`
 
 ### Implementation for User Story 2
 
-- [ ] T022 [P] [US2] Implement post-decision notification generation service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/generate-decision-notification.js`
-- [ ] T023 [US2] Implement review summary-bullet builder in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/review-summary-builder.js`
-- [ ] T024 [US2] Implement full-review section builder appended below summary in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/full-review-section-builder.js`
-- [ ] T025 [US2] Implement decision-notification retrieval controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/get-decision-notification.js`
-- [ ] T026 [US2] Implement frontend notification renderer preserving section order in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/decision-notification-view.html`
+- [X] T022 [P] [US2] Implement post-decision notification generation service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/generate-decision-notification.js`
+- [X] T023 [US2] Implement review summary-bullet builder in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/review-summary-builder.js`
+- [X] T024 [US2] Implement full-review section builder appended below summary in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/full-review-section-builder.js`
+- [X] T025 [US2] Implement decision-notification retrieval controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/get-decision-notification.js`
+- [X] T026 [US2] Implement frontend notification renderer preserving section order in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/decision-notification-view.html`
 
 **Checkpoint**: US2 independently validates ordered notification content.
 
@@ -88,18 +88,18 @@
 
 ### Tests for User Story 3
 
-- [ ] T027 [P] [US3] Add contract test for under-review decision response (`decisionStatus=under_review`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-paper-decision-under-review.contract.spec.js`
-- [ ] T028 [P] [US3] Add contract test for unauthorized owned-paper access (`403`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-paper-decision-unauthorized.contract.spec.js`
-- [ ] T029 [P] [US3] Add integration test for delivery-failure fallback to CMS source-of-truth in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/delivery-failure-cms-fallback.integration.spec.js`
-- [ ] T030 [P] [US3] Add integration test for retrieval-failure system error with withheld details in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/retrieval-failure.integration.spec.js`
+- [X] T027 [P] [US3] Add contract test for under-review decision response (`decisionStatus=under_review`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-paper-decision-under-review.contract.spec.js`
+- [X] T028 [P] [US3] Add contract test for unauthorized owned-paper access (`403`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-paper-decision-unauthorized.contract.spec.js`
+- [X] T029 [P] [US3] Add integration test for delivery-failure fallback to CMS source-of-truth in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/delivery-failure-cms-fallback.integration.spec.js`
+- [X] T030 [P] [US3] Add integration test for retrieval-failure system error with withheld details in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/retrieval-failure.integration.spec.js`
 
 ### Implementation for User Story 3
 
-- [ ] T031 [P] [US3] Implement under-review response path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/get-paper-decision.js`
-- [ ] T032 [P] [US3] Enforce ownership guard for decision and notification endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/ownership-guard.js`
-- [ ] T033 [US3] Implement retrieval-failure handling that withholds decision details in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/get-decision-with-failure-handling.js`
-- [ ] T034 [US3] Implement frontend unauthorized/under-review/system-error states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/decision-error-states.html`
-- [ ] T035 [US3] Implement CMS fallback indicator for `deliveryStatus=failed` in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/paper-decision-controller.js`
+- [X] T031 [P] [US3] Implement under-review response path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/get-paper-decision.js`
+- [X] T032 [P] [US3] Enforce ownership guard for decision and notification endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/decision-notification/ownership-guard.js`
+- [X] T033 [US3] Implement retrieval-failure handling that withholds decision details in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/get-decision-with-failure-handling.js`
+- [X] T034 [US3] Implement frontend unauthorized/under-review/system-error states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/decision-notification/decision-error-states.html`
+- [X] T035 [US3] Implement CMS fallback indicator for `deliveryStatus=failed` in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/decision-notification/paper-decision-controller.js`
 
 **Checkpoint**: US3 independently handles all failure/edge paths.
 
@@ -109,13 +109,13 @@
 
 **Purpose**: Final cross-story quality, traceability, and validation.
 
-- [ ] T036 [P] Add persistence regression test for refresh/new-session decision visibility in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/decision-visibility-persistence.integration.spec.js`
-- [ ] T037 [P] Add contract/integration test for missing notification (`404`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-decision-notification-not-found.contract.spec.js`
-- [ ] T038 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-15.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-15-AT.md` if user-facing wording changed during implementation
-- [ ] T039 Update quickstart with final fallback/error/ordering verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
-- [ ] T040 Run `npm test && npm run lint` and record UC-15 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
-- [ ] T041 Add FR-to-AT traceability mapping validation in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/spec.md`
-- [ ] T042 Add decision/notification retrieval p95 latency verification against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/decision-notification-performance.integration.spec.js`
+- [X] T036 [P] Add persistence regression test for refresh/new-session decision visibility in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/decision-visibility-persistence.integration.spec.js`
+- [X] T037 [P] Add contract/integration test for missing notification (`404`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-decision-notification-not-found.contract.spec.js`
+- [X] T038 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-15.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-15-AT.md` if user-facing wording changed during implementation
+- [X] T039 Update quickstart with final fallback/error/ordering verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
+- [X] T040 Run `npm test && npm run lint` and record UC-15 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
+- [X] T041 Add FR-to-AT traceability mapping validation in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/spec.md`
+- [X] T042 Add decision/notification retrieval p95 latency verification against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/decision-notification-performance.integration.spec.js`
 
 ---
 
@@ -180,3 +180,4 @@ Task: "T022 [US2] Implement notification generation service in /mnt/c/Users/pont
 - Notification body order remains `decision_header -> summary_bullets -> full_review`.
 - CMS decision view remains source-of-truth when notification delivery fails.
 - Under-review and retrieval-failure paths do not leak final decision details.
+

@@ -15,7 +15,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Decision view returned
+          description: Decision view returned (final or under_review)
           content:
             application/json:
               schema:
@@ -84,7 +84,7 @@ components:
   schemas:
     DecisionViewResponse:
       type: object
-      required: [paperId, decisionStatus]
+      required: [paperId, decisionStatus, sourceOfTruth]
       properties:
         paperId:
           type: string
@@ -97,6 +97,9 @@ components:
         sourceOfTruth:
           type: string
           enum: [cms]
+        deliveryStatus:
+          type: string
+          enum: [sent, failed]
         message:
           type: string
     DecisionNotificationResponse:

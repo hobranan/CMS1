@@ -54,6 +54,7 @@ import { createDecisionRoutes } from "./decisions/routes.js";
 import { PaperDecisionRepository } from "../models/decision-record.js";
 import { PaperDecisionNotificationService } from "../services/decisions/paper-decision-notification-service.js";
 import { PaperDecisionObservabilityService } from "../services/paper-decision/paper-decision-observability-service.js";
+import { createDecisionNotificationRoutes } from "./decision-notification/routes.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -201,6 +202,7 @@ export function createRegistrationRoutes(deps) {
   const reviewRoutes = createReviewRoutes(deps);
   const reviewViewRoutes = createReviewViewRoutes(deps);
   const decisionRoutes = createDecisionRoutes(deps);
+  const decisionNotificationRoutes = createDecisionNotificationRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -218,7 +220,8 @@ export function createRegistrationRoutes(deps) {
     ...assignedAccessRoutes,
     ...reviewRoutes,
     ...reviewViewRoutes,
-    ...decisionRoutes
+    ...decisionRoutes,
+    ...decisionNotificationRoutes
   };
 }
 
