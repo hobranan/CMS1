@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc18-public-schedule-pdf/checklists/public-schedule-pdf.md:9` | UC-18 quality checklist is currently unchecked, which can cause readiness ambiguity before implementation starts. | Execute and mark the UC-18 checklist to make readiness status explicit before `/speckit.implement`. |
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc18-public-schedule-pdf/contracts/public-schedule-pdf.openapi.yaml:73`, `specs/001-uc18-public-schedule-pdf/tasks.md:122` | Contract requires `404` response for unpublished PDF requests; this path should be explicitly asserted in contract tests. | Keep explicit unpublished-PDF `404` coverage task (`T043`) and ensure response payload assertions are complete (`code`, `message`). |
 | U1 | Underspecification | LOW | `specs/001-uc18-public-schedule-pdf/plan.md:18`, `specs/001-uc18-public-schedule-pdf/tasks.md:121` | Performance expectation is qualitative ("normal browsing latency"), making load/performance verification thresholds unclear. | Add numeric latency target(s) in `plan.md` and assert in `T042` high-volume PDF stability tests. |
 
 ## Coverage Summary Table
@@ -41,8 +39,5 @@ No constitution-critical violations detected. UC references, MVC boundaries, and
 
 ## Next Actions
 
-- Resolve MEDIUM readiness issues before `/speckit.implement`:
-  - Complete UC-18 checklist status updates.
-  - Confirm unpublished-PDF `404` contract assertions are implemented.
 - Resolve LOW measurability issue:
   - Define numeric schedule/PDF latency targets in `plan.md` for performance validation tasks.
