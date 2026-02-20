@@ -117,6 +117,8 @@
 - [ ] T040 Validate UC-12 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-12-AT.md`
 
 - [ ] T041 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc12-submit-review/quickstart.md`
+- [ ] T042 Add deterministic review-version chain-integrity verification (sequence monotonicity and latest-link invariants) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/review-submission/review-chain-integrity.integration.test.js`
+- [ ] T043 Add submission-outcome telemetry by assignment state and validation category for SC-001 measurement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/reviews/review-submission-observability-service.js`
 
 ---
 
