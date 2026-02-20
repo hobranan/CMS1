@@ -50,6 +50,10 @@ import { createReviewViewRoutes } from "./review-view/routes.js";
 import { ReviewSubmissionRepository } from "../models/review-draft.js";
 import { ReviewNotificationService } from "../services/reviews/review-notification-service.js";
 import { ReviewSubmissionObservabilityService } from "../services/reviews/review-submission-observability-service.js";
+import { createDecisionRoutes } from "./decisions/routes.js";
+import { PaperDecisionRepository } from "../models/decision-record.js";
+import { PaperDecisionNotificationService } from "../services/decisions/paper-decision-notification-service.js";
+import { PaperDecisionObservabilityService } from "../services/paper-decision/paper-decision-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -173,6 +177,15 @@ export function createRegistrationRoutes(deps) {
   if (!deps.reviewSubmissionObservabilityService) {
     deps.reviewSubmissionObservabilityService = new ReviewSubmissionObservabilityService();
   }
+  if (!deps.paperDecisionRepository) {
+    deps.paperDecisionRepository = new PaperDecisionRepository();
+  }
+  if (!deps.paperDecisionNotificationService) {
+    deps.paperDecisionNotificationService = new PaperDecisionNotificationService();
+  }
+  if (!deps.paperDecisionObservabilityService) {
+    deps.paperDecisionObservabilityService = new PaperDecisionObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -187,6 +200,7 @@ export function createRegistrationRoutes(deps) {
   const assignedAccessRoutes = createAssignedAccessRoutes(deps);
   const reviewRoutes = createReviewRoutes(deps);
   const reviewViewRoutes = createReviewViewRoutes(deps);
+  const decisionRoutes = createDecisionRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -203,7 +217,8 @@ export function createRegistrationRoutes(deps) {
     ...invitationRoutes,
     ...assignedAccessRoutes,
     ...reviewRoutes,
-    ...reviewViewRoutes
+    ...reviewViewRoutes,
+    ...decisionRoutes
   };
 }
 

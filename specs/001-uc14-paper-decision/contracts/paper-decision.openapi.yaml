@@ -2,11 +2,11 @@ openapi: 3.0.3
 info:
   title: Paper Decision API
   version: 1.0.0
-  description: Contracts for eligibility checks, final paper decision recording, and notification outcomes.
+  description: Contracts for recording final accept/reject decisions.
 paths:
   /api/v1/papers/{paperId}/decision-context:
     get:
-      summary: Get paper decision context for editor
+      summary: Get decision context for a paper
       parameters:
         - name: paperId
           in: path
@@ -15,11 +15,11 @@ paths:
             type: string
       responses:
         '200':
-          description: Decision context returned
+          description: Decision context loaded
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DecisionContextResponse'
+                $ref: '#/components/schemas/DecisionContext'
         '401':
           description: Authentication required
           content:
@@ -27,7 +27,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '403':
-          description: Unauthorized paper access
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Paper not found
           content:
             application/json:
               schema:
@@ -35,7 +41,7 @@ paths:
 
   /api/v1/papers/{paperId}/decision:
     post:
-      summary: Confirm and record final paper decision
+      summary: Record final paper decision
       parameters:
         - name: paperId
           in: path
@@ -47,34 +53,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RecordDecisionRequest'
+              $ref: '#/components/schemas/DecisionRequest'
       responses:
         '200':
-          description: Decision recorded successfully
+          description: Decision recorded (notification may be failed)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordDecisionResult'
-        '400':
-          description: Invalid request payload or missing confirmation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/DecisionResponse'
         '403':
-          description: Ineligible or unauthorized decision attempt
+          description: Ineligible decision attempt
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '409':
-          description: Paper already decided or concurrent decision conflict
+          description: Already decided / conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid payload
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: Decision save failure
+          description: Decision save failed
           content:
             application/json:
               schema:
@@ -82,58 +88,54 @@ paths:
 
 components:
   schemas:
-    DecisionContextResponse:
+    DecisionContext:
       type: object
-      required: [paperId, eligible, completedReviewCount, decisionOptions, currentStatus]
+      required: [paperId, paperStatus, completedReviewCount, decisionPeriodOpen, allowedOutcomes]
       properties:
         paperId:
           type: string
-        eligible:
-          type: boolean
+        paperStatus:
+          type: string
         completedReviewCount:
           type: integer
-          minimum: 0
-        currentStatus:
-          type: string
-          enum: [under_review, accepted, rejected]
-        decisionOptions:
+        decisionPeriodOpen:
+          type: boolean
+        allowedOutcomes:
           type: array
           items:
             type: string
             enum: [accept, reject]
-        allowNoReviewOverride:
-          type: boolean
-        ineligibilityReason:
-          type: string
-          nullable: true
-    RecordDecisionRequest:
+    DecisionRequest:
       type: object
-      required: [decision, confirmed]
+      required: [outcome, confirm]
       properties:
-        decision:
+        outcome:
           type: string
           enum: [accept, reject]
         comment:
           type: string
-          nullable: true
-        confirmed:
+        confirm:
           type: boolean
-          enum: [true]
-    RecordDecisionResult:
+        allowNoReviewsOverride:
+          type: boolean
+    DecisionResponse:
       type: object
-      required: [paperId, decisionId, finalStatus, notificationStatus]
+      required: [decisionId, paperId, outcome, status, notificationStatus]
       properties:
-        paperId:
-          type: string
         decisionId:
           type: string
-        finalStatus:
+        paperId:
+          type: string
+        outcome:
+          type: string
+          enum: [accept, reject]
+        status:
           type: string
           enum: [accepted, rejected]
         notificationStatus:
           type: string
           enum: [sent, failed]
-        message:
+        notificationMessage:
           type: string
     ErrorResponse:
       type: object
