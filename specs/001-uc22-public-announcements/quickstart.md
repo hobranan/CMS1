@@ -34,3 +34,14 @@ Allow guests to view public conference announcements in date order and open full
 ## Verification
 - Run `npm test && npm run lint`.
 - Execute contract/integration tests for guest access, ordering, detail navigation, no-data/error/unavailable states, and refresh consistency.
+- Verify list/detail templates against `docs/standards/html-css-style-profile.md`:
+  - Headings and section structure are semantic.
+  - Empty/error/unavailable messages are direct and user-actionable.
+  - Link labels clearly describe destination behavior.
+
+## Implementation Notes (2026-02-20)
+- Added public announcement list and detail API routes.
+- Added visibility filtering, deterministic ordering, and fallback mapping for no-data/error/unavailable states.
+- Added guest-facing list/detail/empty/unavailable frontend views and controllers.
+- Added contract and integration tests for ordering, navigation flow, failure recovery, and latency.
+- Final verification command executed: `npm test && npm run lint`.
