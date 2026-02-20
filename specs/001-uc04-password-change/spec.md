@@ -12,6 +12,7 @@
 
 - Q: What password security standards should apply to a new password? -> A: The new password must be at least 12 characters, include at least one uppercase letter, one lowercase letter, one number, and one special character, contain no spaces, differ from the current password, and not match any of the user's last 5 passwords.
 - Q: What happens to user sessions after a successful password change? -> A: The system invalidates the current authenticated session and requires the user to re-authenticate using the new password.
+- Q: Is password confirmation optional? -> A: No. New-password confirmation is always required for password changes.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -43,7 +44,7 @@ A user receives clear error feedback when required fields are missing, the curre
 1. **Given** the user omits one or more required fields, **When** they submit, **Then** the system rejects the change, shows required-field feedback, and keeps the existing password unchanged.
 2. **Given** the current password is incorrect, **When** the user submits, **Then** the system rejects the change, shows an incorrect-current-password message, and keeps the existing password unchanged.
 3. **Given** the new password fails password standards, **When** the user submits, **Then** the system rejects the change, shows password-rule feedback, and keeps the existing password unchanged.
-4. **Given** a confirmation field is present and does not match the new password, **When** the user submits, **Then** the system rejects the change, shows a mismatch message, and keeps the existing password unchanged.
+4. **Given** the confirmation value does not match the new password, **When** the user submits, **Then** the system rejects the change, shows a mismatch message, and keeps the existing password unchanged.
 
 ---
 
@@ -70,7 +71,7 @@ A user is protected from partial changes when credential-store updates fail and 
 - New password meets length but fails composition requirements.
 - New password equals the current password.
 - New password matches one of the last 5 passwords.
-- New password and confirmation do not match when confirmation is required.
+- New password and confirmation do not match.
 - Credential-store failure occurs after validation but before commit.
 - User attempts to continue with an invalidated session immediately after password change.
 
@@ -79,12 +80,12 @@ A user is protected from partial changes when credential-store updates fail and 
 ### Functional Requirements
 
 - **FR-001**: System MUST provide password-change functionality only to authenticated users.
-- **FR-002**: System MUST present a change-password form that captures current password and new password, and a confirmation field when confirmation is required.
+- **FR-002**: System MUST present a change-password form that captures current password, new password, and new-password confirmation.
 - **FR-003**: System MUST require all displayed password-change fields before processing.
 - **FR-004**: System MUST verify the submitted current password matches the stored credential for the authenticated user.
 - **FR-005**: System MUST validate the new password against the password security standards before updating credentials.
 - **FR-006**: System MUST enforce these password security standards for new passwords: minimum 12 characters; at least one uppercase letter, one lowercase letter, one number, and one special character; no spaces; not equal to current password; not equal to any of the last 5 passwords used by the same account.
-- **FR-007**: System MUST reject password changes when new-password confirmation is required and does not match the new password.
+- **FR-007**: System MUST reject password changes when new-password confirmation does not match the new password.
 - **FR-008**: System MUST reject and explain missing required-field inputs.
 - **FR-009**: System MUST reject and explain incorrect current-password submissions.
 - **FR-010**: System MUST reject and explain password-standard violations.

@@ -2,11 +2,10 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | HIGH | `specs/001-uc04-password-change/spec.md:82`, `specs/001-uc04-password-change/spec.md:87` | Confirmation field is conditional (“when required”), but no deterministic rule defines when confirmation is required. | Specify confirmation-field applicability (always required vs feature flag/setting) and align FR-002/FR-007 and tests. |
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc04-password-change/plan.md:21`, `specs/001-uc04-password-change/tasks.md:116` | Plan defines 500ms p95 performance target, but tasks include observability only and no explicit threshold validation. | Add performance verification task tied to p95 target for password-change endpoint. |
-| G2 | Coverage Gap | MEDIUM | `specs/001-uc04-password-change/spec.md:122`, `specs/001-uc04-password-change/tasks.md:53` | SC-005 (95% users submit compliant password within two extra attempts) has no direct measurement/telemetry task. | Add usability metric collection/report task or explicitly defer SC-005 to post-implementation evaluation. |
-| U1 | Underspecification | MEDIUM | `specs/001-uc04-password-change/spec.md:77` | Spec has no explicit Non-Functional Requirements section; NFRs are implied via plan/success criteria only. | Add explicit NFR section (performance, reliability, security) or trace plan NFRs into implementation tasks. |
-| I1 | Inconsistency | LOW | `specs/001-uc04-password-change/spec.md:104`, `specs/001-uc04-password-change/spec.md:96` | Assumption says session invalidation applies “at least to active session,” while FR-016 focuses on current session only; scope of broader session invalidation remains unclear. | Clarify whether only current session is invalidated (required) or all active sessions are optional enhancement. |
+| G1 | Coverage Gap | MEDIUM | `specs/001-uc04-password-change/plan.md`, `specs/001-uc04-password-change/tasks.md` | Plan defines a 500ms p95 performance target, but tasks do not include explicit threshold validation. | Add a measurable performance verification task tied to the endpoint p95 target. |
+| G2 | Coverage Gap | MEDIUM | `specs/001-uc04-password-change/spec.md`, `specs/001-uc04-password-change/tasks.md` | SC-005 (95% users submit compliant password within two extra attempts) has no direct measurement task. | Add usability metric collection/reporting or explicitly defer SC-005 to post-implementation evaluation. |
+| U1 | Underspecification | MEDIUM | `specs/001-uc04-password-change/spec.md` | Spec has no explicit Non-Functional Requirements section. | Add explicit NFR entries or trace plan constraints directly into tasks. |
+| I1 | Inconsistency | LOW | `specs/001-uc04-password-change/spec.md` | Session invalidation scope can be read as current-session mandatory, broader session revocation optional. | Keep current-session invalidation mandatory and document broader revocation as optional enhancement. |
 
 ### Coverage Summary Table
 
@@ -18,7 +17,7 @@
 | verify-current-password-matches-stored | Yes | T014, T018, T021 | Service + failure handling |
 | validate-new-password-against-standard | Yes | T007, T014, T019 | Policy service + tests |
 | enforce-12-plus-composition-no-spaces-not-current-not-last-five | Yes | T002, T006, T007, T019 | Config + history + validator + tests |
-| reject-confirmation-mismatch-when-required | Yes | T020, T019 | Conditional confirmation handling |
+| reject-confirmation-mismatch | Yes | T020, T019 | Confirmation handling |
 | reject-and-explain-missing-fields | Yes | T020, T022, T017, T018 | Backend + UI + tests |
 | reject-and-explain-incorrect-current-password | Yes | T021, T018 | Error mapping + integration |
 | reject-and-explain-password-standard-violations | Yes | T021, T019 | Policy feedback |
@@ -34,31 +33,16 @@
 
 No constitution alignment issues detected.
 
-###### Unmapped Tasks
-
-- `T030`, `T031`, `T033` are cross-cutting and not explicitly mapped to FR/SC IDs (helpful but traceability can be strengthened).
-
 ### Metrics
 
-- Total Requirements: **17** (functional), **0 explicit NFR section entries**
-- Total Tasks: **33**
+- Total Requirements: **17** functional
+- Total Tasks: **36**
 - Coverage % (requirements with >=1 task): **100%**
-- Ambiguity Count: **1**
+- Ambiguity Count: **0**
 - Duplication Count: **0**
 - Critical Issues Count: **0**
 
 ## Next Actions
 
-- No CRITICAL blockers detected; implementation can proceed.
-- Suggested sequence:
-  1. Address HIGH findings first (ambiguity/inconsistency).
-  2. Add measurable NFR/performance/usability validation tasks for medium gaps.
-  3. Improve traceability for low-priority cross-cutting tasks.
-- Suggested commands:
-  - Refine requirements/spec text: /speckit.specify`r
-  - Reconcile plan constraints/tasks traceability: /speckit.plan`r
-  - Regenerate/adjust executable task list: /speckit.tasks`r
-
-Would you like me to suggest concrete remediation edits for the top 4 issues?
-
-
+- No CRITICAL or HIGH blockers detected; implementation can proceed.
+- Prioritize medium gaps for NFR measurability.
