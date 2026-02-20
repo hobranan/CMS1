@@ -59,3 +59,10 @@
 
 - [ ] CHK028 Is there any unresolved conflict between extension-only acceptance and edge-case concern about invalid/unreadable content? [Conflict, Spec §Assumptions, Spec §Edge Cases]
 - [ ] CHK029 Is a stable requirement-to-acceptance-test ID mapping scheme explicitly defined for FR and SC traceability? [Traceability, Gap]
+
+## Auto-Answer Log (UC01/UC02 defaults)
+
+- Auto-answered similar checklist quality questions using the previously confirmed UC-01 and UC-02 decision set.
+- Defaults include: deterministic validation behavior, explicit measurability, no-partial-update guarantees, recovery/resubmission clarity, accessibility/privacy coverage, traceability mapping, and explicit scope assumptions.
+- Where checklist items offered equivalent alternatives, the same prior choices were reused (for example: all-errors mode, unauthorized handling excluded when outside scope, and last-write-wins for concurrent update conflicts).
+
