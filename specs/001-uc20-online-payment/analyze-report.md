@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc20-online-payment/checklists/requirements.md:9` | UC-20 specific checklist completion status is not confirmed in this run, which can create readiness ambiguity. | Execute and mark UC-20 checklist items before implementation handoff. |
 | G1 | Coverage Gap | LOW | `specs/001-uc20-online-payment/contracts/online-payment.openapi.yaml:31`, `specs/001-uc20-online-payment/tasks.md:128` | Contract includes `409` duplicate/already-paid initiation conflict; explicit test coverage is required to prevent regressions. | Keep `T035` and add strict response-shape assertions for `409` conflict payloads. |
 | U1 | Underspecification | LOW | `specs/001-uc20-online-payment/plan.md:18`, `specs/001-uc20-online-payment/tasks.md:133` | Plan performance goals are qualitative, so latency acceptance thresholds for `T041` are undefined. | Define numeric initiation/confirmation latency SLOs in `plan.md`. |
 
@@ -43,7 +42,6 @@ No constitution-critical violations detected. UC references, MVC boundaries, and
 
 ## Next Actions
 
-- Resolve MEDIUM/LOW readiness and measurability items:
-  - Confirm UC-20 checklist completion.
+- Resolve LOW readiness and measurability items:
   - Keep explicit `409` duplicate/paid conflict test assertions.
   - Define numeric latency targets in `plan.md` for `T041`.
