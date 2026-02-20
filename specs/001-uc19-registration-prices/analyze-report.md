@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc19-registration-prices/checklists/registration-prices.md:9` | UC-19 quality checklist is currently unchecked, which can create readiness ambiguity before implementation starts. | Execute and mark the UC-19 checklist so requirement-quality status is explicit before `/speckit.implement`. |
 | G1 | Coverage Gap | LOW | `specs/001-uc19-registration-prices/contracts/registration-prices.openapi.yaml:13`, `specs/001-uc19-registration-prices/tasks.md:72` | Contract has only one endpoint with `200/404/500`; task coverage is strong, but contract assertions should explicitly include `discountApplied=false` and CAD labels in `200` payload validation. | Keep/verify `T029` and add strict response payload assertions for `currency=CAD` and `discountApplied=false` in contract tests. |
 | U1 | Underspecification | LOW | `specs/001-uc19-registration-prices/plan.md:18`, `specs/001-uc19-registration-prices/tasks.md:113` | Plan performance goal is qualitative ("normal browsing latency"), so `T034` lacks explicit numeric acceptance thresholds. | Define numeric latency target(s) in `plan.md` and use them in performance assertions. |
 
@@ -40,7 +39,6 @@ No constitution-critical violations detected. UC references, MVC boundaries, and
 
 ## Next Actions
 
-- Resolve MEDIUM/LOW quality items before implementation:
-  - Complete UC-19 checklist status updates.
+- Resolve LOW quality items before implementation:
   - Confirm strict contract assertions for `currency=CAD` and `discountApplied=false`.
   - Define numeric latency target(s) in `plan.md` for `T034`.
