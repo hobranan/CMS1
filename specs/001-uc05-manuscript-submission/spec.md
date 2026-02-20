@@ -89,7 +89,7 @@ An author is informed when upload or storage fails and can retry later without p
 - **FR-008**: System MUST validate metadata value quality before finalizing submission, including contact rules: primary email must be syntactically valid, and optional phone must normalize to 7-15 digits using only digits, spaces, `+`, `-`, and parentheses.
 - **FR-009**: System MUST reject submissions with missing or invalid metadata and provide actionable error feedback.
 - **FR-010**: System MUST reject submissions with missing/invalid files and provide actionable file-constraint feedback.
-- **FR-011**: System MUST enforce a consistent policy for multiple simultaneous validation failures and communicate it clearly.
+- **FR-011**: System MUST enforce an `ALL_ERRORS` validation policy for multiple simultaneous validation failures and communicate all actionable errors clearly in one response.
 - **FR-012**: System MUST store validated metadata and manuscript file reference together as one finalized submission record.
 - **FR-013**: System MUST confirm successful submission acceptance and redirect the author to home/dashboard.
 - **FR-014**: System MUST ensure failed validation attempts do not create finalized submissions.
@@ -97,6 +97,11 @@ An author is informed when upload or storage fails and can retry later without p
 - **FR-016**: System MUST not finalize or enter a submission into review when upload is interrupted.
 - **FR-017**: System MUST handle storage/database failure by showing a retry-later system error and preventing submission finalization.
 - **FR-018**: System MUST make successful submissions visible in the author's submissions list with associated metadata and manuscript reference.
+
+### Non-Functional Requirements
+
+- **NFR-001**: Validation responses MUST meet a p95 latency target of 500ms under normal operating load.
+- **NFR-002**: System MUST capture resubmission-attempt telemetry required to measure SC-005.
 
 ### Assumptions
 

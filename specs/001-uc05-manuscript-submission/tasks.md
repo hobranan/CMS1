@@ -112,6 +112,9 @@
 - [ ] T036 Run `npm test && npm run lint` and record UC-05 results in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
 
 - [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
+- [ ] T038 Add submission-validation p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/submission-validation-performance.integration.test.js`
+- [ ] T039 Add telemetry for resubmission attempts and success-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-observability-service.js`
+- [ ] T040 Record SC-005 resubmission metric method and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
 
 ---
 
