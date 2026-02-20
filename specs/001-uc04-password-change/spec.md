@@ -97,6 +97,12 @@ A user is protected from partial changes when credential-store updates fail and 
 - **FR-016**: System MUST invalidate the current authenticated session immediately after successful password change.
 - **FR-017**: System MUST require re-authentication with the new password after session invalidation.
 
+### Non-Functional Requirements
+
+- **NFR-001**: Password-change endpoint responses MUST meet a p95 latency target of 500ms under normal operating load.
+- **NFR-002**: System MUST capture validation-to-success metrics required to measure SC-005.
+- **NFR-003**: Password-change failure responses MUST avoid leaking sensitive credential details.
+
 ### Assumptions
 
 - Password change is accessed from account settings by authenticated users.

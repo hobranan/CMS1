@@ -122,6 +122,9 @@
 - [ ] T035 Validate UC-04 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
 
 - [ ] T036 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/quickstart.md`
+- [ ] T037 Add password-change p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_performance.integration.js`
+- [ ] T038 Add telemetry for validation-feedback to compliant-resubmission metric (SC-005) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
+- [ ] T039 Record SC-005 measurement method and collected evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
 
 ---
 
