@@ -3,6 +3,7 @@
 ## Assumptions / Notes
 - The author must be logged in to submit a paper.
 - Required metadata includes (at minimum): author names, affiliations/contact info, abstract, keywords, and main source.
+- Contact-info validation uses: valid primary email required; optional phone normalizes to 7-15 digits with allowed separators (`+`, `-`, spaces, parentheses).
 - Allowed manuscript formats: PDF, Word, or LaTeX.
 - Maximum file size: 7 MB.
 - On success, the submission is stored and the author receives confirmation.

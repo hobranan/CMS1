@@ -12,6 +12,7 @@
 
 - Q: Which manuscript metadata fields are required for submission? -> A: Required metadata fields are author names, author affiliations, author contact information, abstract text, paper keywords, and main reference source.
 - Q: How should upload network interruptions be handled? -> A: If a network interruption happens during upload, the system reports the interruption, does not finalize the submission, and instructs the author to retry the upload once network connectivity is available.
+- Q: What exact contact-information format rules apply? -> A: Contact information must include a valid primary email address; optional phone values may use digits, spaces, `+`, `-`, and parentheses, and must normalize to 7-15 digits.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -80,12 +81,12 @@ An author is informed when upload or storage fails and can retry later without p
 
 - **FR-001**: System MUST provide manuscript submission functionality only to authenticated authors while submissions are open.
 - **FR-002**: System MUST display a submission form requiring metadata and manuscript upload.
-- **FR-003**: System MUST require these metadata fields: author names, author affiliations, author contact information, abstract text, paper keywords, and main reference source.
+- **FR-003**: System MUST require these metadata fields: author names, author affiliations, author contact information (primary email required, phone optional), abstract text, paper keywords, and main reference source.
 - **FR-004**: System MUST require a manuscript file before accepting submission.
 - **FR-005**: System MUST accept manuscript files only in PDF, Word, or LaTeX formats.
 - **FR-006**: System MUST reject manuscript files larger than 7 MB.
 - **FR-007**: System MUST validate required metadata completeness before finalizing submission.
-- **FR-008**: System MUST validate metadata value quality (including contact information format validity) before finalizing submission.
+- **FR-008**: System MUST validate metadata value quality before finalizing submission, including contact rules: primary email must be syntactically valid, and optional phone must normalize to 7-15 digits using only digits, spaces, `+`, `-`, and parentheses.
 - **FR-009**: System MUST reject submissions with missing or invalid metadata and provide actionable error feedback.
 - **FR-010**: System MUST reject submissions with missing/invalid files and provide actionable file-constraint feedback.
 - **FR-011**: System MUST enforce a consistent policy for multiple simultaneous validation failures and communicate it clearly.

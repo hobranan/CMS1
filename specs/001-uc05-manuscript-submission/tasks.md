@@ -70,7 +70,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T022 [US2] Implement metadata completeness and quality checks (including contact format) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-validation-service.js`
+- [ ] T022 [US2] Implement metadata completeness and quality checks (primary email validity and optional phone normalization to 7-15 digits) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-validation-service.js`
 - [ ] T023 [US2] Implement file-type sniffing and 7 MB size enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/file-constraint-service.js`
 - [ ] T024 [US2] Implement consistent validation error aggregation/precedence policy output in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-error-mapper.js`
 - [ ] T025 [P] [US2] Implement frontend inline field/file error rendering and focus management in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form-errors.js`
