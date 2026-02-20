@@ -31,6 +31,7 @@ Implement referee invitation response handling so authenticated referees can acc
 **Post-Design Gate Status**: PASS
  - [x] Data model and contracts place invitation and assignment state rules in backend models/services, with controllers orchestrating only.
  - [x] Design remains within vanilla stack and preserves UC/AT traceability.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
