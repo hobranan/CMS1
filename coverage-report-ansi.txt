@@ -1,0 +1,791 @@
+[32mΓ£ö registration view returns actionable failure text [90m(2.8439ms)[39m[39m
+[32mΓ£ö validation feedback message is immediate and explicit [90m(2.8759ms)[39m[39m
+[32mΓ£ö login required-field message is explicit [90m(4.1201ms)[39m[39m
+[32mΓ£ö error payloads are redacted for unauthorized and retrieval failures [90m(50.7042ms)[39m[39m
+[32mΓ£ö assigned list retrieval failure returns 500 [90m(29.3905ms)[39m[39m
+[32mΓ£ö assigned papers endpoint returns scoped papers and empty state [90m(43.7976ms)[39m[39m
+[32mΓ£ö missing manuscript for assigned paper returns 404 [90m(42.0143ms)[39m[39m
+[32mΓ£ö manuscript endpoint returns view_only mode for assigned paper [90m(39.7779ms)[39m[39m
+[32mΓ£ö non-assigned manuscript and review form access are forbidden [90m(52.05ms)[39m[39m
+[32mΓ£ö missing review form for assigned paper returns 404 [90m(49.489ms)[39m[39m
+[32mΓ£ö review form endpoint returns pre-generated form for assigned paper [90m(38.1956ms)[39m[39m
+[32mΓ£ö GET assignments returns assigned referee details [90m(34.5112ms)[39m[39m
+[32mΓ£ö stale expected version returns 409 conflict [90m(31.1204ms)[39m[39m
+[32mΓ£ö POST assignments rejects zero selections [90m(36.0249ms)[39m[39m
+[32mΓ£ö POST assignments rejects more than three selections [90m(12.2634ms)[39m[39m
+[32mΓ£ö invitation failure keeps assignment empty (rollback) [90m(41.6402ms)[39m[39m
+[32mΓ£ö POST assignments rejects duplicate, ineligible, and workload-exceeded referee selections [90m(32.1045ms)[39m[39m
+[32mΓ£ö POST assignments returns success for valid 1..3 eligible referees [90m(31.9817ms)[39m[39m
+[32mΓ£ö POST assignments returns 503 when invitation dispatch fails and rolls back [90m(31.4422ms)[39m[39m
+[32mΓ£ö missing notification returns 404 [90m(51.1032ms)[39m[39m
+[32mΓ£ö decision notification returns ordered summary and full review sections [90m(49.1662ms)[39m[39m
+[32mΓ£ö unauthorized author paper access returns 403 [90m(56.8115ms)[39m[39m
+[32mΓ£ö under-review response is returned when no final decision exists [90m(40.726ms)[39m[39m
+[32mΓ£ö get paper decision returns final decision for owning author [90m(46.9597ms)[39m[39m
+[32mΓ£ö decision-context returns decision prerequisites [90m(29.1384ms)[39m[39m
+[32mΓ£ö accept decision persists and updates paper status [90m(30.0494ms)[39m[39m
+[32mΓ£ö already decided and closed period return ineligible responses [90m(28.1249ms)[39m[39m
+[32mΓ£ö no completed reviews blocks decision unless override is used [90m(29.0697ms)[39m[39m
+[32mΓ£ö notification failure keeps committed decision and returns failed notification status [90m(34.368ms)[39m[39m
+[32mΓ£ö reject decision persists and updates paper status [90m(37.5715ms)[39m[39m
+[32mΓ£ö save failure returns 500 and leaves status unchanged [90m(39.7762ms)[39m[39m
+[32mΓ£ö get draft returns persisted editable state [90m(38.6469ms)[39m[39m
+[32mΓ£ö finalize returns 409 and keeps prevalidation save when final validation fails [90m(35.5849ms)[39m[39m
+[32mΓ£ö save with no changes returns NO_CHANGES [90m(36.5536ms)[39m[39m
+[32mΓ£ö save draft success returns SAVED [90m(30.4023ms)[39m[39m
+[32mΓ£ö save returns SYSTEM_FAILURE when persistence fails [90m(35.5648ms)[39m[39m
+[32mΓ£ö save returns NETWORK_FAILURE when connectivity fails [90m(11.0781ms)[39m[39m
+[32mΓ£ö save with invalid editable values returns VALIDATION_FAILED [90m(34.3462ms)[39m[39m
+[32mΓ£ö tests\contract\fixtures\login_payloads.js [90m(183.7433ms)[39m[39m
+[32mΓ£ö tests\contract\fixtures\password_change_payloads.js [90m(221.8938ms)[39m[39m
+[32mΓ£ö tests\contract\fixtures\registration_payloads.js [90m(227.8326ms)[39m[39m
+[32mΓ£ö tests\contract\fixtures\validation_payloads.js [90m(227.3099ms)[39m[39m
+[32mΓ£ö pending invitations endpoint returns only actionable pending items [90m(29.8176ms)[39m[39m
+[32mΓ£ö accept response records accepted status and activates assignment [90m(31.5209ms)[39m[39m
+[32mΓ£ö db failure returns 500 and keeps invitation pending [90m(29.7577ms)[39m[39m
+[32mΓ£ö response at exact 14-day boundary is blocked as expired [90m(31.0906ms)[39m[39m
+[32mΓ£ö response to withdrawn invitation is blocked [90m(30.4016ms)[39m[39m
+[32mΓ£ö notification failure preserves committed response with failed notification status [90m(34.4432ms)[39m[39m
+[32mΓ£ö reject response records rejected status and keeps assignment inactive [90m(30.8497ms)[39m[39m
+[32mΓ£ö notification failure payload includes preserved status and redacted fields [90m(32.7726ms)[39m[39m
+[32mΓ£ö gateway canceled confirmation keeps registration unpaid [90m(31.6533ms)[39m[39m
+[32mΓ£ö gateway declined confirmation keeps registration unpaid [90m(29.3573ms)[39m[39m
+[32mΓ£ö gateway invalid-details confirmation keeps registration unpaid [90m(38.3823ms)[39m[39m
+[32mΓ£ö gateway success with db save failure returns reconciliation error [90m(33.4018ms)[39m[39m
+[32mΓ£ö gateway success confirmation returns confirmed outcome [90m(38.9234ms)[39m[39m
+[32mΓ£ö gateway timeout confirmation returns unresolved pending outcome [90m(32.5142ms)[39m[39m
+[32mΓ£ö payment initiation succeeds for authenticated attendee with selected category [90m(28.8571ms)[39m[39m
+[32mΓ£ö public announcement detail returns 200 for available item [90m(19.8028ms)[39m[39m
+[32mΓ£ö public announcement detail returns 404 when unavailable [90m(13.7534ms)[39m[39m
+[32mΓ£ö public announcements list returns 500 on retrieval failure [90m(13.2413ms)[39m[39m
+[32mΓ£ö public announcements list returns 204 when no public announcements exist [90m(13.9731ms)[39m[39m
+[32mΓ£ö public announcements list returns 200 with ordering metadata [90m(14.4036ms)[39m[39m
+[32mΓ£ö unpublished registration prices returns 404 [90m(26.0002ms)[39m[39m
+[32mΓ£ö registration prices retrieval failure returns 500 [90m(14.4569ms)[39m[39m
+[32mΓ£ö public registration prices returns published CAD categories [90m(14.3757ms)[39m[39m
+[32mΓ£ö response enforces no-discount and CAD fields [90m(15.3417ms)[39m[39m
+[32mΓ£ö entry detail not found returns 404 [90m(13.8038ms)[39m[39m
+[32mΓ£ö public entry detail returns projected fields [90m(17.0862ms)[39m[39m
+[32mΓ£ö public schedule returns 404 when not published [90m(15.3362ms)[39m[39m
+[32mΓ£ö pdf attachment response has attachment disposition [90m(13.402ms)[39m[39m
+[32mΓ£ö pdf retrieval failure returns 500 [90m(13.29ms)[39m[39m
+[32mΓ£ö pdf inline response has inline disposition [90m(16.1289ms)[39m[39m
+[32mΓ£ö pdf not published returns 404 [90m(16.2135ms)[39m[39m
+[32mΓ£ö public schedule retrieval failure returns 500 [90m(18.652ms)[39m[39m
+[32mΓ£ö public schedule list is returned for published conference [90m(17.1584ms)[39m[39m
+[32mΓ£ö list/detail payloads omit identity fields [90m(38.9192ms)[39m[39m
+[32mΓ£ö detail endpoint returns anonymized completed review [90m(49.5644ms)[39m[39m
+[32mΓ£ö open failure returns 404 when review is unavailable [90m(46.8289ms)[39m[39m
+[32mΓ£ö list retrieval failure returns 500 and no review data [90m(37.2559ms)[39m[39m
+[32mΓ£ö completed review list excludes draft/incomplete reviews [90m(48.608ms)[39m[39m
+[32mΓ£ö completed review list returns anonymized submitted reviews [90m(92.7724ms)[39m[39m
+[32mΓ£ö unauthorized users are blocked from completed review list and detail [90m(59.7819ms)[39m[39m
+[32mΓ£ö get review draft returns informational deadline indicator [90m(66.6707ms)[39m[39m
+[32mΓ£ö submitted review is returned as read-only [90m(60.274ms)[39m[39m
+[32mΓ£ö submit review rejects inactive assignment [90m(32.2691ms)[39m[39m
+[32mΓ£ö new submitted version links to latest prior review [90m(42.6764ms)[39m[39m
+[32mΓ£ö submit review succeeds for active assignment and valid fields [90m(30.1322ms)[39m[39m
+[32mΓ£ö submit review rejects missing required fields [90m(31.221ms)[39m[39m
+[32mΓ£ö editable schedule details load successfully [90m(29.4546ms)[39m[39m
+[32mΓ£ö conflict-based save rejection returns unchanged schedule [90m(34.0224ms)[39m[39m
+[32mΓ£ö database save failure returns error with no persisted changes [90m(31.5525ms)[39m[39m
+[32mΓ£ö invalid reference save rejection [90m(30.1337ms)[39m[39m
+[32mΓ£ö locked schedule blocks edit save [90m(35.1744ms)[39m[39m
+[32mΓ£ö save on published schedule preserves published status [90m(30.8901ms)[39m[39m
+[32mΓ£ö save schedule succeeds with valid edits [90m(31.4899ms)[39m[39m
+[32mΓ£ö failure payload shape is stable across stale/lock/conflict [90m(34.8711ms)[39m[39m
+[32mΓ£ö get published schedule returns 404 when not available [90m(32.1315ms)[39m[39m
+[32mΓ£ö generate response includes room columns and equal slot counts [90m(45.4663ms)[39m[39m
+[32mΓ£ö generation blocked when parameters are missing [90m(31.2927ms)[39m[39m
+[32mΓ£ö generation blocked when no accepted papers [90m(28.7277ms)[39m[39m
+[32mΓ£ö save failure on generation returns 500 and no draft is stored [90m(32.6787ms)[39m[39m
+[32mΓ£ö generate schedule returns draft for valid conference inputs [90m(40.1316ms)[39m[39m
+[32mΓ£ö publish blocked when blocking conflicts exist [90m(38.1986ms)[39m[39m
+[32mΓ£ö publish schedule succeeds for draft with no blocking conflicts [90m(51.4738ms)[39m[39m
+[32mΓ£ö missing/invalid/oversize file failures return 400 [90m(39.8649ms)[39m[39m
+[32mΓ£ö metadata validation failures return 400 with actionable errors [90m(29.2766ms)[39m[39m
+[32mΓ£ö POST /submissions success returns 201 finalized payload [90m(30.9487ms)[39m[39m
+[32mΓ£ö upload interruption endpoint reports retry guidance [90m(42.6397ms)[39m[39m
+[32mΓ£ö POST /registrations returns 202 for valid request [90m(37.0915ms)[39m[39m
+[32mΓ£ö POST /registrations returns 422 for validation failures [90m(1.5326ms)[39m[39m
+[32mΓ£ö GET /registrations/verify returns 400 when token missing [90m(1.163ms)[39m[39m
+[32mΓ£ö POST /auth/login returns 403 for unverified user [90m(24.1157ms)[39m[39m
+[32mΓ£ö validation endpoint accepts valid payload [90m(10.8619ms)[39m[39m
+[32mΓ£ö validation endpoint rejects invalid payload with field errors [90m(1.2252ms)[39m[39m
+[32mΓ£ö unknown email and wrong password share generic invalid message [90m(68.953ms)[39m[39m
+[32mΓ£ö lockout and store outage responses match contract [90m(74.6921ms)[39m[39m
+[32mΓ£ö missing required fields return 400 with field-level errors [90m(20.8166ms)[39m[39m
+[32mΓ£ö successful login returns authenticated response and session id [90m(44.9182ms)[39m[39m
+[32mΓ£ö active session endpoint returns 200 [90m(24.787ms)[39m[39m
+[32mΓ£ö system failure returns retry-later response [90m(76.4847ms)[39m[39m
+[32mΓ£ö successful password change returns reauthenticate true [90m(78.7162ms)[39m[39m
+[32mΓ£ö required fields and mismatch return 400 [90m(32.9231ms)[39m[39m
+[32mΓ£ö ticket metadata retrieval succeeds after issuance [90m(37.7107ms)[39m[39m
+[32mΓ£ö pdf endpoint returns 503 with stable code/message when storage unavailable [90m(32.6095ms)[39m[39m
+[32mΓ£ö ticket pdf retrieval returns application/pdf payload [90m(36.9259ms)[39m[39m
+[32mΓ£ö issue ticket returns 500 when generation fails [90m(32.2281ms)[39m[39m
+[32mΓ£ö issue ticket returns 409 when payment is pending [90m(39.8047ms)[39m[39m
+[32mΓ£ö issue ticket succeeds for paid registration [90m(50.5328ms)[39m[39m
+[32mΓ£ö oversize manuscript is rejected [90m(38.9085ms)[39m[39m
+[32mΓ£ö retry mode endpoint returns RESUME or RESTART [90m(41.3415ms)[39m[39m
+[32mΓ£ö POST manuscript upload success returns ATTACHED [90m(52.186ms)[39m[39m
+[32mΓ£ö unsupported extension is rejected [90m(31.481ms)[39m[39m
+[32mΓ£ö get workload returns snapshot with applied rule metadata [90m(31.3427ms)[39m[39m
+[32mΓ£ö assignment is rejected when workload equals limit [90m(28.7817ms)[39m[39m
+[32mΓ£ö assignment is rejected when workload exceeds limit [90m(28.3226ms)[39m[39m
+[32mΓ£ö assignment returns 409 when workload/limit drift is detected at confirm [90m(35.9753ms)[39m[39m
+[32mΓ£ö assignment returns 503 when workload retrieval fails [90m(38.1624ms)[39m[39m
+[32mΓ£ö assignment returns 503 when storage fails after validation [90m(35.7543ms)[39m[39m
+[32mΓ£ö assign referee succeeds when workload is below limit [90m(31.7657ms)[39m[39m
+[32mΓ£ö tests\helpers\uc01_system.js [90m(882.4682ms)[39m[39m
+[32mΓ£ö tests\helpers\uc02_system.js [90m(265.2199ms)[39m[39m
+[32mΓ£ö tests\helpers\uc03_system.js [90m(880.978ms)[39m[39m
+[32mΓ£ö tests\helpers\uc04_system.js [90m(829.0399ms)[39m[39m
+[32mΓ£ö tests\helpers\uc05_system.js [90m(830.3482ms)[39m[39m
+[32mΓ£ö tests\helpers\uc06_system.js [90m(808.5071ms)[39m[39m
+[32mΓ£ö tests\helpers\uc07_system.js [90m(927.4764ms)[39m[39m
+[32mΓ£ö tests\helpers\uc08_system.js [90m(818.8657ms)[39m[39m
+[32mΓ£ö tests\helpers\uc09_system.js [90m(884.3873ms)[39m[39m
+[32mΓ£ö tests\helpers\uc10_system.js [90m(860.7405ms)[39m[39m
+[32mΓ£ö tests\helpers\uc11_system.js [90m(884.221ms)[39m[39m
+[32mΓ£ö tests\helpers\uc12_system.js [90m(886.2461ms)[39m[39m
+[32mΓ£ö tests\helpers\uc13_system.js [90m(900.4768ms)[39m[39m
+[32mΓ£ö tests\helpers\uc14_system.js [90m(876.8305ms)[39m[39m
+[32mΓ£ö tests\helpers\uc15_system.js [90m(838.7011ms)[39m[39m
+[32mΓ£ö tests\helpers\uc16_system.js [90m(815.7031ms)[39m[39m
+[32mΓ£ö tests\helpers\uc17_system.js [90m(857.9187ms)[39m[39m
+[32mΓ£ö tests\helpers\uc18_system.js [90m(830.2622ms)[39m[39m
+[32mΓ£ö tests\helpers\uc19_system.js [90m(806.7353ms)[39m[39m
+[32mΓ£ö tests\helpers\uc20_system.js [90m(846.2296ms)[39m[39m
+[32mΓ£ö tests\helpers\uc21_system.js [90m(848.2938ms)[39m[39m
+[32mΓ£ö tests\helpers\uc22_system.js [90m(792.7605ms)[39m[39m
+[32mΓ£ö completed-review access stays within p95 target window for in-memory path [90m(52.4558ms)[39m[39m
+[32mΓ£ö direct URL access to non-assigned resource is blocked [90m(25.9374ms)[39m[39m
+[32mΓ£ö no assignments returns empty list and no-assigned message [90m(29.7054ms)[39m[39m
+[32mΓ£ö refresh replaces cached state with server state and surfaces unavailable resource [90m(36.8334ms)[39m[39m
+[32mΓ£ö assignment confirmation p95 latency is below 500ms [90m(45.3156ms)[39m[39m
+[32mΓ£ö invitation failure rolls back assignment with no partial result [90m(32.6723ms)[39m[39m
+[32mΓ£ö invalid selection keeps existing assignment unchanged [90m(39.1272ms)[39m[39m
+[32mΓ£ö successful assignment persists full set and sends invitations [90m(37.1881ms)[39m[39m
+[32mΓ£ö accepted decision is visible to owning author [90m(41.5863ms)[39m[39m
+[32mΓ£ö decision and notification retrieval p95 stays under 400ms in local harness [90m(50.9975ms)[39m[39m
+[32mΓ£ö decision visibility persists across repeated requests [90m(41.9986ms)[39m[39m
+[32mΓ£ö delivery failure still shows CMS decision as source of truth [90m(45.3574ms)[39m[39m
+[32mΓ£ö notification content keeps summary before full review [90m(53.8429ms)[39m[39m
+[32mΓ£ö summary bullets and full review come from same decision source [90m(49.9764ms)[39m[39m
+[32mΓ£ö rejected decision is visible to owning author [90m(42.5082ms)[39m[39m
+[32mΓ£ö retrieval failure returns system error without decision details [90m(39.2182ms)[39m[39m
+[32mΓ£ö cancel before confirm does not mutate paper status [90m(27.5622ms)[39m[39m
+[32mΓ£ö second near-simultaneous decision attempt returns conflict [90m(48.4965ms)[39m[39m
+[32mΓ£ö decision remains persisted across subsequent context reads [90m(47.876ms)[39m[39m
+[32mΓ£ö saved draft is retrievable after simulated logout/login [90m(32.7763ms)[39m[39m
+[32mΓ£ö validation failure does not overwrite last persisted draft [90m(55.8757ms)[39m[39m
+[32mΓ£ö finalize records prevalidation save before final validation [90m(43.3739ms)[39m[39m
+[32mΓ£ö system/network failures keep last successful draft state [90m(32.951ms)[39m[39m
+[32mΓ£ö draft survives backend route rebuild and session boundary [90m(48.084ms)[39m[39m
+[32mΓ£ö cancel before confirm performs no mutation [90m(35.6678ms)[39m[39m
+[32mΓ£ö second stale response attempt returns canonical 409 conflict [90m(33.9999ms)[39m[39m
+[32mΓ£ö db failure keeps pending and notification failure keeps committed response [90m(38.0246ms)[39m[39m
+[32mΓ£ö invitation-response decision p95 latency is below 300ms [90m(30.5271ms)[39m[39m
+[32mΓ£ö responded invitation is removed from pending list projection [90m(38.4974ms)[39m[39m
+[32mΓ£ö accept activates assignment while reject keeps it inactive [90m(30.027ms)[39m[39m
+[32mΓ£ö duplicate attempt after paid is blocked with 409 payload [90m(35.3872ms)[39m[39m
+[32mΓ£ö non-success outcome canceled preserves unpaid state [90m(28.5622ms)[39m[39m
+[32mΓ£ö non-success outcome invalid preserves unpaid state [90m(10.6766ms)[39m[39m
+[32mΓ£ö non-success outcome declined preserves unpaid state [90m(10.9064ms)[39m[39m
+[32mΓ£ö paid status persists across refresh and relogin style reads [90m(30.0757ms)[39m[39m
+[32mΓ£ö payment flow latency stays below p95 target in local harness [90m(35.5175ms)[39m[39m
+[32mΓ£ö successful payment records paid_confirmed status [90m(32.792ms)[39m[39m
+[32mΓ£ö save failure after gateway success creates reconciliation item [90m(33.8459ms)[39m[39m
+[32mΓ£ö timeout unresolved flow sets pending state with unresolved message [90m(31.3184ms)[39m[39m
+[32mΓ£ö guest can open detail and return to list [90m(14.8761ms)[39m[39m
+[32mΓ£ö intermittent list retrieval failure recovers on retry [90m(16.6647ms)[39m[39m
+[32mΓ£ö public list ordering is newest-first with id fallback for same timestamp [90m(45.1102ms)[39m[39m
+[32mΓ£ö public announcements list/detail latency stays under p95 target [90m(15.4398ms)[39m[39m
+[32mΓ£ö list visibility is consistent across repeated refreshes [90m(15.4565ms)[39m[39m
+[32mΓ£ö single-item announcement list supports detail flow [90m(30.4791ms)[39m[39m
+[32mΓ£ö unavailable detail selection returns safe error and list remains available [90m(25.5888ms)[39m[39m
+[32mΓ£ö CAD formatting supports integer and decimal values [90m(15.0969ms)[39m[39m
+[32mΓ£ö direct URL unpublished pricing returns not available [90m(15.6366ms)[39m[39m
+[32mΓ£ö temporary retrieval failure then recovery [90m(13.7878ms)[39m[39m
+[32mΓ£ö guest and authenticated users see same published pricing [90m(30.3712ms)[39m[39m
+[32mΓ£ö guest can view published prices [90m(16.6547ms)[39m[39m
+[32mΓ£ö incomplete pricing categories include missing-information markers [90m(18.289ms)[39m[39m
+[32mΓ£ö public pricing latency p95 stays under target in local harness [90m(17.0246ms)[39m[39m
+[32mΓ£ö refresh and revisit returns consistent pricing payload [90m(17.5891ms)[39m[39m
+[32mΓ£ö list success with single detail retrieval failure is handled [90m(16.3062ms)[39m[39m
+[32mΓ£ö detail shows unavailable markers when optional fields hidden [90m(14.264ms)[39m[39m
+[32mΓ£ö direct link and refresh remain stable [90m(13.7927ms)[39m[39m
+[32mΓ£ö pdf endpoint remains stable under repeated public access [90m(24.7596ms)[39m[39m
+[32mΓ£ö unauthenticated users can access published schedule [90m(17.3601ms)[39m[39m
+[32mΓ£ö restricted fields hidden while allowed remain visible [90m(16.5648ms)[39m[39m
+[32mΓ£ö review chain integrity keeps monotonic versions and latest-link invariants [90m(36.6054ms)[39m[39m
+[32mΓ£ö editor can load completed review list and only sees submitted entries [90m(42.4023ms)[39m[39m
+[32mΓ£ö empty and failure states are explicit and recoverable [90m(46.216ms)[39m[39m
+[32mΓ£ö editor can open anonymized detail and return to list flow stays consistent [90m(43.9916ms)[39m[39m
+[32mΓ£ö passed displayed deadline does not block active assignment submission [90m(39.667ms)[39m[39m
+[32mΓ£ö sequential submissions maintain version linkage chain [90m(31.1194ms)[39m[39m
+[32mΓ£ö cancel, db failure, and notification failure preserve expected integrity [90m(34.9262ms)[39m[39m
+[32mΓ£ö submitted review is visible to authorized editor [90m(43.5115ms)[39m[39m
+[32mΓ£ö cancel discards unsaved edits [90m(31.7737ms)[39m[39m
+[32mΓ£ö concurrent stale save returns conflict [90m(38.7964ms)[39m[39m
+[32mΓ£ö edit published schedule keeps status published [90m(36.5938ms)[39m[39m
+[32mΓ£ö edit load/save p95 stays below target in local harness [90m(47.2556ms)[39m[39m
+[32mΓ£ö last edited timestamp updates on successful save [90m(31.2167ms)[39m[39m
+[32mΓ£ö latest timestamp wins across multiple edits [90m(31.1654ms)[39m[39m
+[32mΓ£ö saved edits persist across repeated load [90m(30.3791ms)[39m[39m
+[32mΓ£ö save valid edit returns success feedback [90m(33.6192ms)[39m[39m
+[32mΓ£ö cancel publish keeps draft non-public [90m(33.9894ms)[39m[39m
+[32mΓ£ö conflict highlighting blocks publish [90m(33.1487ms)[39m[39m
+[32mΓ£ö generation latency p95 is below target in local harness [90m(49.1135ms)[39m[39m
+[32mΓ£ö manual generation creates a schedule draft [90m(35.3999ms)[39m[39m
+[32mΓ£ö publish reviewed draft then retrieve published schedule [90m(30.4968ms)[39m[39m
+[32mΓ£ö published schedule remains available across repeated retrieval [90m(30.8308ms)[39m[39m
+[32mΓ£ö randomized initial placement changes with different seeds [90m(33.4183ms)[39m[39m
+[32mΓ£ö slot grid uses equal slot counts and configured interval [90m(30.6086ms)[39m[39m
+[32mΓ£ö multiple validation issues return all actionable errors and no finalized record [90m(38.2173ms)[39m[39m
+[32mΓ£ö storage failure returns 503 and no finalized submission [90m(40.3768ms)[39m[39m
+[32mΓ£ö submission validation/finalization decision completes under 500ms [90m(29.5496ms)[39m[39m
+[32mΓ£ö successful submission finalizes and appears in author list [90m(30.5155ms)[39m[39m
+[32mΓ£ö upload interruption returns guidance and does not create finalized submission [90m(26.849ms)[39m[39m
+[32mΓ£ö expired verification token returns 410 and resend works [90m(37.4446ms)[39m[39m
+[32mΓ£ö pre-verification login is denied; expired pending cannot login/resend [90m(34.1971ms)[39m[39m
+[32mΓ£ö happy path: register -> verify -> login [90m(49.6628ms)[39m[39m
+[32mΓ£ö returns all validation errors in stable order [90m(18.4216ms)[39m[39m
+[32mΓ£ö blocks duplicate email [90m(19.78ms)[39m[39m
+[32mΓ£ö no partial update is stored when validation fails [90m(10.223ms)[39m[39m
+[32mΓ£ö concurrent-style updates use last-write-wins [90m(10.4591ms)[39m[39m
+[32mΓ£ö persistence failure returns retry guidance and keeps previous state [90m(11.4784ms)[39m[39m
+[32mΓ£ö valid submission persists record [90m(11.569ms)[39m[39m
+[32mΓ£ö missing/invalid/business violations return deterministic all-errors output [90m(33.0477ms)[39m[39m
+[32mΓ£ö credential store outage denies authentication and allows retry later [90m(30.0731ms)[39m[39m
+[32mΓ£ö unknown and wrong credentials both return generic invalid message [90m(49.9989ms)[39m[39m
+[32mΓ£ö five failures trigger 15-minute lockout and expiry resets lockout [90m(122.2993ms)[39m[39m
+[32mΓ£ö login decision completes under 400ms in local test harness [90m(39.4139ms)[39m[39m
+[32mΓ£ö missing email or password is rejected without authentication [90m(22.8134ms)[39m[39m
+[32mΓ£ö valid credentials authenticate and return dashboard redirect [90m(44.4922ms)[39m[39m
+[32mΓ£ö protected page refresh succeeds while session is active [90m(41.9103ms)[39m[39m
+[32mΓ£ö credential-store failure preserves old password [90m(81.6808ms)[39m[39m
+[32mΓ£ö password-change decision completes under 500ms in local harness [90m(85.9077ms)[39m[39m
+[32mΓ£ö policy failures include weak/current-equals-new/history-reuse/mismatch [90m(194.2679ms)[39m[39m
+[32mΓ£ö missing fields and incorrect current password are rejected [90m(50.8101ms)[39m[39m
+[32mΓ£ö password change succeeds with compliant input [90m(97.7698ms)[39m[39m
+[32mΓ£ö old password fails and new password succeeds after change [90m(105.0362ms)[39m[39m
+[32mΓ£ö after password change user must reauthenticate with new password [90m(119.8837ms)[39m[39m
+[32mΓ£ö session is invalidated immediately after successful password change [90m(76.3139ms)[39m[39m
+[32mΓ£ö ticket remains retrievable after navigating away [90m(38.4592ms)[39m[39m
+[32mΓ£ö ticket is retrievable across new session/device access [90m(30.0647ms)[39m[39m
+[32mΓ£ö ticket confirmation payload includes reference and qr marker [90m(33.6721ms)[39m[39m
+[32mΓ£ö delivery failure still preserves cms ticket retrieval [90m(32.9615ms)[39m[39m
+[32mΓ£ö generation failure prevents ticket issuance [90m(37.1369ms)[39m[39m
+[32mΓ£ö paid registration issues ticket successfully [90m(34.132ms)[39m[39m
+[32mΓ£ö repeated retrieval requests return the same ticket artifact [90m(34.9694ms)[39m[39m
+[32mΓ£ö storage failure returns warning and retrieval is unavailable [90m(38.0974ms)[39m[39m
+[32mΓ£ö ticket issue and retrieval latency stays under p95 target [90m(36.9628ms)[39m[39m
+[32mΓ£ö attachment remains visible after refresh/navigation [90m(32.1311ms)[39m[39m
+[32mΓ£ö cancel selection causes no upload side effects [90m(3.5891ms)[39m[39m
+[32mΓ£ö storage and association failures keep unattached state [90m(32.746ms)[39m[39m
+[32mΓ£ö retry after 30 minutes returns RESTART and clears stale checkpoint [90m(39.4961ms)[39m[39m
+[32mΓ£ö retry within 30 minutes returns RESUME mode from checkpoint [90m(33.4448ms)[39m[39m
+[32mΓ£ö successful upload attaches manuscript to draft [90m(30.5291ms)[39m[39m
+[32mΓ£ö pre-upload validation and attachment decision completes under 300ms [90m(37.8982ms)[39m[39m
+[32mΓ£ö updated configured limit is applied on subsequent checks [90m(64.9812ms)[39m[39m
+[32mΓ£ö over-limit rejection does not persist assignment [90m(38.075ms)[39m[39m
+[32mΓ£ö retrieval failure persists no assignment [90m(31.3146ms)[39m[39m
+[32mΓ£ö rule precedence resolves track-specific over role-specific over default [90m(32.5754ms)[39m[39m
+[32mΓ£ö storage failure does not persist assignment or increment workload [90m(33.8305ms)[39m[39m
+[32mΓ£ö workload decision p95 latency is below 300ms [90m(29.7399ms)[39m[39m
+[32mΓ£ö successful assignment increments workload for subsequent checks [90m(29.7677ms)[39m[39m
+[32mΓ£ö audit log masks emails and omits secrets [90m(5.7772ms)[39m[39m
+[32mΓ£ö password hash/verify works [90m(36.9532ms)[39m[39m
+[32mΓ£ö password policy catches weak passwords [90m(1.9672ms)[39m[39m
+[32mΓ£ö tokens are stored hashed and enforced single-use [90m(29.1537ms)[39m[39m
+[32mΓ£ö validation engine uses required -> format -> business ordering [90m(7.6386ms)[39m[39m
+[32mΓ£ö validation errors do not include sensitive field values [90m(2.9202ms)[39m[39m
+[32mΓ£ö lockout activates at threshold and resets on success [90m(4.9852ms)[39m[39m
+[32mΓ£ö expired lockout no longer blocks login [90m(0.7762ms)[39m[39m
+[32mΓ£ö password policy validator rejects weak password and history reuse [90m(67.8106ms)[39m[39m
+[34mΓä╣ tests 307[39m
+[34mΓä╣ suites 0[39m
+[34mΓä╣ pass 307[39m
+[34mΓä╣ fail 0[39m
+[34mΓä╣ cancelled 0[39m
+[34mΓä╣ skipped 0[39m
+[34mΓä╣ todo 0[39m
+[34mΓä╣ duration_ms 39588.8141[39m
+[34mΓä╣ start of coverage report
+Γä╣ -------------------------------------------------------------------------------------------------------------------------------------
+Γä╣ file                                                             | [31mline %[34m | [31mbranch %[34m | [31mfuncs %[34m | uncovered lines
+Γä╣ -------------------------------------------------------------------------------------------------------------------------------------
+Γä╣ backend                                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣  src                                                             | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   api                                                            | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    assigned-access                                               | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32massigned-access-error-mapper.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32massigned-access-failure-mapper.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mget-assigned-papers-controller.js                           [34m | [33m 84.62[34m | [33m   66.67[34m | [32m 100.00[34m | 8-9 12-13
+Γä╣     [32mget-manuscript-view-controller.js                           [34m | [32m 92.00[34m | [33m   80.00[34m | [32m 100.00[34m | 11-12
+Γä╣     [33mget-review-form-controller.js                               [34m | [32m 92.00[34m | [33m   75.00[34m | [32m 100.00[34m | 11-12
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    assignments                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mconfirm-assignment-controller.js                            [34m | [33m 75.00[34m | [33m   60.00[34m | [32m 100.00[34m | 7-11
+Γä╣     [33mget-assignment-details-controller.js                        [34m | [33m 77.27[34m | [33m   80.00[34m | [32m 100.00[34m | 5-9
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mauth_controller.js                                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    decision-notification                                         | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33merror-response-mapper.js                                    [34m | [32m100.00[34m | [31m   50.00[34m | [32m 100.00[34m | 
+Γä╣     [33mget-decision-notification.js                                [34m | [33m 87.23[34m | [31m   50.00[34m | [32m 100.00[34m | 13-14 23-26
+Γä╣     [33mget-paper-decision.js                                       [34m | [32m 95.74[34m | [31m   50.00[34m | [32m 100.00[34m | 12-13
+Γä╣     [32mownership-guard.js                                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    decisions                                                     | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-decision-context-controller.js                          [34m | [33m 82.86[34m | [31m   50.00[34m | [32m 100.00[34m | 7-8 17-18 20-21
+Γä╣     [32mpaper-decision-notification-failure-mapper.js               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpost-paper-decision-controller.js                           [34m | [33m 88.89[34m | [33m   66.67[34m | [32m 100.00[34m | 8-9 18-19
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    drafts                                                        | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mfinalize-draft-controller.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mget-draft-controller.js                                     [34m | [33m 82.61[34m | [33m   60.00[34m | [32m 100.00[34m | 6-7 10-11
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msave-draft-controller.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msave-error-mapper.js                                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    invitations                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-pending-invitations-controller.js                       [34m | [33m 64.29[34m | [31m   50.00[34m | [32m 100.00[34m | 7-11 14-18
+Γä╣     [32minvitation-notification-failure-mapper.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32minvitation-response-error-mapper.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpost-invitation-response-controller.js                      [34m | [33m 75.00[34m | [33m   71.43[34m | [32m 100.00[34m | 9-13 17-21
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mlogin_controller.js                                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mlogin_error_mapper.js                                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mlogin_routes.js                                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    middleware                                                    | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mform_auth_guard.js                                          [34m | [31m 26.67[34m | [33m   66.67[34m | [32m 100.00[34m | 3-13
+Γä╣     [32mschedule-edit-role-guard.js                                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mschedule-role-guard.js                                      [34m | [33m 55.56[34m | [31m   50.00[34m | [32m 100.00[34m | 3-4 6-7
+Γä╣     [32msession_guard.js                                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpassword_change_controller.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpassword_change_error_mapper.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpassword_change_routes.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    payments                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-payment-status-controller.js                            [34m | [33m 85.19[34m | [31m   50.00[34m | [32m 100.00[34m | 8-9 13-14
+Γä╣     [32mpayment-error-mapper.js                                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpayment-outcome-feedback-mapper.js                          [34m | [32m100.00[34m | [33m   87.50[34m | [32m 100.00[34m | 
+Γä╣     [33mpost-gateway-confirm-controller.js                          [34m | [32m 90.08[34m | [31m   30.00[34m | [32m 100.00[34m | 16-17 21-22 31-32 35-36 40-41 45-46
+Γä╣     [32mpost-payment-initiate-controller.js                         [34m | [32m 95.35[34m | [33m   80.00[34m | [32m 100.00[34m | 9-10
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    public-announcements                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-public-announcement-detail-controller.js                [34m | [33m 90.00[34m | [33m   75.00[34m | [32m 100.00[34m | 24-26
+Γä╣     [32mget-public-announcements-list-controller.js                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-announcements-error-mapper.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    public-pricing                                                | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mget-registration-prices-controller.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-pricing-response-mapper.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    public-schedule                                               | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mget-public-schedule-controller.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mget-public-schedule-entry-controller.js                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mget-public-schedule-pdf-controller.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-schedule-detail-response-mapper.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mregistration_controller.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mregistration_error_mapper.js                                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mregistration_routes.js                                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    review-view                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-completed-review-detail-controller.js                   [34m | [32m 91.30[34m | [33m   75.00[34m | [32m 100.00[34m | 8-9
+Γä╣     [33mget-completed-reviews-controller.js                         [34m | [33m 90.00[34m | [33m   75.00[34m | [32m 100.00[34m | 8-9
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    reviews                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-review-draft-controller.js                              [34m | [33m 70.97[34m | [31m   50.00[34m | [32m 100.00[34m | 5-6 10-11 13-17
+Γä╣     [33mget-submitted-review-controller.js                          [34m | [33m 76.47[34m | [31m   42.86[34m | [32m 100.00[34m | 8-9 13-14 18-19 24-25
+Γä╣     [33mpost-submit-review-controller.js                            [34m | [33m 88.89[34m | [31m   42.86[34m | [32m 100.00[34m | 8-9 13-14
+Γä╣     [32mreview-validation-error-mapper.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    schedule-edit                                                 | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-editable-schedule-controller.js                         [34m | [33m 90.00[34m | [31m   50.00[34m | [32m 100.00[34m | 13-14
+Γä╣     [32mpost-cancel-schedule-edit-controller.js                     [34m | [32m100.00[34m | [33m   75.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpost-save-schedule-controller.js                            [34m | [32m100.00[34m | [33m   78.57[34m | [32m 100.00[34m | 
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mschedule-edit-error-mapper.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mschedule-edit-response-mapper.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mschedule-lock-feedback-mapper.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    schedule                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mconflict-highlight-mapper.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mget-published-schedule-controller.js                        [34m | [32m100.00[34m | [33m   75.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpost-generate-schedule-controller.js                        [34m | [32m100.00[34m | [33m   60.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpost-publish-schedule-controller.js                         [34m | [32m 93.94[34m | [33m   60.00[34m | [32m 100.00[34m | 18-19
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32msession_controller.js                                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    submissions                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mlist-author-submissions-controller.js                       [34m | [33m 84.62[34m | [33m   75.00[34m | [32m 100.00[34m | 7-8
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msubmission-controller.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mupload-status-controller.js                                 [34m | [33m 88.89[34m | [33m   60.00[34m | [32m 100.00[34m | 11-12
+Γä╣    tickets                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mget-ticket-metadata-controller.js                           [34m | [33m 88.24[34m | [33m   60.00[34m | [32m 100.00[34m | 8-9 13-14
+Γä╣     [33mget-ticket-pdf-controller.js                                [34m | [33m 80.95[34m | [31m   42.86[34m | [32m 100.00[34m | 9-10 14-15 19-20 37-38
+Γä╣     [33mpost-issue-ticket-controller.js                             [34m | [33m 82.50[34m | [33m   60.00[34m | [32m 100.00[34m | 15-16 24-35
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mticket-delivery-outcome-mapper.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mticket-error-mapper.js                                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    uploads                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mretry-upload-controller.js                                  [34m | [32m 92.86[34m | [33m   60.00[34m | [32m 100.00[34m | 10-11
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mupload-manuscript-controller.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mvalidation_controller.js                                     [34m | [33m 89.47[34m | [33m   80.00[34m | [32m 100.00[34m | 10-11
+Γä╣    [32mvalidation_error_handler.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mvalidation_routes.js                                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    workload                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33massign-referee-controller.js                                [34m | [33m 76.47[34m | [33m   85.71[34m | [32m 100.00[34m | 9-16
+Γä╣     [33mget-workload-controller.js                                  [34m | [33m 68.29[34m | [33m   60.00[34m | [32m 100.00[34m | 7-11 30-37
+Γä╣     [32mroutes.js                                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-error-mapper.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-failure-response-mapper.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   models                                                         | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    [32mannouncement-access-outcome.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mannouncement-detail-projection.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mannouncement-list-projection.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mannouncement-store.js                                        [34m | [33m 86.27[34m | [33m   75.00[34m | [33m  85.71[34m | 29-33 48-49
+Γä╣    [32manonymized-review-view.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33massigned-paper.js                                            [34m | [33m 80.65[34m | [33m   84.62[34m | [33m  88.89[34m | 36-40 46-50 59-60
+Γä╣    [32massignment-set.js                                            [34m | [32m100.00[34m | [33m   83.33[34m | [32m 100.00[34m | 
+Γä╣    [32massignment-transaction-result.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mcompleted-review-record.js                                   [34m | [32m100.00[34m | [31m   50.00[34m | [32m 100.00[34m | 
+Γä╣    config                                                        | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mlogin_policy_config.js                                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpassword_policy_config.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mregistration_config.js                                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mconflict-record.js                                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mconflict-validation-result.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mcredential_repository.js                                     [34m | [32m100.00[34m | [33m   80.00[34m | [32m 100.00[34m | 
+Γä╣    [32mcredential_store_repository.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mdecision-record.js                                           [34m | [32m 90.43[34m | [33m   75.00[34m | [32m 100.00[34m | 51-55 69-72
+Γä╣    [32mdecision-state.js                                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mdraft-field-state.js                                         [34m | [33m 87.50[34m | [33m   80.00[34m | [33m  75.00[34m | 8-9
+Γä╣    [32mfile-attachment-record.js                                    [34m | [32m100.00[34m | [33m   83.33[34m | [32m 100.00[34m | 
+Γä╣    [32mform_definition_repository.js                                [34m | [32m100.00[34m | [33m   71.43[34m | [32m 100.00[34m | 
+Γä╣    [32mform_submission_repository.js                                [34m | [32m100.00[34m | [33m   83.33[34m | [32m 100.00[34m | 
+Γä╣    [33mgateway-confirmation-event.js                                [34m | [33m 88.24[34m | [33m   66.67[34m | [32m 100.00[34m | 7-8
+Γä╣    [33minvitation-response.js                                       [34m | [33m 75.76[34m | [33m   75.00[34m | [31m  50.00[34m | 10-13 26-27 30-31
+Γä╣    [32mlockout_state_repository.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mlogin_attempt_repository.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mmanuscript-file.js                                           [34m | [32m100.00[34m | [33m   88.89[34m | [32m 100.00[34m | 
+Γä╣    [33mmanuscript-view-resource.js                                  [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    [32mpaper-assignment-attempt.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpaper-decision-eligibility.js                                [34m | [32m100.00[34m | [33m   81.82[34m | [32m 100.00[34m | 
+Γä╣    [32mpaper-decision-repository.js                                 [34m | [32m100.00[34m | [33m   80.00[34m | [32m 100.00[34m | 
+Γä╣    [33mpaper-metadata.js                                            [34m | [33m 82.35[34m | [31m   21.05[34m | [32m 100.00[34m | 4-5 8-9 30 39-40 44-45
+Γä╣    [33mpaper-referee-assignment.js                                  [34m | [33m 88.10[34m | [33m   54.55[34m | [32m 100.00[34m | 33-37 67-71
+Γä╣    [32mpaper-review-access.js                                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpaper-status-snapshot.js                                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mpaper-submission.js                                          [34m | [32m 96.36[34m | [33m   80.00[34m | [33m  87.50[34m | 44-45
+Γä╣    [32mpassword_history_repository.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpayment-confirmation-state.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mpayment-record.js                                            [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    [33mpayment-workflow-store.js                                    [34m | [32m100.00[34m | [33m   57.89[34m | [32m 100.00[34m | 
+Γä╣    [33mpublic-announcement.js                                       [34m | [32m100.00[34m | [31m   40.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpublic-pdf-artifact.js                                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpublic-schedule-models.js                                    [34m | [32m100.00[34m | [33m   75.00[34m | [32m 100.00[34m | 
+Γä╣    [33mreconciliation-item.js                                       [34m | [32m 90.48[34m | [33m   66.67[34m | [32m 100.00[34m | 11-12
+Γä╣    [32mregistration_repository.js                                   [34m | [32m 98.33[34m | [33m   76.92[34m | [32m 100.00[34m | 25-26
+Γä╣    [33mregistration-payment-attempt.js                              [34m | [32m 93.33[34m | [31m   40.00[34m | [32m 100.00[34m | 16-17
+Γä╣    [33mregistration-status.js                                       [34m | [33m 86.96[34m | [31m   42.86[34m | [32m 100.00[34m | 6-7 21
+Γä╣    [32mregistration-ticket.js                                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mreview-assignment-activation.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mreview-draft.js                                              [34m | [32m 90.71[34m | [33m   84.38[34m | [32m  92.86[34m | 105-109 114-121
+Γä╣    [33mreview-form-access.js                                        [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    [32mreview-invitation.js                                         [34m | [32m100.00[34m | [33m   77.78[34m | [32m 100.00[34m | 
+Γä╣    [32msave-attempt.js                                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [33mschedule-detail-projection.js                                [34m | [32m100.00[34m | [31m   33.33[34m | [32m 100.00[34m | 
+Γä╣    [32mschedule-draft.js                                            [34m | [32m100.00[34m | [33m   85.00[34m | [32m 100.00[34m | 
+Γä╣    [32mschedule-save-outcome.js                                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32msubmission-draft.js                                          [34m | [32m100.00[34m | [33m   71.43[34m | [32m 100.00[34m | 
+Γä╣    [33msubmitted-review.js                                          [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    [33mticket-pdf-record.js                                         [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    [32mticket-store.js                                              [34m | [32m100.00[34m | [32m   90.91[34m | [32m 100.00[34m | 
+Γä╣    [32mupload-attempt.js                                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mupload-progress-state.js                                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mworkload-limit-rule.js                                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mworkload-snapshot.js                                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   services                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    account                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mpassword_change_failure_service.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpassword_change_observability_service.js                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpassword_change_service.js                                  [34m | [32m 97.01[34m | [33m   83.33[34m | [32m 100.00[34m | 14-15
+Γä╣     [33mpassword_change_validation_service.js                       [34m | [32m100.00[34m | [33m   62.50[34m | [32m 100.00[34m | 
+Γä╣     [33mpassword_update_transaction_service.js                      [34m | [33m 81.82[34m | [31m   50.00[34m | [32m 100.00[34m | 13-14 18-19
+Γä╣    assigned-access                                               | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32maccess-outcome-mapping-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32massigned-paper-query-service.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33massigned-resource-retrieval-service.js                      [34m | [33m 85.19[34m | [33m   66.67[34m | [32m 100.00[34m | 12-13 24-25
+Γä╣     [32massignment-authorization-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    assignments                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32massignment-observability-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mfinalize-referee-assignment-service.js                      [34m | [32m 90.70[34m | [33m   81.82[34m | [32m 100.00[34m | 10-17
+Γä╣     [33mreferee-assignment-concurrency-service.js                   [34m | [33m 85.71[34m | [33m   75.00[34m | [32m 100.00[34m | 3-4
+Γä╣     [33mreferee-assignment-transaction-service.js                   [34m | [33m 87.18[34m | [33m   66.67[34m | [32m 100.00[34m | 21-25
+Γä╣     [33mreferee-eligibility-validation-service.js                   [34m | [33m 78.79[34m | [33m   83.33[34m | [32m 100.00[34m | 6-12
+Γä╣     [32mreferee-selection-rule-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mreview-invitation-service.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    auth                                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mlockout_policy_service.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mlogin_failure_service.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mlogin_observability_service.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mlogin_service.js                                            [34m | [32m100.00[34m | [33m   88.24[34m | [32m 100.00[34m | 
+Γä╣     [32mlogin_validation_service.js                                 [34m | [32m100.00[34m | [33m   80.00[34m | [32m 100.00[34m | 
+Γä╣     [33msession_invalidation_service.js                             [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣     [32msession_service.js                                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    authorization                                                 | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mauthor-ownership-policy.js                                  [34m | [33m 77.78[34m | [31m   50.00[34m | [32m 100.00[34m | 6-7
+Γä╣    decision-notification                                         | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mfull-review-section-builder.js                              [34m | [33m 66.67[34m | [33m   66.67[34m | [32m 100.00[34m | 3-4
+Γä╣     [32mgenerate-decision-notification.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mget-decision-with-failure-handling.js                       [34m | [33m 69.57[34m | [31m   40.00[34m | [32m 100.00[34m | 8-9 16-17 20-22
+Γä╣     [32mnotification-body-composer.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mreview-summary-builder.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    decisions                                                     | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mpaper-decision-conflict-service.js                          [34m | [31m 41.67[34m | [33m   66.67[34m | [32m 100.00[34m | 4-10
+Γä╣     [32mpaper-decision-eligibility-service.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpaper-decision-notification-service.js                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpaper-decision-persistence-service.js                       [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣     [32mprocess-paper-decision-service.js                           [34m | [32m 95.08[34m | [33m   75.00[34m | [32m 100.00[34m | 22-24
+Γä╣    drafts                                                        | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mdraft-change-detection-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mdraft-persistence-service.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mdraft-save-validation-service.js                            [34m | [32m 93.33[34m | [33m   60.00[34m | [32m 100.00[34m | 24-25
+Γä╣     [33mfinalize-draft-service.js                                   [34m | [33m 70.21[34m | [31m   33.33[34m | [31m  50.00[34m | 15-16 35-46
+Γä╣     [32mfinalize-ordering-observability-service.js                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msave-attempt-logging-service.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33msave-draft-orchestrator.js                                  [34m | [32m 90.77[34m | [33m   54.55[34m | [32m 100.00[34m | 11-12 15-16 18-19
+Γä╣    email                                                         | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mverification_email_service.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    errors                                                        | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [31mdecision-retrieval-error.js                                 [34m | [31m 50.00[34m | [32m  100.00[34m | [31m   0.00[34m | 3-5
+Γä╣    invitations                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33minvitation-actionable-validation-service.js                 [34m | [33m 54.35[34m | [31m   40.00[34m | [32m 100.00[34m | 5-11 21-27 29-35
+Γä╣     [32minvitation-expiry-service.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32minvitation-list-projection-service.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32minvitation-notification-observability-service.js            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32minvitation-notification-service.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33minvitation-response-persistence-service.js                  [34m | [33m 85.71[34m | [32m   90.91[34m | [33m  80.00[34m | 46-53
+Γä╣     [32mprocess-invitation-response-service.js                      [34m | [33m 89.19[34m | [33m   81.82[34m | [32m 100.00[34m | 7-14
+Γä╣    paper-decision                                                | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mpaper-decision-observability-service.js                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    payments                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mgateway-signature-verification-service.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mnon-success-payment-outcome-service.js                      [34m | [32m100.00[34m | [33m   85.71[34m | [32m 100.00[34m | 
+Γä╣     [33mpayment-initiation-eligibility-service.js                   [34m | [33m 67.86[34m | [31m   50.00[34m | [32m 100.00[34m | 4-5 9-15
+Γä╣     [32mpayment-observability-service.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpayment-reconciliation-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpayment-record-persistence-service.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpayment-timeout-resolution-service.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mregistration-payment-state-service.js                       [34m | [33m 52.94[34m | [31m   50.00[34m | [32m 100.00[34m | 6-9 11-14
+Γä╣    persistence                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32matomic_form_persistence_service.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    public-announcements                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mpublic-announcement-fallback-service.js                     [34m | [33m 81.48[34m | [32m  100.00[34m | [33m  75.00[34m | 22-26
+Γä╣     [32mpublic-announcement-ordering-service.js                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-announcement-visibility-service.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-announcements-observability-service.js               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    public-pricing                                                | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mcad-formatting-service.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mincomplete-pricing-projection-service.js                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mno-discount-policy-service.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-pricing-observability-service.js                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-pricing-retrieval-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    public-schedule                                               | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mfield-restriction-policy-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpublic-schedule-detail-service.js                           [34m | [33m 90.00[34m | [33m   60.00[34m | [32m 100.00[34m | 6-7
+Γä╣     [33mpublic-schedule-observability-service.js                    [34m | [32m100.00[34m | [32m  100.00[34m | [31m  50.00[34m | 
+Γä╣     [33mpublic-schedule-pdf-service.js                              [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣     [32mpublic-schedule-retrieval-service.js                        [34m | [32m100.00[34m | [33m   75.00[34m | [32m 100.00[34m | 
+Γä╣    registration                                                  | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mregistration_audit_log.js                                   [34m | [32m100.00[34m | [33m   80.00[34m | [32m 100.00[34m | 
+Γä╣     [32mregistration_expiry_service.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mregistration_service.js                                     [34m | [32m 91.67[34m | [33m   57.14[34m | [32m 100.00[34m | 14 20 26 33 61-62 66-67
+Γä╣     [33mresend_verification_service.js                              [34m | [33m 82.98[34m | [31m   46.15[34m | [31m  50.00[34m | 14-15 21-22 27-28 31-32
+Γä╣     [33mverification_service.js                                     [34m | [33m 86.79[34m | [33m   66.67[34m | [32m 100.00[34m | 15-16 28-29 31-33
+Γä╣    review-view                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32manonymized-review-projection-service.js                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mcompleted-review-query-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33meditor-review-authorization-service.js                      [34m | [33m 90.00[34m | [33m   80.00[34m | [32m 100.00[34m | 6-7
+Γä╣     [33mget-completed-review-detail-service.js                      [34m | [33m 75.00[34m | [31m   40.00[34m | [32m 100.00[34m | 12-13 16-17 20-21
+Γä╣     [32mget-completed-reviews-service.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mreview-retrieval-outcome-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    reviews                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mprocess-review-submission-service.js                        [34m | [32m 93.90[34m | [33m   60.00[34m | [32m 100.00[34m | 9-13
+Γä╣     [32mreview-assignment-status-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mreview-notification-service.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mreview-submission-observability-service.js                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mreview-submission-persistence-service.js                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mreview-submission-validation-service.js                     [34m | [32m 93.94[34m | [31m   50.00[34m | [32m 100.00[34m | 15-16
+Γä╣     [33msubmitted-review-immutability-service.js                    [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    schedule-edit                                                 | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mlast-edited-timestamp-service.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mpolicy-lock-service.js                                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mschedule-edit-observability-service.js                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mschedule-edit-persistence-service.js                        [34m | [33m 80.95[34m | [31m   33.33[34m | [32m 100.00[34m | 7-8 19-20
+Γä╣     [33mschedule-edit-validation-service.js                         [34m | [33m 90.00[34m | [33m   75.00[34m | [32m 100.00[34m | 6-7
+Γä╣     [32mschedule-version-check-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    schedule                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mconflict-detection-service.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mgenerate-schedule-pipeline.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mgeneration-prereq-validator.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mrandomized-placement-service.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mroom-availability-service.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mschedule-draft-persistence-service.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mschedule-generation-observability-service.js                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mschedule-input-loader.js                                    [34m | [32m100.00[34m | [31m   40.00[34m | [32m 100.00[34m | 
+Γä╣     [33mslot-grid-builder.js                                        [34m | [32m100.00[34m | [33m   57.14[34m | [32m 100.00[34m | 
+Γä╣    security                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mpassword_crypto_service.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mpassword_policy_validator.js                                [34m | [32m 90.70[34m | [33m   66.67[34m | [32m 100.00[34m | 21-22 30-31
+Γä╣     [33mpassword_service.js                                         [34m | [33m 88.24[34m | [33m   61.54[34m | [32m 100.00[34m | 22-23 31-32 34-35
+Γä╣     [32mpassword_verifier.js                                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mverification_token_service.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    submissions                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32msubmission-error-mapper.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33msubmission-finalization-service.js                          [34m | [32m 93.94[34m | [31m   50.00[34m | [32m 100.00[34m | 8-9
+Γä╣     [32msubmission-observability-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msubmission-persistence-service.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msubmission-response-mapper.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32msubmission-state-service.js                                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33msubmission-validation-service.js                            [34m | [32m100.00[34m | [33m   66.67[34m | [32m 100.00[34m | 
+Γä╣    tickets                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mticket-failure-handling-service.js                          [34m | [32m 92.86[34m | [33m   66.67[34m | [32m 100.00[34m | 12
+Γä╣     [33mticket-issuance-eligibility-service.js                      [34m | [33m 81.82[34m | [31m   50.00[34m | [32m 100.00[34m | 6-7 18-19
+Γä╣     [32mticket-observability-service.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mticket-pdf-generation-service.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mticket-pdf-storage-service.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mticket-qr-service.js                                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mticket-reference-service.js                                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    uploads                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mattachment-association-service.js                           [34m | [33m 84.00[34m | [33m   80.00[34m | [32m 100.00[34m | 19-22
+Γä╣     [33mupload-attachment-orchestrator.js                           [34m | [33m 84.38[34m | [31m   40.00[34m | [32m 100.00[34m | 9-10 12-13 62-72
+Γä╣     [32mupload-observability-service.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mupload-progress-service.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mupload-transfer-service.js                                  [34m | [33m 75.61[34m | [33m   75.00[34m | [33m  75.00[34m | 8-9 17-24
+Γä╣     [33mupload-validation-service.js                                [34m | [33m 88.00[34m | [31m   42.86[34m | [32m 100.00[34m | 14-16
+Γä╣    validation                                                    | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32mvalidation_engine.js                                        [34m | [32m100.00[34m | [33m   85.71[34m | [32m 100.00[34m | 
+Γä╣     [32mvalidation_error_mapper.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mvalidation_observability_service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [33mvalidation_service.js                                       [34m | [33m 85.19[34m | [33m   55.56[34m | [32m 100.00[34m | 10-17
+Γä╣    workload                                                      | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32massign-referee-with-limit-service.js                        [34m | [32m100.00[34m | [33m   83.33[34m | [32m 100.00[34m | 
+Γä╣     [32mreferee-workload-retrieval-service.js                       [34m | [32m100.00[34m | [33m   75.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-assignment-decision-service.js                     [34m | [32m100.00[34m | [33m   75.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-assignment-persistence-service.js                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-attempt-logging-service.js                         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-limit-resolution-service.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣     [32mworkload-rule-observability-service.js                      [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣ frontend                                                         | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣  src                                                             | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   controllers                                                    | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    assigned-access                                               | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [32massigned-paper-access-refresh-controller.js                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    invitations                                                   | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33minvitation-response-controller.js                           [34m | [31m 42.11[34m | [32m  100.00[34m | [31m  33.33[34m | 2-6 9-14
+Γä╣    reviews                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mreview-submit-failure-controller.js                         [34m | [31m 42.86[34m | [32m  100.00[34m | [31m  50.00[34m | 2-9
+Γä╣    upload                                                        | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣     [33mmanuscript-upload-controller.js                             [34m | [33m 66.67[34m | [31m   40.00[34m | [32m 100.00[34m | 5-9
+Γä╣   views                                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    [33mform_validation_view.js                                      [34m | [33m 80.00[34m | [31m   50.00[34m | [32m 100.00[34m | 4
+Γä╣    [33mlogin_view.js                                                [34m | [31m 45.45[34m | [31m   33.33[34m | [32m 100.00[34m | 4-5 7-10
+Γä╣    [33mregistration_view.js                                         [34m | [33m 66.67[34m | [31m   50.00[34m | [32m 100.00[34m | 3-4 8
+Γä╣  tests                                                           | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   accessibility                                                  | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    [32mtest_uc01_registration_a11y.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mtest_uc02_validation_feedback_a11y.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mtest_uc03_login_feedback_a11y.js                             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣ tests                                                            | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣  contract                                                        | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   decision-notification                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    [32mget-decision-notification-not-found.contract.spec.js         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mget-decision-notification.contract.spec.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mget-paper-decision-unauthorized.contract.spec.js             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mget-paper-decision-under-review.contract.spec.js             [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mget-paper-decision.contract.spec.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   fixtures                                                       | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    [32mlogin_payloads.js                                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mpassword_change_payloads.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mregistration_payloads.js                                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mvalidation_payloads.js                                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc01_registration_contract.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_validation_contract.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_login_failure_contract.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_login_required_fields_contract.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_login_success_contract.js                           [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_failure_contract.js                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_success_contract.js                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_validation_contract.js              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣  helpers                                                         | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   [33muc01_system.js                                                [34m | [32m 91.30[34m | [33m   83.33[34m | [33m  80.00[34m | 23-24 33-34
+Γä╣   [32muc02_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc03_system.js                                                [34m | [32m 96.55[34m | [32m  100.00[34m | [33m  83.33[34m | 34-35
+Γä╣   [32muc04_system.js                                                [34m | [32m 97.56[34m | [32m  100.00[34m | [33m  83.33[34m | 35
+Γä╣   [32muc05_system.js                                                [34m | [32m 98.18[34m | [32m  100.00[34m | [33m  83.33[34m | 49
+Γä╣   [32muc06_system.js                                                [34m | [32m 98.25[34m | [32m  100.00[34m | [33m  87.50[34m | 51
+Γä╣   [32muc07_system.js                                                [34m | [32m 97.83[34m | [32m  100.00[34m | [33m  85.71[34m | 40
+Γä╣   [32muc08_system.js                                                [34m | [32m 98.25[34m | [32m  100.00[34m | [33m  85.71[34m | 50
+Γä╣   [32muc09_system.js                                                [34m | [32m 97.22[34m | [32m  100.00[34m | [33m  80.00[34m | 29
+Γä╣   [32muc10_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [33muc11_system.js                                                [34m | [32m 97.22[34m | [32m  100.00[34m | [33m  60.00[34m | 29
+Γä╣   [32muc12_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc13_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc14_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc15_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [33m  87.50[34m | 
+Γä╣   [32muc16_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc17_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc18_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc19_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc20_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc21_system.js                                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32muc22_system.js                                                [34m | [32m 96.67[34m | [32m  100.00[34m | [33m  83.33[34m | 23
+Γä╣  integration                                                     | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   decision-notification                                          | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣    [32maccepted-decision.integration.spec.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mdecision-notification-performance.integration.spec.js        [34m | [32m100.00[34m | [33m   83.33[34m | [32m 100.00[34m | 
+Γä╣    [32mdecision-visibility-persistence.integration.spec.js          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mdelivery-failure-cms-fallback.integration.spec.js            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mnotification-order.integration.spec.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mnotification-source-consistency.integration.spec.js          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mrejected-decision.integration.spec.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣    [32mretrieval-failure.integration.spec.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc01_registration_expiry_and_unverified_login.js         [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc01_registration_happy_path.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc01_registration_validation_failures.js                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_atomicity.js                                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_last_write_wins.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_persistence_failure_rollback.js                     [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_valid_submission.js                                 [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_validation_failures.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_credential_store_outage.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_invalid_credentials.js                              [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_lockout_policy.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_login_performance.integration.js                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_login_required_fields.js                            [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_login_success.js                                    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_session_continuity.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_atomic_failure.js                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_performance.integration.js          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_policy_failures.js                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_required_and_current_failures.js    [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_password_change_success.js                          [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_post_change_login_behavior.js                       [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_reauthentication_required.js                        [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc04_session_invalidation_after_change.js                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣  unit                                                            | [31m      [34m | [31m        [34m | [31m       [34m | 
+Γä╣   [32mtest_uc01_privacy_logging.js                                  [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc01_security_utils.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc01_token_security.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_validation_engine.js                                [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc02_validation_privacy.js                               [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [32mtest_uc03_lockout_policy.js                                   [34m | [32m100.00[34m | [32m  100.00[34m | [32m 100.00[34m | 
+Γä╣   [33mtest_uc04_password_policy_validator.js                        [34m | [32m100.00[34m | [33m   75.00[34m | [33m  66.67[34m | 
+Γä╣ -------------------------------------------------------------------------------------------------------------------------------------
+Γä╣ all files                                                        | [32m 94.13[34m | [33m   81.76[34m | [32m  96.44[34m | 
+Γä╣ -------------------------------------------------------------------------------------------------------------------------------------
+Γä╣ end of coverage report
+[39m
