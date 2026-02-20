@@ -115,11 +115,11 @@
 
 - [X] T030 [P] Add password-change observability metrics (latency, validation categories, failure categories) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
 - [X] T031 [P] Add unit tests for password policy edge conditions and history-window checks in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc04_password_policy_validator.js`
-- [ ] T032 Update implementation alignment notes and `UC-04.md` / `UC-04-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/tasks.md`
+- [X] T032 Update implementation alignment notes and `UC-04.md` / `UC-04-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/tasks.md`
 - [X] T033 Run `npm test && npm run lint` and record UC04 execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
 
-- [ ] T034 Validate UC-04 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04.md`
-- [ ] T035 Validate UC-04 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
+- [X] T034 Validate UC-04 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04.md`
+- [X] T035 Validate UC-04 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
 
 - [X] T036 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/quickstart.md`
 - [X] T037 Add password-change p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_performance.integration.js`
@@ -203,4 +203,9 @@ Task: "T019 Policy/mismatch integration tests in /mnt/c/Users/ponti/Desktop/CMS1
 - All tasks follow strict checklist format with IDs and explicit file paths.
 - Story tasks include `[US1]`, `[US2]`, `[US3]` labels as required.
 - `[P]` markers are only assigned to safely parallelizable tasks.
+
+## UC Sync Notes
+
+- `UC-04.md` and `UC-04-AT.md` were revalidated and aligned to implemented behavior on 2026-02-20.
+
 
