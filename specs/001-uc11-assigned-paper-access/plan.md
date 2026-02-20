@@ -31,6 +31,7 @@ Implement assignment-scoped referee access to assigned papers, manuscript view-o
 **Post-Design Gate Status**: PASS
  - [x] Data model/contracts preserve model/service ownership of authorization and retrieval rules; controllers only orchestrate.
  - [x] Design stays in vanilla stack and retains UC/AT traceability.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
