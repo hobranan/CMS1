@@ -113,6 +113,8 @@
 - [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-13.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-13-AT.md` if user-facing behavior wording changed during implementation
 - [ ] T038 Run `npm test && npm run lint` and record UC-13 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc13-anonymized-review-view/quickstart.md`
 
+- [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc13-anonymized-review-view/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
