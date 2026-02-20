@@ -69,3 +69,10 @@ Expected:
 Expected:
 - Submission rejected.
 - Field A remains unchanged (rollback/no partial write).
+
+## 6. HTML/CSS style-profile validation
+
+Checked against `docs/standards/html-css-style-profile.md`:
+- Validation messages are concise, explicit, and actionable.
+- Error rendering preserves deterministic ordering and clear field association.
+- UI feedback copy avoids ambiguous wording and indicates next user action.

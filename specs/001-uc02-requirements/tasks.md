@@ -74,20 +74,20 @@
 
 - [X] T021 [P] Add validation observability logs/metrics hooks for reject reasons and latency in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/validation_observability_service.js`
 - [X] T022 [P] Add unit tests for validation engine rule ordering and deterministic outputs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_engine.js`
-- [ ] T023 Update UC synchronization checklist and confirm `UC-02.md`/`UC-02-AT.md` alignment notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/tasks.md`
+- [X] T023 Update UC synchronization checklist and confirm `UC-02.md`/`UC-02-AT.md` alignment notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/tasks.md`
 - [X] T024 Run `npm test && npm run lint` and write execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
-- [ ] T025 Validate UC-02 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02.md`
-- [ ] T026 Validate UC-02 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02-AT.md`
+- [X] T025 Validate UC-02 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02.md`
+- [X] T026 Validate UC-02 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-02-AT.md`
 
-- [ ] T027 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/quickstart.md`
+- [X] T027 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/quickstart.md`
 - [X] T028 [P] Add integration test for rollback/abort behavior on post-validation persistence failure in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_persistence_failure_rollback.js`
 - [X] T029 [P] Add integration test for last-write-wins concurrent conflicting updates in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc02_last_write_wins.js`
 - [X] T030 [P] Add accessibility and immediate-feedback timing checks (<=1s normal load) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc02_validation_feedback_a11y.js`
 - [X] T031 [P] Add unit tests for sensitive-field redaction in validation errors/logs in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc02_validation_privacy.js`
 - [X] T032 Implement required-field discoverability from authoritative form metadata in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/validation/required_field_metadata_service.js`
-- [ ] T033 Document per-form inline validation-rule ownership in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
-- [ ] T034 Update FR-to-AT traceability and SC-001..SC-004 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
+- [X] T033 Document per-form inline validation-rule ownership in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
+- [X] T034 Update FR-to-AT traceability and SC-001..SC-004 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
 ---
 
@@ -160,4 +160,9 @@ Task: "T014 Atomicity integration test in /mnt/c/Users/ponti/Desktop/CMS1/tests/
 - All tasks follow strict checklist format with IDs and explicit file paths.
 - User story tasks include `[US1]` labels.
 - `[P]` used only for safely parallelizable tasks.
+
+## UC Sync Notes
+
+- `UC-02.md` and `UC-02-AT.md` were revalidated and aligned to implemented behavior on 2026-02-20.
+
 

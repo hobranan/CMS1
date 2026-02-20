@@ -24,3 +24,14 @@
 
 - UC-02-specific atomic rollback, persistence-failure rollback, and last-write-wins scenarios are implemented and passing.
 - 100% branch coverage is not yet achieved globally; remaining branches are primarily defensive paths in shared UC-01/UC-02 service modules.
+
+## Rule Ownership and Traceability
+
+- Per-form inline validation-rule ownership is documented in `specs/001-uc02-requirements/spec.md` under **Per-Form Rule Ownership**.
+- FR-to-AT traceability is documented in `specs/001-uc02-requirements/spec.md` under **FR-to-AT Traceability Matrix**.
+
+## Success Criteria Evidence
+
+- SC-001/SC-002: covered by contract and integration validation success/failure suites.
+- SC-003: covered by atomicity and persistence-failure rollback integration tests.
+- SC-004: correction/resubmission flow verified by integration scenarios showing failed submit followed by successful corrected submit within bounded attempts.

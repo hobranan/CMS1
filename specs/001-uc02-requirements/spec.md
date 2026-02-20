@@ -145,6 +145,13 @@ validations pass.
 | FR-015 | AT-UC02-09 |
 | FR-016 | AT-UC02-10 |
 
+## Per-Form Rule Ownership
+
+| Form | Rule Source | Owner |
+|------|-------------|-------|
+| Profile submission | Inline validation metadata in form definition consumed by validation engine | Backend/domain maintainer for profile form |
+| Registration-related submission fields in UC-02 scope | Inline validation metadata in form definition consumed by validation engine | Backend/domain maintainer for registration flows |
+
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
@@ -156,3 +163,12 @@ validations pass.
   writes.
 - **SC-004**: At least 95% of users correct validation errors and resubmit
   successfully within 2 attempts per session.
+
+## Success Criteria Evidence Mapping
+
+| Success Criterion | Evidence Source |
+|-------------------|-----------------|
+| SC-001 | `tests/integration/test_uc02_valid_submission.js`, `tests/contract/test_uc02_validation_contract.js` |
+| SC-002 | `tests/integration/test_uc02_validation_failures.js`, `tests/contract/test_uc02_validation_contract.js` |
+| SC-003 | `tests/integration/test_uc02_atomicity.js`, `tests/integration/test_uc02_persistence_failure_rollback.js` |
+| SC-004 | `tests/integration/test_uc02_validation_failures.js` plus execution evidence summarized in `specs/001-uc02-requirements/validation-report.md` |
