@@ -26,6 +26,10 @@ import { SaveAttemptRepository } from "../models/save-attempt.js";
 import { DraftPersistenceService } from "../services/drafts/draft-persistence-service.js";
 import { FinalizeOrderingObservabilityService } from "../services/drafts/finalize-ordering-observability-service.js";
 import { createDraftRoutes } from "./drafts/routes.js";
+import { createAssignmentRoutes } from "./assignments/routes.js";
+import { PaperRefereeAssignmentRepository } from "../models/paper-referee-assignment.js";
+import { ReviewInvitationService } from "../services/assignments/review-invitation-service.js";
+import { AssignmentObservabilityService } from "../services/assignments/assignment-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -91,6 +95,15 @@ export function createRegistrationRoutes(deps) {
   if (!deps.finalizeOrderingObservabilityService) {
     deps.finalizeOrderingObservabilityService = new FinalizeOrderingObservabilityService();
   }
+  if (!deps.paperRefereeAssignmentRepository) {
+    deps.paperRefereeAssignmentRepository = new PaperRefereeAssignmentRepository();
+  }
+  if (!deps.reviewInvitationService) {
+    deps.reviewInvitationService = new ReviewInvitationService();
+  }
+  if (!deps.assignmentObservabilityService) {
+    deps.assignmentObservabilityService = new AssignmentObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -99,6 +112,7 @@ export function createRegistrationRoutes(deps) {
   const submissionRoutes = createSubmissionRoutes(deps);
   const uploadRoutes = createUploadRoutes(deps);
   const draftRoutes = createDraftRoutes(deps);
+  const assignmentRoutes = createAssignmentRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -109,6 +123,7 @@ export function createRegistrationRoutes(deps) {
     ...passwordChangeRoutes,
     ...submissionRoutes,
     ...uploadRoutes,
-    ...draftRoutes
+    ...draftRoutes,
+    ...assignmentRoutes
   };
 }

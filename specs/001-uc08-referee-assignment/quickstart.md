@@ -68,3 +68,26 @@ curl -X GET http://localhost:3000/api/v1/papers/<paper-id>/assignments \
 
 Expected:
 - Returns consistently assigned referees only for successful finalized transactions.
+
+## 7. Execute UC-08 automated tests
+
+```bash
+node --test tests/contract/assignment/*.test.js tests/integration/assignment/*.test.js
+```
+
+Expected:
+- All UC-08 contract and integration tests pass.
+
+## 8. Style profile verification (HTML/CSS subset)
+
+- Verified `frontend/src/views/referee-assignment.html` against `docs/standards/html-css-style-profile.md`.
+- Confirmed semantic section structure, lower-case tags, explicit button type, and no inline style/script usage.
+
+## 9. Verification notes
+
+- SC-004 rollback evidence:
+  - `tests/contract/assignment/post-assignments-invitation-failure.contract.test.js`
+  - `tests/integration/assignment/atomic-rollback.integration.test.js`
+- SC-005 one-attempt completion metric telemetry captured in `assignment_observability_service` event records.
+- Performance evidence:
+  - `tests/integration/assignment/assignment-confirmation-performance.integration.test.js` verifies p95 < 500ms.
