@@ -1,4 +1,4 @@
-# Acceptance Test Suite — UC-07 Save Paper Submission Draft
+# Acceptance Test Suite - UC-07 Save Paper Submission Draft
 
 ## Assumptions / Notes
 - Authors can manually save a submission at any stage before final submission.
@@ -7,7 +7,7 @@
 
 ---
 
-## AT-UC07-01 — Save Draft Successfully (Main Success Scenario)
+## AT-UC07-01 - Save Draft Successfully (Main Success Scenario)
 
 **Objective:** Verify an author can save a paper submission draft at any stage.
 
@@ -26,7 +26,7 @@
 
 ---
 
-## AT-UC07-02 — Save Without Changes (Extension 2a)
+## AT-UC07-02 - Save Without Changes (Extension 2a)
 
 **Objective:** Verify the system handles save requests when no changes were made.
 
@@ -39,12 +39,12 @@
 
 **Expected Results:**
 - The system detects no changes.
-- The system informs the author that there are no new changes to save.
+- The system informs the author there are no new changes to save.
 - The existing draft remains unchanged.
 
 ---
 
-## AT-UC07-03 — Invalid Data Prevents Save (Extension 3a)
+## AT-UC07-03 - Invalid Data Prevents Save (Extension 3a)
 
 **Objective:** Verify saving is rejected when invalid data prevents draft storage.
 
@@ -63,7 +63,7 @@
 
 ---
 
-## AT-UC07-04 — Draft Persistence Across Sessions
+## AT-UC07-04 - Draft Persistence Across Sessions
 
 **Objective:** Verify saved drafts persist across logout/login.
 
@@ -73,7 +73,7 @@
 **Steps:**
 1. Log out of the CMS.
 2. Log back in.
-3. Navigate to the author’s submission drafts.
+3. Navigate to the author's submission drafts.
 
 **Expected Results:**
 - The previously saved draft is visible.
@@ -81,7 +81,7 @@
 
 ---
 
-## AT-UC07-05 — Storage Failure During Save (Extension 4a)
+## AT-UC07-05 - Storage Failure During Save (Extension 4a)
 
 **Objective:** Verify system behavior when draft storage fails.
 
@@ -98,7 +98,7 @@
 
 ---
 
-## AT-UC07-06 — Network Interruption During Save (Extension 4b)
+## AT-UC07-06 - Network Interruption During Save (Extension 4b)
 
 **Objective:** Verify system behavior when network fails during save.
 
@@ -115,7 +115,7 @@
 
 ---
 
-## AT-UC07-07 — Continue Editing After Save
+## AT-UC07-07 - Continue Editing After Save
 
 **Objective:** Verify author can continue editing after saving a draft.
 

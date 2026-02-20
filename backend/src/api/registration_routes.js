@@ -21,6 +21,11 @@ import { UploadTransferService } from "../services/uploads/upload-transfer-servi
 import { AttachmentAssociationService } from "../services/uploads/attachment-association-service.js";
 import { UploadObservabilityService } from "../services/uploads/upload-observability-service.js";
 import { createUploadRoutes } from "./uploads/routes.js";
+import { SubmissionDraftRepository } from "../models/submission-draft.js";
+import { SaveAttemptRepository } from "../models/save-attempt.js";
+import { DraftPersistenceService } from "../services/drafts/draft-persistence-service.js";
+import { FinalizeOrderingObservabilityService } from "../services/drafts/finalize-ordering-observability-service.js";
+import { createDraftRoutes } from "./drafts/routes.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -74,6 +79,18 @@ export function createRegistrationRoutes(deps) {
   if (!deps.uploadObservabilityService) {
     deps.uploadObservabilityService = new UploadObservabilityService();
   }
+  if (!deps.submissionDraftRepository) {
+    deps.submissionDraftRepository = new SubmissionDraftRepository();
+  }
+  if (!deps.saveAttemptRepository) {
+    deps.saveAttemptRepository = new SaveAttemptRepository();
+  }
+  if (!deps.draftPersistenceService) {
+    deps.draftPersistenceService = new DraftPersistenceService(deps.submissionDraftRepository);
+  }
+  if (!deps.finalizeOrderingObservabilityService) {
+    deps.finalizeOrderingObservabilityService = new FinalizeOrderingObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -81,6 +98,7 @@ export function createRegistrationRoutes(deps) {
   const passwordChangeRoutes = createPasswordChangeRoutes(deps);
   const submissionRoutes = createSubmissionRoutes(deps);
   const uploadRoutes = createUploadRoutes(deps);
+  const draftRoutes = createDraftRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -90,6 +108,7 @@ export function createRegistrationRoutes(deps) {
     ...loginRoutes,
     ...passwordChangeRoutes,
     ...submissionRoutes,
-    ...uploadRoutes
+    ...uploadRoutes,
+    ...draftRoutes
   };
 }

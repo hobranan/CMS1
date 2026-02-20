@@ -76,3 +76,25 @@ Expected:
 - Current unsaved edits are persisted first (save-equivalent behavior).
 - Final validation runs after save step.
 - If final validation fails, response is `409`, submission remains unfinalized, and newly saved edits remain retrievable.
+
+## 8. Execute UC-07 automated tests
+
+```bash
+node --test tests/contract/draft/*.test.js tests/integration/draft/*.test.js tests/integration/drafts/*.test.js
+```
+
+Expected:
+- All UC-07 draft contract and integration tests pass.
+
+## 9. Style profile verification (HTML/CSS subset)
+
+- Verified `frontend/src/views/draft-editor.html` against `docs/standards/html-css-style-profile.md`.
+- Confirmed semantic structure, lower-case element names, explicit button types, and no inline style/script usage.
+
+## 10. Verification notes
+
+- SC-004 evidence: `cross-session-retrieval.integration.test.js` and `draft-durability-restart-session.integration.test.js`.
+- SC-006 evidence: `finalize-prevalidation-save.integration.test.js` asserts event order:
+  1. `finalize_prevalidation_save_start`
+  2. `finalize_prevalidation_save_end`
+  3. `finalize_final_validation`
