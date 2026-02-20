@@ -120,6 +120,8 @@
 - [ ] T044 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-21.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-21-AT.md` if user-facing wording changed during implementation
 - [ ] T045 Run `npm test && npm run lint` and record UC-21 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc21-registration-ticket/quickstart.md`
 
+- [ ] T046 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc21-registration-ticket/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
