@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | HIGH | `specs/001-uc13-anonymized-review-view/plan.md:3` | Plan branch is set to `001-uc12-submit-review` instead of UC13 branch, creating cross-feature traceability inconsistency. | Correct plan branch metadata to `001-uc13-anonymized-review-view`. |
-| I2 | Inconsistency | HIGH | `specs/001-uc13-anonymized-review-view/plan.md:77`, `specs/001-uc13-anonymized-review-view/contracts/view-anonymized-reviews.openapi.yaml:1` | Plan references contract file `anonymized-review-view.openapi.yaml`, but actual file is `view-anonymized-reviews.openapi.yaml`. | Align plan artifact path to actual contract filename (or rename contract consistently). |
 | G1 | Coverage Gap | MEDIUM | `specs/001-uc13-anonymized-review-view/plan.md:18`, `specs/001-uc13-anonymized-review-view/tasks.md:13` | Plan includes 300ms p95 access/authorization goal, but tasks have no explicit performance verification. | Add performance validation task in polish phase. |
 | G2 | Coverage Gap | MEDIUM | `specs/001-uc13-anonymized-review-view/spec.md:114`, `specs/001-uc13-anonymized-review-view/tasks.md:126` | SC-005 requires no identity/unauthorized data exposure on failures; tasks do not include explicit payload-redaction assertions for all error paths. | Add security response-shape tests asserting no identity-bearing fields in error and partial-failure payloads. |
 | U1 | Underspecification | LOW | `specs/001-uc13-anonymized-review-view/tasks.md:111` | T037 is conditional and can be skipped inconsistently. | Convert T037 to explicit verify-and-record UC/AT sync task regardless of changes. |
@@ -46,8 +44,8 @@ No fully unmapped tasks detected.
 
 ## Next Actions
 
-- No CRITICAL blockers found.
-- Resolve HIGH/MEDIUM findings before `/speckit.implement`.
+- No CRITICAL or HIGH blockers found.
+- Resolve MEDIUM findings before `/speckit.implement`.
 - Suggested actions:
   - Fix UC13 `plan.md` branch and contract-path inconsistencies.
   - Add performance and failure-payload redaction verification tasks to `specs/001-uc13-anonymized-review-view/tasks.md`.

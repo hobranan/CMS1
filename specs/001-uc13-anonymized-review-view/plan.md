@@ -1,6 +1,6 @@
 # Implementation Plan: View completed paper reviews
 
-**Branch**: `001-uc12-submit-review` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc13-anonymized-review-view/spec.md`
+**Branch**: `001-uc13-anonymized-review-view` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc13-anonymized-review-view/spec.md`
 **Input**: Feature specification from `/specs/001-uc13-anonymized-review-view/spec.md`
 
 ## Summary
