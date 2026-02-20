@@ -1,13 +1,11 @@
-# Acceptance Test Suite — UC-15 Receive Final Decision
+# Acceptance Test Suite - UC-15 Receive Final Decision Notification
 
 ## Assumptions / Notes
-- Authors must be logged in to view decisions in the CMS.
-- A decision becomes visible once it is recorded by the editor.
-- Notifications are best-effort; the CMS UI is the source of truth.
+- Authors must be logged in to view decisions in CMS.
+- A decision is visible once recorded by an editor.
+- Notifications are best-effort; CMS is the decision source of truth.
 
----
-
-## AT-UC15-01 — View Accepted Decision Successfully (Main Success Scenario)
+## AT-UC15-01 - View Accepted Decision
 
 **Objective:** Verify an author can view an accepted decision.
 
@@ -16,16 +14,14 @@
 - Paper P1 was accepted by an editor.
 
 **Steps:**
-1. Navigate to submitted papers.
+1. Open submitted papers.
 2. Select Paper P1.
 
 **Expected Results:**
-- The system displays **Accepted** status.
-- Any decision comments are visible.
+- System shows **Accepted** status.
+- Any decision comment is visible.
 
----
-
-## AT-UC15-02 — View Rejected Decision Successfully (Main Success Scenario)
+## AT-UC15-02 - View Rejected Decision
 
 **Objective:** Verify an author can view a rejected decision.
 
@@ -34,53 +30,47 @@
 - Paper P2 was rejected by an editor.
 
 **Steps:**
-1. Navigate to submitted papers.
+1. Open submitted papers.
 2. Select Paper P2.
 
 **Expected Results:**
-- The system displays **Rejected** status.
-- Any decision comments are visible.
+- System shows **Rejected** status.
+- Any decision comment is visible.
 
----
+## AT-UC15-03 - Notification Failure Does Not Block CMS Access
 
-## AT-UC15-03 — Notification Failure Does Not Block Access (Extension 4a)
-
-**Objective:** Verify decision is visible even if notification fails.
+**Objective:** Verify decision remains visible in CMS when notification delivery fails.
 
 **Preconditions:**
 - Author is logged in.
 - Paper P3 has a recorded decision.
-- Notification service failed.
+- Notification delivery failed.
 
 **Steps:**
-1. Navigate to submitted papers.
+1. Open submitted papers.
 2. Select Paper P3.
 
 **Expected Results:**
-- The final decision is visible in the CMS.
-- Lack of notification does not affect access.
+- Final decision is visible in CMS.
+- Notification failure does not block decision visibility.
 
----
+## AT-UC15-04 - Decision Not Yet Available
 
-## AT-UC15-04 — Decision Not Yet Available (Extension 5a)
-
-**Objective:** Verify correct behavior when decision is not yet made.
+**Objective:** Verify behavior when no final decision is recorded.
 
 **Preconditions:**
 - Author is logged in.
 - Paper P4 is still under review.
 
 **Steps:**
-1. Navigate to submitted papers.
+1. Open submitted papers.
 2. Select Paper P4.
 
 **Expected Results:**
-- The system indicates the paper is under review.
-- No accept/reject decision is shown.
+- System shows under-review status.
+- No accepted/rejected decision is shown.
 
----
-
-## AT-UC15-05 — Unauthorized Paper Access Blocked (Extension 6a)
+## AT-UC15-05 - Unauthorized Paper Access Blocked
 
 **Objective:** Verify authors cannot view decisions for papers they do not own.
 
@@ -89,43 +79,55 @@
 - Paper P5 belongs to Author B.
 
 **Steps:**
-1. Attempt to access Paper P5 decision details.
+1. Attempt to open Paper P5 decision details.
 
 **Expected Results:**
 - Access is blocked.
-- An authorization error message is displayed.
+- Authorization error is shown.
 
----
+## AT-UC15-06 - Decision Retrieval Failure
 
-## AT-UC15-06 — Decision Retrieval Failure (Extension 7a)
-
-**Objective:** Verify system behavior when decision cannot be retrieved.
+**Objective:** Verify system behavior when decision retrieval fails.
 
 **Preconditions:**
 - Author is logged in.
 - Paper P6 has a recorded decision.
-- Simulate database/service failure.
+- Decision retrieval is failing (service/database error).
 
 **Steps:**
-1. Attempt to view Paper P6 decision.
+1. Attempt to view Paper P6 decision details.
 
 **Expected Results:**
-- The system displays a system error message.
-- The decision is not shown.
+- System shows retry-later system error.
+- Decision details are withheld.
 
----
+## AT-UC15-07 - Decision Persistence Across Sessions
 
-## AT-UC15-07 — Persistence Check: Decision Visible After Logout/Login
-
-**Objective:** Verify decision persists across sessions.
+**Objective:** Verify recorded decision visibility persists after logout/login.
 
 **Preconditions:**
 - Author has a paper with a recorded decision.
 
 **Steps:**
-1. Log out of the CMS.
+1. Log out.
 2. Log back in.
-3. Navigate to the paper decision.
+3. Open the same paper decision page.
 
 **Expected Results:**
-- The final decision is still visible and unchanged.
+- Final decision remains visible and unchanged.
+
+## AT-UC15-08 - Notification Structure and Source Consistency
+
+**Objective:** Verify notification content ordering and same-source consistency.
+
+**Preconditions:**
+- Author is logged in.
+- Paper P7 has a recorded final decision with editor review content.
+
+**Steps:**
+1. Open Paper P7 decision notification details.
+
+**Expected Results:**
+- Important summary bullet notes appear first.
+- Full review content appears below summary bullets.
+- Summary and full review are derived from the same decision source.

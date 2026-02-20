@@ -12,6 +12,12 @@
 
 - Q: What decision content format should notifications use? -> A: Decision notifications first present summary bullet points of the review outcome, followed by the full review content below.
 
+### Session 2026-02-20
+
+- Q: How should "summary bullet points" be interpreted? -> A: They are important summary notes of the same full review content, shown before the full review body.
+- Q: Can summary bullets appear without full review content? -> A: No. Both sections come from the same editor decision source and are delivered together.
+- Q: Are decision outcomes/channels constrained? -> A: Outcomes are Accept/Reject only for this UC; notification channels are only explicitly supported channels.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - View final decision in CMS (Priority: P1)
@@ -67,7 +73,7 @@ An author gets clear feedback if decision is not yet available, access is unauth
 - Paper remains under review with no final decision yet.
 - Author refreshes decision page after viewing final status.
 - Author accesses decision details immediately after decision is recorded.
-- Review summary bullets exist while full review content is temporarily unavailable.
+- Notification channels may fail independently, while CMS decision visibility remains available for owning authors.
 
 ## Requirements *(mandatory)*
 
@@ -78,13 +84,19 @@ An author gets clear feedback if decision is not yet available, access is unauth
 - **FR-003**: System MUST display decision comments when available.
 - **FR-004**: System MUST generate author decision notifications after final decision recording.
 - **FR-005**: System MUST structure decision notifications so summary bullet points appear before full review content.
-- **FR-006**: System MUST include full review content below the summary section in decision notifications when review content is included.
+- **FR-006**: System MUST include full review content below the summary section in every decision notification.
 - **FR-007**: System MUST treat CMS decision view as source of truth when notification delivery fails.
 - **FR-008**: System MUST indicate under-review status when a final decision is not yet available.
 - **FR-009**: System MUST block access to papers not owned by the requesting author and show authorization error feedback.
 - **FR-010**: System MUST show a system error and withhold decision details when retrieval fails.
 - **FR-011**: System MUST persist recorded decision visibility across page refresh and new sessions.
 - **FR-012**: System MUST keep decision visibility independent of notification delivery success.
+
+### Non-Functional Requirements
+
+- **NFR-001**: System MUST enforce owner-only access for summary and full-review decision content across CMS and notification retrieval paths.
+- **NFR-002**: System MUST record notification-delivery and decision-retrieval failures in system logs for operational troubleshooting.
+- **NFR-003**: System MUST treat decision status, summary bullets, and full review as a single-source payload for consistency.
 
 ### Assumptions
 
@@ -109,3 +121,16 @@ An author gets clear feedback if decision is not yet available, access is unauth
 - **SC-003**: 100% of notification delivery failures still allow decision visibility in CMS for owning authors.
 - **SC-004**: 100% of under-review papers show no final decision and display an under-review message.
 - **SC-005**: 100% of unauthorized paper decision access attempts are blocked with authorization feedback.
+
+## FR-to-Acceptance-Test Mapping
+
+| Functional Requirement | Acceptance Tests |
+|------------------------|------------------|
+| FR-001, FR-002 | AT-UC15-01, AT-UC15-02 |
+| FR-003 | AT-UC15-01, AT-UC15-02 |
+| FR-004, FR-005, FR-006 | AT-UC15-08 |
+| FR-007, FR-012 | AT-UC15-03 |
+| FR-008 | AT-UC15-04 |
+| FR-009 | AT-UC15-05 |
+| FR-010 | AT-UC15-06 |
+| FR-011 | AT-UC15-07 |

@@ -66,7 +66,7 @@
 
 - [ ] T019 [P] [US2] Add contract test for successful `GET /api/v1/author/papers/{paperId}/decision-notification` ordering payload in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-decision-notification.contract.spec.js`
 - [ ] T020 [P] [US2] Add integration test verifying summary-before-full-review composition in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-order.integration.spec.js`
-- [ ] T021 [P] [US2] Add integration test for full-review-unavailable marker with summary preserved in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/full-review-unavailable.integration.spec.js`
+- [ ] T021 [P] [US2] Add integration test verifying summary bullets and full review come from the same decision source in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-source-consistency.integration.spec.js`
 
 ### Implementation for User Story 2
 
@@ -114,6 +114,7 @@
 - [ ] T038 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-15.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-15-AT.md` if user-facing wording changed during implementation
 - [ ] T039 Update quickstart with final fallback/error/ordering verification steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
 - [ ] T040 Run `npm test && npm run lint` and record UC-15 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/quickstart.md`
+- [ ] T041 Add FR-to-AT traceability mapping validation in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/spec.md`
 
 ---
 
@@ -155,7 +156,7 @@
 ```bash
 Task: "T019 [US2] Add decision-notification ordering contract test in /mnt/c/Users/ponti/Desktop/CMS1/tests/contract/decision-notification/get-decision-notification.contract.spec.js"
 Task: "T020 [US2] Add summary-before-full-review integration test in /mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-order.integration.spec.js"
-Task: "T021 [US2] Add full-review-unavailable integration test in /mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/full-review-unavailable.integration.spec.js"
+Task: "T021 [US2] Add summary/full-review same-source integration test in /mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/notification-source-consistency.integration.spec.js"
 Task: "T022 [US2] Implement notification generation service in /mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/decision-notification/generate-decision-notification.js"
 ```
 
