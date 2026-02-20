@@ -1,148 +1,67 @@
-# Acceptance Test Suite - UC-01 Register New User Account
+# Acceptance Tests UC-01: Register New User Account
 
-## Assumptions / Notes
+## AT-UC01-01 Successful Register-Verify-Login
+- Given unique valid email and compliant password
+- When user registers and verifies within 24 hours
+- Then account activates and login succeeds
 
-- Required registration fields are `email`, `password`, and `confirm password`.
-- Password policy: minimum 12 chars, uppercase, lowercase, number, symbol, no leading/trailing spaces, and common/breached password rejection when available.
-- Expiry timing uses server UTC.
+## AT-UC01-02 Invalid Email
+- Given invalid email format
+- When registration is submitted
+- Then submission is rejected with field-level email guidance
 
----
+## AT-UC01-03 Duplicate Email
+- Given email already exists (active or pending)
+- When registration is submitted
+- Then duplicate registration is rejected
 
-## AT-UC01-01 - Successful Registration With Verification
+## AT-UC01-04 Password Policy Failure
+- Given password violates policy
+- When registration is submitted
+- Then submission is rejected with password-rule feedback
 
-**Objective:** Verify pending registration is created and account activates only after successful verification.
+## AT-UC01-05 Missing Required Fields
+- Given one or more required fields are missing
+- When registration is submitted
+- Then submission is rejected with required-field feedback
 
-**Preconditions:**
-- User is not logged in.
-- Email `new_user_01@example.com` does not exist in active/pending records.
+## AT-UC01-06 Mixed Validation Failures
+- Given required/format/policy failures in one submit
+- When registration is submitted
+- Then all errors are returned in stable deterministic order
 
-**Steps:**
-1. Submit valid registration form.
-2. Open verification link received by email within 24h.
-3. Complete verification.
+## AT-UC01-07 Login Before Verification
+- Given pending unverified registration
+- When user attempts login
+- Then login is denied with verification reminder and resend option when eligible
 
-**Expected Results:**
-- Pending registration created on submit.
-- Account remains inactive before verification.
-- Account is activated only after verification.
-- User is redirected to login.
+## AT-UC01-08 Verification Link Expired
+- Given verification link age is `>=24h` server UTC
+- When verify is requested
+- Then verification is rejected and resend guidance is returned
 
----
+## AT-UC01-09 Pending Registration Expired
+- Given pending registration age is `>=7d` server UTC
+- When login or resend is requested
+- Then request is denied and user is directed to start new registration
 
-## AT-UC01-02 - Invalid Email Format
+## AT-UC01-10 Concurrent Same-Email Registration
+- Given concurrent requests for same email
+- When both are processed
+- Then uniqueness is atomic: one succeeds and one fails deterministically
 
-**Expected Results:**
-- Field-level email error returned.
-- No pending registration/account activation.
+## AT-UC01-11 Resend Rate Limits
+- Given repeated resend attempts
+- When attempts exceed policy
+- Then system enforces 3/24h rolling limit and 60s cooldown
 
----
+## AT-UC01-12 Token Security and Privacy
+- Given verification token workflows
+- When registration/verification logging occurs
+- Then tokens are single-use and hashed, and logs redact/mask sensitive values
 
-## AT-UC01-03 - Duplicate Email
+## AT-UC01-13 Accessibility of Validation and Reminder UX
+- Given keyboard-only and screen-reader interaction
+- When user navigates errors/reminders
+- Then error text is associated to fields and announced via `aria-live`
 
-**Expected Results:**
-- Duplicate-email error returned for existing active/pending email.
-- No additional pending registration/account activation.
-
----
-
-## AT-UC01-04 - Password Policy Violation
-
-**Expected Results:**
-- Password violation details returned.
-- No pending registration/account activation.
-
----
-
-## AT-UC01-05 - Missing Required Fields
-
-**Expected Results:**
-- Missing-field errors returned.
-- No pending registration/account activation.
-
----
-
-## AT-UC01-06 - Multiple Validation Failures Ordering
-
-**Expected Results:**
-- All field-level validation errors returned in stable order.
-- No pending registration/account activation.
-
----
-
-## AT-UC01-07 - Immediate Login After Successful Verification
-
-**Preconditions:**
-- Account has been successfully verified via AT-UC01-01.
-
-**Expected Results:**
-- Login succeeds with newly registered credentials.
-
----
-
-## AT-UC01-08 - Login Attempt Before Verification
-
-**Expected Results:**
-- Login denied with unverified reminder.
-- Resend option shown when pending registration is unexpired.
-
----
-
-## AT-UC01-09 - Pending Registration Expired After 7 Days
-
-**Expected Results:**
-- Pending registration age `>=7 days` is treated expired.
-- Verification/resend/login for expired pending registration denied.
-- User directed to start new registration.
-
----
-
-## AT-UC01-10 - Post-Expiry Login Guidance
-
-**Expected Results:**
-- Login response indicates inactive/expired registration state.
-- User guidance points to new registration flow.
-
----
-
-## AT-UC01-11 - Concurrent Same-Email Registration
-
-**Expected Results:**
-- Atomic uniqueness enforcement prevents duplicate pending records.
-- One request succeeds; concurrent duplicate is deterministically rejected.
-
----
-
-## AT-UC01-12 - Resend Rate Limits
-
-**Expected Results:**
-- Enforces max 3 resend attempts per rolling 24h window.
-- Enforces 60-second cooldown between attempts.
-- Returns clear cooldown/rate-limit guidance when blocked.
-
----
-
-## AT-UC01-13 - Token Security and Single-Use
-
-**Expected Results:**
-- Verification token generated with secure randomness.
-- Token stored hashed server-side.
-- Used token cannot be reused.
-- Tampered/invalid token cannot activate account.
-
----
-
-## AT-UC01-14 - Privacy and Logging Controls
-
-**Expected Results:**
-- Raw passwords and full tokens never appear in logs.
-- Emails are masked in logs.
-- Client errors do not expose sensitive internals.
-
----
-
-## AT-UC01-15 - Accessibility of Validation and Reminder UX
-
-**Expected Results:**
-- Errors/reminders are announced to assistive technology (`aria-live`).
-- Invalid fields are programmatically associated with their error text.
-- Keyboard-only user can complete register/verify/resend flow.

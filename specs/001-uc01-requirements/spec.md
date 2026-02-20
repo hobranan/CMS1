@@ -205,3 +205,13 @@ data and confirming the user can log in immediately after successful email verif
   from first submit to verification completion in under 2 minutes.
 - **SC-005**: 100% of unverified-login attempts are denied with verification
   reminder and resend option when pending registration is still eligible.
+
+## SC Evidence Mapping
+
+| Success Criterion | Evidence Source |
+|-------------------|-----------------|
+| SC-001 | `tests/integration/test_uc01_registration_happy_path.js`, `tests/contract/test_uc01_registration_contract.js` |
+| SC-002 | `tests/integration/test_uc01_registration_validation_failures.js`, `tests/contract/test_uc01_registration_contract.js` |
+| SC-003 | `tests/integration/test_uc01_registration_happy_path.js` |
+| SC-004 | Measured in `specs/001-uc01-requirements/validation-report.md` using registration-to-verification completion timing observations |
+| SC-005 | `tests/integration/test_uc01_registration_expiry_and_unverified_login.js` and summary evidence in `specs/001-uc01-requirements/validation-report.md` |

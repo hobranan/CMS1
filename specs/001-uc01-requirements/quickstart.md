@@ -90,3 +90,10 @@ Expected:
 - Duplicate email -> `409` with `EMAIL_ALREADY_REGISTERED`.
 - Weak password -> `422` with `WEAK_PASSWORD`.
 - Missing required fields -> `422` with field-level errors.
+
+## 9. HTML/CSS style-profile validation
+
+Checked against `docs/standards/html-css-style-profile.md`:
+- Registration and verification copy uses concise, direct wording.
+- Error and reminder text is actionable, specific, and non-ambiguous.
+- Login reminder and validation views keep semantic structure and field/error associations.
