@@ -69,3 +69,10 @@
 - Mark completed items with `[x]`.
 - Record findings inline for each identified requirement gap, ambiguity, or conflict.
 - Keep this checklist focused on requirement quality only, not implementation verification.
+
+## Auto-Answer Log (UC01/UC02 defaults)
+
+- Auto-answered similar checklist quality questions using the previously confirmed UC-01 and UC-02 decision set.
+- Defaults include: deterministic validation behavior, explicit measurability, no-partial-update guarantees, recovery/resubmission clarity, accessibility/privacy coverage, traceability mapping, and explicit scope assumptions.
+- Where checklist items offered equivalent alternatives, the same prior choices were reused (for example: all-errors mode, unauthorized handling excluded when outside scope, and last-write-wins for concurrent update conflicts).
+
