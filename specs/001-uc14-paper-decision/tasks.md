@@ -117,6 +117,8 @@
 - [ ] T040 Validate UC-14 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-14-AT.md`
 
 - [ ] T041 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc14-paper-decision/quickstart.md`
+- [ ] T042 Add contract/integration assertions for notification-failure payload shape with preserved decision status in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/paper-decision/notification-failure-payload.contract.test.js`
+- [ ] T043 Add decision outcome and blocked-attempt telemetry instrumentation for SC-001/SC-002 validation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/paper-decision/paper-decision-observability-service.js`
 
 ---
 
