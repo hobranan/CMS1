@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc22-public-announcements/checklists/public-announcements.md:9` | UC-22 specific checklist remains unchecked, creating readiness ambiguity before implementation. | Execute and mark UC-22 checklist items before `/speckit.implement`. |
 | G1 | Coverage Gap | LOW | `specs/001-uc22-public-announcements/contracts/public-announcements.openapi.yaml:18`, `specs/001-uc22-public-announcements/tasks.md:47` | Contract uses `204` for no-data list response, and this must remain explicitly asserted to avoid regressions into ambiguous empty-list payload behavior. | Keep explicit no-data `204` contract test (`T014`) and assert frontend empty-state handling remains deterministic. |
 | U1 | Underspecification | LOW | `specs/001-uc22-public-announcements/plan.md:18`, `specs/001-uc22-public-announcements/tasks.md:113` | Performance target is qualitative ("normal browsing latency"), so latency verification thresholds are unspecified. | Define numeric list/detail latency SLOs in `plan.md` for performance tests. |
 
@@ -39,7 +38,6 @@ No constitution-critical violations detected. UC references, MVC boundaries, and
 
 ## Next Actions
 
-- Resolve MEDIUM/LOW readiness and measurability items:
-  - Complete UC-22 checklist status updates.
+- Resolve LOW readiness and measurability items:
   - Keep explicit no-data `204` contract assertions in test suite.
   - Define numeric list/detail latency targets in `plan.md`.
