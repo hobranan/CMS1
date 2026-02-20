@@ -2,6 +2,7 @@
 
 ## Assumptions / Notes
 - Each referee has a maximum allowed number of assigned papers.
+- If multiple limits exist, one applicable limit is resolved by precedence: track-specific > role-specific > conference default.
 - Workload is checked at assignment time.
 - Assignments exceeding the limit must be rejected.
 

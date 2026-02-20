@@ -24,7 +24,7 @@
 - [ ] T005 Create `WorkloadLimitRule` model with active rule resolution constraints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/workload-limit-rule.js`
 - [ ] T006 [P] Create `PaperAssignmentAttempt` model and outcome taxonomy in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-assignment-attempt.js`
 - [ ] T007 [P] Create `WorkloadSnapshot` model for decision-time values in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/workload-snapshot.js`
-- [ ] T008 Implement configurable workload-limit resolution service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-limit-resolution-service.js`
+- [ ] T008 Implement configurable workload-limit resolution service with precedence (track-specific > role-specific > conference default) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-limit-resolution-service.js`
 - [ ] T009 [P] Implement current workload retrieval service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/referee-workload-retrieval-service.js`
 - [ ] T010 Implement assignment decision engine enforcing `workload < limit` rule in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-assignment-decision-service.js`
 - [ ] T011 Implement atomic assignment persistence service that increments workload only on successful commit in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-assignment-persistence-service.js`

@@ -11,6 +11,7 @@
 ### Session 2026-02-08
 
 - Q: Is referee maximum workload fixed or configurable? -> A: Maximum workload limits are configurable and applied at assignment time.
+- Q: If multiple workload rules match, what precedence applies? -> A: Resolve one rule by precedence: track-specific rule > role-specific rule > conference default.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -73,7 +74,7 @@ An editor receives clear system feedback when workload retrieval or assignment s
 
 - **FR-001**: System MUST enforce workload limits when editors assign referees to papers.
 - **FR-002**: System MUST retrieve current assigned-paper workload for the selected referee during assignment.
-- **FR-003**: System MUST retrieve and apply a configurable maximum workload limit for each assignment validation.
+- **FR-003**: System MUST retrieve and apply a configurable maximum workload limit for each assignment validation, using precedence: track-specific > role-specific > conference default.
 - **FR-004**: System MUST allow assignment only when referee workload is below the applicable configured maximum limit.
 - **FR-005**: System MUST reject assignment when referee workload is equal to or greater than the configured maximum limit.
 - **FR-006**: System MUST provide clear workload-limit error feedback when assignment is rejected for overload.
@@ -88,7 +89,7 @@ An editor receives clear system feedback when workload retrieval or assignment s
 
 - Workload means number of currently assigned papers for a referee.
 - Configurable workload limit values are defined and managed by conference/system configuration policy.
-- The same configured limit can vary by context, but a single applicable value is resolved at validation time.
+- The same configured limit can vary by context, and a single applicable value is resolved at validation time using precedence: track-specific > role-specific > conference default.
 
 ### Key Entities *(include if feature involves data)*
 

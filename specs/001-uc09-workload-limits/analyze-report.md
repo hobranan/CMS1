@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | HIGH | `specs/001-uc09-workload-limits/spec.md:91` | The spec allows limit variance by context but does not define deterministic context resolution precedence when multiple rules could match. | Define precedence/order for resolving the single applicable workload limit (for example paper track > conference default). |
 | G1 | Coverage Gap | MEDIUM | `specs/001-uc09-workload-limits/plan.md:20`, `specs/001-uc09-workload-limits/tasks.md:13` | Plan includes a 300ms p95 decision target, but tasks have no explicit performance measurement/verification. | Add performance test and threshold validation task in polish phase. |
 | G2 | Coverage Gap | MEDIUM | `specs/001-uc09-workload-limits/spec.md:109`, `specs/001-uc09-workload-limits/tasks.md:126` | SC-005 requires current configured limit usage on every check, but tasks lack explicit audit/telemetry assertion for rule-version-in-use. | Add instrumentation/assertion task to log and verify applied rule id/version per assignment attempt. |
 | U1 | Underspecification | LOW | `specs/001-uc09-workload-limits/spec.md:65`, `specs/001-uc09-workload-limits/tasks.md:103` | Limit changes between selection and confirmation are listed as edge case, but no explicit UI conflict messaging requirements are defined. | Specify user-facing message and remediation path when confirmation recheck differs from initial view. |
@@ -38,14 +37,14 @@ No fully unmapped tasks detected.
 - Total Requirements: 12 functional requirements (FR-001..FR-012)
 - Total Tasks: 38
 - Coverage % (requirements with >=1 task): 100%
-- Ambiguity Count: 1
+- Ambiguity Count: 0
 - Duplication Count: 0
 - Critical Issues Count: 0
 
 ## Next Actions
 
-- No CRITICAL blockers found.
-- Address HIGH/MEDIUM findings before `/speckit.implement`.
+- No CRITICAL or HIGH blockers found.
+- Address MEDIUM findings before `/speckit.implement`.
 - Suggested actions:
   - Define workload-rule precedence in `specs/001-uc09-workload-limits/spec.md`.
   - Add performance and rule-application telemetry tasks to `specs/001-uc09-workload-limits/tasks.md`.
