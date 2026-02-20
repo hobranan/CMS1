@@ -96,7 +96,7 @@
 ### Implementation for User Story 3
 
 - [ ] T031 [US3] Implement retry endpoint logic selecting `RESUME` vs `RESTART` based on fingerprint and expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/retry-upload-controller.js`
-- [ ] T032 [US3] Implement interruption checkpoint persistence and 30-minute resume window in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-progress-service.js`
+- [ ] T032 [US3] Implement interruption checkpoint persistence, 30-minute resume window, and expired-checkpoint cleanup on restart in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-progress-service.js`
 - [ ] T033 [US3] Implement storage/association failure handling that preserves unattached state in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-attachment-orchestrator.js`
 - [ ] T034 [US3] Implement frontend retry guidance messaging for interruption and service errors in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/upload-error-controller.js`
 
@@ -114,6 +114,9 @@
 - [ ] T038 Run `npm test && npm run lint` and record UC-06 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
+- [ ] T040 Add pre-upload validation p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/upload-validation-performance.integration.test.js`
+- [ ] T041 Add telemetry for resume-vs-restart outcomes and 30-minute success-rate reporting in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-observability-service.js`
+- [ ] T042 Record SC-004 resume-success calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
 
 ---
 

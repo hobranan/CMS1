@@ -92,10 +92,16 @@ An author is guided to retry when uploads fail from network interruption, storag
 - **FR-012**: System MUST handle upload failures caused by network interruption or timeout by displaying retry guidance and leaving file as not attached.
 - **FR-013**: System MUST support resumable retry for interrupted uploads of the same file within 30 minutes, continuing from the last confirmed uploaded portion.
 - **FR-014**: System MUST restart interrupted uploads from the beginning when retry occurs after 30 minutes.
+- **FR-014**: System MUST restart interrupted uploads from the beginning when retry occurs after 30 minutes and clear expired checkpoint state before restart.
 - **FR-015**: System MUST handle storage/service upload failure by displaying a system error and not attaching the file.
 - **FR-016**: System MUST handle file-association database failure by informing the author the file is not attached and prompting retry.
 - **FR-017**: System MUST ensure a file is considered attached only when both upload and submission association complete successfully.
 - **FR-018**: System MUST persist successful attachment visibility across page refresh and navigation back to the submission draft.
+
+### Non-Functional Requirements
+
+- **NFR-001**: Pre-upload validation responses MUST meet a p95 latency target of 300ms under normal operating load.
+- **NFR-002**: System MUST capture resume/restart outcome telemetry required to measure SC-004.
 
 ### Assumptions
 
