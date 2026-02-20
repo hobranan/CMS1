@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| I1 | Inconsistency | MEDIUM | `specs/001-uc17-edit-schedule/checklists/edit-schedule.md:9`, `specs/001-uc17-edit-schedule/checklists/requirements.md:9` | UC-17 checklist is entirely unchecked while the generic requirements checklist may be used as readiness signal elsewhere. | Complete and mark the UC-17 checklist before implementation handoff to avoid false readiness assumptions. |
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc17-edit-schedule/contracts/edit-schedule.openapi.yaml`, `specs/001-uc17-edit-schedule/tasks.md:171` | Contract-level edge responses (such as stale-version/save conflict and lock-policy rejection payloads) need explicit response-shape assertions across all failure classes. | Add/verify contract assertions for each failure code path with stable `code/message` payload semantics. |
 | U1 | Underspecification | LOW | `specs/001-uc17-edit-schedule/plan.md:18`, `specs/001-uc17-edit-schedule/tasks.md:173` | Plan performance target remains qualitative, so latency verification thresholds are not fully defined for T046. | Define numeric SLOs for edit-load/validate/save paths and assert them in integration/perf tests. |
 
 ## Coverage Summary Table
@@ -36,7 +34,7 @@ No constitution-critical violations detected. UC artifact references, MVC bounda
 ## Metrics
 
 - Total Requirements: 14 functional requirements (FR-001..FR-014)
-- Total Tasks: 48
+- Total Tasks: 50
 - Coverage % (requirements with >=1 task): 100%
 - Ambiguity Count: 0
 - Duplication Count: 0
@@ -44,8 +42,5 @@ No constitution-critical violations detected. UC artifact references, MVC bounda
 
 ## Next Actions
 
-- Resolve MEDIUM checklist/contract issues before `/speckit.implement`:
-  - Complete UC-17 checklist status updates.
-  - Confirm all failure payload contracts are asserted in tests.
 - Resolve LOW measurability issue:
   - Define numeric edit-load/validation/save latency targets in `plan.md`.

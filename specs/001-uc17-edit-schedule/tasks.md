@@ -124,6 +124,7 @@
 - [ ] T048 Run `npm test && npm run lint` and record UC-17 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc17-edit-schedule/quickstart.md`
 
 - [ ] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc17-edit-schedule/quickstart.md`
+- [ ] T050 Add contract payload-shape assertions (`code/message`) across stale-version, lock-policy, and save-conflict failures in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule-edit/schedule-edit-failure-payloads.contract.test.js`
 
 ---
 
