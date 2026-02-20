@@ -114,6 +114,8 @@
 - [ ] T038 Run `npm test && npm run lint` and record UC-09 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/quickstart.md`
+- [ ] T040 Add workload-decision p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/workload/workload-decision-performance.integration.test.js`
+- [ ] T041 Add instrumentation to log applied workload-rule id/version per assignment check and verify SC-005 in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-rule-observability-service.js`
 
 ---
 
