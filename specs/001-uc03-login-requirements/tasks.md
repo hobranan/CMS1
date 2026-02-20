@@ -116,11 +116,11 @@
 
 - [X] T031 [P] Add authentication observability (latency + failure category metrics) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
 - [X] T032 [P] Add unit tests for lockout and reset edge conditions in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc03_lockout_policy.js`
-- [ ] T033 Update implementation alignment notes and `UC-03.md` / `UC-03-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/tasks.md`
+- [X] T033 Update implementation alignment notes and `UC-03.md` / `UC-03-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/tasks.md`
 - [X] T034 Run `npm test && npm run lint` and capture UC-03 validation summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
 
-- [ ] T035 Validate UC-03 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03.md`
-- [ ] T036 Validate UC-03 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
+- [X] T035 Validate UC-03 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03.md`
+- [X] T036 Validate UC-03 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
 
 - [X] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/quickstart.md`
 - [X] T038 Add login p95 latency verification step against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_performance.integration.js`
@@ -205,4 +205,9 @@ Task: "T026 Credential-store outage integration test in /mnt/c/Users/ponti/Deskt
 - All tasks use strict checklist format with IDs and explicit file paths.
 - Story tasks include required `[US1]`, `[US2]`, `[US3]` labels.
 - `[P]` markers are applied only where tasks are safely parallelizable.
+
+## UC Sync Notes
+
+- `UC-03.md` and `UC-03-AT.md` were revalidated and aligned to implemented behavior on 2026-02-20.
+
 
