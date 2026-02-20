@@ -5,6 +5,14 @@
 ```bash
 npm install
 npm test && npm run lint
+node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js
+```
+
+If PowerShell blocks `npm.ps1`, run:
+
+```bash
+node --test tests/**/*.js frontend/tests/**/*.js
+node ./scripts/lint.mjs
 ```
 
 ## 2. Successful upload and attachment
@@ -72,3 +80,31 @@ Expected:
 
 Expected:
 - Attached file remains visible in submission draft.
+
+## 9. HTML/CSS style-profile compliance
+
+- Upload UI remains plain HTML + vanilla controller logic.
+- Validation messaging remains deterministic and aligned with `docs/standards/html-css-style-profile.md`.
+
+## 10. UC-06 execution summary and SC-004 evidence
+
+- Contract tests:
+  - `tests/contract/upload/post-manuscript-success.contract.test.js`
+  - `tests/contract/upload/post-manuscript-unsupported-extension.contract.test.js`
+  - `tests/contract/upload/post-manuscript-oversize.contract.test.js`
+  - `tests/contract/upload/post-manuscript-retry-mode.contract.test.js`
+- Integration tests:
+  - `tests/integration/upload/successful-upload.integration.test.js`
+  - `tests/integration/upload/attachment-visibility.integration.test.js`
+  - `tests/integration/upload/cancel-selection.integration.test.js`
+  - `tests/integration/upload/retry-resume-window.integration.test.js`
+  - `tests/integration/upload/retry-restart-expired.integration.test.js`
+  - `tests/integration/upload/failure-non-attachment.integration.test.js`
+  - `tests/integration/upload/upload-validation-performance.integration.test.js`
+
+SC-004 method:
+- Use upload observability events in `backend/src/services/uploads/upload-observability-service.js`:
+  - `upload_interrupted`
+  - `upload_retry_mode_selected` with `mode=RESUME`
+  - `upload_success`
+- Measure interrupted uploads that later reach success via resume within 30 minutes.

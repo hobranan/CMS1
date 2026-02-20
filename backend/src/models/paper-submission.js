@@ -43,4 +43,13 @@ export class PaperSubmissionRepository {
   getById(id) {
     return this.submissions.get(id) ?? null;
   }
+
+  attachManuscript(id, file, now) {
+    const record = this.submissions.get(id);
+    if (!record) return null;
+    record.manuscriptFile = file;
+    record.attached = true;
+    record.updatedAt = now.toISOString();
+    return record;
+  }
 }

@@ -87,19 +87,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: [mode]
+                required: [mode, resume_offset_bytes]
                 properties:
                   mode:
                     type: string
                     enum: [RESUME, RESTART]
-                  message:
-                    type: string
-        '404':
-          description: No interrupted upload context found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                  resume_offset_bytes:
+                    type: integer
 components:
   schemas:
     UploadSuccessResponse:

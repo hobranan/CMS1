@@ -14,6 +14,13 @@ import { PaperSubmissionRepository } from "../models/paper-submission.js";
 import { SubmissionPersistenceService } from "../services/submissions/submission-persistence-service.js";
 import { SubmissionObservabilityService } from "../services/submissions/submission-observability-service.js";
 import { createSubmissionRoutes } from "./submissions/routes.js";
+import { UploadAttemptRepository } from "../models/upload-attempt.js";
+import { UploadProgressStateRepository } from "../models/upload-progress-state.js";
+import { FileAttachmentRecordRepository } from "../models/file-attachment-record.js";
+import { UploadTransferService } from "../services/uploads/upload-transfer-service.js";
+import { AttachmentAssociationService } from "../services/uploads/attachment-association-service.js";
+import { UploadObservabilityService } from "../services/uploads/upload-observability-service.js";
+import { createUploadRoutes } from "./uploads/routes.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -49,12 +56,31 @@ export function createRegistrationRoutes(deps) {
   if (!deps.submissionObservabilityService) {
     deps.submissionObservabilityService = new SubmissionObservabilityService();
   }
+  if (!deps.uploadAttemptRepository) {
+    deps.uploadAttemptRepository = new UploadAttemptRepository();
+  }
+  if (!deps.uploadProgressStateRepository) {
+    deps.uploadProgressStateRepository = new UploadProgressStateRepository();
+  }
+  if (!deps.fileAttachmentRecordRepository) {
+    deps.fileAttachmentRecordRepository = new FileAttachmentRecordRepository();
+  }
+  if (!deps.uploadTransferService) {
+    deps.uploadTransferService = new UploadTransferService();
+  }
+  if (!deps.attachmentAssociationService) {
+    deps.attachmentAssociationService = new AttachmentAssociationService();
+  }
+  if (!deps.uploadObservabilityService) {
+    deps.uploadObservabilityService = new UploadObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
   const loginRoutes = createLoginRoutes(deps);
   const passwordChangeRoutes = createPasswordChangeRoutes(deps);
   const submissionRoutes = createSubmissionRoutes(deps);
+  const uploadRoutes = createUploadRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -63,6 +89,7 @@ export function createRegistrationRoutes(deps) {
     "/api/v1/auth/login:POST": authController.login,
     ...loginRoutes,
     ...passwordChangeRoutes,
-    ...submissionRoutes
+    ...submissionRoutes,
+    ...uploadRoutes
   };
 }

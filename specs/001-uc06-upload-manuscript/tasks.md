@@ -10,10 +10,10 @@
 
 **Purpose**: Prepare upload API surface, frontend upload entry points, and test scaffolding.
 
-- [ ] T001 Create upload feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/`
-- [ ] T002 [P] Register manuscript upload routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/routes.js`
-- [ ] T003 [P] Create frontend upload view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
-- [ ] T004 [P] Add UC-06 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/`
+- [X] T001 Create upload feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/`
+- [X] T002 [P] Register manuscript upload routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/routes.js`
+- [X] T003 [P] Create frontend upload view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
+- [X] T004 [P] Add UC-06 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/`
 
 ---
 
@@ -21,13 +21,13 @@
 
 **Purpose**: Implement shared upload domain components and attachment integrity guarantees for all stories.
 
-- [ ] T005 Create `UploadAttempt` model and status transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/upload-attempt.js`
-- [ ] T006 [P] Create `UploadProgressState` model with 30-minute resume expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/upload-progress-state.js`
-- [ ] T007 [P] Create `FileAttachmentRecord` model with attached-state invariants in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/file-attachment-record.js`
-- [ ] T008 Implement extension-only validation and 7 MB size rules in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-validation-service.js`
-- [ ] T009 [P] Implement storage transfer service with progress checkpoint hooks in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-transfer-service.js`
-- [ ] T010 Implement attachment association service that marks attached only after storage+association success in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/attachment-association-service.js`
-- [ ] T011 Wire auth and submission-workflow guard middleware for upload endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/routes.js`
+- [X] T005 Create `UploadAttempt` model and status transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/upload-attempt.js`
+- [X] T006 [P] Create `UploadProgressState` model with 30-minute resume expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/upload-progress-state.js`
+- [X] T007 [P] Create `FileAttachmentRecord` model with attached-state invariants in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/file-attachment-record.js`
+- [X] T008 Implement extension-only validation and 7 MB size rules in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-validation-service.js`
+- [X] T009 [P] Implement storage transfer service with progress checkpoint hooks in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-transfer-service.js`
+- [X] T010 Implement attachment association service that marks attached only after storage+association success in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/attachment-association-service.js`
+- [X] T011 Wire auth and submission-workflow guard middleware for upload endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/routes.js`
 
 **Checkpoint**: Upload foundation complete; stories can be implemented independently.
 
@@ -41,17 +41,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T012 [P] [US1] Add contract test for `POST /api/v1/submissions/{submissionId}/manuscript` success in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-success.contract.test.js`
-- [ ] T013 [P] [US1] Add integration test for successful upload and association flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/successful-upload.integration.test.js`
-- [ ] T014 [P] [US1] Add integration test for attachment visibility persistence after refresh in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/attachment-visibility.integration.test.js`
+- [X] T012 [P] [US1] Add contract test for `POST /api/v1/submissions/{submissionId}/manuscript` success in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-success.contract.test.js`
+- [X] T013 [P] [US1] Add integration test for successful upload and association flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/successful-upload.integration.test.js`
+- [X] T014 [P] [US1] Add integration test for attachment visibility persistence after refresh in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/attachment-visibility.integration.test.js`
 
 ### Implementation for User Story 1
 
-- [ ] T015 [P] [US1] Implement upload controller multipart handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-manuscript-controller.js`
-- [ ] T016 [US1] Implement upload-and-attach orchestration in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-attachment-orchestrator.js`
-- [ ] T017 [US1] Implement success response mapper (`ATTACHED`, `submission_id`, `attached=true`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-response-mapper.js`
-- [ ] T018 [P] [US1] Implement frontend file picker and selected-file display in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload.html`
-- [ ] T019 [US1] Implement frontend upload submit flow and attached confirmation rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
+- [X] T015 [P] [US1] Implement upload controller multipart handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-manuscript-controller.js`
+- [X] T016 [US1] Implement upload-and-attach orchestration in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-attachment-orchestrator.js`
+- [X] T017 [US1] Implement success response mapper (`ATTACHED`, `submission_id`, `attached=true`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-response-mapper.js`
+- [X] T018 [P] [US1] Implement frontend file picker and selected-file display in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload.html`
+- [X] T019 [US1] Implement frontend upload submit flow and attached confirmation rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
 
 **Checkpoint**: US1 provides MVP attachment workflow.
 
@@ -65,16 +65,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T020 [P] [US2] Add contract test for unsupported extension rejection in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-unsupported-extension.contract.test.js`
-- [ ] T021 [P] [US2] Add contract test for oversize rejection in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-oversize.contract.test.js`
-- [ ] T022 [P] [US2] Add integration test for cancel-without-side-effects behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/cancel-selection.integration.test.js`
+- [X] T020 [P] [US2] Add contract test for unsupported extension rejection in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-unsupported-extension.contract.test.js`
+- [X] T021 [P] [US2] Add contract test for oversize rejection in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-oversize.contract.test.js`
+- [X] T022 [P] [US2] Add integration test for cancel-without-side-effects behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/cancel-selection.integration.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Implement extension normalization (case-insensitive) and allowed-extension whitelist enforcement (`.pdf`, `.doc`, `.docx`, `.tex`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-validation-service.js`
-- [ ] T024 [US2] Implement oversize rejection messaging with explicit 7 MB limit in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-error-mapper.js`
-- [ ] T025 [P] [US2] Implement frontend cancel/no-file handling to preserve current attachment state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
-- [ ] T026 [US2] Implement frontend inline validation messages listing allowed formats and size limit in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload-errors.js`
+- [X] T023 [US2] Implement extension normalization (case-insensitive) and allowed-extension whitelist enforcement (`.pdf`, `.doc`, `.docx`, `.tex`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-validation-service.js`
+- [X] T024 [US2] Implement oversize rejection messaging with explicit 7 MB limit in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-error-mapper.js`
+- [X] T025 [P] [US2] Implement frontend cancel/no-file handling to preserve current attachment state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
+- [X] T026 [US2] Implement frontend inline validation messages listing allowed formats and size limit in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload-errors.js`
 
 **Checkpoint**: US2 ensures deterministic invalid-input handling.
 
@@ -88,17 +88,17 @@
 
 ### Tests for User Story 3
 
-- [ ] T027 [P] [US3] Add contract test for `POST /api/v1/submissions/{submissionId}/manuscript/retry` resume/restart modes in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-retry-mode.contract.test.js`
-- [ ] T028 [P] [US3] Add integration test for interrupted upload retry within 30 minutes resuming from checkpoint in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/retry-resume-window.integration.test.js`
-- [ ] T029 [P] [US3] Add integration test for retry after 30 minutes restart-from-beginning behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/retry-restart-expired.integration.test.js`
-- [ ] T030 [P] [US3] Add integration test for storage and association failure non-attachment state in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/failure-non-attachment.integration.test.js`
+- [X] T027 [P] [US3] Add contract test for `POST /api/v1/submissions/{submissionId}/manuscript/retry` resume/restart modes in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/upload/post-manuscript-retry-mode.contract.test.js`
+- [X] T028 [P] [US3] Add integration test for interrupted upload retry within 30 minutes resuming from checkpoint in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/retry-resume-window.integration.test.js`
+- [X] T029 [P] [US3] Add integration test for retry after 30 minutes restart-from-beginning behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/retry-restart-expired.integration.test.js`
+- [X] T030 [P] [US3] Add integration test for storage and association failure non-attachment state in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/failure-non-attachment.integration.test.js`
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Implement retry endpoint logic selecting `RESUME` vs `RESTART` based on fingerprint and expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/retry-upload-controller.js`
-- [ ] T032 [US3] Implement interruption checkpoint persistence, 30-minute resume window, and expired-checkpoint cleanup on restart in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-progress-service.js`
-- [ ] T033 [US3] Implement storage/association failure handling that preserves unattached state in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-attachment-orchestrator.js`
-- [ ] T034 [US3] Implement frontend retry guidance messaging for interruption and service errors in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/upload-error-controller.js`
+- [X] T031 [US3] Implement retry endpoint logic selecting `RESUME` vs `RESTART` based on fingerprint and expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/retry-upload-controller.js`
+- [X] T032 [US3] Implement interruption checkpoint persistence, 30-minute resume window, and expired-checkpoint cleanup on restart in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-progress-service.js`
+- [X] T033 [US3] Implement storage/association failure handling that preserves unattached state in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-attachment-orchestrator.js`
+- [X] T034 [US3] Implement frontend retry guidance messaging for interruption and service errors in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/upload-error-controller.js`
 
 **Checkpoint**: US3 completes resilient upload recovery behavior.
 
@@ -108,15 +108,15 @@
 
 **Purpose**: Finalize docs, contracts, and cross-story quality gates.
 
-- [ ] T035 [P] Update API contract examples/error codes to match implemented behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/contracts/upload-manuscript.openapi.yaml`
-- [ ] T036 Update quickstart verification with final resume/failure scenarios in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
-- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-06.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-06-AT.md` if behavior wording changed during implementation
-- [ ] T038 Run `npm test && npm run lint` and record UC-06 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
+- [X] T035 [P] Update API contract examples/error codes to match implemented behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/contracts/upload-manuscript.openapi.yaml`
+- [X] T036 Update quickstart verification with final resume/failure scenarios in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
+- [X] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-06.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-06-AT.md` if behavior wording changed during implementation
+- [X] T038 Run `npm test && npm run lint` and record UC-06 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
 
-- [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
-- [ ] T040 Add pre-upload validation p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/upload-validation-performance.integration.test.js`
-- [ ] T041 Add telemetry for resume-vs-restart outcomes and 30-minute success-rate reporting in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-observability-service.js`
-- [ ] T042 Record SC-004 resume-success calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
+- [X] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
+- [X] T040 Add pre-upload validation p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/upload/upload-validation-performance.integration.test.js`
+- [X] T041 Add telemetry for resume-vs-restart outcomes and 30-minute success-rate reporting in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-observability-service.js`
+- [X] T042 Record SC-004 resume-success calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
 
 ---
 
@@ -185,3 +185,4 @@ Task: "T030 [US3] Add failure non-attachment integration test in /mnt/c/Users/po
 - Attachment state is true only after upload+association succeed.
 - Any interruption/storage/association failure keeps file unattached.
 - Resume/restart behavior follows 30-minute policy.
+
