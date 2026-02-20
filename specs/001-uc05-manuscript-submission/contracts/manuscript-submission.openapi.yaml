@@ -73,11 +73,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: [code, message]
+                required: [status, submission_id, message]
                 properties:
-                  code:
+                  status:
                     type: string
                     example: UPLOAD_INTERRUPTED
+                  submission_id:
+                    type: string
                   message:
                     type: string
                     example: Network interruption detected. Retry upload when connectivity is restored.
@@ -93,9 +95,9 @@ paths:
             application/json:
               schema:
                 type: object
-                required: [items]
+                required: [submissions]
                 properties:
-                  items:
+                  submissions:
                     type: array
                     items:
                       $ref: '#/components/schemas/SubmissionSummary'
@@ -106,7 +108,7 @@ components:
       required:
         - author_names
         - author_affiliations
-        - author_contact_info
+        - author_contact_email
         - abstract_text
         - keywords
         - main_reference_source
@@ -116,7 +118,9 @@ components:
           type: string
         author_affiliations:
           type: string
-        author_contact_info:
+        author_contact_email:
+          type: string
+        author_contact_phone:
           type: string
         abstract_text:
           type: string
@@ -142,7 +146,7 @@ components:
           example: /author/home
     SubmissionSummary:
       type: object
-      required: [submission_id, status, metadata, manuscript_reference]
+      required: [submission_id, status, metadata, manuscript_file]
       properties:
         submission_id:
           type: string
@@ -151,8 +155,9 @@ components:
         metadata:
           type: object
           additionalProperties: true
-        manuscript_reference:
-          type: string
+        manuscript_file:
+          type: object
+          additionalProperties: true
     ErrorResponse:
       type: object
       required: [code, message]

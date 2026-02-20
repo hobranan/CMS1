@@ -10,10 +10,10 @@
 
 **Purpose**: Prepare shared scaffolding for submission APIs, frontend entry points, and test harness.
 
-- [ ] T001 Create submission feature folder structure in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/`
-- [ ] T002 [P] Register submission API router shell in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/routes.js`
-- [ ] T003 [P] Create frontend submission page/controller shell in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/submission-form-controller.js`
-- [ ] T004 [P] Add test suite placeholders for UC-05 in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/`
+- [X] T001 Create submission feature folder structure in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/`
+- [X] T002 [P] Register submission API router shell in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/routes.js`
+- [X] T003 [P] Create frontend submission page/controller shell in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/submission-form-controller.js`
+- [X] T004 [P] Add test suite placeholders for UC-05 in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/`
 
 ---
 
@@ -21,12 +21,12 @@
 
 **Purpose**: Implement shared domain infrastructure and policies that all user stories depend on.
 
-- [ ] T005 Create `PaperSubmission` model with state transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-submission.js`
-- [ ] T006 [P] Create `PaperMetadata` model and field normalization rules in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-metadata.js`
-- [ ] T007 [P] Create `ManuscriptFile` model with format and size guards in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/manuscript-file.js`
-- [ ] T008 Implement submission validation service (`ALL_ERRORS` vs `FIRST_BLOCKING` policy) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-validation-service.js`
-- [ ] T009 [P] Implement atomic persistence adapter for metadata+file reference finalization in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-persistence-service.js`
-- [ ] T010 Wire authenticated author and submission-window guard middleware into submission routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/routes.js`
+- [X] T005 Create `PaperSubmission` model with state transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-submission.js`
+- [X] T006 [P] Create `PaperMetadata` model and field normalization rules in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/paper-metadata.js`
+- [X] T007 [P] Create `ManuscriptFile` model with format and size guards in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/manuscript-file.js`
+- [X] T008 Implement submission validation service (`ALL_ERRORS` vs `FIRST_BLOCKING` policy) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-validation-service.js`
+- [X] T009 [P] Implement atomic persistence adapter for metadata+file reference finalization in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-persistence-service.js`
+- [X] T010 Wire authenticated author and submission-window guard middleware into submission routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/routes.js`
 
 **Checkpoint**: Foundation complete; user stories can now be implemented independently.
 
@@ -40,17 +40,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Add contract test for `POST /api/v1/submissions` success response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-submissions-success.contract.test.js`
-- [ ] T012 [P] [US1] Add integration test for end-to-end successful submission flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/successful-submission.integration.test.js`
+- [X] T011 [P] [US1] Add contract test for `POST /api/v1/submissions` success response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-submissions-success.contract.test.js`
+- [X] T012 [P] [US1] Add integration test for end-to-end successful submission flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/successful-submission.integration.test.js`
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Implement multipart request parsing and request DTO mapping in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-controller.js`
-- [ ] T014 [US1] Implement finalize-submission orchestration with atomic write behavior in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-finalization-service.js`
-- [ ] T015 [US1] Implement successful response payload (`FINALIZED`, `submission_id`, redirect) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-response-mapper.js`
-- [ ] T016 [P] [US1] Implement frontend submission form fields for required metadata in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form.html`
-- [ ] T017 [US1] Implement frontend submit handler and success redirect in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/submission-form-controller.js`
-- [ ] T018 [US1] Implement `GET /api/v1/submissions/mine` listing endpoint with metadata+manuscript reference mapping in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/list-author-submissions-controller.js`
+- [X] T013 [P] [US1] Implement multipart request parsing and request DTO mapping in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-controller.js`
+- [X] T014 [US1] Implement finalize-submission orchestration with atomic write behavior in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-finalization-service.js`
+- [X] T015 [US1] Implement successful response payload (`FINALIZED`, `submission_id`, redirect) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-response-mapper.js`
+- [X] T016 [P] [US1] Implement frontend submission form fields for required metadata in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form.html`
+- [X] T017 [US1] Implement frontend submit handler and success redirect in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/submission-form-controller.js`
+- [X] T018 [US1] Implement `GET /api/v1/submissions/mine` listing endpoint with metadata+manuscript reference mapping in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/list-author-submissions-controller.js`
 
 **Checkpoint**: US1 delivers MVP manuscript submission.
 
@@ -64,17 +64,17 @@
 
 ### Tests for User Story 2
 
-- [ ] T019 [P] [US2] Add contract test for metadata validation failure response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-submissions-metadata-errors.contract.test.js`
-- [ ] T020 [P] [US2] Add contract test for file constraint failures (missing/invalid/oversize) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-submissions-file-errors.contract.test.js`
-- [ ] T021 [P] [US2] Add integration test for multiple simultaneous validation failures policy in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/multi-error-policy.integration.test.js`
+- [X] T019 [P] [US2] Add contract test for metadata validation failure response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-submissions-metadata-errors.contract.test.js`
+- [X] T020 [P] [US2] Add contract test for file constraint failures (missing/invalid/oversize) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-submissions-file-errors.contract.test.js`
+- [X] T021 [P] [US2] Add integration test for multiple simultaneous validation failures policy in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/multi-error-policy.integration.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T022 [US2] Implement metadata completeness and quality checks (primary email validity and optional phone normalization to 7-15 digits) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-validation-service.js`
-- [ ] T023 [US2] Implement file-type sniffing and 7 MB size enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/file-constraint-service.js`
-- [ ] T024 [US2] Implement consistent validation error aggregation/precedence policy output in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-error-mapper.js`
-- [ ] T025 [P] [US2] Implement frontend inline field/file error rendering and focus management in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form-errors.js`
-- [ ] T026 [US2] Ensure failed validation attempts never create finalized records in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-finalization-service.js`
+- [X] T022 [US2] Implement metadata completeness and quality checks (primary email validity and optional phone normalization to 7-15 digits) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-validation-service.js`
+- [X] T023 [US2] Implement file-type sniffing and 7 MB size enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/file-constraint-service.js`
+- [X] T024 [US2] Implement consistent validation error aggregation/precedence policy output in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/submission-error-mapper.js`
+- [X] T025 [P] [US2] Implement frontend inline field/file error rendering and focus management in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/submission-form-errors.js`
+- [X] T026 [US2] Ensure failed validation attempts never create finalized records in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-finalization-service.js`
 
 **Checkpoint**: US2 ensures safe and recoverable invalid-input handling.
 
@@ -88,15 +88,15 @@
 
 ### Tests for User Story 3
 
-- [ ] T027 [P] [US3] Add contract test for `POST /api/v1/submissions/upload-status` interruption response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-upload-status-interrupted.contract.test.js`
-- [ ] T028 [P] [US3] Add integration test for upload interruption non-finalization behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/upload-interruption.integration.test.js`
-- [ ] T029 [P] [US3] Add integration test for storage failure `503` and retry-later guidance in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/storage-failure.integration.test.js`
+- [X] T027 [P] [US3] Add contract test for `POST /api/v1/submissions/upload-status` interruption response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/submission/post-upload-status-interrupted.contract.test.js`
+- [X] T028 [P] [US3] Add integration test for upload interruption non-finalization behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/upload-interruption.integration.test.js`
+- [X] T029 [P] [US3] Add integration test for storage failure `503` and retry-later guidance in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/storage-failure.integration.test.js`
 
 ### Implementation for User Story 3
 
-- [ ] T030 [US3] Implement interruption status endpoint and retry guidance message in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/upload-status-controller.js`
-- [ ] T031 [US3] Implement upload interruption and storage failure state transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-state-service.js`
-- [ ] T032 [US3] Implement frontend interruption/system-error messaging with explicit retry instructions in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/submission-error-controller.js`
+- [X] T030 [US3] Implement interruption status endpoint and retry guidance message in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/submissions/upload-status-controller.js`
+- [X] T031 [US3] Implement upload interruption and storage failure state transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-state-service.js`
+- [X] T032 [US3] Implement frontend interruption/system-error messaging with explicit retry instructions in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/submission/submission-error-controller.js`
 
 **Checkpoint**: US3 guarantees integrity for operational failures.
 
@@ -106,15 +106,15 @@
 
 **Purpose**: Final consistency, compliance, and documentation updates across stories.
 
-- [ ] T033 [P] Update API contract examples and response error codes for UC-05 parity in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/contracts/manuscript-submission.openapi.yaml`
-- [ ] T034 Update quickstart verification steps for final implementation behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
-- [ ] T035 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-05.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-05-AT.md` if user-facing behavior wording changed during implementation
-- [ ] T036 Run `npm test && npm run lint` and record UC-05 results in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
+- [X] T033 [P] Update API contract examples and response error codes for UC-05 parity in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/contracts/manuscript-submission.openapi.yaml`
+- [X] T034 Update quickstart verification steps for final implementation behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
+- [X] T035 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-05.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-05-AT.md` if user-facing behavior wording changed during implementation
+- [X] T036 Run `npm test && npm run lint` and record UC-05 results in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
 
-- [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
-- [ ] T038 Add submission-validation p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/submission-validation-performance.integration.test.js`
-- [ ] T039 Add telemetry for resubmission attempts and success-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-observability-service.js`
-- [ ] T040 Record SC-005 resubmission metric method and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
+- [X] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
+- [X] T038 Add submission-validation p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/submission/submission-validation-performance.integration.test.js`
+- [X] T039 Add telemetry for resubmission attempts and success-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-observability-service.js`
+- [X] T040 Record SC-005 resubmission metric method and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
 
 ---
 
@@ -183,3 +183,4 @@ Task: "T025 [US2] Implement frontend inline error rendering in /mnt/c/Users/pont
 - Every story must be independently testable.
 - No failure path may produce a finalized submission.
 - UC artifacts remain aligned with implemented user-facing behavior.
+

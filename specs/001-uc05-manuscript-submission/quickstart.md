@@ -5,6 +5,14 @@
 ```bash
 npm install
 npm test && npm run lint
+node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js
+```
+
+If PowerShell blocks `npm.ps1`, run:
+
+```bash
+node --test tests/**/*.js frontend/tests/**/*.js
+node ./scripts/lint.mjs
 ```
 
 ## 2. Successful submission
@@ -78,3 +86,30 @@ curl -X GET http://localhost:3000/api/v1/submissions/mine \
 
 Expected:
 - Newly finalized submission appears with metadata and manuscript reference.
+
+## 8. HTML/CSS style-profile compliance
+
+- Submission UI is implemented as plain HTML + vanilla controller logic with no frontend framework dependencies.
+- Error text rendering is deterministic and aligns with `docs/standards/html-css-style-profile.md`.
+
+## 9. UC-05 execution summary and SC-005 evidence
+
+- Contract tests:
+  - `tests/contract/submission/post-submissions-success.contract.test.js`
+  - `tests/contract/submission/post-submissions-metadata-errors.contract.test.js`
+  - `tests/contract/submission/post-submissions-file-errors.contract.test.js`
+  - `tests/contract/submission/post-upload-status-interrupted.contract.test.js`
+- Integration tests:
+  - `tests/integration/submission/successful-submission.integration.test.js`
+  - `tests/integration/submission/multi-error-policy.integration.test.js`
+  - `tests/integration/submission/upload-interruption.integration.test.js`
+  - `tests/integration/submission/storage-failure.integration.test.js`
+  - `tests/integration/submission/submission-validation-performance.integration.test.js`
+
+Observed result: all UC-05 tests pass.
+
+SC-005 method:
+- Use `backend/src/services/submissions/submission-observability-service.js` events:
+  - `submission_validation_failed`
+  - `submission_finalized`
+- Compute per-author sequence of attempts and measure whether success occurs within 2 additional attempts after a failure.

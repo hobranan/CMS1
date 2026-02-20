@@ -10,6 +10,10 @@ import { CredentialRepository } from "../models/credential_repository.js";
 import { PasswordHistoryRepository } from "../models/password_history_repository.js";
 import { PasswordChangeObservabilityService } from "../services/account/password_change_observability_service.js";
 import { createPasswordChangeRoutes } from "./password_change_routes.js";
+import { PaperSubmissionRepository } from "../models/paper-submission.js";
+import { SubmissionPersistenceService } from "../services/submissions/submission-persistence-service.js";
+import { SubmissionObservabilityService } from "../services/submissions/submission-observability-service.js";
+import { createSubmissionRoutes } from "./submissions/routes.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -36,11 +40,21 @@ export function createRegistrationRoutes(deps) {
   if (!deps.passwordChangeObservabilityService) {
     deps.passwordChangeObservabilityService = new PasswordChangeObservabilityService();
   }
+  if (!deps.paperSubmissionRepository) {
+    deps.paperSubmissionRepository = new PaperSubmissionRepository();
+  }
+  if (!deps.submissionPersistenceService) {
+    deps.submissionPersistenceService = new SubmissionPersistenceService(deps.paperSubmissionRepository);
+  }
+  if (!deps.submissionObservabilityService) {
+    deps.submissionObservabilityService = new SubmissionObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
   const loginRoutes = createLoginRoutes(deps);
   const passwordChangeRoutes = createPasswordChangeRoutes(deps);
+  const submissionRoutes = createSubmissionRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -48,6 +62,7 @@ export function createRegistrationRoutes(deps) {
     "/api/v1/registrations/resend-confirmation:POST": registrationController.resendConfirmation,
     "/api/v1/auth/login:POST": authController.login,
     ...loginRoutes,
-    ...passwordChangeRoutes
+    ...passwordChangeRoutes,
+    ...submissionRoutes
   };
 }
