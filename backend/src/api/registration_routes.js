@@ -55,6 +55,10 @@ import { PaperDecisionRepository } from "../models/decision-record.js";
 import { PaperDecisionNotificationService } from "../services/decisions/paper-decision-notification-service.js";
 import { PaperDecisionObservabilityService } from "../services/paper-decision/paper-decision-observability-service.js";
 import { createDecisionNotificationRoutes } from "./decision-notification/routes.js";
+import { createScheduleRoutes } from "./schedule/routes.js";
+import { ScheduleDraftRepository } from "../models/schedule-draft.js";
+import { ScheduleGenerationObservabilityService } from "../services/schedule/schedule-generation-observability-service.js";
+import { applyRoomAvailability } from "../services/schedule/room-availability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -187,6 +191,15 @@ export function createRegistrationRoutes(deps) {
   if (!deps.paperDecisionObservabilityService) {
     deps.paperDecisionObservabilityService = new PaperDecisionObservabilityService();
   }
+  if (!deps.scheduleDraftRepository) {
+    deps.scheduleDraftRepository = new ScheduleDraftRepository();
+  }
+  if (!deps.scheduleGenerationObservabilityService) {
+    deps.scheduleGenerationObservabilityService = new ScheduleGenerationObservabilityService();
+  }
+  if (!deps.roomAvailabilityService) {
+    deps.roomAvailabilityService = applyRoomAvailability;
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -203,6 +216,7 @@ export function createRegistrationRoutes(deps) {
   const reviewViewRoutes = createReviewViewRoutes(deps);
   const decisionRoutes = createDecisionRoutes(deps);
   const decisionNotificationRoutes = createDecisionNotificationRoutes(deps);
+  const scheduleRoutes = createScheduleRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -221,7 +235,8 @@ export function createRegistrationRoutes(deps) {
     ...reviewRoutes,
     ...reviewViewRoutes,
     ...decisionRoutes,
-    ...decisionNotificationRoutes
+    ...decisionNotificationRoutes,
+    ...scheduleRoutes
   };
 }
 

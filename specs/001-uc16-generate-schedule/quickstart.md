@@ -1,41 +1,31 @@
-# Quickstart - UC-16 Generate Schedule
+# Quickstart - UC-16 Generate Conference Schedule
 
 ## Goal
-Allow authenticated administrators/editors to manually generate a conference schedule draft from accepted papers using room-column sequential slots with randomized initial session placement.
-
-## Prerequisites
-- Dependencies installed
-- Test command available: `npm test && npm run lint`
-- UC files present: `UC-16.md`, `UC-16-AT.md`
-
-## Implementation Steps
-1. Add manual Generate Schedule action available only to authenticated administrators/editors.
-2. Validate prerequisites before generation:
-   - accepted papers exist
-   - required conference parameters are complete.
-3. Build initial schedule grid with one column per configured room.
-4. Generate sequential time slots for each room column using configured interval.
-5. Enforce equal slot count across all room columns for initial draft template.
-6. Randomize accepted-session ordering and place sessions into available room/slot assignments.
-7. Apply scheduling rules (session duration, room availability, conflict checks) during placement.
-8. Persist generated schedule as draft and display draft with conflict highlights.
-9. Block publication while blocking conflicts remain unresolved.
-10. Support explicit publish confirmation; if canceled, keep schedule in draft state.
-11. On save failure during generation, return system error and do not store schedule.
-12. Ensure published schedules persist for retrieval across refresh and new sessions.
+Allow authorized admin/editor users to manually generate a draft schedule, review it, and publish it when blocking conflicts are resolved.
 
 ## Validation Scenarios
-- Valid manual generation creates reviewable draft with room/time assignments.
-- No accepted papers blocks generation with explicit feedback.
-- Incomplete parameters block generation with missing-configuration guidance.
-- Initial draft contains one room column per room and equal slot counts across columns.
-- Adjacent slots are sequential with configured interval separation.
-- Initial placement order is randomized per generation run.
-- Detected conflicts are highlighted and block finalization until resolved.
-- Publish canceled after valid draft keeps status as draft.
-- Save failure returns error and leaves no stored draft.
-- Published schedule remains retrievable and unchanged across sessions.
+- Manual generate creates a draft from accepted papers.
+- Generated draft includes one column per room and equal sequential slot counts.
+- Different seeds produce different initial paper ordering.
+- Publish succeeds only when `confirm=true` and no blocking conflicts exist.
+- Cancel publish keeps draft unpublished.
+- No accepted papers blocks generation.
+- Missing schedule parameters blocks generation.
+- Save failure returns 500 with no stored draft.
+- Published schedule remains available across repeated retrieval.
+- `GET /schedule` returns 404 when unpublished.
+- Generation latency p95 remains under 400ms in local harness.
 
-## Verification
-- Run `npm test && npm run lint`.
-- Execute contract/integration tests for generation prerequisites, slot-grid structure, random placement, conflict blocking, draft/publish transitions, and failure handling.
+## Verification Run (Executed)
+- `node --test tests/contract/schedule/*.test.js tests/integration/schedule/*.test.js`
+  - Result: 16 passed, 0 failed.
+- `npm.cmd test`
+  - Result: pass (full suite).
+- `npm.cmd run lint`
+  - Result: pass.
+
+## HTML/CSS Style Profile Check
+- Verified schedule views against `docs/standards/html-css-style-profile.md`:
+  - `frontend/src/views/schedule/schedule-draft.html`
+  - `frontend/src/views/schedule/schedule-grid-view.html`
+- Confirmed semantic section structure and no inline style usage.

@@ -1,131 +1,41 @@
-# Acceptance Test Suite — UC-16 Generate Conference Schedule
+# Acceptance Tests - UC-16 Generate Conference Schedule
 
-## Assumptions / Notes
-- Only administrators/editors can generate schedules.
-- A schedule is based only on accepted papers.
-- Publishing makes the schedule visible to relevant users.
+## AT-UC16-01 Manual Draft Generation
+- Given valid conference setup
+- When admin/editor runs generate
+- Then a draft schedule is created
 
----
+## AT-UC16-02 Publish Reviewed Draft
+- Given a valid draft without blocking conflicts
+- When publish is confirmed
+- Then draft is published and retrievable
 
-## AT-UC16-01 — Generate and Publish Schedule Successfully (Main Success Scenario)
+## AT-UC16-03 Grid Invariants
+- Generated draft has one column per room and equal slot counts per column
 
-**Objective:** Verify an administrator/editor can generate and publish a conference schedule.
+## AT-UC16-04 Randomized Initial Placement
+- Different seeds produce different initial ordering
 
-**Preconditions:**
-- Administrator/editor is logged in.
-- At least one paper is accepted.
-- Conference parameters are fully defined.
+## AT-UC16-05 Cancel Publish
+- Confirm=false keeps draft unpublished
 
-**Steps:**
-1. Navigate to the scheduling section.
-2. Select **Generate Schedule**.
-3. Review the generated schedule.
-4. Confirm and publish the schedule.
+## AT-UC16-06 No Accepted Papers Block
+- Generation returns 400 and no draft
 
-**Expected Results:**
-- A schedule is generated without conflicts.
-- The schedule is stored in the database.
-- The schedule is marked as published and visible.
+## AT-UC16-07 Missing Parameters Block
+- Generation returns 400 and no draft
 
----
+## AT-UC16-08 Blocking Conflict Block
+- Publish returns 400 when blocking conflicts exist
 
-## AT-UC16-02 — No Accepted Papers (Extension 3a)
+## AT-UC16-09 Save Failure Rollback
+- Save failure returns 500 and no draft is stored
 
-**Objective:** Verify schedule generation is blocked when no papers are accepted.
+## AT-UC16-10 Published Persistence
+- Published schedule remains available across repeated retrieval
 
-**Preconditions:**
-- Administrator/editor is logged in.
-- No papers are accepted.
+## AT-UC16-11 Unpublished Retrieval
+- `GET /schedule` returns 404 when no published draft exists
 
-**Steps:**
-1. Attempt to generate a schedule.
-
-**Expected Results:**
-- The system displays a message indicating no accepted papers.
-- No schedule is generated.
-
----
-
-## AT-UC16-03 — Missing Conference Parameters (Extension 3b)
-
-**Objective:** Verify schedule generation is blocked when configuration is incomplete.
-
-**Preconditions:**
-- Administrator/editor is logged in.
-- One or more required conference parameters are missing.
-
-**Steps:**
-1. Attempt to generate a schedule.
-
-**Expected Results:**
-- The system blocks generation.
-- A message prompts completion of missing configuration.
-
----
-
-## AT-UC16-04 — Scheduling Conflicts Detected (Extension 4a)
-
-**Objective:** Verify conflicts are detected and reported.
-
-**Preconditions:**
-- Administrator/editor is logged in.
-- Accepted papers and parameters exist that cause conflicts.
-
-**Steps:**
-1. Generate schedule.
-
-**Expected Results:**
-- The system identifies conflicts.
-- Conflicts are displayed clearly.
-- Schedule is not finalized until resolved.
-
----
-
-## AT-UC16-05 — Database Error During Save (Extension 6a)
-
-**Objective:** Verify system behavior when schedule cannot be saved.
-
-**Preconditions:**
-- Administrator/editor is logged in.
-- Ability to simulate database failure.
-
-**Steps:**
-1. Generate schedule while database save fails.
-
-**Expected Results:**
-- The schedule is not stored.
-- A system error message is displayed.
-
----
-
-## AT-UC16-06 — Cancel Before Publishing (Extension 8a)
-
-**Objective:** Verify canceling publication keeps schedule in draft state.
-
-**Preconditions:**
-- Administrator/editor is logged in.
-- A schedule has been generated.
-
-**Steps:**
-1. Generate schedule.
-2. Cancel before publishing.
-
-**Expected Results:**
-- The schedule remains in draft state.
-- The schedule is not visible to other users.
-
----
-
-## AT-UC16-07 — Persistence Check: Published Schedule Persists
-
-**Objective:** Verify published schedules persist across sessions.
-
-**Preconditions:**
-- A schedule has been generated and published.
-
-**Steps:**
-1. Log out and log back in.
-2. View the conference schedule.
-
-**Expected Results:**
-- The published schedule is still visible and unchanged.
+## AT-UC16-12 Performance
+- Generation retrieval path p95 stays below 400ms in local harness

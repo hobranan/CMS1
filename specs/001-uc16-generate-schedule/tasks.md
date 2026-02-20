@@ -10,10 +10,10 @@
 
 **Purpose**: Prepare schedule-generation modules, routes, views, and test scaffolding.
 
-- [ ] T001 Create schedule-generation feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/`
-- [ ] T002 [P] Register generate/publish/retrieve schedule routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/routes.js`
-- [ ] T003 [P] Create frontend draft review and publish view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/schedule/schedule-draft.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-draft-controller.js`
-- [ ] T004 [P] Add UC-16 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/`
+- [X] T001 Create schedule-generation feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/`
+- [X] T002 [P] Register generate/publish/retrieve schedule routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/routes.js`
+- [X] T003 [P] Create frontend draft review and publish view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/schedule/schedule-draft.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-draft-controller.js`
+- [X] T004 [P] Add UC-16 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/`
 
 ---
 
@@ -21,18 +21,18 @@
 
 **Purpose**: Implement shared auth, slot-grid, placement, conflict, and persistence primitives.
 
-- [ ] T005 Create `ScheduleGenerationRequest` model with manual-trigger validation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-generation-request.js`
-- [ ] T006 [P] Create `ScheduleDraft` model with `draft/published` state transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-draft.js`
-- [ ] T007 [P] Create `RoomColumn` and `TimeSlot` models with equal-slot and sequential-slot invariants in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-grid.js`
-- [ ] T008 [P] Create `SessionPlacement` model with randomized placement rank fields in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/session-placement.js`
-- [ ] T009 [P] Create `ConflictRecord` model with blocking/warning semantics in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/conflict-record.js`
-- [ ] T010 Implement admin/editor authentication and role guard middleware in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/middleware/schedule-role-guard.js`
-- [ ] T011 Implement conference prerequisite retrieval service (accepted papers + parameters + rooms) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-input-loader.js`
-- [ ] T012 [P] Implement room-column slot-grid builder enforcing equal slot counts and interval spacing in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/slot-grid-builder.js`
-- [ ] T013 [P] Implement randomized initial placement service (seed-aware for tests) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/randomized-placement-service.js`
-- [ ] T014 [P] Implement scheduling-rule and conflict detection service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/conflict-detection-service.js`
-- [ ] T015 Implement draft-first persistence transaction service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-draft-persistence-service.js`
-- [ ] T016 Implement schedule API error mapper for blocked/conflict/save-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/schedule-error-mapper.js`
+- [X] T005 Create `ScheduleGenerationRequest` model with manual-trigger validation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-generation-request.js`
+- [X] T006 [P] Create `ScheduleDraft` model with `draft/published` state transitions in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-draft.js`
+- [X] T007 [P] Create `RoomColumn` and `TimeSlot` models with equal-slot and sequential-slot invariants in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-grid.js`
+- [X] T008 [P] Create `SessionPlacement` model with randomized placement rank fields in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/session-placement.js`
+- [X] T009 [P] Create `ConflictRecord` model with blocking/warning semantics in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/conflict-record.js`
+- [X] T010 Implement admin/editor authentication and role guard middleware in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/middleware/schedule-role-guard.js`
+- [X] T011 Implement conference prerequisite retrieval service (accepted papers + parameters + rooms) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-input-loader.js`
+- [X] T012 [P] Implement room-column slot-grid builder enforcing equal slot counts and interval spacing in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/slot-grid-builder.js`
+- [X] T013 [P] Implement randomized initial placement service (seed-aware for tests) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/randomized-placement-service.js`
+- [X] T014 [P] Implement scheduling-rule and conflict detection service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/conflict-detection-service.js`
+- [X] T015 Implement draft-first persistence transaction service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-draft-persistence-service.js`
+- [X] T016 Implement schedule API error mapper for blocked/conflict/save-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/schedule-error-mapper.js`
 
 **Checkpoint**: Foundation complete; user stories can proceed independently.
 
@@ -46,19 +46,19 @@
 
 ### Tests for User Story 1
 
-- [ ] T017 [P] [US1] Add contract test for successful `POST /api/v1/conferences/{conferenceId}/schedule/generate` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-schedule.contract.test.js`
-- [ ] T018 [P] [US1] Add contract test for successful `POST /api/v1/conferences/{conferenceId}/schedule/drafts/{draftId}/publish` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-publish-schedule.contract.test.js`
-- [ ] T019 [P] [US1] Add integration test for manual generation draft creation flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/manual-generate-draft.integration.test.js`
-- [ ] T020 [P] [US1] Add integration test for publish confirmation and published retrieval flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/publish-reviewed-draft.integration.test.js`
+- [X] T017 [P] [US1] Add contract test for successful `POST /api/v1/conferences/{conferenceId}/schedule/generate` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-schedule.contract.test.js`
+- [X] T018 [P] [US1] Add contract test for successful `POST /api/v1/conferences/{conferenceId}/schedule/drafts/{draftId}/publish` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-publish-schedule.contract.test.js`
+- [X] T019 [P] [US1] Add integration test for manual generation draft creation flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/manual-generate-draft.integration.test.js`
+- [X] T020 [P] [US1] Add integration test for publish confirmation and published retrieval flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/publish-reviewed-draft.integration.test.js`
 
 ### Implementation for User Story 1
 
-- [ ] T021 [US1] Implement generate-schedule controller orchestration in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/post-generate-schedule-controller.js`
-- [ ] T022 [US1] Implement publish-schedule controller with explicit confirmation requirement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/post-publish-schedule-controller.js`
-- [ ] T023 [US1] Implement published-schedule retrieval controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/get-published-schedule-controller.js`
-- [ ] T024 [P] [US1] Implement frontend manual generate action and draft rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-draft-controller.js`
-- [ ] T025 [US1] Implement frontend publish confirmation flow and success state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-publish-controller.js`
-- [ ] T026 [US1] Implement draft and publish UI states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/schedule/schedule-draft.html`
+- [X] T021 [US1] Implement generate-schedule controller orchestration in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/post-generate-schedule-controller.js`
+- [X] T022 [US1] Implement publish-schedule controller with explicit confirmation requirement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/post-publish-schedule-controller.js`
+- [X] T023 [US1] Implement published-schedule retrieval controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/get-published-schedule-controller.js`
+- [X] T024 [P] [US1] Implement frontend manual generate action and draft rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-draft-controller.js`
+- [X] T025 [US1] Implement frontend publish confirmation flow and success state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-publish-controller.js`
+- [X] T026 [US1] Implement draft and publish UI states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/schedule/schedule-draft.html`
 
 **Checkpoint**: US1 delivers MVP generation/publish flow.
 
@@ -72,17 +72,17 @@
 
 ### Tests for User Story 2
 
-- [ ] T027 [P] [US2] Add contract test for room column count and slot invariants in generate response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-grid-structure.contract.test.js`
-- [ ] T028 [P] [US2] Add integration test for equal slot counts and configured interval separation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/slot-grid-intervals.integration.test.js`
-- [ ] T029 [P] [US2] Add integration test for randomized initial placement behavior with seed support in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/randomized-placement.integration.test.js`
-- [ ] T030 [P] [US2] Add integration test for cancel-before-publish keeping draft non-public in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/cancel-publish-keeps-draft.integration.test.js`
+- [X] T027 [P] [US2] Add contract test for room column count and slot invariants in generate response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-grid-structure.contract.test.js`
+- [X] T028 [P] [US2] Add integration test for equal slot counts and configured interval separation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/slot-grid-intervals.integration.test.js`
+- [X] T029 [P] [US2] Add integration test for randomized initial placement behavior with seed support in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/randomized-placement.integration.test.js`
+- [X] T030 [P] [US2] Add integration test for cancel-before-publish keeping draft non-public in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/cancel-publish-keeps-draft.integration.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T031 [US2] Implement generation pipeline stage combining slot-grid builder and randomized placement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/generate-schedule-pipeline.js`
-- [ ] T032 [US2] Implement room unavailability handling during slot construction in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/room-availability-service.js`
-- [ ] T033 [US2] Implement frontend room-column sequential slot rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/schedule/schedule-grid-view.html`
-- [ ] T034 [US2] Implement frontend draft-cancel behavior preserving draft state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-publish-controller.js`
+- [X] T031 [US2] Implement generation pipeline stage combining slot-grid builder and randomized placement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/generate-schedule-pipeline.js`
+- [X] T032 [US2] Implement room unavailability handling during slot construction in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/room-availability-service.js`
+- [X] T033 [US2] Implement frontend room-column sequential slot rendering in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/schedule/schedule-grid-view.html`
+- [X] T034 [US2] Implement frontend draft-cancel behavior preserving draft state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-publish-controller.js`
 
 **Checkpoint**: US2 guarantees expected baseline schedule structure.
 
@@ -96,19 +96,19 @@
 
 ### Tests for User Story 3
 
-- [ ] T035 [P] [US3] Add contract test for blocked generation with no accepted papers (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-no-accepted-papers.contract.test.js`
-- [ ] T036 [P] [US3] Add contract test for blocked generation with missing parameters (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-missing-params.contract.test.js`
-- [ ] T037 [P] [US3] Add contract test for blocked publish when unresolved conflicts exist (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-publish-blocking-conflicts.contract.test.js`
-- [ ] T038 [P] [US3] Add contract test for save failure during generation (`500`) with no draft stored in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-save-failure.contract.test.js`
-- [ ] T039 [P] [US3] Add integration test for conflict highlighting and finalization blocking in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/conflict-highlight-block-publish.integration.test.js`
-- [ ] T040 [P] [US3] Add integration test for published schedule persistence across refresh/new session in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/published-schedule-persistence.integration.test.js`
+- [X] T035 [P] [US3] Add contract test for blocked generation with no accepted papers (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-no-accepted-papers.contract.test.js`
+- [X] T036 [P] [US3] Add contract test for blocked generation with missing parameters (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-missing-params.contract.test.js`
+- [X] T037 [P] [US3] Add contract test for blocked publish when unresolved conflicts exist (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-publish-blocking-conflicts.contract.test.js`
+- [X] T038 [P] [US3] Add contract test for save failure during generation (`500`) with no draft stored in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/post-generate-save-failure.contract.test.js`
+- [X] T039 [P] [US3] Add integration test for conflict highlighting and finalization blocking in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/conflict-highlight-block-publish.integration.test.js`
+- [X] T040 [P] [US3] Add integration test for published schedule persistence across refresh/new session in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/published-schedule-persistence.integration.test.js`
 
 ### Implementation for User Story 3
 
-- [ ] T041 [US3] Implement pre-generation blocking checks for accepted papers and required parameters in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/generation-prereq-validator.js`
-- [ ] T042 [US3] Implement conflict highlight mapper and publish-block enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/conflict-highlight-mapper.js`
-- [ ] T043 [US3] Implement save-failure rollback/no-store handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-draft-persistence-service.js`
-- [ ] T044 [US3] Implement frontend invalid-setup/conflict/save-failure feedback states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-error-feedback-controller.js`
+- [X] T041 [US3] Implement pre-generation blocking checks for accepted papers and required parameters in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/generation-prereq-validator.js`
+- [X] T042 [US3] Implement conflict highlight mapper and publish-block enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/schedule/conflict-highlight-mapper.js`
+- [X] T043 [US3] Implement save-failure rollback/no-store handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-draft-persistence-service.js`
+- [X] T044 [US3] Implement frontend invalid-setup/conflict/save-failure feedback states in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/schedule/schedule-error-feedback-controller.js`
 
 **Checkpoint**: US3 completes blocking/error-safe behavior.
 
@@ -118,13 +118,13 @@
 
 **Purpose**: Final parity, observability, and verification.
 
-- [ ] T045 [P] Add generation telemetry for latency and blocked-reason counters in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-generation-observability-service.js`
-- [ ] T046 [P] Add performance verification test for generation latency target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/generation-latency.integration.test.js`
-- [ ] T047 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-16.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-16-AT.md` if user-facing behavior wording changed during implementation
-- [ ] T048 Run `npm test && npm run lint` and record UC-16 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
+- [X] T045 [P] Add generation telemetry for latency and blocked-reason counters in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/schedule/schedule-generation-observability-service.js`
+- [X] T046 [P] Add performance verification test for generation latency target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/schedule/generation-latency.integration.test.js`
+- [X] T047 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-16.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-16-AT.md` if user-facing behavior wording changed during implementation
+- [X] T048 Run `npm test && npm run lint` and record UC-16 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
 
-- [ ] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
-- [ ] T050 Add contract and UI feedback test for `GET /schedule` unpublished `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/get-published-schedule-not-available.contract.test.js`
+- [X] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
+- [X] T050 Add contract and UI feedback test for `GET /schedule` unpublished `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/get-published-schedule-not-available.contract.test.js`
 
 ---
 
@@ -194,3 +194,4 @@ Task: "T033 [US2] Implement frontend room-column slot rendering in /mnt/c/Users/
 - Initial draft always uses one room column per room with equal sequential slots.
 - Unresolved blocking conflicts always prevent publication.
 - Save failure never leaves persisted partial draft.
+
