@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc08-referee-assignment/plan.md:20`, `specs/001-uc08-referee-assignment/tasks.md:13` | Plan sets 500ms p95 confirmation goal, but tasks do not include explicit performance verification. | Add performance test/measurement task in polish phase. |
-| G2 | Coverage Gap | MEDIUM | `specs/001-uc08-referee-assignment/spec.md:116`, `specs/001-uc08-referee-assignment/tasks.md:126` | SC-005 (95% one-attempt completion for valid assignments) lacks instrumentation/reporting task coverage. | Add telemetry task to track attempts and completion rate for valid-referee availability scenarios. |
 | U1 | Underspecification | LOW | `specs/001-uc08-referee-assignment/spec.md:69`, `specs/001-uc08-referee-assignment/tasks.md:103` | Concurrent assignment conflict behavior is defined at high level, but no explicit lock/version strategy is documented. | Specify optimistic lock/version check or explicit paper-level lock semantics in design docs. |
 | U2 | Underspecification | LOW | `specs/001-uc08-referee-assignment/tasks.md:111` | T037 is conditional and can lead to inconsistent execution behavior. | Convert to explicit verify-and-record UC/AT sync task regardless of changes. |
 
@@ -39,7 +37,7 @@ No fully unmapped tasks detected.
 ## Metrics
 
 - Total Requirements: 16 functional requirements (FR-001..FR-016)
-- Total Tasks: 38
+- Total Tasks: 40
 - Coverage % (requirements with >=1 task): 100%
 - Ambiguity Count: 0
 - Duplication Count: 0
