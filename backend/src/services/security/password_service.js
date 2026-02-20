@@ -39,13 +39,13 @@ export function validatePassword(password) {
 
 export function hashPassword(password) {
   const salt = crypto.randomBytes(16).toString("hex");
-  const digest = crypto.scryptSync(password, salt, 64).toString("hex");
+  const digest = crypto.pbkdf2Sync(password, salt, 10000, 32, "sha256").toString("hex");
   return `${salt}:${digest}`;
 }
 
 export function verifyPassword(password, passwordHash) {
   if (!passwordHash || !passwordHash.includes(":")) return false;
   const [salt, digest] = passwordHash.split(":");
-  const candidate = crypto.scryptSync(password, salt, 64).toString("hex");
+  const candidate = crypto.pbkdf2Sync(password, salt, 10000, 32, "sha256").toString("hex");
   return crypto.timingSafeEqual(Buffer.from(digest, "hex"), Buffer.from(candidate, "hex"));
 }

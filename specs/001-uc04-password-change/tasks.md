@@ -18,9 +18,9 @@
 
 **Purpose**: Initialize password-change feature structure and shared policy constants.
 
-- [ ] T001 Create password-change MVC scaffolding files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_service.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/password_change_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_view.js`
-- [ ] T002 Add password security policy constants (12+, composition, no spaces, history window=5) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/password_policy_config.js`
-- [ ] T003 [P] Create UC04 contract test fixtures for password-change payloads in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/password_change_payloads.js`
+- [X] T001 Create password-change MVC scaffolding files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_service.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/password_change_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_view.js`
+- [X] T002 Add password security policy constants (12+, composition, no spaces, history window=5) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/password_policy_config.js`
+- [X] T003 [P] Create UC04 contract test fixtures for password-change payloads in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/password_change_payloads.js`
 
 ---
 
@@ -30,13 +30,13 @@
 
 **CRITICAL**: No user story work begins before this phase is complete.
 
-- [ ] T004 Implement credential repository access for current password hash retrieval/update in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/credential_repository.js`
-- [ ] T005 [P] Implement password hashing and secure comparison utilities in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_crypto_service.js`
-- [ ] T006 [P] Implement password history repository with last-5 retrieval and rotation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/password_history_repository.js`
-- [ ] T007 [P] Implement password policy validator service (composition, no-space, current mismatch, history mismatch) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_policy_validator.js`
-- [ ] T008 [P] Implement atomic credential+history update transaction service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_update_transaction_service.js`
-- [ ] T009 Implement session invalidation service for active session termination after successful password change in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/session_invalidation_service.js`
-- [ ] T010 Implement password-change error/response mapper for required/current/mismatch/policy/system errors in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_error_mapper.js`
+- [X] T004 Implement credential repository access for current password hash retrieval/update in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/credential_repository.js`
+- [X] T005 [P] Implement password hashing and secure comparison utilities in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_crypto_service.js`
+- [X] T006 [P] Implement password history repository with last-5 retrieval and rotation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/password_history_repository.js`
+- [X] T007 [P] Implement password policy validator service (composition, no-space, current mismatch, history mismatch) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_policy_validator.js`
+- [X] T008 [P] Implement atomic credential+history update transaction service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_update_transaction_service.js`
+- [X] T009 Implement session invalidation service for active session termination after successful password change in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/session_invalidation_service.js`
+- [X] T010 Implement password-change error/response mapper for required/current/mismatch/policy/system errors in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_error_mapper.js`
 
 **Checkpoint**: Foundation complete; story implementation can begin.
 
@@ -50,15 +50,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Add contract tests for successful password change response and credential update semantics in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc04_password_change_success_contract.js`
-- [ ] T012 [P] [US1] Add integration test for successful password change and confirmation flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_success.js`
-- [ ] T013 [P] [US1] Add integration test for old-password-fails/new-password-succeeds login verification in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_post_change_login_behavior.js`
+- [X] T011 [P] [US1] Add contract tests for successful password change response and credential update semantics in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc04_password_change_success_contract.js`
+- [X] T012 [P] [US1] Add integration test for successful password change and confirmation flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_success.js`
+- [X] T013 [P] [US1] Add integration test for old-password-fails/new-password-succeeds login verification in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_post_change_login_behavior.js`
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Implement successful password-change orchestration (verify current, validate policy, transactional update) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_service.js`
-- [ ] T015 [US1] Implement password-change endpoint/controller success path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_controller.js`
-- [ ] T016 [US1] Implement frontend success flow and user confirmation messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/password_change_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_view.js`
+- [X] T014 [US1] Implement successful password-change orchestration (verify current, validate policy, transactional update) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_service.js`
+- [X] T015 [US1] Implement password-change endpoint/controller success path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_controller.js`
+- [X] T016 [US1] Implement frontend success flow and user confirmation messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/password_change_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_view.js`
 
 **Checkpoint**: US1 independently functional and testable (MVP complete).
 
@@ -72,15 +72,15 @@
 
 ### Tests for User Story 2
 
-- [ ] T017 [P] [US2] Add contract tests for required-field/current-password/policy/mismatch error responses in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc04_password_change_validation_contract.js`
-- [ ] T018 [P] [US2] Add integration tests for missing-fields and incorrect-current-password cases in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_required_and_current_failures.js`
-- [ ] T019 [P] [US2] Add integration tests for weak-password/current-equals-new/history-reuse/mismatch failures in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_policy_failures.js`
+- [X] T017 [P] [US2] Add contract tests for required-field/current-password/policy/mismatch error responses in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc04_password_change_validation_contract.js`
+- [X] T018 [P] [US2] Add integration tests for missing-fields and incorrect-current-password cases in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_required_and_current_failures.js`
+- [X] T019 [P] [US2] Add integration tests for weak-password/current-equals-new/history-reuse/mismatch failures in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_policy_failures.js`
 
 ### Implementation for User Story 2
 
-- [ ] T020 [US2] Implement required-field and confirmation-mismatch validation gate in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_validation_service.js`
-- [ ] T021 [US2] Implement backend error mapping for incorrect current password and password-policy violations in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_controller.js`
-- [ ] T022 [US2] Implement frontend field-level validation feedback and unchanged-state messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_validation_view.js`
+- [X] T020 [US2] Implement required-field and confirmation-mismatch validation gate in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_validation_service.js`
+- [X] T021 [US2] Implement backend error mapping for incorrect current password and password-policy violations in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/password_change_controller.js`
+- [X] T022 [US2] Implement frontend field-level validation feedback and unchanged-state messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_validation_view.js`
 
 **Checkpoint**: US2 independently functional and testable.
 
@@ -94,16 +94,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T023 [P] [US3] Add contract tests for system-failure and re-authentication-required responses in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc04_password_change_failure_contract.js`
-- [ ] T024 [P] [US3] Add integration test for credential-store failure rollback/no-partial-update behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_atomic_failure.js`
-- [ ] T025 [P] [US3] Add integration test for session invalidation immediately after successful change in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_session_invalidation_after_change.js`
-- [ ] T026 [P] [US3] Add integration test for re-authentication requirement with new password in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_reauthentication_required.js`
+- [X] T023 [P] [US3] Add contract tests for system-failure and re-authentication-required responses in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc04_password_change_failure_contract.js`
+- [X] T024 [P] [US3] Add integration test for credential-store failure rollback/no-partial-update behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_atomic_failure.js`
+- [X] T025 [P] [US3] Add integration test for session invalidation immediately after successful change in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_session_invalidation_after_change.js`
+- [X] T026 [P] [US3] Add integration test for re-authentication requirement with new password in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_reauthentication_required.js`
 
 ### Implementation for User Story 3
 
-- [ ] T027 [US3] Implement credential-store failure handling and retry-later response path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_failure_service.js`
-- [ ] T028 [US3] Integrate session invalidation trigger into successful change flow in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/session_invalidation_service.js`
-- [ ] T029 [US3] Implement frontend sign-out and re-login-required UX after success in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/password_change_post_success_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_post_success_view.js`
+- [X] T027 [US3] Implement credential-store failure handling and retry-later response path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_failure_service.js`
+- [X] T028 [US3] Integrate session invalidation trigger into successful change flow in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/session_invalidation_service.js`
+- [X] T029 [US3] Implement frontend sign-out and re-login-required UX after success in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/password_change_post_success_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/password_change_post_success_view.js`
 
 **Checkpoint**: All user stories independently functional and testable.
 
@@ -113,18 +113,18 @@
 
 **Purpose**: Hardening, traceability, and operational verification.
 
-- [ ] T030 [P] Add password-change observability metrics (latency, validation categories, failure categories) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
-- [ ] T031 [P] Add unit tests for password policy edge conditions and history-window checks in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc04_password_policy_validator.js`
+- [X] T030 [P] Add password-change observability metrics (latency, validation categories, failure categories) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
+- [X] T031 [P] Add unit tests for password policy edge conditions and history-window checks in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc04_password_policy_validator.js`
 - [ ] T032 Update implementation alignment notes and `UC-04.md` / `UC-04-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/tasks.md`
-- [ ] T033 Run `npm test && npm run lint` and record UC04 execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
+- [X] T033 Run `npm test && npm run lint` and record UC04 execution summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
 
 - [ ] T034 Validate UC-04 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04.md`
 - [ ] T035 Validate UC-04 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
 
-- [ ] T036 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/quickstart.md`
-- [ ] T037 Add password-change p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_performance.integration.js`
-- [ ] T038 Add telemetry for validation-feedback to compliant-resubmission metric (SC-005) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
-- [ ] T039 Record SC-005 measurement method and collected evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
+- [X] T036 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/quickstart.md`
+- [X] T037 Add password-change p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc04_password_change_performance.integration.js`
+- [X] T038 Add telemetry for validation-feedback to compliant-resubmission metric (SC-005) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
+- [X] T039 Record SC-005 measurement method and collected evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
 
 ---
 
@@ -203,3 +203,4 @@ Task: "T019 Policy/mismatch integration tests in /mnt/c/Users/ponti/Desktop/CMS1
 - All tasks follow strict checklist format with IDs and explicit file paths.
 - Story tasks include `[US1]`, `[US2]`, `[US3]` labels as required.
 - `[P]` markers are only assigned to safely parallelizable tasks.
+

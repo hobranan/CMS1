@@ -14,4 +14,8 @@ export class SessionService {
   isSessionActive(sessionId) {
     return this.sessions.has(sessionId);
   }
+
+  invalidateSession(sessionId) {
+    return this.sessions.delete(sessionId);
+  }
 }

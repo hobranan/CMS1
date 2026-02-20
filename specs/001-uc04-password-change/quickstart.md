@@ -5,6 +5,14 @@
 ```bash
 npm install
 npm test && npm run lint
+node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js
+```
+
+If PowerShell blocks `npm.ps1`, run:
+
+```bash
+node --test tests/**/*.js frontend/tests/**/*.js
+node ./scripts/lint.mjs
 ```
 
 ## 2. Successful password change
@@ -61,3 +69,7 @@ curl -X GET http://localhost:3000/api/v1/auth/session \
 Expected:
 - Previous session invalidated after password change.
 - User must sign in again with new password.
+
+## 7. HTML/CSS style-profile compliance
+
+- Password-change UI updates are controller/view state strings only and keep framework-free HTML/CSS behavior aligned with `docs/standards/html-css-style-profile.md`.
