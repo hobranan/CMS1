@@ -12,6 +12,7 @@
 
 - Q: How should allowed file type validation be performed? -> A: File type validation is performed by file extension only.
 - Q: What resumable upload behavior should apply after interrupted transfers? -> A: The system supports simple resume by allowing retry of the same file within 30 minutes, continuing from the last confirmed uploaded portion; after 30 minutes the upload restarts from the beginning.
+- Q: Which exact extensions are allowed for PDF, Word, and LaTeX? -> A: Allowed extensions are `.pdf`, `.doc`, `.docx`, and `.tex` (case-insensitive).
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -80,7 +81,7 @@ An author is guided to retry when uploads fail from network interruption, storag
 - **FR-001**: System MUST allow manuscript upload only for authenticated authors in a submission workflow.
 - **FR-002**: System MUST allow the author to select a local manuscript file or cancel file selection without side effects.
 - **FR-003**: System MUST validate allowed file types by extension only.
-- **FR-004**: System MUST accept only `PDF`, `Word`, or `LaTeX` manuscript file extensions.
+- **FR-004**: System MUST accept only these manuscript file extensions: `.pdf`, `.doc`, `.docx`, `.tex` (case-insensitive).
 - **FR-005**: System MUST validate file size and reject files larger than 7 MB.
 - **FR-006**: System MUST reject unsupported extensions with an error message listing allowed formats.
 - **FR-007**: System MUST reject oversized files with an error message indicating the size limit.

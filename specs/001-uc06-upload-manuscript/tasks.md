@@ -71,7 +71,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Implement extension normalization (case-insensitive) and allowed-extension enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-validation-service.js`
+- [ ] T023 [US2] Implement extension normalization (case-insensitive) and allowed-extension whitelist enforcement (`.pdf`, `.doc`, `.docx`, `.tex`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-validation-service.js`
 - [ ] T024 [US2] Implement oversize rejection messaging with explicit 7 MB limit in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/uploads/upload-error-mapper.js`
 - [ ] T025 [P] [US2] Implement frontend cancel/no-file handling to preserve current attachment state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/upload/manuscript-upload-controller.js`
 - [ ] T026 [US2] Implement frontend inline validation messages listing allowed formats and size limit in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/manuscript-upload-errors.js`

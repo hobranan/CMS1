@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | HIGH | `specs/001-uc06-upload-manuscript/spec.md:84` | FR-004 names allowed types (`PDF`, `Word`, `LaTeX`) but does not explicitly define canonical allowed extensions (for example `.pdf`, `.doc/.docx`, `.tex`). | Define explicit extension whitelist in spec and mirror it in contract/tests/tasks to avoid inconsistent validation behavior. |
 | U1 | Underspecification | MEDIUM | `specs/001-uc06-upload-manuscript/spec.md:93` | FR-014 requires restart after 30 minutes but does not define whether expired checkpoint metadata is deleted or retained. | Specify post-expiry checkpoint handling (cleanup/retention) and add corresponding task/test. |
 | G1 | Coverage Gap | MEDIUM | `specs/001-uc06-upload-manuscript/plan.md:21`, `specs/001-uc06-upload-manuscript/tasks.md:13` | Plan includes pre-upload validation response target (300ms p95), but tasks have no explicit performance verification task. | Add a performance test/measurement task and acceptance gate in polish phase. |
 | G2 | Coverage Gap | MEDIUM | `specs/001-uc06-upload-manuscript/spec.md:121`, `specs/001-uc06-upload-manuscript/tasks.md:126` | SC-004 (95% resume success within 30 minutes) has behavior tests but no metric collection/reporting task. | Add observability/reporting tasks for retry outcomes and a success-rate calculation method. |
@@ -16,7 +15,7 @@
 | upload-only-authenticated-author-in-workflow (FR-001) | Yes | T011 | Guard middleware coverage exists. |
 | file-select-or-cancel-no-side-effects (FR-002) | Yes | T019, T022, T025 | Frontend flow + integration test coverage present. |
 | extension-only-validation (FR-003) | Yes | T008, T023 | Core validation tasks mapped. |
-| allow-only-pdf-word-latex (FR-004) | Yes | T020, T023 | Coverage present, exact extension list ambiguity remains (A1). |
+| allow-only-whitelisted-extensions (FR-004) | Yes | T020, T023 | Explicit whitelist (`.pdf`, `.doc`, `.docx`, `.tex`) is defined and enforced. |
 | reject-over-7mb (FR-005) | Yes | T008, T021, T024 | Service, contract, and error mapping coverage. |
 | unsupported-extension-error-with-allowed-formats (FR-006) | Yes | T020, T024, T026 | API and UI feedback tasks mapped. |
 | oversize-error-with-limit (FR-007) | Yes | T021, T024, T026 | API and UI feedback tasks mapped. |
@@ -45,14 +44,14 @@ No fully unmapped tasks detected.
 - Total Requirements: 18 functional requirements (FR-001..FR-018)
 - Total Tasks: 38
 - Coverage % (requirements with >=1 task): 100%
-- Ambiguity Count: 1
+- Ambiguity Count: 0
 - Duplication Count: 1
 - Critical Issues Count: 0
 
 ## Next Actions
 
-- No CRITICAL blockers found.
-- Address HIGH/MEDIUM findings before `/speckit.implement` to reduce rework.
+- No CRITICAL or HIGH blockers found.
+- Address MEDIUM findings before `/speckit.implement` to reduce rework.
 - Suggested actions:
   - Refine FR-004 and FR-014 in `specs/001-uc06-upload-manuscript/spec.md`.
   - Add performance and resume-success metric tasks to `specs/001-uc06-upload-manuscript/tasks.md`.
