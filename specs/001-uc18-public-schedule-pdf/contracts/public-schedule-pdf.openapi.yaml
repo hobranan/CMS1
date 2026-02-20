@@ -2,152 +2,32 @@ openapi: 3.0.3
 info:
   title: Public Schedule PDF API
   version: 1.0.0
-  description: Contracts for public access to published conference schedule and PDF view/export.
+  description: Public schedule browsing and PDF retrieval for published conference schedules.
 paths:
   /api/v1/public/conferences/{conferenceId}/schedule:
     get:
-      summary: Get published final schedule for public view
-      parameters:
-        - name: conferenceId
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: Get public published schedule
       responses:
-        '200':
-          description: Published schedule returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicScheduleResponse'
-        '404':
-          description: Final schedule not published yet
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Schedule retrieval failure
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+        '200': { description: Public schedule returned }
+        '404': { description: Schedule not published }
+        '500': { description: Retrieval failure }
   /api/v1/public/conferences/{conferenceId}/schedule/entries/{entryId}:
     get:
-      summary: Get public schedule entry details with policy filtering
-      parameters:
-        - name: conferenceId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: entryId
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: Get public schedule entry detail
       responses:
-        '200':
-          description: Schedule entry details returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ScheduleEntryDetailResponse'
-        '404':
-          description: Entry not found or schedule unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Detail retrieval failure
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+        '200': { description: Entry detail returned }
+        '404': { description: Entry not found / schedule not published }
+        '500': { description: Retrieval failure }
   /api/v1/public/conferences/{conferenceId}/schedule.pdf:
     get:
-      summary: View or export published schedule as PDF
+      summary: Get public schedule PDF
       parameters:
-        - name: conferenceId
-          in: path
-          required: true
-          schema:
-            type: string
         - name: disposition
           in: query
-          required: false
           schema:
             type: string
             enum: [inline, attachment]
       responses:
-        '200':
-          description: PDF response
-          content:
-            application/pdf:
-              schema:
-                type: string
-                format: binary
-        '404':
-          description: Final schedule not published yet
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: PDF generation/retrieval failure
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-components:
-  schemas:
-    PublicScheduleResponse:
-      type: object
-      required: [conferenceId, published, days]
-      properties:
-        conferenceId:
-          type: string
-        published:
-          type: boolean
-          enum: [true]
-        days:
-          type: array
-          items:
-            type: object
-        generatedFrom:
-          type: string
-          enum: [published_schedule]
-    ScheduleEntryDetailResponse:
-      type: object
-      required: [entryId, title, time, location, visibleFields]
-      properties:
-        entryId:
-          type: string
-        title:
-          type: string
-        time:
-          type: string
-        location:
-          type: string
-        visibleFields:
-          type: object
-        unavailableFields:
-          type: array
-          items:
-            type: string
-        restrictedFieldsApplied:
-          type: array
-          items:
-            type: string
-    ErrorResponse:
-      type: object
-      required: [code, message]
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+        '200': { description: PDF returned }
+        '404': { description: Schedule not published }
+        '500': { description: PDF retrieval failure }

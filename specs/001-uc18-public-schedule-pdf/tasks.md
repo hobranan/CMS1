@@ -10,10 +10,10 @@
 
 **Purpose**: Prepare public schedule endpoints, PDF delivery surface, and test scaffolding.
 
-- [ ] T001 Create public-schedule feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/`
-- [ ] T002 [P] Register public schedule list/detail/pdf routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/routes.js`
-- [ ] T003 [P] Create frontend public schedule and detail view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-controller.js`
-- [ ] T004 [P] Add UC-18 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/`
+- [X] T001 Create public-schedule feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/`
+- [X] T002 [P] Register public schedule list/detail/pdf routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/routes.js`
+- [X] T003 [P] Create frontend public schedule and detail view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-controller.js`
+- [X] T004 [P] Add UC-18 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/`
 
 ---
 
@@ -21,16 +21,16 @@
 
 **Purpose**: Implement publication-state gating, detail shaping, PDF artifact service, and error mapping.
 
-- [ ] T005 Create `PublicScheduleAvailability` model for published/unpublished gating in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/public-schedule-availability.js`
-- [ ] T006 [P] Create `PublishedSchedule` and `ScheduleEntry` models with required core fields in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/public-schedule-models.js`
-- [ ] T007 [P] Create `ScheduleDetailProjection` model with visible/restricted/unavailable fields in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-detail-projection.js`
-- [ ] T008 [P] Create `PublicPdfArtifact` model and metadata mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/public-pdf-artifact.js`
-- [ ] T009 Implement publication-state loader service to block unpublished content in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/publication-state-service.js`
-- [ ] T010 [P] Implement public schedule retrieval service grouped by day/session in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-retrieval-service.js`
-- [ ] T011 [P] Implement detail projection service with unavailable markers in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-detail-service.js`
-- [ ] T012 [P] Implement policy-based field restriction service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/field-restriction-policy-service.js`
-- [ ] T013 [P] Implement PDF view/export service (inline vs attachment disposition) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-pdf-service.js`
-- [ ] T014 Implement public schedule API error mapper for `404`/`500` outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/public-schedule-error-mapper.js`
+- [X] T005 Create `PublicScheduleAvailability` model for published/unpublished gating in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/public-schedule-availability.js`
+- [X] T006 [P] Create `PublishedSchedule` and `ScheduleEntry` models with required core fields in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/public-schedule-models.js`
+- [X] T007 [P] Create `ScheduleDetailProjection` model with visible/restricted/unavailable fields in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/schedule-detail-projection.js`
+- [X] T008 [P] Create `PublicPdfArtifact` model and metadata mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/public-pdf-artifact.js`
+- [X] T009 Implement publication-state loader service to block unpublished content in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/publication-state-service.js`
+- [X] T010 [P] Implement public schedule retrieval service grouped by day/session in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-retrieval-service.js`
+- [X] T011 [P] Implement detail projection service with unavailable markers in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-detail-service.js`
+- [X] T012 [P] Implement policy-based field restriction service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/field-restriction-policy-service.js`
+- [X] T013 [P] Implement PDF view/export service (inline vs attachment disposition) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-pdf-service.js`
+- [X] T014 Implement public schedule API error mapper for `404`/`500` outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/public-schedule-error-mapper.js`
 
 **Checkpoint**: Foundation complete; user stories can proceed independently.
 
@@ -44,17 +44,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T015 [P] [US1] Add contract test for successful `GET /api/v1/public/conferences/{conferenceId}/schedule` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule.contract.test.js`
-- [ ] T016 [P] [US1] Add contract test for unpublished schedule `404` not-available response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-not-published.contract.test.js`
-- [ ] T017 [P] [US1] Add integration test for unauthenticated published schedule access in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/public-access-published.integration.test.js`
-- [ ] T018 [P] [US1] Add integration test for direct-link access and stable refresh behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/direct-link-refresh-stability.integration.test.js`
+- [X] T015 [P] [US1] Add contract test for successful `GET /api/v1/public/conferences/{conferenceId}/schedule` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule.contract.test.js`
+- [X] T016 [P] [US1] Add contract test for unpublished schedule `404` not-available response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-not-published.contract.test.js`
+- [X] T017 [P] [US1] Add integration test for unauthenticated published schedule access in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/public-access-published.integration.test.js`
+- [X] T018 [P] [US1] Add integration test for direct-link access and stable refresh behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/direct-link-refresh-stability.integration.test.js`
 
 ### Implementation for User Story 1
 
-- [ ] T019 [US1] Implement public schedule list controller with publication gating in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/get-public-schedule-controller.js`
-- [ ] T020 [US1] Implement frontend public schedule loader for unauthenticated users in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-controller.js`
-- [ ] T021 [US1] Implement frontend day/session grouped rendering with time/location in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule.html`
-- [ ] T022 [US1] Implement unpublished schedule not-available state view in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule-unavailable.html`
+- [X] T019 [US1] Implement public schedule list controller with publication gating in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/get-public-schedule-controller.js`
+- [X] T020 [US1] Implement frontend public schedule loader for unauthenticated users in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-controller.js`
+- [X] T021 [US1] Implement frontend day/session grouped rendering with time/location in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule.html`
+- [X] T022 [US1] Implement unpublished schedule not-available state view in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule-unavailable.html`
 
 **Checkpoint**: US1 delivers MVP public schedule visibility.
 
@@ -68,18 +68,18 @@
 
 ### Tests for User Story 2
 
-- [ ] T023 [P] [US2] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule/entries/{entryId}` success in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-entry-detail.contract.test.js`
-- [ ] T024 [P] [US2] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule.pdf` inline PDF response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-inline.contract.test.js`
-- [ ] T025 [P] [US2] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule.pdf?disposition=attachment` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-attachment.contract.test.js`
-- [ ] T026 [P] [US2] Add integration test for detail view with unavailable optional fields marker in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/detail-unavailable-fields.integration.test.js`
+- [X] T023 [P] [US2] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule/entries/{entryId}` success in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-entry-detail.contract.test.js`
+- [X] T024 [P] [US2] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule.pdf` inline PDF response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-inline.contract.test.js`
+- [X] T025 [P] [US2] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule.pdf?disposition=attachment` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-attachment.contract.test.js`
+- [X] T026 [P] [US2] Add integration test for detail view with unavailable optional fields marker in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/detail-unavailable-fields.integration.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Implement public schedule detail controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/get-public-schedule-entry-controller.js`
-- [ ] T028 [US2] Implement PDF endpoint controller with disposition handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/get-public-schedule-pdf-controller.js`
-- [ ] T029 [US2] Implement frontend session detail panel and entry selection behavior in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-detail-controller.js`
-- [ ] T030 [US2] Implement frontend PDF view/export actions in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-pdf-controller.js`
-- [ ] T031 [US2] Implement public session detail view template with unavailable markers in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule-detail.html`
+- [X] T027 [US2] Implement public schedule detail controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/get-public-schedule-entry-controller.js`
+- [X] T028 [US2] Implement PDF endpoint controller with disposition handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/get-public-schedule-pdf-controller.js`
+- [X] T029 [US2] Implement frontend session detail panel and entry selection behavior in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-detail-controller.js`
+- [X] T030 [US2] Implement frontend PDF view/export actions in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-pdf-controller.js`
+- [X] T031 [US2] Implement public session detail view template with unavailable markers in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule-detail.html`
 
 **Checkpoint**: US2 provides detail browsing plus PDF view/export.
 
@@ -93,18 +93,18 @@
 
 ### Tests for User Story 3
 
-- [ ] T032 [P] [US3] Add contract test for schedule retrieval `500` error response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-retrieval-failure.contract.test.js`
-- [ ] T033 [P] [US3] Add contract test for entry detail `404` unavailable response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-entry-detail-not-found.contract.test.js`
-- [ ] T034 [P] [US3] Add contract test for PDF retrieval `500` error response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-failure.contract.test.js`
-- [ ] T035 [P] [US3] Add integration test for restricted-field policy behavior (restricted hidden, allowed visible) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/restricted-field-policy.integration.test.js`
-- [ ] T036 [P] [US3] Add integration test for schedule-list success with single-detail retrieval failure handling in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/detail-record-failure-handling.integration.test.js`
+- [X] T032 [P] [US3] Add contract test for schedule retrieval `500` error response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-retrieval-failure.contract.test.js`
+- [X] T033 [P] [US3] Add contract test for entry detail `404` unavailable response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-entry-detail-not-found.contract.test.js`
+- [X] T034 [P] [US3] Add contract test for PDF retrieval `500` error response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-failure.contract.test.js`
+- [X] T035 [P] [US3] Add integration test for restricted-field policy behavior (restricted hidden, allowed visible) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/restricted-field-policy.integration.test.js`
+- [X] T036 [P] [US3] Add integration test for schedule-list success with single-detail retrieval failure handling in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/detail-record-failure-handling.integration.test.js`
 
 ### Implementation for User Story 3
 
-- [ ] T037 [US3] Implement retrieval-failure safe response handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-retrieval-service.js`
-- [ ] T038 [US3] Implement restricted-field projection in detail response mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/public-schedule-detail-response-mapper.js`
-- [ ] T039 [US3] Implement frontend retrieval-error states for schedule/detail/pdf paths in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-error-feedback-controller.js`
-- [ ] T040 [US3] Implement frontend policy-restriction indicators in detail UI in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule-detail-policy-notes.html`
+- [X] T037 [US3] Implement retrieval-failure safe response handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-retrieval-service.js`
+- [X] T038 [US3] Implement restricted-field projection in detail response mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-schedule/public-schedule-detail-response-mapper.js`
+- [X] T039 [US3] Implement frontend retrieval-error states for schedule/detail/pdf paths in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-schedule/public-schedule-error-feedback-controller.js`
+- [X] T040 [US3] Implement frontend policy-restriction indicators in detail UI in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-schedule/public-schedule-detail-policy-notes.html`
 
 **Checkpoint**: US3 completes safe failure and restriction handling.
 
@@ -114,13 +114,13 @@
 
 **Purpose**: Final observability, stability verification, and traceability.
 
-- [ ] T041 [P] Add telemetry for public schedule/PDF request latency and failure codes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-observability-service.js`
-- [ ] T042 [P] Add high-access PDF response stability test in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/pdf-high-volume-stability.integration.test.js`
-- [ ] T043 [P] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule.pdf` unpublished `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-not-published.contract.test.js`
-- [ ] T044 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-18.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-18-AT.md` if user-facing wording changed during implementation
-- [ ] T045 Run `npm test && npm run lint` and record UC-18 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc18-public-schedule-pdf/quickstart.md`
+- [X] T041 [P] Add telemetry for public schedule/PDF request latency and failure codes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-schedule/public-schedule-observability-service.js`
+- [X] T042 [P] Add high-access PDF response stability test in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-schedule/pdf-high-volume-stability.integration.test.js`
+- [X] T043 [P] Add contract test for `GET /api/v1/public/conferences/{conferenceId}/schedule.pdf` unpublished `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-schedule/get-public-schedule-pdf-not-published.contract.test.js`
+- [X] T044 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-18.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-18-AT.md` if user-facing wording changed during implementation
+- [X] T045 Run `npm test && npm run lint` and record UC-18 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc18-public-schedule-pdf/quickstart.md`
 
-- [ ] T046 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc18-public-schedule-pdf/quickstart.md`
+- [X] T046 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc18-public-schedule-pdf/quickstart.md`
 
 ---
 
@@ -190,3 +190,4 @@ Task: "T026 [US2] Add unavailable-field marker integration test in /mnt/c/Users/
 - Public schedule viewing and export both use PDF format.
 - Restricted fields are hidden while non-restricted fields remain visible.
 - Retrieval failures return explicit error responses without leaking final schedule content.
+

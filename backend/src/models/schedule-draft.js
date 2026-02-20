@@ -7,6 +7,9 @@ export class ScheduleDraftRepository {
     this.publishedByConference = new Map();
     this.failNextSave = false;
     this.failNextEditSave = false;
+    this.failNextPublicScheduleRead = false;
+    this.failNextPublicEntryRead = false;
+    this.failNextPublicPdfRead = false;
   }
 
   seedConference({
@@ -76,5 +79,17 @@ export class ScheduleDraftRepository {
 
   failNextScheduleEditSave() {
     this.failNextEditSave = true;
+  }
+
+  failNextPublicSchedule() {
+    this.failNextPublicScheduleRead = true;
+  }
+
+  failNextPublicEntry() {
+    this.failNextPublicEntryRead = true;
+  }
+
+  failNextPublicPdf() {
+    this.failNextPublicPdfRead = true;
   }
 }
