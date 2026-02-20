@@ -88,7 +88,7 @@
 
 **Expected Results:**
 - The system does not authenticate the user.
-- The system displays an error message indicating the username is not recognized (or credentials invalid, depending on design).
+- The system displays the generic message: `Invalid email or password.`
 - The user remains on the login page.
 
 ---
@@ -109,7 +109,7 @@
 
 **Expected Results:**
 - The system does not authenticate the user.
-- The system displays an error message indicating invalid credentials.
+- The system displays the generic message: `Invalid email or password.`
 - The user remains on the login page.
 
 ---

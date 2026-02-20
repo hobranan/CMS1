@@ -101,7 +101,7 @@
 
 ### Implementation for User Story 3
 
-- [ ] T027 [US3] Implement unknown-email and wrong-password failure mapping with retry-oriented messaging in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_failure_service.js`
+- [ ] T027 [US3] Implement unknown-email and wrong-password failure mapping using one generic message (`Invalid email or password.`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_failure_service.js`
 - [ ] T028 [US3] Integrate lockout policy enforcement (threshold, deny window, reset logic) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/lockout_policy_service.js`
 - [ ] T029 [US3] Implement credential-store outage fail-closed path and retry-later response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
 - [ ] T030 [US3] Implement frontend messaging flows for invalid/locked/system-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_error_state_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_error_state_view.js`

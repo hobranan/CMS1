@@ -12,6 +12,7 @@
 
 - Q: What identifier is used as username for login? -> A: Username is the registered email address.
 - Q: How should repeated failed login attempts be handled? -> A: Apply a simple lockout policy: 5 consecutive failed attempts trigger a 15-minute lockout; the failed-attempt counter resets after a successful login or after lockout expiry.
+- Q: Should unknown-email and wrong-password show different error messages? -> A: No. Use one generic retry-oriented message for both: "Invalid email or password."
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -55,8 +56,8 @@ A user who cannot be authenticated due to unknown email, wrong password, lockout
 
 **Acceptance Scenarios**:
 
-1. **Given** no account exists for the submitted email, **When** the user submits the login form, **Then** the system does not authenticate the user, displays an invalid or unrecognized email/credential message, and keeps the user on the login page.
-2. **Given** an account exists and the submitted password is incorrect, **When** the user submits the login form, **Then** the system does not authenticate the user, displays an invalid credential message, and keeps the user on the login page.
+1. **Given** no account exists for the submitted email, **When** the user submits the login form, **Then** the system does not authenticate the user, displays the generic message "Invalid email or password.", and keeps the user on the login page.
+2. **Given** an account exists and the submitted password is incorrect, **When** the user submits the login form, **Then** the system does not authenticate the user, displays the generic message "Invalid email or password.", and keeps the user on the login page.
 3. **Given** a user reaches the failed-attempt threshold, **When** they attempt login during the lockout window, **Then** the system denies authentication, shows a temporary lockout message, and allows retry after lockout expiry.
 4. **Given** the credential store is unavailable, **When** a user submits login credentials, **Then** the system does not authenticate the user, displays a system problem message, and allows retry later from the login page.
 
@@ -85,8 +86,8 @@ A user who cannot be authenticated due to unknown email, wrong password, lockout
 - **FR-007**: System MUST authenticate the user only when submitted credentials match stored credentials.
 - **FR-008**: System MUST establish an authenticated session after successful authentication.
 - **FR-009**: System MUST redirect authenticated users to their personalized dashboard/home page after successful login.
-- **FR-010**: System MUST deny authentication when the submitted email address is not recognized and display a clear retry-oriented error message.
-- **FR-011**: System MUST deny authentication when the submitted password does not match and display a clear retry-oriented error message.
+- **FR-010**: System MUST deny authentication when the submitted email address is not recognized and display the generic retry-oriented message "Invalid email or password."
+- **FR-011**: System MUST deny authentication when the submitted password does not match and display the generic retry-oriented message "Invalid email or password."
 - **FR-012**: System MUST handle credential-store access failures by denying authentication, informing the user of a temporary system problem, and allowing retry later.
 - **FR-013**: System MUST keep users on (or return users to) the login page after any failed login attempt.
 - **FR-014**: System MUST allow authenticated users to access protected dashboard resources during the active session.
