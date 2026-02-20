@@ -34,3 +34,28 @@ Deliver invitation accept/reject behavior with 14-day expiry enforcement, action
 ## Verification
 - Run `npm test && npm run lint`.
 - Execute integration/contract tests for scenarios above, including concurrent multi-session response attempts.
+
+## Automated test execution
+
+```bash
+node --test tests/contract/invitations/*.test.js tests/integration/invitations/*.test.js
+```
+
+Expected:
+- All UC-10 invitation contract and integration tests pass.
+
+## Style profile verification (HTML/CSS subset)
+
+- Verified `frontend/src/views/invitation-list.html` against `docs/standards/html-css-style-profile.md`.
+- Confirmed semantic section structure, lower-case tags, and no inline style/script usage.
+
+## Verification notes
+
+- SC-003 evidence:
+  - `tests/contract/invitations/post-invitation-response-expiry-boundary.contract.test.js`
+- SC-005 evidence:
+  - `tests/contract/invitations/post-invitation-response-db-failure.contract.test.js`
+  - `tests/contract/invitations/post-invitation-response-notification-failure.contract.test.js`
+  - `tests/integration/invitations/failure-integrity.integration.test.js`
+- Performance evidence:
+  - `tests/integration/invitations/invitation-response-performance.integration.test.js` verifies p95 < 300ms.

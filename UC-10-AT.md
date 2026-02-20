@@ -1,164 +1,176 @@
-# Acceptance Test Suite — UC-10 Respond to Review Invitation (Accept/Reject)
+# Acceptance Test Suite - UC-10 Respond to Review Invitation (Accept/Reject)
 
 ## Assumptions / Notes
 - Referees must be logged in to respond to invitations.
-- Invitations have a status (pending, accepted, rejected, expired/withdrawn).
-- Invitation expiry is evaluated server-side in UTC (`issued_at_utc + 14 days`).
-- Responding updates invitation status and may create/activate an assignment on acceptance.
-- Notifications are sent to the editor when possible.
+- Invitations have status values: pending, accepted, rejected, expired, withdrawn.
+- Expiry is evaluated server-side in UTC:
+  - `now_utc >= issued_at_utc + 14 days` means expired.
+- Responding updates invitation status and may activate assignment on acceptance.
+- Editor notification is attempted after response commit.
 
 ---
 
-## AT-UC10-01 — Accept Invitation Successfully (Main Success Scenario)
+## AT-UC10-01 - Accept Invitation Successfully
 
-**Objective:** Verify a referee can accept a pending invitation and the assignment becomes active.
-
-**Preconditions:**
-- Referee is logged in.
-- A pending invitation exists for Paper P1.
-
-**Steps:**
-1. Navigate to pending invitations.
-2. Open the invitation for Paper P1.
-3. Select **Accept**.
-4. Confirm the action (if confirmation exists).
-
-**Expected Results:**
-- The system validates the invitation is pending.
-- Invitation status is updated to **Accepted**.
-- Paper P1 appears in the referee’s assigned papers list.
-- The system displays confirmation to the referee.
-- The editor is notified (if notifications are enabled).
-
----
-
-## AT-UC10-02 — Reject Invitation Successfully (Main Success Scenario)
-
-**Objective:** Verify a referee can reject a pending invitation and the assignment is not activated.
-
-**Preconditions:**
-- Referee is logged in.
-- A pending invitation exists for Paper P2.
-
-**Steps:**
-1. Navigate to pending invitations.
-2. Open the invitation for Paper P2.
-3. Select **Reject**.
-4. Confirm the action (if confirmation exists).
-
-**Expected Results:**
-- Invitation status is updated to **Rejected**.
-- Paper P2 does not appear in the referee’s assigned papers list.
-- The system displays confirmation to the referee.
-- The editor is notified (if notifications are enabled).
-
----
-
-## AT-UC10-03 — No Pending Invitations (Extension 1a)
-
-**Objective:** Verify the system handles the case where there are no pending invitations.
-
-**Preconditions:**
-- Referee is logged in.
-- Referee has zero pending invitations.
-
-**Steps:**
-1. Navigate to pending invitations.
-
-**Expected Results:**
-- The system displays a message indicating no pending invitations.
-- No accept/reject actions are available.
-
----
-
-## AT-UC10-04 — Invitation Not Pending (Extension 5a)
-
-**Objective:** Verify the system blocks responses to non-pending invitations.
-
-**Preconditions:**
-- Referee is logged in.
-- An invitation exists but is not pending (expired/withdrawn/already responded).
-
-**Steps:**
-1. Attempt to open the invitation and respond with **Accept** or **Reject**.
-
-**Expected Results:**
-- The system prevents the response.
-- A message indicates the invitation cannot be responded to.
-- Invitation status remains unchanged.
-
----
-
-## AT-UC10-05 — Cancel Before Confirming (Extension 4a)
-
-**Objective:** Verify no changes occur if the referee cancels before confirming.
+**Objective:** Verify a referee can accept a pending invitation and assignment becomes active.
 
 **Preconditions:**
 - Referee is logged in.
 - A pending invitation exists.
 
 **Steps:**
-1. Open a pending invitation.
-2. Start an accept/reject action but cancel (navigate away/close dialog).
+1. Navigate to pending invitations.
+2. Open an invitation.
+3. Select **Accept**.
+4. Confirm response.
+
+**Expected Results:**
+- Invitation status updates to **accepted**.
+- Assignment becomes active for the invitation.
+- Confirmation is shown.
+
+---
+
+## AT-UC10-02 - Reject Invitation Successfully
+
+**Objective:** Verify a referee can reject a pending invitation and assignment remains inactive.
+
+**Preconditions:**
+- Referee is logged in.
+- A pending invitation exists.
+
+**Steps:**
+1. Navigate to pending invitations.
+2. Open an invitation.
+3. Select **Reject**.
+4. Confirm response.
+
+**Expected Results:**
+- Invitation status updates to **rejected**.
+- Assignment is not activated.
+- Confirmation is shown.
+
+---
+
+## AT-UC10-03 - No Pending Invitations
+
+**Objective:** Verify the system handles no pending invitations.
+
+**Preconditions:**
+- Referee is logged in.
+- Referee has no actionable pending invitations.
+
+**Steps:**
+1. Navigate to pending invitations.
+
+**Expected Results:**
+- System shows a no-pending message.
+- No response actions are available.
+
+---
+
+## AT-UC10-04 - Non-Actionable Invitation Blocked
+
+**Objective:** Verify responses to non-actionable invitations are blocked.
+
+**Preconditions:**
+- Referee is logged in.
+- Invitation is withdrawn, expired, or already responded.
+
+**Steps:**
+1. Attempt accept or reject on the invitation.
+
+**Expected Results:**
+- System blocks the action.
+- Invitation status remains unchanged.
+- Blocked-action feedback is shown.
+
+---
+
+## AT-UC10-05 - Expiry Boundary Enforcement
+
+**Objective:** Verify exact 14-day boundary is treated as expired.
+
+**Preconditions:**
+- Referee is logged in.
+- Invitation issued exactly 14 days before current server UTC time.
+
+**Steps:**
+1. Attempt to respond to the invitation.
+
+**Expected Results:**
+- System blocks response as expired.
+- Invitation status remains pending/unchanged.
+
+---
+
+## AT-UC10-06 - Cancel Before Confirm
+
+**Objective:** Verify canceling before confirmation causes no mutation.
+
+**Preconditions:**
+- Referee is logged in.
+- A pending invitation exists.
+
+**Steps:**
+1. Start accept/reject action.
+2. Cancel before confirmation.
 
 **Expected Results:**
 - No response is recorded.
-- Invitation remains **Pending**.
+- Invitation remains pending.
 
 ---
 
-## AT-UC10-06 — Database Error on Recording Response (Extension 6a)
+## AT-UC10-07 - Database Failure on Response Commit
 
-**Objective:** Verify system behavior when response cannot be recorded due to database error.
+**Objective:** Verify persistence failure leaves invitation unchanged.
 
 **Preconditions:**
 - Referee is logged in.
 - Pending invitation exists.
-- Ability to simulate database failure on update.
+- Persistence failure is simulated.
 
 **Steps:**
-1. Open a pending invitation.
-2. Select **Accept** (or **Reject**).
-3. Submit response while database update is failing.
+1. Submit accept/reject response.
 
 **Expected Results:**
-- The response is not recorded.
-- Invitation remains **Pending**.
-- The system displays a system error message advising retry later.
+- System returns persistence/system error.
+- Invitation remains pending.
+- No response record is committed.
 
 ---
 
-## AT-UC10-07 — Notification Failure After Response Recorded (Extension 8a)
+## AT-UC10-08 - Notification Failure After Commit
 
-**Objective:** Verify system behavior when notifications fail after recording a response.
+**Objective:** Verify notification failure does not roll back committed response.
 
 **Preconditions:**
 - Referee is logged in.
 - Pending invitation exists.
-- Ability to simulate notification service failure.
+- Notification failure is simulated.
 
 **Steps:**
-1. Open a pending invitation.
-2. Accept or reject the invitation while the notification service is failing.
+1. Submit accept/reject response.
 
 **Expected Results:**
-- Invitation status is updated appropriately (Accepted/Rejected).
-- The system informs the referee that notifications could not be sent.
-- The recorded response remains consistent (not lost).
+- Response remains committed (accepted/rejected).
+- System returns notification failure feedback.
+- Notification status reports failure.
 
 ---
 
-## AT-UC10-08 — Persistence Check: Invitation Status Updates in List
+## AT-UC10-09 - Multi-Session Stale Conflict
 
-**Objective:** Verify the invitation list reflects the updated status after responding.
+**Objective:** Verify stale concurrent response attempts get canonical conflict message.
 
 **Preconditions:**
-- AT-UC10-01 or AT-UC10-02 completed successfully.
+- Same invitation is open in multiple sessions.
 
 **Steps:**
-1. Return to the invitations list.
-2. Refresh the page (or re-open invitations list).
+1. Respond in session A.
+2. Respond in session B using stale pending state.
 
 **Expected Results:**
-- The invitation no longer appears as pending.
-- The invitation is shown as Accepted/Rejected (or moved to a history section).
+- Session B receives conflict response.
+- Message is: "Invitation state changed. Refresh and try again."

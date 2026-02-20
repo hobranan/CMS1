@@ -10,10 +10,10 @@
 
 **Purpose**: Prepare invitation-response API endpoints, referee invitation UI shells, and test scaffolding.
 
-- [ ] T001 Create invitation-response feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/`
-- [ ] T002 [P] Register invitation pending-list and response routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/routes.js`
-- [ ] T003 [P] Create referee invitation list/detail UI/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-list.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-response-controller.js`
-- [ ] T004 [P] Add UC-10 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/`
+- [X] T001 Create invitation-response feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/`
+- [X] T002 [P] Register invitation pending-list and response routes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/routes.js`
+- [X] T003 [P] Create referee invitation list/detail UI/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-list.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-response-controller.js`
+- [X] T004 [P] Add UC-10 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/`
 
 ---
 
@@ -21,13 +21,13 @@
 
 **Purpose**: Implement shared invitation state rules, expiry policy, persistence, and notification integration.
 
-- [ ] T005 Create `ReviewInvitation` model with actionable-state and expiry derivation rules in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/review-invitation.js`
-- [ ] T006 [P] Create `InvitationResponse` model with single-effective-response constraints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/invitation-response.js`
-- [ ] T007 [P] Create `ReviewAssignmentActivation` model with accept-only activation invariant in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/review-assignment-activation.js`
-- [ ] T008 Implement invitation actionable-state validation service (`pending`, not expired, not withdrawn, not responded) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-actionable-validation-service.js`
-- [ ] T009 [P] Implement 14-day expiry policy utility with server-side UTC boundary behavior (`now_utc >= issued_at_utc + 14 days` => expired) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-expiry-service.js`
-- [ ] T010 Implement response persistence service with no-mutation-on-db-failure guarantees in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-response-persistence-service.js`
-- [ ] T011 [P] Implement post-commit notification adapter that reports failure without rolling back response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-notification-service.js`
+- [X] T005 Create `ReviewInvitation` model with actionable-state and expiry derivation rules in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/review-invitation.js`
+- [X] T006 [P] Create `InvitationResponse` model with single-effective-response constraints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/invitation-response.js`
+- [X] T007 [P] Create `ReviewAssignmentActivation` model with accept-only activation invariant in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/review-assignment-activation.js`
+- [X] T008 Implement invitation actionable-state validation service (`pending`, not expired, not withdrawn, not responded) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-actionable-validation-service.js`
+- [X] T009 [P] Implement 14-day expiry policy utility with server-side UTC boundary behavior (`now_utc >= issued_at_utc + 14 days` => expired) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-expiry-service.js`
+- [X] T010 Implement response persistence service with no-mutation-on-db-failure guarantees in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-response-persistence-service.js`
+- [X] T011 [P] Implement post-commit notification adapter that reports failure without rolling back response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-notification-service.js`
 
 **Checkpoint**: Foundation complete; user stories can proceed independently.
 
@@ -41,17 +41,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T012 [P] [US1] Add contract test for successful accept response on actionable invitation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-accept.contract.test.js`
-- [ ] T013 [P] [US1] Add contract test for successful reject response on actionable invitation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-reject.contract.test.js`
-- [ ] T014 [P] [US1] Add integration test verifying accepted response activates assignment and rejected response does not in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/response-assignment-activation.integration.test.js`
+- [X] T012 [P] [US1] Add contract test for successful accept response on actionable invitation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-accept.contract.test.js`
+- [X] T013 [P] [US1] Add contract test for successful reject response on actionable invitation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-reject.contract.test.js`
+- [X] T014 [P] [US1] Add integration test verifying accepted response activates assignment and rejected response does not in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/response-assignment-activation.integration.test.js`
 
 ### Implementation for User Story 1
 
-- [ ] T015 [P] [US1] Implement pending invitation list controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/get-pending-invitations-controller.js`
-- [ ] T016 [US1] Implement invitation response controller for accept/reject requests in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/post-invitation-response-controller.js`
-- [ ] T017 [US1] Implement response orchestration linking persistence, assignment activation, and notification attempt in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/process-invitation-response-service.js`
-- [ ] T018 [P] [US1] Implement frontend pending invitation rendering and Accept/Reject actions in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-list.html`
-- [ ] T019 [US1] Implement frontend response confirmation and status refresh flow in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-response-controller.js`
+- [X] T015 [P] [US1] Implement pending invitation list controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/get-pending-invitations-controller.js`
+- [X] T016 [US1] Implement invitation response controller for accept/reject requests in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/post-invitation-response-controller.js`
+- [X] T017 [US1] Implement response orchestration linking persistence, assignment activation, and notification attempt in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/process-invitation-response-service.js`
+- [X] T018 [P] [US1] Implement frontend pending invitation rendering and Accept/Reject actions in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-list.html`
+- [X] T019 [US1] Implement frontend response confirmation and status refresh flow in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-response-controller.js`
 
 **Checkpoint**: US1 delivers MVP invitation response behavior.
 
@@ -65,16 +65,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T020 [P] [US2] Add contract test for non-actionable invitation state rejection (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-invalid-state.contract.test.js`
-- [ ] T021 [P] [US2] Add contract test for exact 14-day boundary expiry blocking in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-expiry-boundary.contract.test.js`
-- [ ] T022 [P] [US2] Add integration test for concurrent multi-session stale-response blocking (`409`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/concurrent-response-conflict.integration.test.js`
+- [X] T020 [P] [US2] Add contract test for non-actionable invitation state rejection (`400`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-invalid-state.contract.test.js`
+- [X] T021 [P] [US2] Add contract test for exact 14-day boundary expiry blocking in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-expiry-boundary.contract.test.js`
+- [X] T022 [P] [US2] Add integration test for concurrent multi-session stale-response blocking (`409`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/concurrent-response-conflict.integration.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Implement invitation-state revalidation immediately before persistence in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/process-invitation-response-service.js`
-- [ ] T024 [US2] Implement invalid-state/expiry error response mapper including canonical stale-state conflict message and refresh guidance in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/invitation-response-error-mapper.js`
-- [ ] T025 [P] [US2] Implement no-pending and blocked-action UI messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-state-feedback.js`
-- [ ] T026 [US2] Remove responded invitations from pending view and update invitation history projection in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-list-projection-service.js`
+- [X] T023 [US2] Implement invitation-state revalidation immediately before persistence in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/process-invitation-response-service.js`
+- [X] T024 [US2] Implement invalid-state/expiry error response mapper including canonical stale-state conflict message and refresh guidance in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/invitation-response-error-mapper.js`
+- [X] T025 [P] [US2] Implement no-pending and blocked-action UI messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/invitation-state-feedback.js`
+- [X] T026 [US2] Remove responded invitations from pending view and update invitation history projection in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-list-projection-service.js`
 
 **Checkpoint**: US2 enforces actionable-state guardrails.
 
@@ -88,17 +88,17 @@
 
 ### Tests for User Story 3
 
-- [ ] T027 [P] [US3] Add contract test for db-failure path keeping invitation pending (`500`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-db-failure.contract.test.js`
-- [ ] T028 [P] [US3] Add contract test for notification-failure path preserving response with `notificationStatus=failed` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-notification-failure.contract.test.js`
-- [ ] T029 [P] [US3] Add integration test for cancel-before-confirm with no status mutation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/cancel-no-mutation.integration.test.js`
-- [ ] T030 [P] [US3] Add integration test ensuring db failure leaves status unchanged and notification failure preserves committed response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/failure-integrity.integration.test.js`
+- [X] T027 [P] [US3] Add contract test for db-failure path keeping invitation pending (`500`) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-db-failure.contract.test.js`
+- [X] T028 [P] [US3] Add contract test for notification-failure path preserving response with `notificationStatus=failed` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/invitations/post-invitation-response-notification-failure.contract.test.js`
+- [X] T029 [P] [US3] Add integration test for cancel-before-confirm with no status mutation in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/cancel-no-mutation.integration.test.js`
+- [X] T030 [P] [US3] Add integration test ensuring db failure leaves status unchanged and notification failure preserves committed response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/failure-integrity.integration.test.js`
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Implement cancel-before-confirm no-op pathway in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-response-controller.js`
-- [ ] T032 [US3] Implement transactional db-failure handling with rollback/no-mutation guarantees in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-response-persistence-service.js`
-- [ ] T033 [US3] Implement notification-failure post-commit feedback mapping in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/invitation-notification-failure-mapper.js`
-- [ ] T034 [P] [US3] Implement frontend system/notification failure messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-failure-controller.js`
+- [X] T031 [US3] Implement cancel-before-confirm no-op pathway in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-response-controller.js`
+- [X] T032 [US3] Implement transactional db-failure handling with rollback/no-mutation guarantees in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-response-persistence-service.js`
+- [X] T033 [US3] Implement notification-failure post-commit feedback mapping in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/invitations/invitation-notification-failure-mapper.js`
+- [X] T034 [P] [US3] Implement frontend system/notification failure messaging in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/invitations/invitation-failure-controller.js`
 
 **Checkpoint**: US3 completes failure-safe response behavior.
 
@@ -108,14 +108,14 @@
 
 **Purpose**: Finalize contract/docs parity and full quality checks.
 
-- [ ] T035 [P] Update contract examples/status codes for finalized invitation response behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/contracts/invitation-response.openapi.yaml`
-- [ ] T036 Update quickstart scenarios with final boundary and failure validation steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
-- [ ] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-10.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-10-AT.md` and record whether user-facing wording changes were required during implementation
-- [ ] T038 Run `npm test && npm run lint` and record UC-10 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
+- [X] T035 [P] Update contract examples/status codes for finalized invitation response behavior in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/contracts/invitation-response.openapi.yaml`
+- [X] T036 Update quickstart scenarios with final boundary and failure validation steps in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
+- [X] T037 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-10.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-10-AT.md` and record whether user-facing wording changes were required during implementation
+- [X] T038 Run `npm test && npm run lint` and record UC-10 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
 
-- [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
-- [ ] T040 Add invitation-response decision p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/invitation-response-performance.integration.test.js`
-- [ ] T041 Add post-commit notification-failure invariant telemetry/assertion task in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-notification-observability-service.js`
+- [X] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
+- [X] T040 Add invitation-response decision p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/invitation-response-performance.integration.test.js`
+- [X] T041 Add post-commit notification-failure invariant telemetry/assertion task in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-notification-observability-service.js`
 
 ---
 

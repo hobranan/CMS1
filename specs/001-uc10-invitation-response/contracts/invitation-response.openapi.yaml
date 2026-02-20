@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
   title: Invitation Response API
-  version: 1.0.0
-  description: Contracts for responding to review invitations (accept/reject) with actionable-state and expiry enforcement.
+  version: 1.1.0
+  description: Contracts for responding to review invitations (accept/reject) with actionable-state and 14-day UTC expiry enforcement.
 paths:
   /api/v1/referees/{refereeId}/invitations/pending:
     get:
-      summary: List pending invitations for a referee
+      summary: List pending actionable invitations for a referee
       parameters:
         - name: refereeId
           in: path
@@ -14,23 +14,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Pending invitations returned
           content:
             application/json:
               schema:
                 type: object
+                required: [invitations]
                 properties:
                   invitations:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ReviewInvitation'
-        '401':
+                      $ref: "#/components/schemas/ReviewInvitation"
+        "401":
           description: Authentication required
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
   /api/v1/invitations/{invitationId}/response:
     post:
       summary: Submit invitation response (accept or reject)
@@ -45,38 +46,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InvitationResponseRequest'
+              $ref: "#/components/schemas/InvitationResponseRequest"
       responses:
-        '200':
+        "200":
           description: Response recorded
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvitationResponseResult'
-        '400':
-          description: Non-actionable invitation or invalid state
+                $ref: "#/components/schemas/InvitationResponseResult"
+        "400":
+          description: Non-actionable invitation or invalid decision/state
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
           description: Authentication required
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '409':
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
           description: Invitation state changed concurrently
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Persistence error or internal failure
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Persistence error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     ReviewInvitation:
@@ -105,6 +106,9 @@ components:
         decision:
           type: string
           enum: [accept, reject]
+        expected_status:
+          type: string
+          enum: [pending, accepted, rejected, withdrawn]
     InvitationResponseResult:
       type: object
       required: [invitationId, status, assignmentActive, notificationStatus]

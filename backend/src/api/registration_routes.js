@@ -36,6 +36,13 @@ import { PaperAssignmentAttemptRepository } from "../models/paper-assignment-att
 import { RefereeWorkloadRetrievalService } from "../services/workload/referee-workload-retrieval-service.js";
 import { WorkloadAssignmentPersistenceService } from "../services/workload/workload-assignment-persistence-service.js";
 import { WorkloadRuleObservabilityService } from "../services/workload/workload-rule-observability-service.js";
+import { createInvitationRoutes } from "./invitations/routes.js";
+import { ReviewInvitationRepository } from "../models/review-invitation.js";
+import { InvitationResponseRepository } from "../models/invitation-response.js";
+import { ReviewAssignmentActivationRepository } from "../models/review-assignment-activation.js";
+import { InvitationResponsePersistenceService } from "../services/invitations/invitation-response-persistence-service.js";
+import { InvitationNotificationService } from "../services/invitations/invitation-notification-service.js";
+import { InvitationNotificationObservabilityService } from "../services/invitations/invitation-notification-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -125,6 +132,28 @@ export function createRegistrationRoutes(deps) {
   if (!deps.workloadRuleObservabilityService) {
     deps.workloadRuleObservabilityService = new WorkloadRuleObservabilityService();
   }
+  if (!deps.reviewInvitationRepository) {
+    deps.reviewInvitationRepository = new ReviewInvitationRepository();
+  }
+  if (!deps.invitationResponseRepository) {
+    deps.invitationResponseRepository = new InvitationResponseRepository();
+  }
+  if (!deps.reviewAssignmentActivationRepository) {
+    deps.reviewAssignmentActivationRepository = new ReviewAssignmentActivationRepository();
+  }
+  if (!deps.invitationResponsePersistenceService) {
+    deps.invitationResponsePersistenceService = new InvitationResponsePersistenceService(
+      deps.reviewInvitationRepository,
+      deps.invitationResponseRepository,
+      deps.reviewAssignmentActivationRepository
+    );
+  }
+  if (!deps.invitationNotificationService) {
+    deps.invitationNotificationService = new InvitationNotificationService();
+  }
+  if (!deps.invitationNotificationObservabilityService) {
+    deps.invitationNotificationObservabilityService = new InvitationNotificationObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -135,6 +164,7 @@ export function createRegistrationRoutes(deps) {
   const draftRoutes = createDraftRoutes(deps);
   const assignmentRoutes = createAssignmentRoutes(deps);
   const workloadRoutes = createWorkloadRoutes(deps);
+  const invitationRoutes = createInvitationRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -147,6 +177,7 @@ export function createRegistrationRoutes(deps) {
     ...uploadRoutes,
     ...draftRoutes,
     ...assignmentRoutes,
-    ...workloadRoutes
+    ...workloadRoutes,
+    ...invitationRoutes
   };
 }
