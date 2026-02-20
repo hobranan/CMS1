@@ -66,3 +66,38 @@ curl -X GET http://localhost:3000/api/v1/referees/<referee-id>/workload \
 
 Expected:
 - Returned workload reflects accepted assignments only.
+
+## 8. Refresh-required conflict check
+
+1. Capture workload/limit snapshot during referee selection.
+2. Change workload or limit before confirmation.
+3. Confirm assignment with stale snapshot.
+
+Expected:
+- `409`
+- Refresh-required message returned.
+- No assignment stored.
+
+## 9. Execute UC-09 automated tests
+
+```bash
+node --test tests/contract/workload/*.test.js tests/integration/workload/*.test.js
+```
+
+Expected:
+- All UC-09 workload contract and integration tests pass.
+
+## 10. Style profile verification (HTML/CSS subset)
+
+- Verified `frontend/src/views/workload-assignment-panel.html` against `docs/standards/html-css-style-profile.md`.
+- Confirmed semantic section structure, lower-case tags, explicit button type, and no inline style/script usage.
+
+## 11. Verification notes
+
+- SC-004 evidence:
+  - `tests/integration/workload/workload-increment.integration.test.js`
+- SC-005 evidence:
+  - `tests/integration/workload/config-change-applies-next-check.integration.test.js`
+  - `tests/integration/workload/rule-precedence-resolution.integration.test.js`
+- Performance evidence:
+  - `tests/integration/workload/workload-decision-performance.integration.test.js` verifies p95 < 300ms.

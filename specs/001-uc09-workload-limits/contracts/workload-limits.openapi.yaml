@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CMS Referee Workload Limits API
-  version: 1.0.0
+  version: 1.1.0
   description: Contracts for UC-09 workload validation during referee assignment.
 servers:
   - url: http://localhost:3000
@@ -27,38 +27,71 @@ paths:
               properties:
                 referee_id:
                   type: string
+                track_id:
+                  type: string
+                role:
+                  type: string
+                selection_snapshot:
+                  type: object
+                  properties:
+                    current_workload:
+                      type: integer
+                    limit:
+                      type: integer
       responses:
-        '200':
+        "200":
           description: Assignment accepted and stored.
           content:
             application/json:
               schema:
                 type: object
-                required: [status, referee_id]
+                required: [status, paper_id, referee_id, workload_snapshot]
                 properties:
                   status:
                     type: string
-                    example: ASSIGNED
+                    enum: [ASSIGNMENT_ACCEPTED]
+                  paper_id:
+                    type: string
                   referee_id:
                     type: string
-        '400':
+                  workload_snapshot:
+                    type: object
+                    required: [refereeId, currentWorkload, limit, ruleId, ruleVersion]
+                    properties:
+                      refereeId:
+                        type: string
+                      currentWorkload:
+                        type: integer
+                      limit:
+                        type: integer
+                      ruleId:
+                        type: string
+                      ruleVersion:
+                        type: integer
+        "400":
           description: Assignment rejected for workload-limit violation.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
           description: Editor not authenticated.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '503':
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Workload/limit changed since selection; refresh required.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
           description: Retrieval/storage failure prevents assignment.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
   /api/v1/referees/{refereeId}/workload:
     get:
       summary: Retrieve current workload and applicable limit
@@ -70,20 +103,35 @@ paths:
           required: true
           schema:
             type: string
+        - in: query
+          name: track_id
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: role
+          required: false
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: Workload snapshot returned.
           content:
             application/json:
               schema:
                 type: object
-                required: [referee_id, workload, limit]
+                required:
+                  [referee_id, current_workload, applicable_limit, applied_rule_id, applied_rule_version]
                 properties:
                   referee_id:
                     type: string
-                  workload:
+                  current_workload:
                     type: integer
-                  limit:
+                  applicable_limit:
+                    type: integer
+                  applied_rule_id:
+                    type: string
+                  applied_rule_version:
                     type: integer
 components:
   schemas:
@@ -96,16 +144,3 @@ components:
           example: WORKLOAD_LIMIT_REACHED
         message:
           type: string
-        details:
-          type: array
-          items:
-            type: object
-            required: [code, field, message]
-            properties:
-              code:
-                type: string
-              field:
-                type: string
-                nullable: true
-              message:
-                type: string

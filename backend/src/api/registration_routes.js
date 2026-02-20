@@ -30,6 +30,12 @@ import { createAssignmentRoutes } from "./assignments/routes.js";
 import { PaperRefereeAssignmentRepository } from "../models/paper-referee-assignment.js";
 import { ReviewInvitationService } from "../services/assignments/review-invitation-service.js";
 import { AssignmentObservabilityService } from "../services/assignments/assignment-observability-service.js";
+import { createWorkloadRoutes } from "./workload/routes.js";
+import { WorkloadLimitRuleRepository } from "../models/workload-limit-rule.js";
+import { PaperAssignmentAttemptRepository } from "../models/paper-assignment-attempt.js";
+import { RefereeWorkloadRetrievalService } from "../services/workload/referee-workload-retrieval-service.js";
+import { WorkloadAssignmentPersistenceService } from "../services/workload/workload-assignment-persistence-service.js";
+import { WorkloadRuleObservabilityService } from "../services/workload/workload-rule-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -104,6 +110,21 @@ export function createRegistrationRoutes(deps) {
   if (!deps.assignmentObservabilityService) {
     deps.assignmentObservabilityService = new AssignmentObservabilityService();
   }
+  if (!deps.workloadLimitRuleRepository) {
+    deps.workloadLimitRuleRepository = new WorkloadLimitRuleRepository();
+  }
+  if (!deps.paperAssignmentAttemptRepository) {
+    deps.paperAssignmentAttemptRepository = new PaperAssignmentAttemptRepository();
+  }
+  if (!deps.refereeWorkloadRetrievalService) {
+    deps.refereeWorkloadRetrievalService = new RefereeWorkloadRetrievalService();
+  }
+  if (!deps.workloadAssignmentPersistenceService) {
+    deps.workloadAssignmentPersistenceService = new WorkloadAssignmentPersistenceService();
+  }
+  if (!deps.workloadRuleObservabilityService) {
+    deps.workloadRuleObservabilityService = new WorkloadRuleObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -113,6 +134,7 @@ export function createRegistrationRoutes(deps) {
   const uploadRoutes = createUploadRoutes(deps);
   const draftRoutes = createDraftRoutes(deps);
   const assignmentRoutes = createAssignmentRoutes(deps);
+  const workloadRoutes = createWorkloadRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -124,6 +146,7 @@ export function createRegistrationRoutes(deps) {
     ...submissionRoutes,
     ...uploadRoutes,
     ...draftRoutes,
-    ...assignmentRoutes
+    ...assignmentRoutes,
+    ...workloadRoutes
   };
 }
