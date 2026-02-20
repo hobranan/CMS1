@@ -117,6 +117,8 @@
 - [ ] T040 Validate UC-07 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-07-AT.md`
 
 - [ ] T041 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc07-save-draft/quickstart.md`
+- [ ] T042 Add integration test for draft durability across backend restart and session boundary in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/drafts/draft-durability-restart-session.integration.test.js`
+- [ ] T043 Add finalize-flow ordering assertion/telemetry verifying prevalidation save executes before final validation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/drafts/finalize-ordering-observability-service.js`
 
 ---
 
