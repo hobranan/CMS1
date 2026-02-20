@@ -37,3 +37,13 @@ Enable authenticated attendees to pay registration fees online through a gateway
 ## Verification
 - Run `npm test && npm run lint`.
 - Execute contract/integration tests for success, cancel/decline/invalid, timeout, save-failure reconciliation, and status persistence flows.
+- Verify payment UX content follows `docs/standards/html-css-style-profile.md`:
+  - Labels are explicit, concise, and actionable.
+  - Error/success/unresolved messages are specific and non-ambiguous.
+  - HTML structure uses semantic headings, section landmarks, and button labels.
+
+## Implementation Notes (2026-02-20)
+- Added payment initiation, gateway confirmation, and payment status API routes.
+- Added payment-state safety for success, cancel/invalid/decline, timeout, and save-failure reconciliation.
+- Added contract and integration tests for all UC-20 outcomes, including duplicate-attempt blocking and latency checks.
+- Final verification command executed: `npm test && npm run lint`.

@@ -1,133 +1,37 @@
-# Acceptance Test Suite — UC-20 Pay Registration Fee Online
+# Acceptance Tests UC-20: Online Registration Payment
 
-## Assumptions / Notes
-- Attendees must be logged in to pay.
-- Payment gateway interactions may be simulated in testing.
-- Successful payment confirms registration.
+## AT-UC20-01 Successful Payment
+- Given authenticated attendee with selected category
+- When payment succeeds at gateway and callback is verified
+- Then CMS records payment, sets registration to `paid_confirmed`, and shows confirmation
 
----
+## AT-UC20-02 Canceled Payment
+- Given attendee starts payment
+- When attendee cancels at gateway
+- Then CMS keeps registration unpaid and records no payment
 
-## AT-UC20-01 — Successful Online Payment (Main Success Scenario)
+## AT-UC20-03 Invalid Payment Details
+- Given attendee submits invalid details
+- When gateway rejects details
+- Then CMS keeps registration unpaid and shows invalid-details feedback
 
-**Objective:** Verify an attendee can successfully pay the registration fee online.
+## AT-UC20-04 Declined Payment
+- Given attendee submits payment
+- When provider declines transaction
+- Then CMS keeps registration unpaid and shows decline feedback
 
-**Preconditions:**
-- Attendee is logged in.
-- Registration category selected.
-- Payment gateway available.
+## AT-UC20-05 Timeout or Missing Confirmation
+- Given payment callback is not received in time
+- When timeout resolution executes
+- Then CMS keeps registration out of confirmed state and marks unresolved pending outcome
 
-**Steps:**
-1. Navigate to payment page.
-2. Select **Pay Online**.
-3. Enter valid payment details.
-4. Confirm payment.
+## AT-UC20-06 Success with Persistence Failure
+- Given gateway returns success
+- When CMS fails to save payment record
+- Then registration is not confirmed and reconciliation item is created
 
-**Expected Results:**
-- Payment is processed successfully.
-- Registration status updates to **Paid/Confirmed**.
-- Confirmation/receipt is displayed and sent.
+## AT-UC20-07 Confirmed Status Persistence
+- Given registration reached `paid_confirmed`
+- When attendee refreshes or logs in again
+- Then status remains `paid_confirmed`
 
----
-
-## AT-UC20-02 — Cancel Payment at Gateway (Extension 4a)
-
-**Objective:** Verify canceling payment does not register payment.
-
-**Preconditions:**
-- Attendee is logged in.
-
-**Steps:**
-1. Start online payment.
-2. Cancel payment at gateway.
-
-**Expected Results:**
-- No payment is recorded.
-- Registration remains unpaid.
-
----
-
-## AT-UC20-03 — Invalid Payment Details (Extension 5a)
-
-**Objective:** Verify invalid payment details are rejected.
-
-**Preconditions:**
-- Attendee is logged in.
-
-**Steps:**
-1. Enter invalid payment details.
-2. Attempt payment.
-
-**Expected Results:**
-- Payment gateway rejects transaction.
-- Error message displayed.
-- Registration remains unpaid.
-
----
-
-## AT-UC20-04 — Payment Declined by Provider (Extension 6a)
-
-**Objective:** Verify declined payments are handled correctly.
-
-**Preconditions:**
-- Attendee is logged in.
-
-**Steps:**
-1. Enter valid payment details.
-2. Payment is declined by provider.
-
-**Expected Results:**
-- Attendee informed of decline.
-- Registration remains unpaid.
-
----
-
-## AT-UC20-05 — Payment Confirmation Timeout (Extension 7a)
-
-**Objective:** Verify handling of missing payment confirmation.
-
-**Preconditions:**
-- Attendee is logged in.
-- Simulate gateway timeout.
-
-**Steps:**
-1. Complete payment at gateway.
-2. CMS does not receive confirmation.
-
-**Expected Results:**
-- System shows pending/failed payment message.
-- Registration remains unpaid until resolved.
-
----
-
-## AT-UC20-06 — Database Error While Recording Payment (Extension 8a)
-
-**Objective:** Verify behavior when payment cannot be recorded.
-
-**Preconditions:**
-- Attendee is logged in.
-- Simulate database failure.
-
-**Steps:**
-1. Complete successful payment.
-2. Database save fails.
-
-**Expected Results:**
-- System error message displayed.
-- Registration not confirmed.
-- Payment requires reconciliation.
-
----
-
-## AT-UC20-07 — Persistence Check: Confirmed Registration Persists
-
-**Objective:** Verify confirmed registration persists across sessions.
-
-**Preconditions:**
-- AT-UC20-01 completed successfully.
-
-**Steps:**
-1. Log out and log back in.
-2. View registration status.
-
-**Expected Results:**
-- Registration status remains **Paid/Confirmed**.
