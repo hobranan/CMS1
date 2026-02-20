@@ -34,3 +34,30 @@ Enable authenticated referees to view assigned papers, open manuscripts in view-
 ## Verification
 - Run `npm test && npm run lint`.
 - Execute contract/integration tests for all scenarios above.
+
+## Automated test execution
+
+```bash
+node --test tests/contract/assigned-access/*.test.js tests/integration/assigned-access/*.test.js
+```
+
+Expected:
+- All UC-11 assigned-access contract and integration tests pass.
+
+## Style profile verification (HTML/CSS subset)
+
+- Verified `frontend/src/views/assigned-papers.html` against `docs/standards/html-css-style-profile.md`.
+- Confirmed semantic section structure, lower-case tags, and no inline style/script usage.
+
+## Verification notes
+
+- SC-002 evidence:
+  - `tests/contract/assigned-access/get-manuscript-view.contract.test.js` asserts `accessMode=view_only`.
+  - `frontend/src/controllers/assigned-access/assigned-paper-access-controller.js` prevents download support.
+- SC-003 evidence:
+  - `tests/contract/assigned-access/get-non-assigned-resource-forbidden.contract.test.js`
+  - `tests/integration/assigned-access/direct-url-authorization.integration.test.js`
+- SC-005 evidence:
+  - `tests/contract/assigned-access/get-assigned-papers-failure.contract.test.js`
+  - `tests/contract/assigned-access/get-manuscript-unavailable.contract.test.js`
+  - `tests/contract/assigned-access/get-review-form-unavailable.contract.test.js`

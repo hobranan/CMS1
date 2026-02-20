@@ -1,168 +1,161 @@
-# Acceptance Test Suite — UC-11 Access Assigned Papers and Review Forms
+# Acceptance Test Suite - UC-11 Access Assigned Papers and Review Forms
 
 ## Assumptions / Notes
 - Referees must be logged in to access assigned papers.
-- Referees can only access papers assigned to them.
-- Each assigned paper has an associated manuscript file and review form.
+- Referees can access only papers assigned to them.
+- Manuscripts are view-only in this flow (no download/export).
+- Review forms are pre-generated before referee access.
 
 ---
 
-## AT-UC11-01 — View Assigned Papers List (Main Success Scenario)
+## AT-UC11-01 - View Assigned Papers List
 
-**Objective:** Verify a referee can view their assigned papers list.
+**Objective:** Verify a referee can view assigned papers.
 
 **Preconditions:**
 - Referee is logged in.
-- At least one paper is assigned to the referee.
+- At least one paper is assigned.
 
 **Steps:**
-1. Navigate to **Assigned Papers**.
+1. Navigate to Assigned Papers.
 
 **Expected Results:**
-- The system retrieves and displays the list of assigned papers for the referee.
+- Assigned papers are listed for that referee only.
 
 ---
 
-## AT-UC11-02 — Open Manuscript for Assigned Paper (Main Success Scenario)
+## AT-UC11-02 - Open Manuscript in View-Only Mode
 
-**Objective:** Verify a referee can access the manuscript for an assigned paper.
+**Objective:** Verify assigned manuscript access is view-only.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P1 is assigned to the referee and has a manuscript stored.
+- Assigned paper manuscript exists.
 
 **Steps:**
-1. Open **Assigned Papers**.
-2. Select Paper P1.
-3. Open/download the manuscript.
+1. Open assigned paper.
+2. Open manuscript.
 
 **Expected Results:**
-- The system allows access to the manuscript.
-- The manuscript opens/downloads successfully.
+- Manuscript opens in `view_only` mode.
+- No download/export actions are available.
 
 ---
 
-## AT-UC11-03 — Open Review Form for Assigned Paper (Main Success Scenario)
+## AT-UC11-03 - Open Pre-Generated Review Form
 
-**Objective:** Verify a referee can access the review form for an assigned paper.
+**Objective:** Verify referee can open the pre-generated review form for assigned paper.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P1 is assigned to the referee and has a review form available.
+- Assigned paper has a pre-generated review form.
 
 **Steps:**
-1. Open **Assigned Papers**.
-2. Select Paper P1.
-3. Open the review form.
+1. Open assigned paper.
+2. Open review form.
 
 **Expected Results:**
-- The system displays the review form for Paper P1.
+- Review form is returned and marked pre-generated.
 
 ---
 
-## AT-UC11-04 — No Assigned Papers (Extension 1a)
+## AT-UC11-04 - No Assigned Papers Empty State
 
-**Objective:** Verify correct behavior when a referee has no assignments.
+**Objective:** Verify no-assignment behavior.
 
 **Preconditions:**
 - Referee is logged in.
-- Referee has no assigned papers.
+- No active assignments.
 
 **Steps:**
-1. Navigate to **Assigned Papers**.
+1. Navigate to Assigned Papers.
 
 **Expected Results:**
-- The system displays a message indicating no assigned papers.
-- No paper details/manuscript/review form access is available.
+- `200` response with empty paper list.
+- "No assigned papers" message shown.
 
 ---
 
-## AT-UC11-05 — Unauthorized Paper Access Blocked (Extension 3a)
+## AT-UC11-05 - Unauthorized Access Blocked
 
-**Objective:** Verify a referee cannot access a paper not assigned to them.
+**Objective:** Verify non-assigned paper resource access is blocked.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P2 exists but is not assigned to the referee.
+- Target paper is not assigned to referee.
 
 **Steps:**
-1. Attempt to open Paper P2 details/manuscript via direct URL or UI path.
+1. Attempt direct URL access to manuscript or review form.
 
 **Expected Results:**
-- The system blocks access.
-- An authorization error message is displayed.
-- Manuscript and review form are not accessible.
+- `403` authorization response.
+- No paper resource data is leaked.
 
 ---
 
-## AT-UC11-06 — Manuscript Unavailable (Extension 5a)
+## AT-UC11-06 - Manuscript Unavailable
 
-**Objective:** Verify system behavior when an assigned manuscript cannot be retrieved.
+**Objective:** Verify missing manuscript handling for assigned paper.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P3 is assigned but manuscript file is missing/unavailable (simulate storage error).
+- Paper is assigned but manuscript is unavailable.
 
 **Steps:**
-1. Open **Assigned Papers**.
-2. Select Paper P3.
-3. Attempt to open the manuscript.
+1. Open manuscript for assigned paper.
 
 **Expected Results:**
-- The system displays an error that the manuscript cannot be accessed.
-- The referee remains on the paper detail page and can retry later.
+- `404` manuscript-unavailable response.
+- Retry guidance can be shown.
 
 ---
 
-## AT-UC11-07 — Review Form Unavailable (Extension 6a)
+## AT-UC11-07 - Review Form Unavailable
 
-**Objective:** Verify system behavior when a review form cannot be retrieved.
+**Objective:** Verify missing review-form handling for assigned paper.
 
 **Preconditions:**
 - Referee is logged in.
-- Paper P4 is assigned but review form is unavailable (simulate not generated or DB error).
+- Paper is assigned but review form is unavailable.
 
 **Steps:**
-1. Open **Assigned Papers**.
-2. Select Paper P4.
-3. Attempt to open the review form.
+1. Open review form for assigned paper.
 
 **Expected Results:**
-- The system displays an error that the review form cannot be accessed.
-- Manuscript access may still be available if storage is functioning.
+- `404` review-form-unavailable response.
+- Retry guidance can be shown.
 
 ---
 
-## AT-UC11-08 — Assigned Papers List Retrieval Failure (Extension 2a)
+## AT-UC11-08 - Assigned List Retrieval Failure
 
-**Objective:** Verify system behavior when the assigned papers list cannot be loaded.
+**Objective:** Verify list retrieval failure behavior.
 
 **Preconditions:**
 - Referee is logged in.
-- Simulate database failure on list retrieval.
+- Simulate assigned-list retrieval failure.
 
 **Steps:**
-1. Navigate to **Assigned Papers** while DB retrieval fails.
+1. Open Assigned Papers.
 
 **Expected Results:**
-- The system displays a system error message.
-- No assigned paper list is shown.
+- `500` response with list-failure error.
+- No stale list shown.
 
 ---
 
-## AT-UC11-09 — Persistence Check: Assigned Paper Still Accessible After Refresh
+## AT-UC11-09 - Refresh Consistency
 
-**Objective:** Verify assigned papers and access links persist across refresh.
+**Objective:** Verify refresh uses server-authoritative state.
 
 **Preconditions:**
 - Referee is logged in.
-- At least one assigned paper exists.
+- Assigned paper initially accessible.
 
 **Steps:**
-1. Open **Assigned Papers**.
-2. Refresh the page.
-3. Select an assigned paper and open the review form.
+1. Open manuscript successfully.
+2. Make manuscript unavailable server-side.
+3. Refresh/reopen manuscript.
 
 **Expected Results:**
-- Assigned papers list remains available.
-- Access to manuscript/review form still works for assigned papers.
+- Refreshed access shows unavailable state (`404`) based on current server data.

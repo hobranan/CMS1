@@ -43,6 +43,8 @@ import { ReviewAssignmentActivationRepository } from "../models/review-assignmen
 import { InvitationResponsePersistenceService } from "../services/invitations/invitation-response-persistence-service.js";
 import { InvitationNotificationService } from "../services/invitations/invitation-notification-service.js";
 import { InvitationNotificationObservabilityService } from "../services/invitations/invitation-notification-observability-service.js";
+import { createAssignedAccessRoutes } from "./assigned-access/routes.js";
+import { AssignedPaperRepository } from "../models/assigned-paper.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -154,6 +156,9 @@ export function createRegistrationRoutes(deps) {
   if (!deps.invitationNotificationObservabilityService) {
     deps.invitationNotificationObservabilityService = new InvitationNotificationObservabilityService();
   }
+  if (!deps.assignedPaperRepository) {
+    deps.assignedPaperRepository = new AssignedPaperRepository();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -165,6 +170,7 @@ export function createRegistrationRoutes(deps) {
   const assignmentRoutes = createAssignmentRoutes(deps);
   const workloadRoutes = createWorkloadRoutes(deps);
   const invitationRoutes = createInvitationRoutes(deps);
+  const assignedAccessRoutes = createAssignedAccessRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -178,6 +184,7 @@ export function createRegistrationRoutes(deps) {
     ...draftRoutes,
     ...assignmentRoutes,
     ...workloadRoutes,
-    ...invitationRoutes
+    ...invitationRoutes,
+    ...assignedAccessRoutes
   };
 }

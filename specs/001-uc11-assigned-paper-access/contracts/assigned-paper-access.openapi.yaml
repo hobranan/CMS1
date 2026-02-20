@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
   title: Assigned Paper Access API
-  version: 1.0.0
-  description: Contracts for assignment-scoped paper, manuscript (view-only), and review-form access.
+  version: 1.1.0
+  description: Contracts for assignment-scoped paper, manuscript (view-only), and pre-generated review-form access.
 paths:
   /api/v1/referees/{refereeId}/assigned-papers:
     get:
-      summary: Get papers assigned to logged-in referee
+      summary: Get papers assigned to authenticated referee
       parameters:
         - name: refereeId
           in: path
@@ -14,32 +14,32 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: Assigned papers returned for authenticated referee; empty list when no assignments
+        "200":
+          description: Assigned papers returned; empty list with message when no assignments.
           content:
             application/json:
               schema:
                 type: object
+                required: [papers]
                 properties:
                   papers:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AssignedPaper'
+                      $ref: "#/components/schemas/AssignedPaper"
                   message:
                     type: string
-        '401':
-          description: Authentication required (unauthenticated request)
+        "401":
+          description: Authentication required.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: List retrieval failure
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: List retrieval failure.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+                $ref: "#/components/schemas/ErrorResponse"
   /api/v1/papers/{paperId}/manuscript-view:
     get:
       summary: Open manuscript in view-only mode for assigned referee
@@ -50,37 +50,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: Manuscript view resource returned
+        "200":
+          description: Manuscript view resource returned.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ManuscriptView'
-        '401':
-          description: Authentication required
+                $ref: "#/components/schemas/ManuscriptView"
+        "401":
+          description: Authentication required.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Not assigned to paper
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Not assigned to paper.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
-          description: Manuscript unavailable
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Manuscript unavailable.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: System error during retrieval
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: System error during retrieval.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+                $ref: "#/components/schemas/ErrorResponse"
   /api/v1/papers/{paperId}/review-form:
     get:
       summary: Access pre-generated review form for assigned referee
@@ -91,37 +90,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: Pre-generated review form returned
+        "200":
+          description: Pre-generated review form returned.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReviewForm'
-        '401':
-          description: Authentication required
+                $ref: "#/components/schemas/ReviewForm"
+        "401":
+          description: Authentication required.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Not assigned to paper
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Not assigned to paper.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
-          description: Review form unavailable
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Review form unavailable.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: System error during retrieval
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: System error during retrieval.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     AssignedPaper:
