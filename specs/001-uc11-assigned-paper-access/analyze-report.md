@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc11-assigned-paper-access/plan.md:18`, `specs/001-uc11-assigned-paper-access/tasks.md:13` | Plan defines 300ms p95 access/authorization checks, but tasks lack explicit performance validation task. | Add performance test/measurement task in polish phase. |
-| G2 | Coverage Gap | MEDIUM | `specs/001-uc11-assigned-paper-access/spec.md:114`, `specs/001-uc11-assigned-paper-access/tasks.md:126` | SC-005 requires failure responses without unauthorized data exposure, but tasks do not include explicit payload-redaction/assertion checks. | Add security-focused response-shape assertions for all failure modes. |
 | U1 | Underspecification | LOW | `specs/001-uc11-assigned-paper-access/spec.md:90`, `specs/001-uc11-assigned-paper-access/tasks.md:103` | FR-014 mentions refresh consistency, but not whether stale cached data should be replaced or merged when assignments change mid-session. | Specify refresh conflict policy (server-authoritative replace vs merge) and expected UI behavior. |
 | U2 | Underspecification | LOW | `specs/001-uc11-assigned-paper-access/tasks.md:111` | T037 is conditional and may be skipped inconsistently. | Convert to explicit verify-and-record UC/AT sync task regardless of change status. |
 
@@ -37,7 +35,7 @@ No fully unmapped tasks detected.
 ## Metrics
 
 - Total Requirements: 14 functional requirements (FR-001..FR-014)
-- Total Tasks: 38
+- Total Tasks: 41
 - Coverage % (requirements with >=1 task): 100%
 - Ambiguity Count: 0
 - Duplication Count: 0
