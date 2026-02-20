@@ -82,6 +82,8 @@
 - [ ] T028 Validate UC-01 narrative and update any changed registration behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01.md`
 - [ ] T029 Validate UC-01 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
 
+- [ ] T030 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
