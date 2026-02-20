@@ -18,9 +18,9 @@
 
 **Purpose**: Initialize UC-01 implementation scaffolding for web MVC structure.
 
-- [ ] T001 Create UC-01 backend/frontend module skeleton files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/registration_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/registration_view.js`
-- [ ] T002 Add registration configuration constants (token TTL 24h, pending TTL 7d) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/registration_config.js`
-- [ ] T003 [P] Create endpoint contract fixture helpers for UC-01 in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/registration_payloads.js`
+- [X] T001 Create UC-01 backend/frontend module skeleton files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/registration_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/registration_view.js`
+- [X] T002 Add registration configuration constants (token TTL 24h, pending TTL 7d) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/registration_config.js`
+- [X] T003 [P] Create endpoint contract fixture helpers for UC-01 in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/registration_payloads.js`
 
 ---
 
@@ -30,13 +30,13 @@
 
 **CRITICAL**: No user story tasks start before this phase is complete.
 
-- [ ] T004 Create persistence schema/migration for pending registrations and email verification tokens in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/migrations/001_uc01_registration_tables.sql`
-- [ ] T005 [P] Implement registration repository for `UserAccount`, `PendingRegistration`, and `EmailVerificationToken` entities in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/registration_repository.js`
-- [ ] T006 [P] Implement password policy + hashing utility in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_service.js`
-- [ ] T007 [P] Implement single-use verification token generator/validator in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/verification_token_service.js`
-- [ ] T008 Implement verification email sender adapter for confirmation/resend flows in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/email/verification_email_service.js`
-- [ ] T009 Implement shared registration error code/message mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_error_mapper.js`
-- [ ] T010 Implement expiry enforcement service for 24-hour token expiry and 7-day pending-registration expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/registration_expiry_service.js`
+- [X] T004 Create persistence schema/migration for pending registrations and email verification tokens in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/migrations/001_uc01_registration_tables.sql`
+- [X] T005 [P] Implement registration repository for `UserAccount`, `PendingRegistration`, and `EmailVerificationToken` entities in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/registration_repository.js`
+- [X] T006 [P] Implement password policy + hashing utility in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_service.js`
+- [X] T007 [P] Implement single-use verification token generator/validator in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/verification_token_service.js`
+- [X] T008 Implement verification email sender adapter for confirmation/resend flows in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/email/verification_email_service.js`
+- [X] T009 Implement shared registration error code/message mapper in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_error_mapper.js`
+- [X] T010 Implement expiry enforcement service for 24-hour token expiry and 7-day pending-registration expiry in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/registration_expiry_service.js`
 
 **Checkpoint**: Foundation complete, User Story 1 can be implemented and tested independently.
 
@@ -50,22 +50,22 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Add contract tests for `/api/v1/registrations`, `/api/v1/registrations/verify`, `/api/v1/registrations/resend-confirmation`, and `/api/v1/auth/login` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc01_registration_contract.js`
-- [ ] T012 [P] [US1] Add integration test for happy-path register-verify-login flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_happy_path.js`
-- [ ] T013 [P] [US1] Add integration tests for invalid email/duplicate email/weak password/missing fields in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_validation_failures.js`
-- [ ] T014 [P] [US1] Add integration tests for expired token, resend, pre-verification login denial, and 7-day pending expiry in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_expiry_and_unverified_login.js`
+- [X] T011 [P] [US1] Add contract tests for `/api/v1/registrations`, `/api/v1/registrations/verify`, `/api/v1/registrations/resend-confirmation`, and `/api/v1/auth/login` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc01_registration_contract.js`
+- [X] T012 [P] [US1] Add integration test for happy-path register-verify-login flow in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_happy_path.js`
+- [X] T013 [P] [US1] Add integration tests for invalid email/duplicate email/weak password/missing fields in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_validation_failures.js`
+- [X] T014 [P] [US1] Add integration tests for expired token, resend, pre-verification login denial, and 7-day pending expiry in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_expiry_and_unverified_login.js`
 
 ### Implementation for User Story 1
 
-- [ ] T015 [US1] Implement registration submission workflow (validation, duplicate checks against active+pending, pending record creation, verification send) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/registration_service.js`
-- [ ] T016 [US1] Implement verification workflow (token validation, single-use enforcement, active account creation, redirect/login readiness) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/verification_service.js`
-- [ ] T017 [US1] Implement resend-confirmation workflow with pending-window checks and token invalidation/rotation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/resend_verification_service.js`
-- [ ] T018 [US1] Implement pre-verification login resolution (`EMAIL_UNVERIFIED` + resend metadata) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
-- [ ] T019 [US1] Wire registration/verification/resend endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_controller.js`
-- [ ] T020 [US1] Update auth login endpoint responses for unverified state in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/auth_controller.js`
-- [ ] T021 [P] [US1] Implement frontend registration form behaviors (field highlighting, actionable errors, submit flow) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/registration_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/registration_view.js`
-- [ ] T022 [P] [US1] Implement verification result and resend-option UI in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/verification_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/verification_view.js`
-- [ ] T023 [US1] Implement login reminder/resend-option UX for unverified accounts in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_view.js`
+- [X] T015 [US1] Implement registration submission workflow (validation, duplicate checks against active+pending, pending record creation, verification send) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/registration_service.js`
+- [X] T016 [US1] Implement verification workflow (token validation, single-use enforcement, active account creation, redirect/login readiness) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/verification_service.js`
+- [X] T017 [US1] Implement resend-confirmation workflow with pending-window checks and token invalidation/rotation in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/resend_verification_service.js`
+- [X] T018 [US1] Implement pre-verification login resolution (`EMAIL_UNVERIFIED` + resend metadata) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
+- [X] T019 [US1] Wire registration/verification/resend endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/registration_controller.js`
+- [X] T020 [US1] Update auth login endpoint responses for unverified state in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/auth_controller.js`
+- [X] T021 [P] [US1] Implement frontend registration form behaviors (field highlighting, actionable errors, submit flow) in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/registration_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/registration_view.js`
+- [X] T022 [P] [US1] Implement verification result and resend-option UI in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/verification_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/verification_view.js`
+- [X] T023 [US1] Implement login reminder/resend-option UX for unverified accounts in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_view.js`
 
 **Checkpoint**: User Story 1 is independently functional and testable (MVP complete).
 
@@ -75,19 +75,19 @@
 
 **Purpose**: Hardening, observability, and documentation updates across the completed story.
 
-- [ ] T024 [P] Add registration/verification/resend/login audit logging for support and diagnostics in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/registration_audit_log.js`
-- [ ] T025 [P] Add unit tests for password/token utility edge cases in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_security_utils.js`
-- [ ] T026 Update implementation verification steps and expected API outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/quickstart.md`
-- [ ] T027 Run `npm test && npm run lint` and record UC-01 execution notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/validation-report.md`
+- [X] T024 [P] Add registration/verification/resend/login audit logging for support and diagnostics in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/registration_audit_log.js`
+- [X] T025 [P] Add unit tests for password/token utility edge cases in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_security_utils.js`
+- [X] T026 Update implementation verification steps and expected API outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/quickstart.md`
+- [X] T027 Run `npm test && npm run lint` and record UC-01 execution notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/validation-report.md`
 - [ ] T028 Validate UC-01 narrative and update any changed registration behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01.md`
 - [ ] T029 Validate UC-01 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
 
 - [ ] T030 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/quickstart.md`
-- [ ] T031 [P] Add contract/integration tests for required `confirm password` and stable all-error ordering in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc01_registration_contract.js` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_validation_failures.js`
-- [ ] T032 Implement resend verification rate-limit rules (3 per 24h rolling window, 60s cooldown) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/resend_verification_service.js`
-- [ ] T033 [P] Add token security tests for CSPRNG generation, hashed token storage, and single-use enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_token_security.js`
-- [ ] T034 [P] Add privacy/logging tests for email masking and secret redaction in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_privacy_logging.js`
-- [ ] T035 [P] Add accessibility checks for registration validation and unverified-login reminders in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc01_registration_a11y.js`
+- [X] T031 [P] Add contract/integration tests for required `confirm password` and stable all-error ordering in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc01_registration_contract.js` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc01_registration_validation_failures.js`
+- [X] T032 Implement resend verification rate-limit rules (3 per 24h rolling window, 60s cooldown) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/registration/resend_verification_service.js`
+- [X] T033 [P] Add token security tests for CSPRNG generation, hashed token storage, and single-use enforcement in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_token_security.js`
+- [X] T034 [P] Add privacy/logging tests for email masking and secret redaction in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc01_privacy_logging.js`
+- [X] T035 [P] Add accessibility checks for registration validation and unverified-login reminders in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc01_registration_a11y.js`
 - [ ] T036 Update FR-to-AT traceability matrix and SC-004/SC-005 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/validation-report.md`
 
 ---
@@ -167,3 +167,5 @@ Task: "T022 Implement verification/resend UI in /mnt/c/Users/ponti/Desktop/CMS1/
 - All tasks use strict checklist format with Task ID and explicit file paths.
 - `[US1]` labels are applied to user-story tasks only.
 - `[P]` marks only tasks that are parallelizable without conflicting incomplete dependencies.
+
+

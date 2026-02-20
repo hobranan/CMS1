@@ -1,0 +1,11 @@
+{
+  "name": "cms1",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/**/*.js frontend/tests/**/*.js",
+    "test:coverage": "node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js",
+    "lint": "node ./scripts/lint.mjs"
+  }
+}

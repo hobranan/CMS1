@@ -5,6 +5,14 @@
 ```bash
 npm install
 npm test && npm run lint
+node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js
+```
+
+If PowerShell blocks `npm.ps1`, run the equivalent direct commands:
+
+```bash
+node --test tests/**/*.js frontend/tests/**/*.js
+node ./scripts/lint.mjs
 ```
 
 ## 2. Initiate registration
