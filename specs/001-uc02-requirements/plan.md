@@ -34,6 +34,7 @@ errors, and MVC-compatible controller/model responsibilities using vanilla JS.
 **Post-Design Gate Status**: PASS
  - [x] Data model and contract design keep validation logic in models/services and orchestration in controllers.
  - [x] Proposed implementation uses vanilla web stack and preserves authoritative UC/AT artifacts.
+- [x] Frontend work includes compliance checks against `docs/standards/html-css-style-profile.md`.
 
 ## Project Structure
 
