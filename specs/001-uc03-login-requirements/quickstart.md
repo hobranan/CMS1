@@ -5,6 +5,14 @@
 ```bash
 npm install
 npm test && npm run lint
+node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js
+```
+
+If PowerShell blocks `npm.ps1`, run:
+
+```bash
+node --test tests/**/*.js frontend/tests/**/*.js
+node ./scripts/lint.mjs
 ```
 
 ## 2. Successful login
@@ -71,3 +79,8 @@ curl -X GET http://localhost:3000/api/v1/auth/session
 Expected:
 - `200 OK` when session is active.
 - Protected dashboard can load/refresh without redirect to login.
+
+## 8. HTML/CSS style-profile compliance
+
+- Login view/controller messaging updates remain plain-text state strings and do not introduce framework-specific UI markup.
+- UI behavior remains compatible with `docs/standards/html-css-style-profile.md`.

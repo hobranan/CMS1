@@ -18,9 +18,9 @@
 
 **Purpose**: Initialize UC-03 authentication scaffolding across MVC layers.
 
-- [ ] T001 Create authentication module skeleton files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_view.js`
-- [ ] T002 Add login/lockout configuration constants (threshold=5, lockout=15m) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/login_policy_config.js`
-- [ ] T003 [P] Create authentication contract test fixtures in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/login_payloads.js`
+- [X] T001 Create authentication module skeleton files in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_routes.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_controller.js`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`, `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_controller.js`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_view.js`
+- [X] T002 Add login/lockout configuration constants (threshold=5, lockout=15m) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/config/login_policy_config.js`
+- [X] T003 [P] Create authentication contract test fixtures in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/fixtures/login_payloads.js`
 
 ---
 
@@ -30,13 +30,13 @@
 
 **CRITICAL**: No user story work begins until this phase is complete.
 
-- [ ] T004 Implement credential lookup repository for registered email identities in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/credential_store_repository.js`
-- [ ] T005 [P] Implement password hash verification utility in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_verifier.js`
-- [ ] T006 [P] Implement lockout state repository (`failed_attempt_count`, `lockout_expires_at`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/lockout_state_repository.js`
-- [ ] T007 [P] Implement lockout policy service (increment/lock/reset/expiry checks) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/lockout_policy_service.js`
-- [ ] T008 [P] Implement authenticated session service and protected-page guard middleware in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/session_service.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/middleware/session_guard.js`
-- [ ] T009 Implement login attempt audit/outcome recorder in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/login_attempt_repository.js`
-- [ ] T010 Implement standardized login response/error mapper for missing/invalid/lockout/system-failure responses in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_error_mapper.js`
+- [X] T004 Implement credential lookup repository for registered email identities in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/credential_store_repository.js`
+- [X] T005 [P] Implement password hash verification utility in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/security/password_verifier.js`
+- [X] T006 [P] Implement lockout state repository (`failed_attempt_count`, `lockout_expires_at`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/lockout_state_repository.js`
+- [X] T007 [P] Implement lockout policy service (increment/lock/reset/expiry checks) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/lockout_policy_service.js`
+- [X] T008 [P] Implement authenticated session service and protected-page guard middleware in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/session_service.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/middleware/session_guard.js`
+- [X] T009 Implement login attempt audit/outcome recorder in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/login_attempt_repository.js`
+- [X] T010 Implement standardized login response/error mapper for missing/invalid/lockout/system-failure responses in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_error_mapper.js`
 
 **Checkpoint**: Foundation complete; user stories can be implemented.
 
@@ -50,16 +50,16 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Add contract tests for successful login and session continuity endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc03_login_success_contract.js`
-- [ ] T012 [P] [US1] Add integration test for valid credential login and redirect behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_success.js`
-- [ ] T013 [P] [US1] Add integration test for protected-page refresh during active session in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_session_continuity.js`
+- [X] T011 [P] [US1] Add contract tests for successful login and session continuity endpoints in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc03_login_success_contract.js`
+- [X] T012 [P] [US1] Add integration test for valid credential login and redirect behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_success.js`
+- [X] T013 [P] [US1] Add integration test for protected-page refresh during active session in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_session_continuity.js`
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Implement successful credential verification and session creation flow in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
-- [ ] T015 [US1] Implement login route/controller success path and dashboard redirect response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_controller.js`
-- [ ] T016 [US1] Implement protected resource session access check endpoint in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/session_controller.js`
-- [ ] T017 [US1] Implement frontend login submit and success navigation behavior in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_view.js`
+- [X] T014 [US1] Implement successful credential verification and session creation flow in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
+- [X] T015 [US1] Implement login route/controller success path and dashboard redirect response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_routes.js` and `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_controller.js`
+- [X] T016 [US1] Implement protected resource session access check endpoint in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/session_controller.js`
+- [X] T017 [US1] Implement frontend login submit and success navigation behavior in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_view.js`
 
 **Checkpoint**: US1 is independently functional and testable (MVP complete).
 
@@ -73,14 +73,14 @@
 
 ### Tests for User Story 2
 
-- [ ] T018 [P] [US2] Add contract tests for missing-field login validation errors in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc03_login_required_fields_contract.js`
-- [ ] T019 [P] [US2] Add integration tests for missing email/password behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_required_fields.js`
+- [X] T018 [P] [US2] Add contract tests for missing-field login validation errors in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc03_login_required_fields_contract.js`
+- [X] T019 [P] [US2] Add integration tests for missing email/password behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_required_fields.js`
 
 ### Implementation for User Story 2
 
-- [ ] T020 [US2] Implement required-field validation gate before credential-store access in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_validation_service.js`
-- [ ] T021 [US2] Implement field-level required feedback response handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_controller.js`
-- [ ] T022 [US2] Implement frontend required-field highlighting/messages and stay-on-page flow in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_validation_view.js`
+- [X] T020 [US2] Implement required-field validation gate before credential-store access in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_validation_service.js`
+- [X] T021 [US2] Implement field-level required feedback response handling in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/login_controller.js`
+- [X] T022 [US2] Implement frontend required-field highlighting/messages and stay-on-page flow in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_validation_view.js`
 
 **Checkpoint**: US2 is independently functional and testable.
 
@@ -94,17 +94,17 @@
 
 ### Tests for User Story 3
 
-- [ ] T023 [P] [US3] Add contract tests for invalid credential, lockout, and system-failure responses in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc03_login_failure_contract.js`
-- [ ] T024 [P] [US3] Add integration tests for unknown-email and wrong-password outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_invalid_credentials.js`
-- [ ] T025 [P] [US3] Add integration tests for lockout trigger, active lockout denial, and reset-after-success/expiry behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_lockout_policy.js`
-- [ ] T026 [P] [US3] Add integration test for credential-store unavailability handling in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_credential_store_outage.js`
+- [X] T023 [P] [US3] Add contract tests for invalid credential, lockout, and system-failure responses in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/test_uc03_login_failure_contract.js`
+- [X] T024 [P] [US3] Add integration tests for unknown-email and wrong-password outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_invalid_credentials.js`
+- [X] T025 [P] [US3] Add integration tests for lockout trigger, active lockout denial, and reset-after-success/expiry behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_lockout_policy.js`
+- [X] T026 [P] [US3] Add integration test for credential-store unavailability handling in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_credential_store_outage.js`
 
 ### Implementation for User Story 3
 
-- [ ] T027 [US3] Implement unknown-email and wrong-password failure mapping using one generic message (`Invalid email or password.`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_failure_service.js`
-- [ ] T028 [US3] Integrate lockout policy enforcement (threshold, deny window, reset logic) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/lockout_policy_service.js`
-- [ ] T029 [US3] Implement credential-store outage fail-closed path and retry-later response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
-- [ ] T030 [US3] Implement frontend messaging flows for invalid/locked/system-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_error_state_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_error_state_view.js`
+- [X] T027 [US3] Implement unknown-email and wrong-password failure mapping using one generic message (`Invalid email or password.`) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_failure_service.js`
+- [X] T028 [US3] Integrate lockout policy enforcement (threshold, deny window, reset logic) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/lockout_policy_service.js`
+- [X] T029 [US3] Implement credential-store outage fail-closed path and retry-later response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_service.js`
+- [X] T030 [US3] Implement frontend messaging flows for invalid/locked/system-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/login_error_state_controller.js` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/login_error_state_view.js`
 
 **Checkpoint**: All user stories are independently functional and testable.
 
@@ -114,18 +114,18 @@
 
 **Purpose**: Hardening, observability, and UC artifact synchronization.
 
-- [ ] T031 [P] Add authentication observability (latency + failure category metrics) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
-- [ ] T032 [P] Add unit tests for lockout and reset edge conditions in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc03_lockout_policy.js`
+- [X] T031 [P] Add authentication observability (latency + failure category metrics) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
+- [X] T032 [P] Add unit tests for lockout and reset edge conditions in `/mnt/c/Users/ponti/Desktop/CMS1/tests/unit/test_uc03_lockout_policy.js`
 - [ ] T033 Update implementation alignment notes and `UC-03.md` / `UC-03-AT.md` sync checklist in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/tasks.md`
-- [ ] T034 Run `npm test && npm run lint` and capture UC-03 validation summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
+- [X] T034 Run `npm test && npm run lint` and capture UC-03 validation summary in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
 
 - [ ] T035 Validate UC-03 narrative and update any changed user-facing behavior details in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03.md`
 - [ ] T036 Validate UC-03 acceptance tests and update scenarios/expected outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
 
-- [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/quickstart.md`
-- [ ] T038 Add login p95 latency verification step against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_performance.integration.js`
-- [ ] T039 Add telemetry for failed-login recovery-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
-- [ ] T040 Record SC-005 recovery metric calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
+- [X] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/quickstart.md`
+- [X] T038 Add login p95 latency verification step against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/test_uc03_login_performance.integration.js`
+- [X] T039 Add telemetry for failed-login recovery-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
+- [X] T040 Record SC-005 recovery metric calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
 
 ---
 
@@ -205,3 +205,4 @@ Task: "T026 Credential-store outage integration test in /mnt/c/Users/ponti/Deskt
 - All tasks use strict checklist format with IDs and explicit file paths.
 - Story tasks include required `[US1]`, `[US2]`, `[US3]` labels.
 - `[P]` markers are applied only where tasks are safely parallelizable.
+
