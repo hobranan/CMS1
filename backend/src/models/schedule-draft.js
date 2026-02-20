@@ -10,6 +10,8 @@ export class ScheduleDraftRepository {
     this.failNextPublicScheduleRead = false;
     this.failNextPublicEntryRead = false;
     this.failNextPublicPdfRead = false;
+    this.publishedPricing = null;
+    this.failNextPublicPricingRead = false;
   }
 
   seedConference({
@@ -91,5 +93,21 @@ export class ScheduleDraftRepository {
 
   failNextPublicPdf() {
     this.failNextPublicPdfRead = true;
+  }
+
+  seedPublishedPricing({ conferenceId = "default", categories = [] }) {
+    this.publishedPricing = { conferenceId, status: "published", categories };
+  }
+
+  getPublishedPricing() {
+    return this.publishedPricing;
+  }
+
+  clearPublishedPricing() {
+    this.publishedPricing = null;
+  }
+
+  failNextPricingRead() {
+    this.failNextPublicPricingRead = true;
   }
 }

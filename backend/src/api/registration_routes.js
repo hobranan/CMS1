@@ -63,6 +63,8 @@ import { createScheduleEditRoutes } from "./schedule-edit/routes.js";
 import { ScheduleEditObservabilityService } from "../services/schedule-edit/schedule-edit-observability-service.js";
 import { createPublicScheduleRoutes } from "./public-schedule/routes.js";
 import { PublicScheduleObservabilityService } from "../services/public-schedule/public-schedule-observability-service.js";
+import { createPublicPricingRoutes } from "./public-pricing/routes.js";
+import { PublicPricingObservabilityService } from "../services/public-pricing/public-pricing-observability-service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -213,6 +215,9 @@ export function createRegistrationRoutes(deps) {
   if (!deps.publicScheduleObservabilityService) {
     deps.publicScheduleObservabilityService = new PublicScheduleObservabilityService();
   }
+  if (!deps.publicPricingObservabilityService) {
+    deps.publicPricingObservabilityService = new PublicPricingObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -232,6 +237,7 @@ export function createRegistrationRoutes(deps) {
   const scheduleRoutes = createScheduleRoutes(deps);
   const scheduleEditRoutes = createScheduleEditRoutes(deps);
   const publicScheduleRoutes = createPublicScheduleRoutes(deps);
+  const publicPricingRoutes = createPublicPricingRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -253,7 +259,8 @@ export function createRegistrationRoutes(deps) {
     ...decisionNotificationRoutes,
     ...scheduleRoutes,
     ...scheduleEditRoutes,
-    ...publicScheduleRoutes
+    ...publicScheduleRoutes,
+    ...publicPricingRoutes
   };
 }
 

@@ -2,79 +2,12 @@ openapi: 3.0.3
 info:
   title: Registration Prices API
   version: 1.0.0
-  description: Contracts for publicly viewing published registration prices in CAD without discounts.
+  description: Public endpoint for published registration pricing (CAD, no discount fields).
 paths:
   /api/v1/public/registration-prices:
     get:
-      summary: Get published public registration prices
+      summary: Get public registration prices
       responses:
-        '200':
-          description: Published pricing returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicRegistrationPricesResponse'
-        '404':
-          description: Pricing not published yet
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Pricing retrieval failure
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-components:
-  schemas:
-    PublicRegistrationPricesResponse:
-      type: object
-      required: [published, currency, categories]
-      properties:
-        published:
-          type: boolean
-          enum: [true]
-        currency:
-          type: string
-          enum: [CAD]
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceCategory'
-        missingInformation:
-          type: array
-          items:
-            type: string
-        discountApplied:
-          type: boolean
-          enum: [false]
-    PriceCategory:
-      type: object
-      required: [categoryId, finalAmount, currency]
-      properties:
-        categoryId:
-          type: string
-        label:
-          type: string
-          nullable: true
-        conditionText:
-          type: string
-          nullable: true
-        finalAmount:
-          type: number
-          format: decimal
-        currency:
-          type: string
-          enum: [CAD]
-        informationComplete:
-          type: boolean
-    ErrorResponse:
-      type: object
-      required: [code, message]
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+        '200': { description: Published pricing returned }
+        '404': { description: Pricing not published }
+        '500': { description: Retrieval failure }

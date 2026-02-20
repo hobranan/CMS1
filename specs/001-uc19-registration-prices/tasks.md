@@ -10,10 +10,10 @@
 
 **Purpose**: Prepare public pricing endpoint/view and test scaffolding.
 
-- [ ] T001 Create public-pricing feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/`
-- [ ] T002 [P] Register public registration-prices route in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/routes.js`
-- [ ] T003 [P] Create frontend public pricing view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-controller.js`
-- [ ] T004 [P] Add UC-19 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/`
+- [X] T001 Create public-pricing feature folders in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/`, `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/`, and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/`
+- [X] T002 [P] Register public registration-prices route in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/routes.js`
+- [X] T003 [P] Create frontend public pricing view/controller shells in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices.html` and `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-controller.js`
+- [X] T004 [P] Add UC-19 contract/integration test directories in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/` and `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/`
 
 ---
 
@@ -21,14 +21,14 @@
 
 **Purpose**: Implement published-only gating, CAD/no-discount policy, projection, and safe error handling.
 
-- [ ] T005 Create `PricingAvailabilityState` model for published/unpublished access gating in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/pricing-availability-state.js`
-- [ ] T006 [P] Create `RegistrationPriceCategory` model with `final_amount_cad` and completeness flags in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/registration-price-category.js`
-- [ ] T007 [P] Create `PublishedPricingSet` and projection model in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/published-pricing-set.js`
-- [ ] T008 [P] Implement published-pricing retrieval service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/public-pricing-retrieval-service.js`
-- [ ] T009 [P] Implement CAD formatting/labeling utility for zero- and two-decimal values in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/cad-formatting-service.js`
-- [ ] T010 [P] Implement no-discount enforcement and response-shaping service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/no-discount-policy-service.js`
-- [ ] T011 Implement incomplete-data projection service with missing-information flags in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/incomplete-pricing-projection-service.js`
-- [ ] T012 Implement public-pricing API error mapper for unpublished/retrieval-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/public-pricing-error-mapper.js`
+- [X] T005 Create `PricingAvailabilityState` model for published/unpublished access gating in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/pricing-availability-state.js`
+- [X] T006 [P] Create `RegistrationPriceCategory` model with `final_amount_cad` and completeness flags in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/registration-price-category.js`
+- [X] T007 [P] Create `PublishedPricingSet` and projection model in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/published-pricing-set.js`
+- [X] T008 [P] Implement published-pricing retrieval service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/public-pricing-retrieval-service.js`
+- [X] T009 [P] Implement CAD formatting/labeling utility for zero- and two-decimal values in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/cad-formatting-service.js`
+- [X] T010 [P] Implement no-discount enforcement and response-shaping service in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/no-discount-policy-service.js`
+- [X] T011 Implement incomplete-data projection service with missing-information flags in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/incomplete-pricing-projection-service.js`
+- [X] T012 Implement public-pricing API error mapper for unpublished/retrieval-failure outcomes in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/public-pricing-error-mapper.js`
 
 **Checkpoint**: Foundation complete; user stories can proceed independently.
 
@@ -42,16 +42,16 @@
 
 ### Tests for User Story 1
 
-- [ ] T013 [P] [US1] Add contract test for successful `GET /api/v1/public/registration-prices` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/get-registration-prices.contract.test.js`
-- [ ] T014 [P] [US1] Add integration test for guest access to published prices in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/guest-published-prices.integration.test.js`
-- [ ] T015 [P] [US1] Add integration test for guest vs authenticated parity in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/guest-auth-parity.integration.test.js`
-- [ ] T016 [P] [US1] Add integration test for CAD display formatting variants (0/2 decimals) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/cad-format-variants.integration.test.js`
+- [X] T013 [P] [US1] Add contract test for successful `GET /api/v1/public/registration-prices` in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/get-registration-prices.contract.test.js`
+- [X] T014 [P] [US1] Add integration test for guest access to published prices in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/guest-published-prices.integration.test.js`
+- [X] T015 [P] [US1] Add integration test for guest vs authenticated parity in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/guest-auth-parity.integration.test.js`
+- [X] T016 [P] [US1] Add integration test for CAD display formatting variants (0/2 decimals) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/cad-format-variants.integration.test.js`
 
 ### Implementation for User Story 1
 
-- [ ] T017 [US1] Implement public registration-prices controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/get-registration-prices-controller.js`
-- [ ] T018 [US1] Implement frontend public pricing loader in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-controller.js`
-- [ ] T019 [US1] Implement pricing table rendering with category/final-amount mapping in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices.html`
+- [X] T017 [US1] Implement public registration-prices controller in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/get-registration-prices-controller.js`
+- [X] T018 [US1] Implement frontend public pricing loader in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-controller.js`
+- [X] T019 [US1] Implement pricing table rendering with category/final-amount mapping in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices.html`
 
 **Checkpoint**: US1 delivers MVP public pricing visibility.
 
@@ -65,16 +65,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T020 [P] [US2] Add contract test for unpublished pricing `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/get-registration-prices-not-published.contract.test.js`
-- [ ] T021 [P] [US2] Add contract test for retrieval failure `500` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/get-registration-prices-retrieval-failure.contract.test.js`
-- [ ] T022 [P] [US2] Add integration test for incomplete category set with missing-information indicators in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/incomplete-pricing-indicators.integration.test.js`
-- [ ] T023 [P] [US2] Add integration test for direct URL access to unpublished pricing page in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/direct-url-unpublished.integration.test.js`
+- [X] T020 [P] [US2] Add contract test for unpublished pricing `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/get-registration-prices-not-published.contract.test.js`
+- [X] T021 [P] [US2] Add contract test for retrieval failure `500` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/get-registration-prices-retrieval-failure.contract.test.js`
+- [X] T022 [P] [US2] Add integration test for incomplete category set with missing-information indicators in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/incomplete-pricing-indicators.integration.test.js`
+- [X] T023 [P] [US2] Add integration test for direct URL access to unpublished pricing page in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/direct-url-unpublished.integration.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T024 [US2] Implement unpublished-pricing not-available frontend state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices-unavailable.html`
-- [ ] T025 [US2] Implement incomplete-data rendering and missing-info markers in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices-missing-info.html`
-- [ ] T026 [US2] Implement retrieval-failure error-state controller in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-error-controller.js`
+- [X] T024 [US2] Implement unpublished-pricing not-available frontend state in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices-unavailable.html`
+- [X] T025 [US2] Implement incomplete-data rendering and missing-info markers in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/views/public-pricing/registration-prices-missing-info.html`
+- [X] T026 [US2] Implement retrieval-failure error-state controller in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-error-controller.js`
 
 **Checkpoint**: US2 handles unavailable/incomplete/failure states safely.
 
@@ -88,15 +88,15 @@
 
 ### Tests for User Story 3
 
-- [ ] T027 [P] [US3] Add integration test for refresh/revisit pricing consistency in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/refresh-revisit-consistency.integration.test.js`
-- [ ] T028 [P] [US3] Add integration test for temporary retrieval failure then recovery behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/failure-then-recovery.integration.test.js`
-- [ ] T029 [P] [US3] Add contract test asserting `discountApplied=false`, `currency=CAD`, and no discount fields in response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/no-discount-response.contract.test.js`
+- [X] T027 [P] [US3] Add integration test for refresh/revisit pricing consistency in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/refresh-revisit-consistency.integration.test.js`
+- [X] T028 [P] [US3] Add integration test for temporary retrieval failure then recovery behavior in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/failure-then-recovery.integration.test.js`
+- [X] T029 [P] [US3] Add contract test asserting `discountApplied=false`, `currency=CAD`, and no discount fields in response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/public-pricing/no-discount-response.contract.test.js`
 
 ### Implementation for User Story 3
 
-- [ ] T030 [US3] Implement stable published-pricing snapshot read path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/public-pricing-retrieval-service.js`
-- [ ] T031 [US3] Implement response mapper enforcing final-price/no-discount schema in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/public-pricing-response-mapper.js`
-- [ ] T032 [US3] Implement frontend consistency guard for unchanged published pricing across reloads in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-consistency-controller.js`
+- [X] T030 [US3] Implement stable published-pricing snapshot read path in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/public-pricing-retrieval-service.js`
+- [X] T031 [US3] Implement response mapper enforcing final-price/no-discount schema in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/api/public-pricing/public-pricing-response-mapper.js`
+- [X] T032 [US3] Implement frontend consistency guard for unchanged published pricing across reloads in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/src/controllers/public-pricing/registration-prices-consistency-controller.js`
 
 **Checkpoint**: US3 completes consistency/no-discount guarantees.
 
@@ -106,12 +106,12 @@
 
 **Purpose**: Final observability, traceability, and verification.
 
-- [ ] T033 [P] Add public-pricing telemetry (latency/error outcome counters) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/public-pricing-observability-service.js`
-- [ ] T034 [P] Add performance verification test for public pricing latency target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/public-pricing-latency.integration.test.js`
-- [ ] T035 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-19.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-19-AT.md` if user-facing wording changed during implementation
-- [ ] T036 Run `npm test && npm run lint` and record UC-19 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
+- [X] T033 [P] Add public-pricing telemetry (latency/error outcome counters) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/public-pricing/public-pricing-observability-service.js`
+- [X] T034 [P] Add performance verification test for public pricing latency target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/public-pricing/public-pricing-latency.integration.test.js`
+- [X] T035 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-19.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-19-AT.md` if user-facing wording changed during implementation
+- [X] T036 Run `npm test && npm run lint` and record UC-19 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
 
-- [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
+- [X] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
 
 ---
 
@@ -181,3 +181,4 @@ Task: "T023 [US2] Add direct URL unpublished integration test in /mnt/c/Users/po
 - All displayed prices are final CAD amounts with no discount calculations.
 - Unpublished/failure states never show misleading pricing tables.
 - Guest and authenticated users see identical published pricing values.
+

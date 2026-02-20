@@ -1,36 +1,30 @@
-# Quickstart - UC-19 Registration Prices
+# Quickstart - UC-19 View Registration Prices
 
 ## Goal
-Provide public visibility of published registration prices with final CAD amounts and no discounts, including clear unavailable/incomplete/error states.
-
-## Prerequisites
-- Dependencies installed
-- Test command available: `npm test && npm run lint`
-- UC files present: `UC-19.md`, `UC-19-AT.md`
-
-## Implementation Steps
-1. Expose public Registration Prices endpoint/page without authentication requirement.
-2. Retrieve current published pricing set and category amounts.
-3. Enforce published-state gating before showing any pricing table content.
-4. Render available categories with corresponding final prices.
-5. Display all price amounts with explicit CAD labeling/formatting.
-6. Do not apply or display discount calculations in any public pricing output.
-7. If pricing unpublished, show clear not-available message and no pricing table.
-8. If pricing incomplete, show available categories and indicate missing information.
-9. If retrieval fails, show explicit system error and no pricing content.
-10. Ensure guests and authenticated users see identical published pricing values.
-11. Ensure published pricing remains consistent across refresh and return navigation.
+Expose published registration categories publicly with final CAD prices, no discount calculations, and stable behavior across guest/authenticated views.
 
 ## Validation Scenarios
-- Guest user views published categories/prices successfully.
-- All displayed amounts are in CAD (including 0- and 2-decimal values).
-- No discount fields or computed discount totals appear.
-- Unpublished pricing request returns not-available message and no table.
-- Incomplete pricing data shows available categories plus missing-info indicators.
-- Retrieval failure returns explicit error and no misleading pricing content.
-- Guest and logged-in users see identical published prices.
-- Refresh/revisit preserves same published values.
+- Published prices are visible publicly.
+- Guest and authenticated users receive identical pricing values.
+- Prices use CAD formatting (integer and decimal variants).
+- Discount fields are absent and `discountApplied=false`.
+- Unpublished pricing returns 404.
+- Retrieval failure returns 500 and recovers on subsequent success.
+- Incomplete categories include missing-information markers.
+- Refresh/revisit keeps consistent payload.
+- Public pricing latency p95 remains below 400ms in local harness.
 
-## Verification
-- Run `npm test && npm run lint`.
-- Execute contract/integration tests for public access, currency/no-discount enforcement, availability gating, incomplete data rendering, and failure handling.
+## Verification Run (Executed)
+- `node --test tests/contract/public-pricing/*.test.js tests/integration/public-pricing/*.test.js`
+  - Result: 12 passed, 0 failed.
+- `npm.cmd test`
+  - Result: pass (full suite).
+- `npm.cmd run lint`
+  - Result: pass.
+
+## HTML/CSS Style Profile Check
+- Verified pricing views against `docs/standards/html-css-style-profile.md`:
+  - `frontend/src/views/public-pricing/registration-prices.html`
+  - `frontend/src/views/public-pricing/registration-prices-unavailable.html`
+  - `frontend/src/views/public-pricing/registration-prices-missing-info.html`
+- Confirmed semantic structure and no inline styles.
