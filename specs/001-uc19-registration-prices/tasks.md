@@ -111,6 +111,8 @@
 - [ ] T035 Update `/mnt/c/Users/ponti/Desktop/CMS1/UC-19.md` and `/mnt/c/Users/ponti/Desktop/CMS1/UC-19-AT.md` if user-facing wording changed during implementation
 - [ ] T036 Run `npm test && npm run lint` and record UC-19 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
 
+- [ ] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
+
 ---
 
 ## Dependencies & Execution Order
