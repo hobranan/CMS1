@@ -2,7 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| A1 | Ambiguity | HIGH | `specs/001-uc10-invitation-response/spec.md:79`, `specs/001-uc10-invitation-response/research.md:4` | Expiry definition is clear, but timezone/clock-source authority for `issued_at + 14 days` is not explicit, risking boundary inconsistencies across environments. | Specify canonical timezone and server-side clock authority for expiry evaluation. |
 | G1 | Coverage Gap | MEDIUM | `specs/001-uc10-invitation-response/plan.md:18`, `specs/001-uc10-invitation-response/tasks.md:13` | Plan includes 300ms p95 decision target, but tasks have no explicit performance verification step. | Add performance measurement and threshold validation task in polish phase. |
 | G2 | Coverage Gap | MEDIUM | `specs/001-uc10-invitation-response/spec.md:113`, `specs/001-uc10-invitation-response/tasks.md:126` | SC-005 includes notification-failure feedback reliability, but tasks lack explicit telemetry/audit assertions that committed responses remain unchanged on notification failure. | Add instrumentation/assertion tasks to verify notification-failure post-commit invariants. |
 | U1 | Underspecification | LOW | `specs/001-uc10-invitation-response/spec.md:67`, `specs/001-uc10-invitation-response/tasks.md:103` | Multi-session concurrent response edge case is covered functionally, but no explicit conflict-resolution message standard is specified. | Define canonical conflict message and client refresh guidance for stale invitation state. |
@@ -40,14 +39,14 @@ No fully unmapped tasks detected.
 - Total Requirements: 14 functional requirements (FR-001..FR-014)
 - Total Tasks: 38
 - Coverage % (requirements with >=1 task): 100%
-- Ambiguity Count: 1
+- Ambiguity Count: 0
 - Duplication Count: 0
 - Critical Issues Count: 0
 
 ## Next Actions
 
-- No CRITICAL blockers found.
-- Resolve HIGH/MEDIUM findings before `/speckit.implement`.
+- No CRITICAL or HIGH blockers found.
+- Resolve MEDIUM findings before `/speckit.implement`.
 - Suggested actions:
   - Clarify expiry timezone/clock authority in `specs/001-uc10-invitation-response/spec.md`.
   - Add performance and notification-failure invariant telemetry tasks to `specs/001-uc10-invitation-response/tasks.md`.

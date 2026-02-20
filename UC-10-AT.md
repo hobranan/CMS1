@@ -3,6 +3,7 @@
 ## Assumptions / Notes
 - Referees must be logged in to respond to invitations.
 - Invitations have a status (pending, accepted, rejected, expired/withdrawn).
+- Invitation expiry is evaluated server-side in UTC (`issued_at_utc + 14 days`).
 - Responding updates invitation status and may create/activate an assignment on acceptance.
 - Notifications are sent to the editor when possible.
 

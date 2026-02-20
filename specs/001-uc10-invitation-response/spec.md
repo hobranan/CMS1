@@ -11,6 +11,7 @@
 ### Session 2026-02-08
 
 - Q: What invitation expiry rule should apply? -> A: Review invitations expire 14 calendar days after they are issued.
+- Q: Which clock/timezone is authoritative for expiry evaluation? -> A: Expiry is evaluated server-side using UTC (`now_utc >= issued_at_utc + 14 days`).
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -76,7 +77,7 @@ A referee can cancel before confirming, and database/notification failures are h
 - **FR-001**: System MUST allow invitation response actions only for authenticated referees.
 - **FR-002**: System MUST present pending invitations and invitation details with Accept/Reject options.
 - **FR-003**: System MUST validate invitation is still actionable before recording any response.
-- **FR-004**: System MUST treat invitations as expired 14 calendar days after issue time.
+- **FR-004**: System MUST treat invitations as expired 14 calendar days after issue time using server-side UTC clock authority (`now_utc >= issued_at_utc + 14 days`).
 - **FR-005**: System MUST prevent responses to invitations that are expired, withdrawn, or already responded.
 - **FR-006**: System MUST record accepted responses and update invitation status to Accepted.
 - **FR-007**: System MUST record rejected responses and update invitation status to Rejected.
@@ -90,7 +91,7 @@ A referee can cancel before confirming, and database/notification failures are h
 
 ### Assumptions
 
-- Invitation issue timestamp is available and trusted for expiry calculation.
+- Invitation issue timestamp is available and stored in UTC for expiry calculation.
 - Reminder behavior is outside scope of this use case.
 - Response change after initial accept/reject is outside scope unless defined in separate use case.
 

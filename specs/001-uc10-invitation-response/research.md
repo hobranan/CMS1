@@ -1,7 +1,7 @@
 # Phase 0 Research - UC-10 Invitation Response
 
 ## Decision 1: Expiry calculation and boundary behavior
-- Decision: Invitations expire exactly 14 calendar days after `issued_at`; any response at or after `issued_at + 14 days` is blocked as expired.
+- Decision: Invitations expire exactly 14 calendar days after `issued_at` using server-side UTC clock authority; any response at or after `issued_at_utc + 14 days` is blocked as expired.
 - Rationale: Matches clarified requirement and removes ambiguity at the exact boundary.
 - Alternatives considered: End-of-day expiry (rejected: timezone ambiguity), business-day window (rejected: mismatched to clarification).
 

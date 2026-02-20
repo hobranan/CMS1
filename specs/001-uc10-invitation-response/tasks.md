@@ -25,7 +25,7 @@
 - [ ] T006 [P] Create `InvitationResponse` model with single-effective-response constraints in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/invitation-response.js`
 - [ ] T007 [P] Create `ReviewAssignmentActivation` model with accept-only activation invariant in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/models/review-assignment-activation.js`
 - [ ] T008 Implement invitation actionable-state validation service (`pending`, not expired, not withdrawn, not responded) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-actionable-validation-service.js`
-- [ ] T009 [P] Implement 14-day expiry policy utility with exact boundary behavior (`now >= issued_at + 14 days` => expired) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-expiry-service.js`
+- [ ] T009 [P] Implement 14-day expiry policy utility with server-side UTC boundary behavior (`now_utc >= issued_at_utc + 14 days` => expired) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-expiry-service.js`
 - [ ] T010 Implement response persistence service with no-mutation-on-db-failure guarantees in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-response-persistence-service.js`
 - [ ] T011 [P] Implement post-commit notification adapter that reports failure without rolling back response in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-notification-service.js`
 
