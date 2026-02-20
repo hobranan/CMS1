@@ -1,211 +1,148 @@
-# Acceptance Test Suite — UC-01 Register New User Account
+# Acceptance Test Suite - UC-01 Register New User Account
 
 ## Assumptions / Notes
-- A valid email follows standard email formatting rules.
-- A unique email does not already exist in the CMS database.
-- A secure password meets the CMS password security standards.
+
+- Required registration fields are `email`, `password`, and `confirm password`.
+- Password policy: minimum 12 chars, uppercase, lowercase, number, symbol, no leading/trailing spaces, and common/breached password rejection when available.
+- Expiry timing uses server UTC.
 
 ---
 
-## AT-UC01-01 — Successful Registration (Main Success Scenario)
+## AT-UC01-01 - Successful Registration With Verification
 
-**Objective:** Verify a new user can register successfully with a unique, valid email and secure password.
+**Objective:** Verify pending registration is created and account activates only after successful verification.
 
 **Preconditions:**
 - User is not logged in.
-- Email `new_user_01@example.com` does not exist in the database.
-
-**Test Data:**
-- Email: `new_user_01@example.com`
-- Password: `ValidSecurePass!123`
-- Other required fields: Valid values
+- Email `new_user_01@example.com` does not exist in active/pending records.
 
 **Steps:**
-1. Navigate to the CMS registration option.
-2. Verify the registration form is displayed.
-3. Enter valid values in all required fields.
-4. Submit the registration form.
+1. Submit valid registration form.
+2. Open verification link received by email within 24h.
+3. Complete verification.
 
 **Expected Results:**
-- Email format and uniqueness are validated.
-- Password meets security requirements.
-- User account is created and stored in the database.
-- User is redirected to the login screen.
-- No error messages are displayed.
+- Pending registration created on submit.
+- Account remains inactive before verification.
+- Account is activated only after verification.
+- User is redirected to login.
 
 ---
 
-## AT-UC01-02 — Invalid Email Format (Extension 4a)
-
-**Objective:** Verify the system rejects registration if the email format is invalid.
-
-**Preconditions:**
-- User is not logged in.
-
-**Test Data:**
-- Email: `invalid-email-format`
-- Password: `ValidSecurePass!123`
-
-**Steps:**
-1. Open the registration form.
-2. Enter the invalid email and valid values elsewhere.
-3. Submit the form.
+## AT-UC01-02 - Invalid Email Format
 
 **Expected Results:**
-- The system detects the invalid email format.
-- No account is created.
-- An email-related error message is displayed.
-- The user remains on the registration page.
+- Field-level email error returned.
+- No pending registration/account activation.
 
 ---
 
-## AT-UC01-03 — Duplicate Email (Extension 4b)
-
-**Objective:** Verify the system rejects registration if the email is already registered.
-
-**Preconditions:**
-- User is not logged in.
-- Email `existing_user@example.com` already exists in the database.
-
-**Test Data:**
-- Email: `existing_user@example.com`
-- Password: `ValidSecurePass!123`
-
-**Steps:**
-1. Open the registration form.
-2. Enter the duplicate email and valid values elsewhere.
-3. Submit the form.
+## AT-UC01-03 - Duplicate Email
 
 **Expected Results:**
-- The system detects the duplicate email.
-- No account is created.
-- An error message indicates the email is already registered.
-- The user remains on the registration page.
+- Duplicate-email error returned for existing active/pending email.
+- No additional pending registration/account activation.
 
 ---
 
-## AT-UC01-04 — Password Does Not Meet Security Standards (Extension 5a)
-
-**Objective:** Verify the system rejects weak or invalid passwords.
-
-**Preconditions:**
-- User is not logged in.
-- Email does not exist in the database.
-
-**Test Data:**
-- Email: `new_user_weakpass@example.com`
-- Password: `12345`
-
-**Steps:**
-1. Open the registration form.
-2. Enter valid values except for the weak password.
-3. Submit the form.
+## AT-UC01-04 - Password Policy Violation
 
 **Expected Results:**
-- The system rejects the password.
-- No account is created.
-- A password-related error message is displayed.
-- The user remains on the registration page.
+- Password violation details returned.
+- No pending registration/account activation.
 
 ---
 
-## AT-UC01-05 — Missing Required Fields (Extension 3a)
-
-**Objective:** Verify the system rejects incomplete registration forms.
-
-**Preconditions:**
-- User is not logged in.
-
-**Test Data:**
-- Email: `new_user_missingfield@example.com`
-- Password: `ValidSecurePass!123`
-- One required field left blank
-
-**Steps:**
-1. Open the registration form.
-2. Leave one required field blank.
-3. Submit the form.
+## AT-UC01-05 - Missing Required Fields
 
 **Expected Results:**
-- The system detects missing required fields.
-- No account is created.
-- Missing fields are highlighted with an error message.
-- The user remains on the registration page.
+- Missing-field errors returned.
+- No pending registration/account activation.
 
 ---
 
-## AT-UC01-06 — Multiple Validation Errors
-
-**Objective:** Verify the system handles multiple invalid inputs in a single submission.
-
-**Preconditions:**
-- User is not logged in.
-
-**Test Data:**
-- Email: `bademail`
-- Password: `123`
-- One required field missing
-
-**Steps:**
-1. Open the registration form.
-2. Enter invalid email, weak password, and omit a required field.
-3. Submit the form.
+## AT-UC01-06 - Multiple Validation Failures Ordering
 
 **Expected Results:**
-- The system reports all validation errors or the first blocking error clearly.
-- No account is created.
-- The user remains on the registration page.
+- All field-level validation errors returned in stable order.
+- No pending registration/account activation.
 
 ---
 
-## AT-UC01-07 — Data Persistence Check
-
-**Objective:** Verify successful registration persists user data correctly.
+## AT-UC01-07 - Immediate Login After Successful Verification
 
 **Preconditions:**
-- A successful registration has been completed for `new_user_01@example.com`.
-
-**Steps:**
-1. Navigate to the login screen.
-2. Log in using the newly registered credentials.
+- Account has been successfully verified via AT-UC01-01.
 
 **Expected Results:**
-- Login is successful.
-- The user is redirected to their dashboard or home page.
+- Login succeeds with newly registered credentials.
 
 ---
 
 ## AT-UC01-08 - Login Attempt Before Verification
 
-**Objective:** Verify login is denied with corrective guidance when email is not yet verified.
-
-**Preconditions:**
-- User has submitted registration for `pending_user@example.com`.
-- Email verification has not been completed.
-
-**Steps:**
-1. Navigate to the login screen.
-2. Attempt login with pending registration credentials.
-
 **Expected Results:**
-- Login is denied.
-- User sees reminder that a verification email was sent.
-- User is offered an option to resend verification.
+- Login denied with unverified reminder.
+- Resend option shown when pending registration is unexpired.
 
 ---
 
-## AT-UC01-09 - Unverified Registration Attempt Expired After 7 Days
-
-**Objective:** Verify pending registrations expire after one week and require restart.
-
-**Preconditions:**
-- User has an unverified registration attempt older than 7 days.
-
-**Steps:**
-1. Attempt to resend verification for the expired registration.
-2. Attempt to verify using old token.
+## AT-UC01-09 - Pending Registration Expired After 7 Days
 
 **Expected Results:**
-- Resend request is rejected due to expired registration attempt.
-- Old token cannot complete registration.
-- User is prompted to start registration again.
+- Pending registration age `>=7 days` is treated expired.
+- Verification/resend/login for expired pending registration denied.
+- User directed to start new registration.
+
+---
+
+## AT-UC01-10 - Post-Expiry Login Guidance
+
+**Expected Results:**
+- Login response indicates inactive/expired registration state.
+- User guidance points to new registration flow.
+
+---
+
+## AT-UC01-11 - Concurrent Same-Email Registration
+
+**Expected Results:**
+- Atomic uniqueness enforcement prevents duplicate pending records.
+- One request succeeds; concurrent duplicate is deterministically rejected.
+
+---
+
+## AT-UC01-12 - Resend Rate Limits
+
+**Expected Results:**
+- Enforces max 3 resend attempts per rolling 24h window.
+- Enforces 60-second cooldown between attempts.
+- Returns clear cooldown/rate-limit guidance when blocked.
+
+---
+
+## AT-UC01-13 - Token Security and Single-Use
+
+**Expected Results:**
+- Verification token generated with secure randomness.
+- Token stored hashed server-side.
+- Used token cannot be reused.
+- Tampered/invalid token cannot activate account.
+
+---
+
+## AT-UC01-14 - Privacy and Logging Controls
+
+**Expected Results:**
+- Raw passwords and full tokens never appear in logs.
+- Emails are masked in logs.
+- Client errors do not expose sensitive internals.
+
+---
+
+## AT-UC01-15 - Accessibility of Validation and Reminder UX
+
+**Expected Results:**
+- Errors/reminders are announced to assistive technology (`aria-live`).
+- Invalid fields are programmatically associated with their error text.
+- Keyboard-only user can complete register/verify/resend flow.
