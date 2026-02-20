@@ -114,6 +114,8 @@
 - [ ] T038 Run `npm test && npm run lint` and record UC-10 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc10-invitation-response/quickstart.md`
+- [ ] T040 Add invitation-response decision p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/invitations/invitation-response-performance.integration.test.js`
+- [ ] T041 Add post-commit notification-failure invariant telemetry/assertion task in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/invitations/invitation-notification-observability-service.js`
 
 ---
 

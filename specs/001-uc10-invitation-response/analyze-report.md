@@ -2,8 +2,6 @@
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
-| G1 | Coverage Gap | MEDIUM | `specs/001-uc10-invitation-response/plan.md:18`, `specs/001-uc10-invitation-response/tasks.md:13` | Plan includes 300ms p95 decision target, but tasks have no explicit performance verification step. | Add performance measurement and threshold validation task in polish phase. |
-| G2 | Coverage Gap | MEDIUM | `specs/001-uc10-invitation-response/spec.md:113`, `specs/001-uc10-invitation-response/tasks.md:126` | SC-005 includes notification-failure feedback reliability, but tasks lack explicit telemetry/audit assertions that committed responses remain unchanged on notification failure. | Add instrumentation/assertion tasks to verify notification-failure post-commit invariants. |
 | U1 | Underspecification | LOW | `specs/001-uc10-invitation-response/spec.md:67`, `specs/001-uc10-invitation-response/tasks.md:103` | Multi-session concurrent response edge case is covered functionally, but no explicit conflict-resolution message standard is specified. | Define canonical conflict message and client refresh guidance for stale invitation state. |
 | U2 | Underspecification | LOW | `specs/001-uc10-invitation-response/tasks.md:111` | T037 is conditional and may be skipped inconsistently. | Convert to explicit verify-and-record UC/AT sync task regardless of changes. |
 
@@ -37,7 +35,7 @@ No fully unmapped tasks detected.
 ## Metrics
 
 - Total Requirements: 14 functional requirements (FR-001..FR-014)
-- Total Tasks: 38
+- Total Tasks: 41
 - Coverage % (requirements with >=1 task): 100%
 - Ambiguity Count: 0
 - Duplication Count: 0
