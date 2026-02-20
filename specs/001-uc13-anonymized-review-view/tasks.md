@@ -114,6 +114,8 @@
 - [ ] T038 Run `npm test && npm run lint` and record UC-13 verification notes in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc13-anonymized-review-view/quickstart.md`
 
 - [ ] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc13-anonymized-review-view/quickstart.md`
+- [ ] T040 Add assigned-review access/authorization p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/anonymized-review-view/access-performance.integration.test.js`
+- [ ] T041 Add failure payload-redaction assertion tests for all unauthorized/error paths in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/anonymized-review-view/error-payload-redaction.contract.test.js`
 
 ---
 
