@@ -41,6 +41,7 @@ import { buildAnnouncementsListViewModel } from "../../frontend/src/controllers/
 import { pricingConsistencyKey } from "../../frontend/src/controllers/public-pricing/registration-prices-consistency-controller.js";
 
 function createStubElement() {
+  const listeners = new Map();
   return {
     value: "",
     textContent: "",
@@ -50,7 +51,14 @@ function createStubElement() {
     size: 0,
     append() {},
     appendChild() {},
-    addEventListener() {},
+    addEventListener(type, handler) {
+      listeners.set(type, handler);
+    },
+    async trigger(type) {
+      if (listeners.has(type)) {
+        await listeners.get(type)({ preventDefault() {} });
+      }
+    },
     querySelector() {
       return createStubElement();
     },
@@ -78,6 +86,8 @@ test("wave8 covers schedule-generation-request and frontend controller branch pa
   assert.equal((await verifyToken(apiClient, "t1")).status, 200);
   assert.equal((await resendVerification(apiClient, "a@x.com")).status, 200);
   assert.equal(mapRegistrationErrors([{ field: "email", message: "bad" }]).email, "bad");
+  assert.equal(mapRegistrationErrors([{ message: "general" }]).form, "general");
+  assert.deepEqual(mapRegistrationErrors(undefined), {});
   assert.equal((await submitRegistration(apiClient, {})).status, 200);
   assert.equal((await submitFormForValidation(apiClient, {}, user)).status, 200);
   assert.equal(mapFieldErrors([{ field: "f", message: "m" }]).f, "m");
@@ -118,6 +128,8 @@ test("wave8 covers schedule-generation-request and frontend controller branch pa
   assert.equal(invitationFailureMessage({ status: 200 }), "");
 
   assert.equal(buildOnlinePaymentViewModel({ amount: 10, currency: "CAD", categoryLabel: "Regular" }).totalLabel, "CAD 10.00");
+  assert.equal(buildOnlinePaymentViewModel({}).categoryLabel, "Not selected");
+  assert.equal(buildOnlinePaymentViewModel({}).totalLabel, "CAD 0.00");
   assert.equal(buildPaymentFailureMessage("declined").includes("declined"), true);
   assert.equal(buildPaymentFailureMessage("invalid_details").includes("invalid"), true);
   assert.equal(buildPaymentFailureMessage("cancelled").includes("canceled"), true);
@@ -172,5 +184,17 @@ test("wave8 executes frontend app entry modules under a mocked browser environme
   const root = process.cwd();
   await import(pathToFileURL(path.join(root, "frontend/src/app/app.js")).href);
   await import(pathToFileURL(path.join(root, "frontend/src/appsimple/app.js")).href);
+  await elements.get("save-context")?.trigger("click");
+  await elements.get("clear-context")?.trigger("click");
+  await elements.get("seed-demo")?.trigger("click");
+  await elements.get("run-all")?.trigger("click");
+  if (elements.get("uc-filter")) {
+    elements.get("uc-filter").value = "uc-01";
+    await elements.get("uc-filter").trigger("input");
+  }
+  if (elements.get("filter-input")) {
+    elements.get("filter-input").value = "schedule";
+    await elements.get("filter-input").trigger("input");
+  }
   assert.equal(true, true);
 });
