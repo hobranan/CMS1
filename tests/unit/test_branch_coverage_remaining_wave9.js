@@ -46,6 +46,7 @@ import { renderReviewSubmitErrors } from "../../frontend/src/views/review-submit
 import { reviewViewFeedbackMessage } from "../../frontend/src/views/review-view-state-feedback.js";
 import { renderSubmissionErrors } from "../../frontend/src/views/submission-form-errors.js";
 import { renderVerificationState } from "../../frontend/src/views/verification_view.js";
+import { renderWorkloadLimitError } from "../../frontend/src/views/workload-limit-errors.js";
 
 test("wave9 covers non-app frontend controllers/models/views", async () => {
   const calls = [];
@@ -90,6 +91,7 @@ test("wave9 covers non-app frontend controllers/models/views", async () => {
   assert.equal(scheduleEditErrorFeedback({ status: 423 }).includes("locked"), true);
   assert.equal(scheduleEditErrorFeedback({ status: 409 }).includes("Reload"), true);
   assert.equal(scheduleEditErrorFeedback({ status: 400, body: { message: "bad" } }), "bad");
+  assert.equal(scheduleEditErrorFeedback({ status: 400, body: {} }).includes("Invalid"), true);
   assert.equal(scheduleEditErrorFeedback({ status: 500 }).includes("failed"), true);
   assert.equal(scheduleEditErrorFeedback({ status: 200 }), "");
   assert.equal(scheduleEditSaveFeedback({ status: 200 }).includes("saved"), true);
@@ -97,6 +99,7 @@ test("wave9 covers non-app frontend controllers/models/views", async () => {
 
   await generateSchedule(apiClient, "c1", { seed: 1 }, user);
   assert.equal(scheduleErrorMessage({ status: 400, body: { message: "invalid" } }), "invalid");
+  assert.equal(scheduleErrorMessage({ status: 400, body: {} }).includes("invalid"), true);
   assert.equal(scheduleErrorMessage({ status: 500 }).includes("failed"), true);
   assert.equal(scheduleErrorMessage({ status: 200 }), "");
   await publishScheduleDraft(apiClient, "c1", "d1", { confirm: true }, user);
@@ -130,6 +133,7 @@ test("wave9 covers non-app frontend controllers/models/views", async () => {
   assert.equal(toValidationModel({ status: 422, body: { errors: [{ field: "x" }] } }).errors.length, 1);
 
   assert.equal(assignedAccessErrorMessage({ status: 404, body: { message: "gone" } }), "gone");
+  assert.equal(assignedAccessErrorMessage({ status: 404, body: {} }).includes("unavailable"), true);
   assert.equal(assignedAccessErrorMessage({ status: 500 }).includes("System error"), true);
   assert.equal(assignedAccessErrorMessage({ status: 200 }), "");
   assert.equal(assignedAccessStateFeedback({ status: 200, body: { papers: [] } }).includes("No assigned"), true);
@@ -142,6 +146,7 @@ test("wave9 covers non-app frontend controllers/models/views", async () => {
   assert.deepEqual(renderAllErrors([{ field: "x", message: "m" }]), ["x: m"]);
   assert.equal(invitationStateFeedback({ status: 200, body: { invitations: [] } }).includes("No pending"), true);
   assert.equal(invitationStateFeedback({ status: 400, body: { message: "blocked" } }), "blocked");
+  assert.equal(invitationStateFeedback({ status: 400, body: {} }).includes("blocked"), true);
   assert.equal(invitationStateFeedback({ status: 409 }).includes("Refresh"), true);
   assert.equal(invitationStateFeedback({ status: 200, body: { invitations: [1] } }), "");
   assert.equal(renderLoginErrorState({ status: 423 }).includes("locked"), true);
@@ -161,8 +166,13 @@ test("wave9 covers non-app frontend controllers/models/views", async () => {
   assert.equal(renderPasswordChangeResult({ status: 500 }).includes("failed"), true);
   assert.deepEqual(renderAssignmentErrors({ status: 500, body: {} }), []);
   assert.deepEqual(renderAssignmentErrors({ status: 400, body: { errors: [{ field: "x" }] } }), [{ field: "x" }]);
+  assert.deepEqual(renderAssignmentErrors({ status: 400, body: {} }), []);
   assert.deepEqual(renderReviewSubmitErrors({ status: 500, body: {} }), []);
   assert.deepEqual(renderReviewSubmitErrors({ status: 400, body: { errors: [{ field: "x" }] } }), [{ field: "x" }]);
+  assert.deepEqual(renderReviewSubmitErrors({ status: 400, body: {} }), []);
+  assert.equal(renderWorkloadLimitError({ status: 409 }).includes("Refresh"), true);
+  assert.equal(renderWorkloadLimitError({ status: 400 }).includes("limit"), true);
+  assert.equal(renderWorkloadLimitError({ status: 200 }), "");
   assert.equal(reviewViewFeedbackMessage({ status: 200, body: { reviews: [] } }).includes("No completed"), true);
   assert.equal(reviewViewFeedbackMessage({ status: 403 }).includes("not allowed"), true);
   assert.equal(reviewViewFeedbackMessage({ status: 500 }).includes("could not"), true);
