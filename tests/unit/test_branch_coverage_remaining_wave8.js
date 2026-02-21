@@ -148,6 +148,7 @@ test("wave8 covers schedule-generation-request and frontend controller branch pa
 
 test("wave8 executes frontend app entry modules under a mocked browser environment", async () => {
   const elements = new Map();
+  const createdElements = [];
   globalThis.document = {
     getElementById(id) {
       if (!elements.has(id)) {
@@ -156,7 +157,9 @@ test("wave8 executes frontend app entry modules under a mocked browser environme
       return elements.get(id);
     },
     createElement() {
-      return createStubElement();
+      const el = createStubElement();
+      createdElements.push(el);
+      return el;
     }
   };
   globalThis.localStorage = {
@@ -195,6 +198,11 @@ test("wave8 executes frontend app entry modules under a mocked browser environme
   if (elements.get("filter-input")) {
     elements.get("filter-input").value = "schedule";
     await elements.get("filter-input").trigger("input");
+  }
+  for (const el of createdElements) {
+    await el.trigger("click");
+    await el.trigger("input");
+    await el.trigger("submit");
   }
   assert.equal(true, true);
 });
