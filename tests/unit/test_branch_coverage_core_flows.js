@@ -46,6 +46,23 @@ test("PaperRefereeAssignmentRepository applies and restores assignments across r
   assert.deepEqual(repo.getAssignment("p-missing").refereeIds, []);
 });
 
+test("PaperRefereeAssignmentRepository covers reassignment replacement and submitted fallback", () => {
+  const repo = new PaperRefereeAssignmentRepository();
+  const now = new Date("2026-02-21T00:00:00.000Z");
+
+  repo.seedPaper({ paperId: "p2", status: "ASSIGNED", version: 4 });
+  repo.seedReferee({ refereeId: "ra", currentLoad: 0 });
+  repo.seedReferee({ refereeId: "rb", currentLoad: 1 });
+
+  repo.applyAssignment({ paperId: "p2", refereeIds: ["rb"], now });
+  repo.applyAssignment({ paperId: "p2", refereeIds: ["ra"], now });
+  assert.equal(repo.getReferee("rb").currentLoad, 1);
+  assert.equal(repo.getReferee("ra").currentLoad, 1);
+
+  repo.restoreAssignment({ paperId: "p2", previousAssignment: {}, now });
+  assert.equal(repo.getPaper("p2").status, "SUBMITTED");
+});
+
 test("PaymentWorkflowStore covers null updates, failNextPersist, and reconciliation", () => {
   const store = new PaymentWorkflowStore();
 
