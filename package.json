@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "node backend/src/server.js",
+    "dev": "node --watch backend/src/server.js",
     "test": "node --test tests/**/*.js frontend/tests/**/*.js",
     "test:coverage": "node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js",
     "lint": "node ./scripts/lint.mjs"
