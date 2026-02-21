@@ -1,4 +1,4 @@
-# Acceptance Test Suite — UC-05 Submit Paper Manuscript with Required Metadata
+# Acceptance Test Suite - UC-05 Submit paper manuscript with required metadata
 
 ## Assumptions / Notes
 - The author must be logged in to submit a paper.

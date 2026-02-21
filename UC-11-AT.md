@@ -1,4 +1,4 @@
-# Acceptance Test Suite - UC-11 Access Assigned Papers and Review Forms
+# Acceptance Test Suite - UC-11 Access assigned papers and review forms
 
 ## Assumptions / Notes
 - Referees must be logged in to access assigned papers.

@@ -1,4 +1,4 @@
-# Acceptance Test Suite - UC-10 Respond to Review Invitation (Accept/Reject)
+# Acceptance Test Suite - UC-10 Respond to review invitation (accept or reject)
 
 ## Assumptions / Notes
 - Referees must be logged in to respond to invitations.

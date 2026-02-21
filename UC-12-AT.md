@@ -1,4 +1,4 @@
-# Acceptance Test Suite - UC-12 Submit Completed Review
+# Acceptance Test Suite - UC-12 Submit completed review
 
 ## Assumptions / Notes
 - Referees must be authenticated and tied to the assignment.

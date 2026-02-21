@@ -1,4 +1,4 @@
-# Acceptance Test Suite - UC-08 Assign Referees to Paper
+# Acceptance Test Suite - UC-08 Assign referees to submitted paper
 
 ## Assumptions / Notes
 - Editors may assign at most three referees per paper.

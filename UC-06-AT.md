@@ -1,9 +1,11 @@
-# Acceptance Test Suite - UC-06 Upload Manuscript
+# Acceptance Test Suite - UC-06 Upload manuscript in an allowed format
 
 ## Assumptions / Notes
 - Allowed extensions: `.pdf`, `.doc`, `.docx`, `.tex` (case-insensitive).
 - Maximum file size: 7 MB.
 - Upload is complete only when file is attached to the submission.
+
+---
 
 ## AT-UC06-01 - Successful Upload
 
@@ -25,6 +27,8 @@
 - File is associated with current submission.
 - UI confirms attached state.
 
+---
+
 ## AT-UC06-02 - Cancel File Selection
 
 **Objective:** Verify cancel does not attach file.
@@ -36,6 +40,8 @@
 **Expected Results:**
 - No upload occurs.
 - No file is attached.
+
+---
 
 ## AT-UC06-03 - Reject Unsupported Extension
 
@@ -52,6 +58,8 @@
 - Error lists allowed extensions (`.pdf`, `.doc`, `.docx`, `.tex`).
 - No file is attached.
 
+---
+
 ## AT-UC06-04 - Reject Oversized File
 
 **Objective:** Verify rejection for file > 7 MB.
@@ -66,6 +74,8 @@
 - Upload is rejected.
 - Size-limit error is shown.
 - No file is attached.
+
+---
 
 ## AT-UC06-05 - Network Interruption
 
@@ -83,6 +93,8 @@
 - Retry guidance is shown.
 - No file is attached.
 
+---
+
 ## AT-UC06-06 - Storage/Service Failure
 
 **Objective:** Verify service failure leaves file unattached.
@@ -93,6 +105,8 @@
 **Expected Results:**
 - System error is shown.
 - No file is attached.
+
+---
 
 ## AT-UC06-07 - Association Failure After Upload
 
@@ -105,6 +119,8 @@
 **Expected Results:**
 - System reports file could not be attached.
 - File remains unattached.
+
+---
 
 ## AT-UC06-08 - Attached File Persists Across Refresh
 

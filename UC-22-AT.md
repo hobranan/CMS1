@@ -1,4 +1,4 @@
-# Acceptance Test Suite — UC-22 View Public Announcements
+# Acceptance Test Suite - UC-22 View public conference announcements
 
 ## Assumptions / Notes
 - Announcements marked as public are accessible without authentication.

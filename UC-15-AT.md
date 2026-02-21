@@ -5,6 +5,8 @@
 - A decision is visible once recorded by an editor.
 - Notifications are best-effort; CMS is the decision source of truth.
 
+---
+
 ## AT-UC15-01 - View Accepted Decision
 
 **Objective:** Verify an author can view an accepted decision.
@@ -21,6 +23,8 @@
 - System shows **Accepted** status.
 - Any decision comment is visible.
 
+---
+
 ## AT-UC15-02 - View Rejected Decision
 
 **Objective:** Verify an author can view a rejected decision.
@@ -36,6 +40,8 @@
 **Expected Results:**
 - System shows **Rejected** status.
 - Any decision comment is visible.
+
+---
 
 ## AT-UC15-03 - Notification Failure Does Not Block CMS Access
 
@@ -54,6 +60,8 @@
 - Final decision is visible in CMS.
 - Notification failure does not block decision visibility.
 
+---
+
 ## AT-UC15-04 - Decision Not Yet Available
 
 **Objective:** Verify behavior when no final decision is recorded.
@@ -70,6 +78,8 @@
 - System shows under-review status.
 - No accepted/rejected decision is shown.
 
+---
+
 ## AT-UC15-05 - Unauthorized Paper Access Blocked
 
 **Objective:** Verify authors cannot view decisions for papers they do not own.
@@ -84,6 +94,8 @@
 **Expected Results:**
 - Access is blocked.
 - Authorization error is shown.
+
+---
 
 ## AT-UC15-06 - Decision Retrieval Failure
 
@@ -101,6 +113,8 @@
 - System shows retry-later system error.
 - Decision details are withheld.
 
+---
+
 ## AT-UC15-07 - Decision Persistence Across Sessions
 
 **Objective:** Verify recorded decision visibility persists after logout/login.
@@ -115,6 +129,8 @@
 
 **Expected Results:**
 - Final decision remains visible and unchanged.
+
+---
 
 ## AT-UC15-08 - Notification Structure and Source Consistency
 

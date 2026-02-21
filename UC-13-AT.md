@@ -1,4 +1,4 @@
-# Acceptance Test Suite — UC-13 View Completed Reviews for a Paper
+# Acceptance Test Suite - UC-13 View completed reviews for a paper
 
 ## Assumptions / Notes
 - Editors must be logged in to view reviews.

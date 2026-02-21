@@ -1,4 +1,4 @@
-# Acceptance Test Suite - UC-09 Enforce Referee Workload Limits
+# Acceptance Test Suite - UC-09 Enforce referee workload limits
 
 ## Assumptions / Notes
 - Each referee has a maximum allowed number of assigned papers.

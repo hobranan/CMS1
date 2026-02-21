@@ -1,4 +1,4 @@
-# Acceptance Test Suite - UC-07 Save Paper Submission Draft
+# Acceptance Test Suite - UC-07 Save paper submission draft
 
 ## Assumptions / Notes
 - Authors can manually save a submission at any stage before final submission.
