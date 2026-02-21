@@ -3,41 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CMS1 Interactive App</title>
+  <title>CMS1 UC Dashboard</title>
   <link rel="stylesheet" href="/app/style.css">
 </head>
 <body>
   <header class="topbar">
-    <h1>CMS1 Interactive App</h1>
-    <p>Use the forms below to exercise the full backend API in-browser.</p>
+    <h1>CMS1 Use Case Dashboard</h1>
+    <p>One-page view of UC-01 through UC-22 with primary flow calls and placeholder outcomes.</p>
   </header>
 
   <main class="layout">
-    <section class="panel auth-panel">
+    <section class="panel">
       <h2>Session Context</h2>
-      <div class="grid">
-        <label>User ID<input id="user-id" type="text" placeholder="e.g. author-1"></label>
-        <label>User Email<input id="user-email" type="email" placeholder="e.g. author@example.com"></label>
+      <p>Set this once. It applies to all runnable UC calls.</p>
+      <div class="context-grid">
+        <label>User ID<input id="user-id" type="text" placeholder="author-1"></label>
+        <label>User Email<input id="user-email" type="email" placeholder="author@example.com"></label>
         <label>User Role<input id="user-role" type="text" placeholder="author | editor | referee | admin"></label>
         <label>Session ID<input id="session-id" type="text" placeholder="optional"></label>
       </div>
       <div class="actions">
         <button id="save-context" type="button">Save Context</button>
         <button id="clear-context" type="button">Clear Context</button>
+        <a class="ghost-link" href="/appsimple/">Open API Tester</a>
       </div>
-      <small>Sent as headers: <code>x-user-id</code>, <code>x-user-email</code>, <code>x-user-role</code>, <code>x-session-id</code>.</small>
     </section>
 
     <section class="panel">
-      <h2>Endpoints</h2>
-      <input id="filter-input" type="search" placeholder="Filter endpoints (path, method, category)">
-      <div id="endpoint-list" class="endpoint-list"></div>
-    </section>
-
-    <section class="panel response-panel">
-      <h2>Last Response</h2>
-      <p id="request-meta">No request yet.</p>
-      <pre id="response-output">{}</pre>
+      <h2>UC Sections</h2>
+      <input id="uc-filter" type="search" placeholder="Filter by UC number, title, or endpoint">
+      <div id="uc-list" class="uc-list"></div>
     </section>
   </main>
 

@@ -1,226 +1,186 @@
-const ROUTE_KEYS = [
-  "/api/v1/account/password:PUT",
-  "/api/v1/account/registrations/:registrationId/ticket.pdf:GET",
-  "/api/v1/account/registrations/:registrationId/ticket:GET",
-  "/api/v1/assignments/:assignmentId/review-draft:GET",
-  "/api/v1/assignments/:assignmentId/reviews/submit:POST",
-  "/api/v1/auth/login:POST",
-  "/api/v1/auth/session:GET",
-  "/api/v1/author/papers/:paperId/decision-notification:GET",
-  "/api/v1/author/papers/:paperId/decision:GET",
-  "/api/v1/conferences/:conferenceId/schedule/cancel:POST",
-  "/api/v1/conferences/:conferenceId/schedule/drafts/:draftId/publish:POST",
-  "/api/v1/conferences/:conferenceId/schedule/editable:GET",
-  "/api/v1/conferences/:conferenceId/schedule/generate:POST",
-  "/api/v1/conferences/:conferenceId/schedule/save:POST",
-  "/api/v1/conferences/:conferenceId/schedule:GET",
-  "/api/v1/drafts/:draftId/finalize:POST",
-  "/api/v1/drafts/:draftId/save:POST",
-  "/api/v1/drafts/:draftId:GET",
-  "/api/v1/invitations/:invitationId/response:POST",
-  "/api/v1/papers/:paperId/assign-referee:POST",
-  "/api/v1/papers/:paperId/assignments:GET",
-  "/api/v1/papers/:paperId/assignments:POST",
-  "/api/v1/papers/:paperId/completed-reviews/:reviewId:GET",
-  "/api/v1/papers/:paperId/completed-reviews:GET",
-  "/api/v1/papers/:paperId/decision-context:GET",
-  "/api/v1/papers/:paperId/decision:POST",
-  "/api/v1/papers/:paperId/manuscript-view:GET",
-  "/api/v1/papers/:paperId/review-form:GET",
-  "/api/v1/payments/gateway/confirm:POST",
-  "/api/v1/public/announcements/:announcementId:GET",
-  "/api/v1/public/announcements:GET",
-  "/api/v1/public/conferences/:conferenceId/schedule.pdf:GET",
-  "/api/v1/public/conferences/:conferenceId/schedule/entries/:entryId:GET",
-  "/api/v1/public/conferences/:conferenceId/schedule:GET",
-  "/api/v1/public/registration-prices:GET",
-  "/api/v1/referees/:refereeId/assigned-papers:GET",
-  "/api/v1/referees/:refereeId/invitations/pending:GET",
-  "/api/v1/referees/:refereeId/workload:GET",
-  "/api/v1/registrations/:registrationId/payment/initiate:POST",
-  "/api/v1/registrations/:registrationId/payment/status:GET",
-  "/api/v1/registrations/:registrationId/ticket/issue:POST",
-  "/api/v1/registrations/resend-confirmation:POST",
-  "/api/v1/registrations/verify:GET",
-  "/api/v1/registrations:POST",
-  "/api/v1/reviews/:reviewId:GET",
-  "/api/v1/submissions/:submissionId/manuscript/retry:POST",
-  "/api/v1/submissions/:submissionId/manuscript:POST",
-  "/api/v1/submissions/mine:GET",
-  "/api/v1/submissions/upload-status:POST",
-  "/api/v1/submissions:POST"
+const UC_ITEMS = [
+  {
+    id: "UC-01",
+    title: "Registration",
+    goal: "Author registers and gets pending verification state.",
+    alt: "Alt path: invalid email/password returns validation errors.",
+    endpoint: { method: "POST", path: "/api/v1/registrations", body: { email: "author@example.com", password: "Password123!", confirmPassword: "Password123!" } }
+  },
+  {
+    id: "UC-02",
+    title: "Validation Rules",
+    goal: "Input validation and clear field-level feedback behavior.",
+    alt: "Placeholder: run UC-01/UC-05 calls with invalid data to observe validation paths.",
+    endpoint: null
+  },
+  {
+    id: "UC-03",
+    title: "Login",
+    goal: "User logs in and receives an authenticated session response.",
+    alt: "Alt path: unknown/wrong credentials return generic invalid response.",
+    endpoint: { method: "POST", path: "/api/v1/auth/login", body: { email: "author@example.com", password: "Password123!" } }
+  },
+  {
+    id: "UC-04",
+    title: "Password Change",
+    goal: "Authenticated account updates password and invalidates session.",
+    alt: "Alt path: weak/reused/mismatch values return policy errors.",
+    endpoint: { method: "PUT", path: "/api/v1/account/password", body: { currentPassword: "Password123!", newPassword: "NewPassword123!", confirmNewPassword: "NewPassword123!" } }
+  },
+  {
+    id: "UC-05",
+    title: "Manuscript Submission",
+    goal: "Author submits metadata + file and gets finalized submission.",
+    alt: "Alt path: bad metadata/file returns validation failure.",
+    endpoint: {
+      method: "POST",
+      path: "/api/v1/submissions",
+      body: {
+        author_names: "A. Author",
+        author_affiliations: "Example University",
+        author_contact_email: "author@example.com",
+        author_contact_phone: "+1 (555) 123-4567",
+        abstract_text: "Sample abstract",
+        keywords: "cms, review",
+        main_reference_source: "Demo bibliography",
+        file: { fileName: "paper.pdf", sizeBytes: 102400, mimeType: "application/pdf" }
+      }
+    }
+  },
+  {
+    id: "UC-06",
+    title: "Upload Manuscript",
+    goal: "Upload/attach manuscript for an existing submission.",
+    alt: "Alt path: oversize/invalid file rejects attachment.",
+    endpoint: { method: "POST", path: "/api/v1/submissions/:submissionId/manuscript", params: { submissionId: "sub-1" }, body: { mode: "RESTART", file_fingerprint: "fp-1", file: { fileName: "paper.pdf", sizeBytes: 102400, mimeType: "application/pdf" } } }
+  },
+  {
+    id: "UC-07",
+    title: "Save Draft",
+    goal: "Save working draft state without finalizing.",
+    alt: "Alt path: invalid draft data returns validation failed.",
+    endpoint: { method: "POST", path: "/api/v1/drafts/:draftId/save", params: { draftId: "draft-1" }, body: { editable_state: { title: "Draft Title" } } }
+  },
+  {
+    id: "UC-08",
+    title: "Referee Assignment",
+    goal: "Editor assigns referees to a paper.",
+    alt: "Alt path: invalid selection or invitation failure blocks commit.",
+    endpoint: { method: "POST", path: "/api/v1/papers/:paperId/assignments", params: { paperId: "paper-1" }, body: { referee_ids: ["ref-1"], expected_version: 1 } }
+  },
+  {
+    id: "UC-09",
+    title: "Workload Limits",
+    goal: "Check/assign referee under workload rules.",
+    alt: "Alt path: equal/over limit blocks assignment.",
+    endpoint: { method: "POST", path: "/api/v1/papers/:paperId/assign-referee", params: { paperId: "paper-1" }, body: { referee_id: "ref-1", role: "reviewer", track_id: "AI", selection_snapshot: { at: new Date().toISOString() } } }
+  },
+  {
+    id: "UC-10",
+    title: "Invitation Response",
+    goal: "Referee accepts or rejects review invitation.",
+    alt: "Alt path: expired/invalid invitation stays pending.",
+    endpoint: { method: "POST", path: "/api/v1/invitations/:invitationId/response", params: { invitationId: "inv-1" }, body: { decision: "ACCEPT", expected_status: "pending" } }
+  },
+  {
+    id: "UC-11",
+    title: "Assigned Paper Access",
+    goal: "Referee accesses assigned paper list/content.",
+    alt: "Alt path: non-assigned access returns forbidden.",
+    endpoint: { method: "GET", path: "/api/v1/referees/:refereeId/assigned-papers", params: { refereeId: "ref-1" } }
+  },
+  {
+    id: "UC-12",
+    title: "Submit Review",
+    goal: "Referee submits review with required fields.",
+    alt: "Alt path: missing required fields returns validation errors.",
+    endpoint: { method: "POST", path: "/api/v1/assignments/:assignmentId/reviews/submit", params: { assignmentId: "assign-1" }, body: { confirm_submit: true, recommendation: "ACCEPT", comments: "Looks good", fields: { originality: 4, significance: 4 } } }
+  },
+  {
+    id: "UC-13",
+    title: "Anonymized Review View",
+    goal: "Editor views anonymized completed reviews.",
+    alt: "Alt path: unavailable review returns not found/failure.",
+    endpoint: { method: "GET", path: "/api/v1/papers/:paperId/completed-reviews", params: { paperId: "paper-1" } }
+  },
+  {
+    id: "UC-14",
+    title: "Paper Decision",
+    goal: "Editor records final accept/reject decision.",
+    alt: "Alt path: ineligible state or missing reviews blocks decision.",
+    endpoint: { method: "POST", path: "/api/v1/papers/:paperId/decision", params: { paperId: "paper-1" }, body: { outcome: "ACCEPT", comment: "Meets criteria", confirm: true, allowNoReviewsOverride: false } }
+  },
+  {
+    id: "UC-15",
+    title: "Decision Notification",
+    goal: "Author views decision and notification content.",
+    alt: "Alt path: not owner/undecided returns access/under-review status.",
+    endpoint: { method: "GET", path: "/api/v1/author/papers/:paperId/decision-notification", params: { paperId: "paper-1" } }
+  },
+  {
+    id: "UC-16",
+    title: "Generate Schedule",
+    goal: "Generate conference schedule draft.",
+    alt: "Alt path: missing params or no accepted papers blocks generation.",
+    endpoint: { method: "POST", path: "/api/v1/conferences/:conferenceId/schedule/generate", params: { conferenceId: "conf-1" }, body: { rooms: ["A", "B"], dayStart: "09:00", dayEnd: "17:00", slotMinutes: 30, seed: "demo-seed" } }
+  },
+  {
+    id: "UC-17",
+    title: "Edit Schedule",
+    goal: "Load and save schedule edits.",
+    alt: "Alt path: conflict/lock/stale version returns rejection.",
+    endpoint: { method: "POST", path: "/api/v1/conferences/:conferenceId/schedule/save", params: { conferenceId: "conf-1" }, body: { expectedVersion: 1, edits: [{ type: "MOVE", paperId: "paper-1", room: "A", slot: 0 }] } }
+  },
+  {
+    id: "UC-18",
+    title: "Public Schedule PDF",
+    goal: "Public user opens schedule and PDF output.",
+    alt: "Alt path: unpublished schedule returns not found.",
+    endpoint: { method: "GET", path: "/api/v1/public/conferences/:conferenceId/schedule.pdf", params: { conferenceId: "conf-1" }, query: { disposition: "inline" } }
+  },
+  {
+    id: "UC-19",
+    title: "Registration Prices",
+    goal: "Public pricing display for registration categories.",
+    alt: "Alt path: unpublished/retrieval failure returns unavailable.",
+    endpoint: { method: "GET", path: "/api/v1/public/registration-prices" }
+  },
+  {
+    id: "UC-20",
+    title: "Online Payment",
+    goal: "Initiate/confirm payment workflow.",
+    alt: "Alt path: declined/timeout leaves unpaid or unresolved state.",
+    endpoint: { method: "POST", path: "/api/v1/registrations/:registrationId/payment/initiate", params: { registrationId: "reg-1" }, body: { categoryId: "regular" } }
+  },
+  {
+    id: "UC-21",
+    title: "Registration Ticket",
+    goal: "Issue and retrieve ticket for paid registration.",
+    alt: "Alt path: pending payment blocks ticket issuance.",
+    endpoint: { method: "POST", path: "/api/v1/registrations/:registrationId/ticket/issue", params: { registrationId: "reg-1" }, body: { deliveryMode: "download" } }
+  },
+  {
+    id: "UC-22",
+    title: "Public Announcements",
+    goal: "List and open public announcement details.",
+    alt: "Alt path: unavailable item returns safe not-found response.",
+    endpoint: { method: "GET", path: "/api/v1/public/announcements" }
+  }
 ];
 
-const BODY_PRESETS = {
-  "/api/v1/registrations:POST": {
-    email: "author@example.com",
-    password: "Password123!",
-    confirmPassword: "Password123!"
-  },
-  "/api/v1/registrations/resend-confirmation:POST": {
-    email: "author@example.com"
-  },
-  "/api/v1/auth/login:POST": {
-    email: "author@example.com",
-    password: "Password123!"
-  },
-  "/api/v1/account/password:PUT": {
-    currentPassword: "Password123!",
-    newPassword: "NewPassword123!",
-    confirmNewPassword: "NewPassword123!"
-  },
-  "/api/v1/submissions:POST": {
-    author_names: "A. Author",
-    author_affiliations: "Example University",
-    author_contact_email: "author@example.com",
-    author_contact_phone: "+1 (555) 123-4567",
-    abstract_text: "Sample abstract",
-    keywords: "cms, review",
-    main_reference_source: "Demo bibliography",
-    file: { fileName: "paper.pdf", sizeBytes: 102400, mimeType: "application/pdf" }
-  },
-  "/api/v1/submissions/:submissionId/manuscript:POST": {
-    mode: "RESTART",
-    file_fingerprint: "fp-123",
-    file: { fileName: "paper.pdf", sizeBytes: 102400, mimeType: "application/pdf" }
-  },
-  "/api/v1/submissions/:submissionId/manuscript/retry:POST": {
-    mode: "RESUME",
-    resume_offset_bytes: 0,
-    file_fingerprint: "fp-123"
-  },
-  "/api/v1/drafts/:draftId/save:POST": {
-    editable_state: { title: "Draft title", abstract: "Draft abstract" }
-  },
-  "/api/v1/drafts/:draftId/finalize:POST": {
-    confirm: true,
-    editable_state: { title: "Final title", abstract: "Final abstract" }
-  },
-  "/api/v1/papers/:paperId/assign-referee:POST": {
-    referee_id: "ref-1",
-    role: "reviewer",
-    track_id: "AI",
-    selection_snapshot: { at: new Date().toISOString() }
-  },
-  "/api/v1/papers/:paperId/assignments:POST": {
-    referee_ids: ["ref-1"],
-    expected_version: 1
-  },
-  "/api/v1/invitations/:invitationId/response:POST": {
-    decision: "ACCEPT",
-    expected_status: "pending"
-  },
-  "/api/v1/assignments/:assignmentId/reviews/submit:POST": {
-    confirm_submit: true,
-    recommendation: "ACCEPT",
-    comments: "Looks good.",
-    fields: { originality: 4, significance: 4 }
-  },
-  "/api/v1/papers/:paperId/decision:POST": {
-    outcome: "ACCEPT",
-    comment: "Meets criteria.",
-    confirm: true,
-    allowNoReviewsOverride: false
-  },
-  "/api/v1/conferences/:conferenceId/schedule/generate:POST": {
-    rooms: ["A", "B"],
-    dayStart: "09:00",
-    dayEnd: "17:00",
-    slotMinutes: 30,
-    seed: "demo-seed"
-  },
-  "/api/v1/conferences/:conferenceId/schedule/save:POST": {
-    expectedVersion: 1,
-    edits: [{ type: "MOVE", paperId: "paper-1", room: "A", slot: 0 }]
-  },
-  "/api/v1/conferences/:conferenceId/schedule/cancel:POST": {
-    reason: "No changes"
-  },
-  "/api/v1/conferences/:conferenceId/schedule/drafts/:draftId/publish:POST": {
-    confirm: true
-  },
-  "/api/v1/registrations/:registrationId/payment/initiate:POST": {
-    categoryId: "regular"
-  },
-  "/api/v1/payments/gateway/confirm:POST": {
-    attemptId: "attempt-1",
-    gatewayStatus: "SUCCESS",
-    gatewayReference: "gw-ref-1",
-    signature: "demo-signature"
-  },
-  "/api/v1/registrations/:registrationId/ticket/issue:POST": {
-    deliveryMode: "download"
-  },
-  "/api/v1/submissions/upload-status:POST": {
-    submission_id: "sub-1",
-    status: "interrupted"
-  }
-};
-
-const QUERY_PRESETS = {
-  "/api/v1/registrations/verify:GET": { token: "paste-token-here" },
-  "/api/v1/public/conferences/:conferenceId/schedule.pdf:GET": { disposition: "inline" },
-  "/api/v1/referees/:refereeId/workload:GET": { role: "reviewer", track_id: "AI" }
-};
-
-const PARAM_PRESETS = {
-  paperId: "paper-1",
-  registrationId: "reg-1",
-  submissionId: "sub-1",
-  assignmentId: "assign-1",
-  invitationId: "inv-1",
-  refereeId: "ref-1",
-  conferenceId: "conf-1",
-  draftId: "draft-1",
-  reviewId: "rev-1",
-  announcementId: "ann-1",
-  entryId: "entry-1"
-};
-
-const contextEls = {
+const context = {
   userId: document.getElementById("user-id"),
   userEmail: document.getElementById("user-email"),
   userRole: document.getElementById("user-role"),
   sessionId: document.getElementById("session-id")
 };
 
-const filterInput = document.getElementById("filter-input");
-const endpointListEl = document.getElementById("endpoint-list");
-const requestMetaEl = document.getElementById("request-meta");
-const responseOutputEl = document.getElementById("response-output");
-
-function parseRouteKey(routeKey) {
-  const idx = routeKey.lastIndexOf(":");
-  return {
-    path: routeKey.slice(0, idx),
-    method: routeKey.slice(idx + 1)
-  };
-}
-
-function getCategory(path) {
-  if (path.includes("/public/")) return "Public";
-  if (path.includes("/auth/") || path.includes("/account/")) return "Auth/Account";
-  if (path.includes("/registrations")) return "Registration";
-  if (path.includes("/submissions")) return "Submissions";
-  if (path.includes("/drafts")) return "Drafts";
-  if (path.includes("/assignments") || path.includes("/assign-referee") || path.includes("/referees")) return "Assignment";
-  if (path.includes("/invitations")) return "Invitations";
-  if (path.includes("/reviews")) return "Reviews";
-  if (path.includes("/decision")) return "Decisions";
-  if (path.includes("/schedule")) return "Schedule";
-  if (path.includes("/payment")) return "Payments";
-  if (path.includes("/ticket")) return "Tickets";
-  return "General";
-}
-
-function getParams(pathTemplate) {
-  return Array.from(pathTemplate.matchAll(/:([a-zA-Z0-9_]+)/g)).map((m) => m[1]);
-}
+const ucListEl = document.getElementById("uc-list");
+const filterEl = document.getElementById("uc-filter");
 
 function safeJsonParse(text, fallback = {}) {
-  if (!text || !text.trim()) return fallback;
   try {
-    return JSON.parse(text);
+    return text.trim() ? JSON.parse(text) : fallback;
   } catch {
     return fallback;
   }
@@ -228,193 +188,160 @@ function safeJsonParse(text, fallback = {}) {
 
 function saveContext() {
   const value = {
-    userId: contextEls.userId.value.trim(),
-    userEmail: contextEls.userEmail.value.trim(),
-    userRole: contextEls.userRole.value.trim(),
-    sessionId: contextEls.sessionId.value.trim()
+    userId: context.userId.value.trim(),
+    userEmail: context.userEmail.value.trim(),
+    userRole: context.userRole.value.trim(),
+    sessionId: context.sessionId.value.trim()
   };
-  localStorage.setItem("cms1-context", JSON.stringify(value));
+  localStorage.setItem("cms1-uc-context", JSON.stringify(value));
 }
 
 function loadContext() {
-  const raw = localStorage.getItem("cms1-context");
+  const raw = localStorage.getItem("cms1-uc-context");
   if (!raw) return;
   const saved = safeJsonParse(raw, {});
-  contextEls.userId.value = saved.userId ?? "";
-  contextEls.userEmail.value = saved.userEmail ?? "";
-  contextEls.userRole.value = saved.userRole ?? "";
-  contextEls.sessionId.value = saved.sessionId ?? "";
+  context.userId.value = saved.userId ?? "";
+  context.userEmail.value = saved.userEmail ?? "";
+  context.userRole.value = saved.userRole ?? "";
+  context.sessionId.value = saved.sessionId ?? "";
 }
 
 function clearContext() {
-  contextEls.userId.value = "";
-  contextEls.userEmail.value = "";
-  contextEls.userRole.value = "";
-  contextEls.sessionId.value = "";
-  localStorage.removeItem("cms1-context");
+  context.userId.value = "";
+  context.userEmail.value = "";
+  context.userRole.value = "";
+  context.sessionId.value = "";
+  localStorage.removeItem("cms1-uc-context");
 }
 
 function buildHeaders(method, hasBody) {
   const headers = {};
-  if (hasBody && method !== "GET") {
-    headers["content-type"] = "application/json";
-  }
-  if (contextEls.userId.value.trim()) headers["x-user-id"] = contextEls.userId.value.trim();
-  if (contextEls.userEmail.value.trim()) headers["x-user-email"] = contextEls.userEmail.value.trim();
-  if (contextEls.userRole.value.trim()) headers["x-user-role"] = contextEls.userRole.value.trim();
-  if (contextEls.sessionId.value.trim()) headers["x-session-id"] = contextEls.sessionId.value.trim();
+  if (hasBody && method !== "GET") headers["content-type"] = "application/json";
+  if (context.userId.value.trim()) headers["x-user-id"] = context.userId.value.trim();
+  if (context.userEmail.value.trim()) headers["x-user-email"] = context.userEmail.value.trim();
+  if (context.userRole.value.trim()) headers["x-user-role"] = context.userRole.value.trim();
+  if (context.sessionId.value.trim()) headers["x-session-id"] = context.sessionId.value.trim();
   return headers;
 }
 
-async function runRoute(routeKey, form) {
-  const { path: pathTemplate, method } = parseRouteKey(routeKey);
-  const paramNames = getParams(pathTemplate);
-
+function interpolatePath(pathTemplate, params) {
   let path = pathTemplate;
-  for (const param of paramNames) {
-    const input = form.querySelector(`input[name="param-${param}"]`);
-    const value = input?.value?.trim() || PARAM_PRESETS[param] || "";
-    path = path.replace(`:${param}`, encodeURIComponent(value));
-  }
-
-  const queryObj = safeJsonParse(form.querySelector('textarea[name="query"]').value, {});
-  const query = new URLSearchParams();
-  Object.entries(queryObj).forEach(([k, v]) => {
-    if (v === undefined || v === null || v === "") return;
-    query.set(k, String(v));
+  Object.entries(params).forEach(([key, value]) => {
+    path = path.replace(`:${key}`, encodeURIComponent(String(value)));
   });
-
-  const bodyRaw = form.querySelector('textarea[name="body"]').value;
-  const hasBody = bodyRaw.trim().length > 0 && method !== "GET";
-  const bodyObj = hasBody ? safeJsonParse(bodyRaw, {}) : undefined;
-
-  const url = query.size > 0 ? `${path}?${query.toString()}` : path;
-  const started = performance.now();
-  const response = await fetch(url, {
-    method,
-    headers: buildHeaders(method, hasBody),
-    body: hasBody ? JSON.stringify(bodyObj) : undefined
-  });
-  const elapsedMs = Math.round(performance.now() - started);
-
-  const contentType = response.headers.get("content-type") || "";
-  let payload;
-  if (contentType.includes("application/json")) {
-    payload = await response.json();
-  } else {
-    payload = await response.text();
-  }
-
-  requestMetaEl.className = response.ok ? "status-ok" : "status-error";
-  requestMetaEl.textContent = `${method} ${url} -> ${response.status} (${elapsedMs}ms)`;
-  responseOutputEl.textContent = JSON.stringify(payload, null, 2);
+  return path;
 }
 
-function createEndpointCard(routeKey) {
-  const { path, method } = parseRouteKey(routeKey);
-  const category = getCategory(path);
-  const params = getParams(path);
-  const bodyPreset = BODY_PRESETS[routeKey] ?? {};
-  const queryPreset = QUERY_PRESETS[routeKey] ?? {};
+function createArea(labelText, value) {
+  const label = document.createElement("label");
+  label.textContent = labelText;
+  const area = document.createElement("textarea");
+  area.value = JSON.stringify(value ?? {}, null, 2);
+  label.appendChild(area);
+  return { label, area };
+}
 
-  const details = document.createElement("details");
-  details.className = "endpoint";
+function createUcCard(item) {
+  const card = document.createElement("article");
+  card.className = "uc-card";
 
-  const summary = document.createElement("summary");
-  summary.innerHTML = `<span class="method">${method}</span><span class="path">${path}</span> <span class="category">[${category}]</span>`;
-  details.appendChild(summary);
+  const endpointText = item.endpoint
+    ? `${item.endpoint.method} ${item.endpoint.path}`
+    : "Placeholder only (no direct endpoint mapped)";
 
-  const form = document.createElement("form");
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const button = form.querySelector("button[type='submit']");
-    button.disabled = true;
-    try {
-      saveContext();
-      await runRoute(routeKey, form);
-    } catch (error) {
-      requestMetaEl.className = "status-error";
-      requestMetaEl.textContent = `${method} ${path} -> request failed`;
-      responseOutputEl.textContent = JSON.stringify({ error: String(error?.message ?? error) }, null, 2);
-    } finally {
-      button.disabled = false;
-    }
-  });
+  card.innerHTML = `
+    <div class="uc-head">
+      <div class="uc-id">${item.id} - ${item.title}</div>
+      <div class="uc-endpoint">${endpointText}</div>
+    </div>
+    <p class="uc-goal">${item.goal}</p>
+    <p class="uc-flow">${item.alt}</p>
+  `;
 
-  for (const param of params) {
-    const label = document.createElement("label");
-    label.textContent = `Path param: ${param}`;
-    const input = document.createElement("input");
-    input.name = `param-${param}`;
-    input.type = "text";
-    input.value = PARAM_PRESETS[param] ?? "";
-    label.appendChild(input);
-    form.appendChild(label);
+  const grid = document.createElement("div");
+  grid.className = "uc-grid";
+  const output = document.createElement("pre");
+  output.className = "uc-output";
+  output.textContent = "No call yet.";
+
+  let paramsArea = null;
+  let queryArea = null;
+  let bodyArea = null;
+
+  if (item.endpoint) {
+    const paramsSection = createArea("Path params JSON", item.endpoint.params ?? {});
+    const querySection = createArea("Query JSON", item.endpoint.query ?? {});
+    const bodySection = createArea("Body JSON", item.endpoint.body ?? {});
+    paramsArea = paramsSection.area;
+    queryArea = querySection.area;
+    bodyArea = bodySection.area;
+
+    grid.append(paramsSection.label, querySection.label, bodySection.label);
   }
-
-  const queryLabel = document.createElement("label");
-  queryLabel.textContent = "Query JSON";
-  const queryArea = document.createElement("textarea");
-  queryArea.name = "query";
-  queryArea.value = JSON.stringify(queryPreset, null, 2);
-  queryLabel.appendChild(queryArea);
-  form.appendChild(queryLabel);
-
-  const bodyLabel = document.createElement("label");
-  bodyLabel.textContent = "Body JSON";
-  const bodyArea = document.createElement("textarea");
-  bodyArea.name = "body";
-  bodyArea.value = method === "GET" ? "" : JSON.stringify(bodyPreset, null, 2);
-  bodyLabel.appendChild(bodyArea);
-  form.appendChild(bodyLabel);
 
   const actions = document.createElement("div");
   actions.className = "actions";
   const runButton = document.createElement("button");
-  runButton.type = "submit";
-  runButton.textContent = "Send Request";
-  const resetButton = document.createElement("button");
-  resetButton.type = "button";
-  resetButton.className = "secondary";
-  resetButton.textContent = "Reset Preset";
-  resetButton.addEventListener("click", () => {
-    for (const param of params) {
-      const input = form.querySelector(`input[name="param-${param}"]`);
-      if (input) input.value = PARAM_PRESETS[param] ?? "";
-    }
-    queryArea.value = JSON.stringify(queryPreset, null, 2);
-    bodyArea.value = method === "GET" ? "" : JSON.stringify(bodyPreset, null, 2);
-  });
+  runButton.type = "button";
+  runButton.textContent = item.endpoint ? "Run Primary Action" : "Placeholder";
+  runButton.disabled = !item.endpoint;
   actions.appendChild(runButton);
-  actions.appendChild(resetButton);
-  form.appendChild(actions);
 
-  details.appendChild(form);
-  return details;
+  runButton.addEventListener("click", async () => {
+    if (!item.endpoint) return;
+    saveContext();
+    const params = safeJsonParse(paramsArea.value, {});
+    const query = safeJsonParse(queryArea.value, {});
+    const body = safeJsonParse(bodyArea.value, {});
+    const path = interpolatePath(item.endpoint.path, params);
+    const queryStr = new URLSearchParams(Object.entries(query).filter(([, v]) => v !== "" && v !== null && v !== undefined).map(([k, v]) => [k, String(v)])).toString();
+    const url = queryStr ? `${path}?${queryStr}` : path;
+    const hasBody = item.endpoint.method !== "GET";
+
+    runButton.disabled = true;
+    try {
+      const started = performance.now();
+      const response = await fetch(url, {
+        method: item.endpoint.method,
+        headers: buildHeaders(item.endpoint.method, hasBody),
+        body: hasBody ? JSON.stringify(body) : undefined
+      });
+      const elapsed = Math.round(performance.now() - started);
+      const text = await response.text();
+      let payload = text;
+      try {
+        payload = JSON.parse(text);
+      } catch {
+        // keep raw text
+      }
+      output.textContent = `${item.endpoint.method} ${url}\nStatus: ${response.status} (${elapsed}ms)\n\n${typeof payload === "string" ? payload : JSON.stringify(payload, null, 2)}`;
+    } catch (error) {
+      output.textContent = `Request failed: ${String(error?.message ?? error)}`;
+    } finally {
+      runButton.disabled = false;
+    }
+  });
+
+  card.appendChild(grid);
+  card.appendChild(actions);
+  card.appendChild(output);
+  return card;
 }
 
-function renderEndpointList(filterText = "") {
-  const query = filterText.trim().toLowerCase();
-  endpointListEl.innerHTML = "";
-
-  const keys = [...ROUTE_KEYS].sort((a, b) => {
-    const aa = parseRouteKey(a).path;
-    const bb = parseRouteKey(b).path;
-    return aa.localeCompare(bb);
-  });
-
-  for (const routeKey of keys) {
-    const { path, method } = parseRouteKey(routeKey);
-    const category = getCategory(path);
-    const haystack = `${method} ${path} ${category}`.toLowerCase();
+function render(filter = "") {
+  const query = filter.trim().toLowerCase();
+  ucListEl.innerHTML = "";
+  for (const item of UC_ITEMS) {
+    const endpoint = item.endpoint ? `${item.endpoint.method} ${item.endpoint.path}` : "placeholder";
+    const haystack = `${item.id} ${item.title} ${item.goal} ${endpoint}`.toLowerCase();
     if (query && !haystack.includes(query)) continue;
-    endpointListEl.appendChild(createEndpointCard(routeKey));
+    ucListEl.appendChild(createUcCard(item));
   }
 }
 
 document.getElementById("save-context").addEventListener("click", saveContext);
 document.getElementById("clear-context").addEventListener("click", clearContext);
-filterInput.addEventListener("input", () => renderEndpointList(filterInput.value));
+filterEl.addEventListener("input", () => render(filterEl.value));
 
 loadContext();
-renderEndpointList();
+render();

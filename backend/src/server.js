@@ -164,6 +164,7 @@ async function tryServeFrontend(req, res, pathname) {
   const root = process.cwd();
   const viewsRoot = path.resolve(root, "frontend", "src", "views");
   const appRoot = path.resolve(root, "frontend", "src", "app");
+  const appSimpleRoot = path.resolve(root, "frontend", "src", "appsimple");
 
   if (pathname === "/") {
     const html = `<!doctype html>
@@ -171,6 +172,11 @@ async function tryServeFrontend(req, res, pathname) {
 <head><meta charset="utf-8"><title>CMS1 Frontend Views</title></head>
 <body>
   <h1>CMS1 Frontend Views</h1>
+  <p>Apps:</p>
+  <ul>
+    <li><a href="/app/">/app (UC map)</a></li>
+    <li><a href="/appsimple/">/appsimple (API tester)</a></li>
+  </ul>
   <p>Open a view directly:</p>
   <ul>
     <li><a href="/views/submission-form.html">Submission Form</a></li>
@@ -199,10 +205,40 @@ async function tryServeFrontend(req, res, pathname) {
     return true;
   }
 
+  if (pathname === "/appsimple") {
+    sendResult(res, {
+      status: 302,
+      headers: { location: "/appsimple/" }
+    });
+    return true;
+  }
+
   if (pathname === "/app/" || pathname.startsWith("/app/")) {
     const relPath = pathname === "/app/" ? "index.html" : pathname.slice("/app/".length);
     const filePath = path.resolve(appRoot, relPath);
     if (!filePath.startsWith(appRoot)) {
+      sendResult(res, { status: 403, body: "Forbidden" });
+      return true;
+    }
+
+    try {
+      const content = await fs.readFile(filePath);
+      sendResult(res, {
+        status: 200,
+        body: content,
+        headers: { "content-type": contentTypeFor(filePath) }
+      });
+      return true;
+    } catch {
+      sendResult(res, { status: 404, body: "App asset not found." });
+      return true;
+    }
+  }
+
+  if (pathname === "/appsimple/" || pathname.startsWith("/appsimple/")) {
+    const relPath = pathname === "/appsimple/" ? "index.html" : pathname.slice("/appsimple/".length);
+    const filePath = path.resolve(appSimpleRoot, relPath);
+    if (!filePath.startsWith(appSimpleRoot)) {
       sendResult(res, { status: 403, body: "Forbidden" });
       return true;
     }
