@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -80,37 +80,37 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">34x</span>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">37x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { canTransitionRegistrationState } from "../../models/registration-status.js";
 &nbsp;
 export function applyRegistrationPaymentState(store, registrationId, nextState, patch = {}) {
   const registration = store.getRegistration(registrationId);
-  if (!registration) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    const err = new Error("REGISTRATION_NOT_FOUND");</span>
-<span class="cstat-no" title="statement not covered" >    err.code = "REGISTRATION_NOT_FOUND";</span>
-<span class="cstat-no" title="statement not covered" >    throw err;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-  if (!canTransitionRegistrationState(registration.state, nextState)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    const err = new Error("INVALID_REGISTRATION_STATE_TRANSITION");</span>
-<span class="cstat-no" title="statement not covered" >    err.code = "INVALID_REGISTRATION_STATE_TRANSITION";</span>
-<span class="cstat-no" title="statement not covered" >    throw err;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  if (!registration) {
+    const err = new Error("REGISTRATION_NOT_FOUND");
+    err.code = "REGISTRATION_NOT_FOUND";
+    throw err;
+  }
+  if (!canTransitionRegistrationState(registration.state, nextState)) {
+    const err = new Error("INVALID_REGISTRATION_STATE_TRANSITION");
+    err.code = "INVALID_REGISTRATION_STATE_TRANSITION";
+    throw err;
+  }
   return store.updateRegistration(registrationId, { ...patch, state: nextState });
 }
 &nbsp;
@@ -121,7 +121,7 @@ export function applyRegistrationPaymentState(store, registrationId, nextState, 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-20T23:57:05.991Z
+                at 2026-02-21T19:32:09.572Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
