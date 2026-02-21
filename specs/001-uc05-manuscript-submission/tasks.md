@@ -116,6 +116,8 @@
 - [X] T039 Add telemetry for resubmission attempts and success-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/submissions/submission-observability-service.js`
 - [X] T040 Record SC-005 resubmission metric method and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc05-manuscript-submission/quickstart.md`
 
+- [ ] T041 Update implementation change log and reconcile UC-05 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-05.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-05-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -183,4 +185,5 @@ Task: "T025 [US2] Implement frontend inline error rendering in /mnt/c/Users/pont
 - Every story must be independently testable.
 - No failure path may produce a finalized submission.
 - UC artifacts remain aligned with implemented user-facing behavior.
+
 

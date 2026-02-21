@@ -118,6 +118,8 @@
 - [X] T041 Add telemetry for resume-vs-restart outcomes and 30-minute success-rate reporting in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/uploads/upload-observability-service.js`
 - [X] T042 Record SC-004 resume-success calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc06-upload-manuscript/quickstart.md`
 
+- [ ] T043 Update implementation change log and reconcile UC-06 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-06.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-06-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -185,4 +187,5 @@ Task: "T030 [US3] Add failure non-attachment integration test in /mnt/c/Users/po
 - Attachment state is true only after upload+association succeed.
 - Any interruption/storage/association failure keeps file unattached.
 - Resume/restart behavior follows 30-minute policy.
+
 

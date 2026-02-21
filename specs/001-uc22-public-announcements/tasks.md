@@ -115,6 +115,8 @@
 
 - [X] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc22-public-announcements/quickstart.md`
 
+- [ ] T040 Update implementation change log and reconcile UC-22 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-22.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-22-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -183,4 +185,5 @@ Task: "T016 [US1] Add refresh consistency integration test in /mnt/c/Users/ponti
 - List ordering is newest-first with deterministic same-date fallback.
 - No-data, retrieval-failure, and unavailable-selection flows always show explicit safe feedback.
 - Refresh/return navigation preserves consistent public list visibility when data source is healthy.
+
 

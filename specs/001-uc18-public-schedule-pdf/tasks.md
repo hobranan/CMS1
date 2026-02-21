@@ -122,6 +122,8 @@
 
 - [X] T046 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc18-public-schedule-pdf/quickstart.md`
 
+- [ ] T047 Update implementation change log and reconcile UC-18 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-18.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-18-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -190,4 +192,5 @@ Task: "T026 [US2] Add unavailable-field marker integration test in /mnt/c/Users/
 - Public schedule viewing and export both use PDF format.
 - Restricted fields are hidden while non-restricted fields remain visible.
 - Retrieval failures return explicit error responses without leaking final schedule content.
+
 

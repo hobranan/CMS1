@@ -127,6 +127,8 @@
 - [X] T039 Add telemetry for failed-login recovery-within-two-attempts metric in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/auth/login_observability_service.js`
 - [X] T040 Record SC-005 recovery metric calculation and evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc03-login-requirements/validation-report.md`
 
+- [ ] T041 Update implementation change log and reconcile UC-03 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-03.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-03-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -209,5 +211,6 @@ Task: "T026 Credential-store outage integration test in /mnt/c/Users/ponti/Deskt
 ## UC Sync Notes
 
 - `UC-03.md` and `UC-03-AT.md` were revalidated and aligned to implemented behavior on 2026-02-20.
+
 
 

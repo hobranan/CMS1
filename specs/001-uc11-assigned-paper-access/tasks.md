@@ -115,6 +115,8 @@
 
 - [X] T039 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc11-assigned-paper-access/quickstart.md`
 
+- [ ] T040 Update implementation change log and reconcile UC-11 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-11.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-11-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -182,3 +184,4 @@ Task: "T030 [US3] Add refresh-consistency integration test in /mnt/c/Users/ponti
 - Assigned-paper list and resources are scoped strictly to the authenticated referee's active assignments.
 - Manuscript access remains view-only with no download/export capability.
 - Review forms are pre-generated and never generated on-demand in this flow.
+

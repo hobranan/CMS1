@@ -126,6 +126,8 @@
 - [X] T038 Add telemetry for validation-feedback to compliant-resubmission metric (SC-005) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/account/password_change_observability_service.js`
 - [X] T039 Record SC-005 measurement method and collected evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc04-password-change/validation-report.md`
 
+- [ ] T040 Update implementation change log and reconcile UC-04 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-04.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-04-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -207,5 +209,6 @@ Task: "T019 Policy/mismatch integration tests in /mnt/c/Users/ponti/Desktop/CMS1
 ## UC Sync Notes
 
 - `UC-04.md` and `UC-04-AT.md` were revalidated and aligned to implemented behavior on 2026-02-20.
+
 
 

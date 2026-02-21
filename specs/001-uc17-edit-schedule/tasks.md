@@ -126,6 +126,8 @@
 - [X] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc17-edit-schedule/quickstart.md`
 - [X] T050 Add contract payload-shape assertions (`code/message`) across stale-version, lock-policy, and save-conflict failures in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule-edit/schedule-edit-failure-payloads.contract.test.js`
 
+- [ ] T051 Update implementation change log and reconcile UC-17 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-17.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-17-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -194,4 +196,5 @@ Task: "T039 [US3] Add concurrent stale-save integration test in /mnt/c/Users/pon
 - Published schedules remain published after successful authorized edits.
 - Last-edited date/time updates only on successful saves.
 - Failed/conflicting/locked/canceled saves persist no unintended changes.
+
 

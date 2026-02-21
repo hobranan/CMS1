@@ -90,6 +90,8 @@
 - [X] T035 [P] Add accessibility checks for registration validation and unverified-login reminders in `/mnt/c/Users/ponti/Desktop/CMS1/frontend/tests/accessibility/test_uc01_registration_a11y.js`
 - [X] T036 Update FR-to-AT traceability matrix and SC-004/SC-005 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc01-requirements/validation-report.md`
 
+- [ ] T037 Update implementation change log and reconcile UC-01 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-01.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-01-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -167,6 +169,7 @@ Task: "T022 Implement verification/resend UI in /mnt/c/Users/ponti/Desktop/CMS1/
 - All tasks use strict checklist format with Task ID and explicit file paths.
 - `[US1]` labels are applied to user-story tasks only.
 - `[P]` marks only tasks that are parallelizable without conflicting incomplete dependencies.
+
 
 
 

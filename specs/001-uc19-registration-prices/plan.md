@@ -2,6 +2,7 @@
 
 **Branch**: `001-uc19-registration-prices` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc19-registration-prices/spec.md`
 **Input**: Feature specification from `/specs/001-uc19-registration-prices/spec.md`
+**Implementation Baseline**: `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-spec.md`
 
 ## Summary
 
@@ -88,3 +89,4 @@ Resolved in `specs/001-uc19-registration-prices/research.md` with decisions for 
 ## Complexity Tracking
 
 No constitution violations identified; complexity tracking not required.
+

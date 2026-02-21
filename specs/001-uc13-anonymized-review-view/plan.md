@@ -2,6 +2,7 @@
 
 **Branch**: `001-uc13-anonymized-review-view` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc13-anonymized-review-view/spec.md`
 **Input**: Feature specification from `/specs/001-uc13-anonymized-review-view/spec.md`
+**Implementation Baseline**: `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-spec.md`
 
 ## Summary
 
@@ -88,3 +89,4 @@ Resolved in `specs/001-uc13-anonymized-review-view/research.md` with decisions f
 ## Complexity Tracking
 
 No constitution violations identified; complexity tracking not required.
+

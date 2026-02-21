@@ -117,6 +117,8 @@
 - [X] T040 Add assigned-review access/authorization p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/anonymized-review-view/access-performance.integration.test.js`
 - [X] T041 Add failure payload-redaction assertion tests for all unauthorized/error paths in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/anonymized-review-view/error-payload-redaction.contract.test.js`
 
+- [ ] T042 Update implementation change log and reconcile UC-13 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-13.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-13-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -184,4 +186,5 @@ Task: "T018 [US1] Implement completed-review list rendering in /mnt/c/Users/pont
 - Only submitted reviews appear in editor completed-review list.
 - All identity-bearing fields are stripped from editor-facing list/detail payloads.
 - Unauthorized and retrieval failures return explicit safe feedback with no data leak.
+
 

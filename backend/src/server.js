@@ -8,6 +8,7 @@ import { REGISTRATION_CONFIG } from "./models/config/registration_config.js";
 import { RegistrationRepository } from "./models/registration_repository.js";
 import { VerificationEmailService } from "./services/email/verification_email_service.js";
 import { RegistrationAuditLog } from "./services/registration/registration_audit_log.js";
+import { hashPassword } from "./services/security/password_service.js";
 
 function parseRouteKey(routeKey) {
   const match = routeKey.match(/:(GET|POST|PUT|PATCH|DELETE|OPTIONS|HEAD)$/);
@@ -292,6 +293,259 @@ function createDefaultDeps() {
   };
 }
 
+function seedDemoData(deps) {
+  const now = deps.nowProvider ? deps.nowProvider() : new Date();
+
+  // Registration/auth users for login/password flows.
+  const passwordHash = hashPassword("Password123!");
+  deps.repository.usersByEmail.clear();
+  deps.repository.pendingByEmail.clear();
+  deps.repository.tokensByHash.clear();
+  deps.repository.usersByEmail.set("author@example.com", {
+    id: "author-1",
+    email: "author@example.com",
+    passwordHash,
+    status: "ACTIVE",
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  });
+  deps.repository.usersByEmail.set("editor@example.com", {
+    id: "editor-1",
+    email: "editor@example.com",
+    passwordHash,
+    status: "ACTIVE",
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  });
+  deps.repository.usersByEmail.set("referee@example.com", {
+    id: "ref-1",
+    email: "referee@example.com",
+    passwordHash,
+    status: "ACTIVE",
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  });
+
+  // Submission + draft flows.
+  deps.paperSubmissionRepository.submissions.clear();
+  deps.paperSubmissionRepository.submissions.set("sub-1", {
+    id: "sub-1",
+    authorEmail: "author@example.com",
+    metadata: {
+      author_names: "A. Author",
+      author_affiliations: "Example University",
+      author_contact_email: "author@example.com",
+      abstract_text: "Seeded abstract",
+      keywords: "cms,review",
+      main_reference_source: "Seeded references"
+    },
+    manuscriptFile: { fileName: "paper.pdf", sizeBytes: 102400, mimeType: "application/pdf" },
+    status: "FINALIZED",
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  });
+
+  deps.submissionDraftRepository.drafts.clear();
+  deps.submissionDraftRepository.drafts.set("draft-1", {
+    id: "draft-1",
+    authorEmail: "author@example.com",
+    status: "DRAFT",
+    editableState: {
+      title: "Seeded Draft Title",
+      abstract: "Seeded draft abstract",
+      contact_email: "author@example.com"
+    },
+    stateHash: "seed",
+    version: 1,
+    lastSavedAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  });
+
+  // Assignment/workload + referee access.
+  deps.paperRefereeAssignmentRepository.papers.clear();
+  deps.paperRefereeAssignmentRepository.assignments.clear();
+  deps.paperRefereeAssignmentRepository.referees.clear();
+  deps.paperRefereeAssignmentRepository.seedPaper({ paperId: "paper-1", status: "SUBMITTED", version: 1 });
+  deps.paperRefereeAssignmentRepository.seedReferee({ refereeId: "ref-1", eligible: true, currentLoad: 0, maxLoad: 3 });
+
+  deps.assignedPaperRepository.assignedByReferee.clear();
+  deps.assignedPaperRepository.manuscriptsByPaper.clear();
+  deps.assignedPaperRepository.reviewFormsByPaper.clear();
+  deps.assignedPaperRepository.seedAssignment({ refereeId: "ref-1", paperId: "paper-1", title: "Seeded Paper 1" });
+  deps.assignedPaperRepository.seedManuscript({ paperId: "paper-1", contentUrl: "/files/paper-1.pdf" });
+  deps.assignedPaperRepository.seedReviewForm({ paperId: "paper-1", reviewFormId: "form-1", preGenerated: true });
+
+  deps.workloadLimitRuleRepository.setConferenceDefault(3, 1);
+  deps.workloadLimitRuleRepository.setRoleRule("reviewer", 3, 1);
+  deps.workloadLimitRuleRepository.setTrackRule("AI", 3, 1);
+  deps.refereeWorkloadRetrievalService.seed("ref-1", 0);
+
+  // Invitations/reviews.
+  deps.reviewInvitationRepository.invitations.clear();
+  deps.reviewInvitationRepository.invitations.set("inv-1", {
+    invitationId: "inv-1",
+    paperId: "paper-1",
+    refereeId: "ref-1",
+    issuedAt: new Date(now.getTime() - 60 * 60 * 1000).toISOString(),
+    status: "pending",
+    responseRecordedAt: null
+  });
+  deps.invitationResponseRepository.responsesByInvitation.clear();
+  deps.reviewAssignmentActivationRepository.activeAssignments.clear();
+
+  deps.reviewSubmissionRepository.assignments.clear();
+  deps.reviewSubmissionRepository.drafts.clear();
+  deps.reviewSubmissionRepository.submittedByAssignment.clear();
+  deps.reviewSubmissionRepository.submittedById.clear();
+  deps.reviewSubmissionRepository.versionLinks = [];
+  deps.reviewSubmissionRepository.seedAssignment({
+    assignmentId: "assign-1",
+    refereeId: "ref-1",
+    editorId: "editor-1",
+    paperId: "paper-1",
+    status: "active",
+    deadlineIndicator: "Due in 5 days"
+  });
+  deps.reviewSubmissionRepository.seedDraft({
+    assignmentId: "assign-1",
+    requiredFields: { originality: true, significance: true }
+  });
+  const seededSubmitted = deps.reviewSubmissionRepository.createSubmittedReview({
+    assignmentId: "assign-1",
+    refereeId: "ref-1",
+    fields: { originality: 4, significance: 4 },
+    recommendation: "accept",
+    comments: "Seeded submitted review",
+    now
+  });
+  deps.reviewSubmissionRepository.updateAssignmentStatus("assign-1", "active");
+
+  // Decision + author visibility.
+  deps.paperDecisionRepository.papers.clear();
+  deps.paperDecisionRepository.decisionsByPaper.clear();
+  deps.paperDecisionRepository.seedPaper({
+    paperId: "paper-1",
+    title: "Seeded Paper 1",
+    editorId: "editor-1",
+    completedReviewCount: 1,
+    decisionPeriodOpen: true,
+    status: "under_review",
+    authors: ["author-1"],
+    reviewHighlights: ["Strong methodology", "Good novelty"],
+    fullReviewContent: "Full seeded review content.",
+    notificationAvailable: true,
+    notificationDeliveryStatus: "sent"
+  });
+
+  // Schedule (draft + published for edit/public UCs).
+  deps.scheduleDraftRepository.conferences.clear();
+  deps.scheduleDraftRepository.drafts.clear();
+  deps.scheduleDraftRepository.publishedByConference.clear();
+  deps.scheduleDraftRepository.seedConference({
+    conferenceId: "conf-1",
+    acceptedPapers: [{ paperId: "paper-1", title: "Seeded Paper 1" }],
+    rooms: ["Room A", "Room B"],
+    parameters: { dayStart: "09:00", dayEnd: "11:00", slotMinutes: 30 },
+    editorIds: ["editor-1"],
+    editLocked: false,
+    lockReason: null
+  });
+  const seededSchedule = {
+    draftId: "sched-draft-1",
+    conferenceId: "conf-1",
+    status: "published",
+    grid: { rooms: ["Room A", "Room B"], slots: ["09:00", "09:30"] },
+    placements: [{ paperId: "paper-1", room: "Room A", slot: 0 }],
+    conflicts: [],
+    entries: [
+      {
+        entryId: "entry-1",
+        day: "Day 1",
+        time: "09:00",
+        room: "Room A",
+        title: "Seeded Session",
+        presenter: "Author A"
+      }
+    ],
+    createdAt: now.toISOString()
+  };
+  deps.scheduleDraftRepository.drafts.set("sched-draft-1", seededSchedule);
+  deps.scheduleDraftRepository.publishedByConference.set("conf-1", seededSchedule);
+  deps.scheduleEditVersions.set("conf-1", 1);
+  deps.scheduleDraftRepository.seedPublishedPricing({
+    conferenceId: "conf-1",
+    categories: [
+      { categoryId: "regular", categoryName: "Regular", finalAmountCad: 300, complete: true },
+      { categoryId: "student", categoryName: "Student", finalAmountCad: 150, complete: true }
+    ]
+  });
+
+  // Payments + tickets.
+  deps.paymentWorkflowStore.registrations.clear();
+  deps.paymentWorkflowStore.attempts.clear();
+  deps.paymentWorkflowStore.paymentRecords.clear();
+  deps.paymentWorkflowStore.reconciliationItems.clear();
+  deps.paymentWorkflowStore.seedRegistration({
+    registrationId: "reg-1",
+    attendeeId: "author-1",
+    categoryId: "regular",
+    amount: 300,
+    currency: "CAD",
+    state: "unpaid"
+  });
+  deps.paymentWorkflowStore.seedRegistration({
+    registrationId: "reg-2",
+    attendeeId: "author-1",
+    categoryId: "regular",
+    amount: 300,
+    currency: "CAD",
+    state: "paid_confirmed"
+  });
+  deps.paymentWorkflowStore.updateRegistration("reg-2", { paymentId: "pay-seeded-1" });
+
+  deps.ticketStore.ticketByRegistrationId.clear();
+  deps.ticketStore.pdfByRegistrationId.clear();
+
+  // Public announcements.
+  deps.announcementStore.items.clear();
+  deps.announcementStore.seedAnnouncements([
+    {
+      announcementId: "ann-1",
+      title: "Welcome",
+      summary: "Conference updates",
+      content: "Seeded public announcement content",
+      publishedAt: now.toISOString(),
+      isPublic: true,
+      isAvailable: true
+    }
+  ]);
+
+  return {
+    seeded: true,
+    ids: {
+      submissionId: "sub-1",
+      draftId: "draft-1",
+      paperId: "paper-1",
+      invitationId: "inv-1",
+      assignmentId: "assign-1",
+      reviewId: seededSubmitted.reviewId,
+      conferenceId: "conf-1",
+      scheduleDraftId: "sched-draft-1",
+      entryId: "entry-1",
+      registrationId: "reg-1",
+      paidRegistrationId: "reg-2",
+      refereeId: "ref-1",
+      announcementId: "ann-1"
+    },
+    users: {
+      author: { id: "author-1", email: "author@example.com", role: "author" },
+      editor: { id: "editor-1", email: "editor@example.com", role: "editor" },
+      referee: { id: "ref-1", email: "referee@example.com", role: "referee" }
+    },
+    defaultPassword: "Password123!"
+  };
+}
+
 export function createServerApp(customDeps = {}) {
   const deps = {
     ...createDefaultDeps(),
@@ -308,6 +562,12 @@ export function createServerApp(customDeps = {}) {
 
       const servedFrontend = await tryServeFrontend(req, res, pathname);
       if (servedFrontend) {
+        return;
+      }
+
+      if (method === "POST" && pathname === "/api/v1/dev/seed-demo") {
+        const seeded = seedDemoData(deps);
+        sendResult(res, { status: 200, body: seeded });
         return;
       }
 

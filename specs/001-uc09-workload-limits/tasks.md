@@ -117,6 +117,8 @@
 - [X] T040 Add workload-decision p95 latency verification against 300ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/workload/workload-decision-performance.integration.test.js`
 - [X] T041 Add instrumentation to log applied workload-rule id/version per assignment check and verify SC-005 in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/workload/workload-rule-observability-service.js`
 
+- [ ] T042 Update implementation change log and reconcile UC-09 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-09.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-09-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -184,4 +186,5 @@ Task: "T030 [US3] Add storage-failure integration test in /mnt/c/Users/ponti/Des
 - Assignment accepted only when `workload < configured limit` at validation time.
 - Config changes are applied to subsequent checks without client changes.
 - No failure path persists invalid assignment or workload increments.
+
 

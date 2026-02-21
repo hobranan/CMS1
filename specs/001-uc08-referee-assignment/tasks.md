@@ -115,6 +115,8 @@
 - [X] T039 Add assignment-confirmation p95 latency verification against 500ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/assignment/assignment-confirmation-performance.integration.test.js`
 - [X] T040 Add telemetry for one-attempt-valid-assignment completion metric (SC-005) in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/assignments/assignment-observability-service.js`
 
+- [ ] T041 Update implementation change log and reconcile UC-08 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-08.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-08-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -182,4 +184,5 @@ Task: "T025 [US2] Implement frontend selection validation error rendering in /mn
 - Assignment is finalized only when validation, persistence, and invitation sending all succeed.
 - Any failure must leave assignment unchanged (no partial outcome).
 - Selection constraints (1..3, unique, eligible, workload-valid) are enforced at confirmation time.
+
 

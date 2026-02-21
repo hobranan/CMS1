@@ -2,6 +2,7 @@
 
 **Branch**: `001-uc16-generate-schedule` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc16-generate-schedule/spec.md`
 **Input**: Feature specification from `/specs/001-uc16-generate-schedule/spec.md`
+**Implementation Baseline**: `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-spec.md`
 
 ## Summary
 
@@ -88,3 +89,4 @@ Resolved in `specs/001-uc16-generate-schedule/research.md` with decisions for ma
 ## Complexity Tracking
 
 No constitution violations identified; complexity tracking not required.
+

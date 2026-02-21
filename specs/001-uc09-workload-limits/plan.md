@@ -2,6 +2,7 @@
 
 **Branch**: `001-uc09-workload-limits` | **Date**: 2026-02-10 | **Spec**: `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/spec.md`  
 **Input**: Feature specification from `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc09-workload-limits/spec.md`
+**Implementation Baseline**: `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-spec.md`
 
 ## Summary
 
@@ -93,3 +94,4 @@ Generated:
 ## Complexity Tracking
 
 No constitution violations or exceptions required.
+

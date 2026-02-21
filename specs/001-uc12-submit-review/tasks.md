@@ -120,6 +120,8 @@
 - [X] T042 Add deterministic review-version chain-integrity verification (sequence monotonicity and latest-link invariants) in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/review-submission/review-chain-integrity.integration.test.js`
 - [X] T043 Add submission-outcome telemetry by assignment state and validation category for SC-001 measurement in `/mnt/c/Users/ponti/Desktop/CMS1/backend/src/services/reviews/review-submission-observability-service.js`
 
+- [ ] T044 Update implementation change log and reconcile UC-12 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-12.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-12-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -187,3 +189,4 @@ Task: "T030 [US3] Add submission failure-integrity integration test in /mnt/c/Us
 - Deadline display remains informational only and never blocks active-assignment submission.
 - Submitted reviews are immutable; newer changes are expressed only via new linked versions.
 - Db failures keep draft/unsubmitted status; notification failures preserve committed submission.
+

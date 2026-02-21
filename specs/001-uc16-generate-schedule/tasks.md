@@ -126,6 +126,8 @@
 - [X] T049 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc16-generate-schedule/quickstart.md`
 - [X] T050 Add contract and UI feedback test for `GET /schedule` unpublished `404` response in `/mnt/c/Users/ponti/Desktop/CMS1/tests/contract/schedule/get-published-schedule-not-available.contract.test.js`
 
+- [ ] T051 Update implementation change log and reconcile UC-16 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-16.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-16-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -194,4 +196,5 @@ Task: "T033 [US2] Implement frontend room-column slot rendering in /mnt/c/Users/
 - Initial draft always uses one room column per room with equal sequential slots.
 - Unresolved blocking conflicts always prevent publication.
 - Save failure never leaves persisted partial draft.
+
 

@@ -117,6 +117,8 @@
 - [X] T041 Add FR-to-AT traceability mapping validation in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc15-decision-notification/spec.md`
 - [X] T042 Add decision/notification retrieval p95 latency verification against 400ms target in `/mnt/c/Users/ponti/Desktop/CMS1/tests/integration/decision-notification/decision-notification-performance.integration.spec.js`
 
+- [ ] T043 Update implementation change log and reconcile UC-15 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-15.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-15-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -180,4 +182,5 @@ Task: "T022 [US2] Implement notification generation service in /mnt/c/Users/pont
 - Notification body order remains `decision_header -> summary_bullets -> full_review`.
 - CMS decision view remains source-of-truth when notification delivery fails.
 - Under-review and retrieval-failure paths do not leak final decision details.
+
 

@@ -89,6 +89,8 @@
 - [X] T033 Document per-form inline validation-rule ownership in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 - [X] T034 Update FR-to-AT traceability and SC-001..SC-004 measurement evidence in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/spec.md` and `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc02-requirements/validation-report.md`
 
+- [ ] T035 Update implementation change log and reconcile UC-02 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-02.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-02-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -164,5 +166,6 @@ Task: "T014 Atomicity integration test in /mnt/c/Users/ponti/Desktop/CMS1/tests/
 ## UC Sync Notes
 
 - `UC-02.md` and `UC-02-AT.md` were revalidated and aligned to implemented behavior on 2026-02-20.
+
 
 

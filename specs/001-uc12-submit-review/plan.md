@@ -2,6 +2,7 @@
 
 **Branch**: `001-uc12-submit-review` | **Date**: 2026-02-19 | **Spec**: `specs/001-uc12-submit-review/spec.md`
 **Input**: Feature specification from `/specs/001-uc12-submit-review/spec.md`
+**Implementation Baseline**: `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-spec.md`
 
 ## Summary
 
@@ -88,3 +89,4 @@ Resolved in `specs/001-uc12-submit-review/research.md` with decisions for assign
 ## Complexity Tracking
 
 No constitution violations identified; complexity tracking not required.
+

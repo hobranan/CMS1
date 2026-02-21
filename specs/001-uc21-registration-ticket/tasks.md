@@ -122,6 +122,8 @@
 
 - [X] T046 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc21-registration-ticket/quickstart.md`
 
+- [ ] T047 Update implementation change log and reconcile UC-21 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-21.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-21-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -190,4 +192,5 @@ Task: "T027 [US2] Add repeated retrieval same-artifact integration test in /mnt/
 - Each issued ticket includes unique reference and QR code and is stored as PDF.
 - Delivery failures never remove successful CMS retrieval.
 - Generation/storage failures never claim successful retrievable issuance.
+
 

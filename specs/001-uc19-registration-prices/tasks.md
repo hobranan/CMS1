@@ -113,6 +113,8 @@
 
 - [X] T037 Validate frontend HTML/CSS compliance against `/mnt/c/Users/ponti/Desktop/CMS1/docs/standards/html-css-style-profile.md` and record checks in `/mnt/c/Users/ponti/Desktop/CMS1/specs/001-uc19-registration-prices/quickstart.md`
 
+- [ ] T038 Update implementation change log and reconcile UC-19 behavior traceability in `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-log.md`, `/mnt/c/Users/ponti/Desktop/CMS1/UC-19.md`, and `/mnt/c/Users/ponti/Desktop/CMS1/UC-19-AT.md`
+
 ---
 
 ## Dependencies & Execution Order
@@ -181,4 +183,5 @@ Task: "T023 [US2] Add direct URL unpublished integration test in /mnt/c/Users/po
 - All displayed prices are final CAD amounts with no discount calculations.
 - Unpublished/failure states never show misleading pricing tables.
 - Guest and authenticated users see identical published pricing values.
+
 

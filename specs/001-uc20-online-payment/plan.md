@@ -2,6 +2,7 @@
 
 **Branch**: `001-uc20-online-payment` | **Date**: 2026-02-10 | **Spec**: `specs/001-uc20-online-payment/spec.md`
 **Input**: Feature specification from `/specs/001-uc20-online-payment/spec.md`
+**Implementation Baseline**: `/mnt/c/Users/ponti/Desktop/CMS1/docs/implementation/implementation-spec.md`
 
 ## Summary
 
@@ -88,3 +89,4 @@ Resolved in `specs/001-uc20-online-payment/research.md` with decisions for initi
 ## Complexity Tracking
 
 No constitution violations identified; complexity tracking not required.
+
