@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.57% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/35</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.57% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/35</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -99,41 +99,41 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">267x</span>
+<span class="cline-any cline-yes">267x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">267x</span>
+<span class="cline-any cline-yes">267x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { processReviewSubmission } from "../../services/reviews/process-review-submission-service.js";
 import { mapReviewValidationErrors } from "./review-validation-error-mapper.js";
@@ -141,20 +141,20 @@ import { mapReviewValidationErrors } from "./review-validation-error-mapper.js";
 export function createPostSubmitReviewController(deps) {
   return {
     post: (request) =&gt; {
-      if (!request.user?.email || request.user?.role !== "referee") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Referee authentication is required." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!request.user?.email || request.user?.role !== "referee") {
+        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Referee authentication is required." } };
+      }
       const assignmentId = request.params?.assignmentId;
       const confirm = request.body?.confirm_submit;
-      if (confirm === false) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 200, body: { cancelled: true, mutated: false } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (confirm === false) {
+        return { status: 200, body: { cancelled: true, mutated: false } };
+      }
 &nbsp;
       const result = processReviewSubmission(deps, {
         assignmentId,
         refereeId: request.user.id,
-        fields: request.body?.fields <span class="branch-0 cbranch-no" title="branch not covered" >?? {},</span>
-        recommendation: request.body?.recommendation <span class="branch-0 cbranch-no" title="branch not covered" >?? "",</span>
+        fields: request.body?.fields ?? {},
+        recommendation: request.body?.recommendation ?? "",
         comments: request.body?.comments ?? ""
       });
 &nbsp;
@@ -178,7 +178,7 @@ export function createPostSubmitReviewController(deps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

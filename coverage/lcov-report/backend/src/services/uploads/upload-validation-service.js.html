@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/25</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/25</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
@@ -88,52 +88,52 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">276x</span>
+<span class="cline-any cline-yes">276x</span>
+<span class="cline-any cline-yes">276x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">276x</span>
+<span class="cline-any cline-yes">276x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const ALLOWED_EXTENSIONS = new Set([".pdf", ".doc", ".docx", ".tex"]);
 const MAX_BYTES = 7 * 1024 * 1024;
 &nbsp;
 function extensionOf(name) {
-  const value = String(name <span class="branch-0 cbranch-no" title="branch not covered" >?? "")</span>;
+  const value = String(name ?? "");
   const idx = value.lastIndexOf(".");
-  if (idx &lt; 0) <span class="branch-0 cbranch-no" title="branch not covered" >return "";</span>
+  if (idx &lt; 0) return "";
   return value.slice(idx).toLowerCase();
 }
 &nbsp;
 export function validateUploadCandidate(file) {
   const errors = [];
-  if (!file) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    errors.push({ field: "file", code: "REQUIRED_FILE", message: "Manuscript file is required." });</span>
-<span class="cstat-no" title="statement not covered" >    return { errors, extension: "" };</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  if (!file) {
+    errors.push({ field: "file", code: "REQUIRED_FILE", message: "Manuscript file is required." });
+    return { errors, extension: "" };
+  }
   const ext = extensionOf(file.fileName);
   if (!ALLOWED_EXTENSIONS.has(ext)) {
     errors.push({ field: "file", code: "UNSUPPORTED_EXTENSION", message: "Allowed formats: .pdf, .doc, .docx, .tex." });
   }
-  if (Number(file.sizeBytes <span class="branch-0 cbranch-no" title="branch not covered" >?? 0)</span> &gt; MAX_BYTES) {
+  if (Number(file.sizeBytes ?? 0) &gt; MAX_BYTES) {
     errors.push({ field: "file", code: "FILE_TOO_LARGE", message: "Maximum file size is 7 MB." });
   }
   return { errors, extension: ext };
@@ -145,7 +145,7 @@ export function validateUploadCandidate(file) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

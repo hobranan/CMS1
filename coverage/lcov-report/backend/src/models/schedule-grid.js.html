@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -81,42 +81,42 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >export function buildScheduleGrid({ rooms, parameters }) {</span></span></span>
-<span class="cstat-no" title="statement not covered" >  const slotMinutes = parameters.slotMinutes ?? 30;</span>
-<span class="cstat-no" title="statement not covered" >  const totalSlots = parameters.totalSlots ?? 4;</span>
-<span class="cstat-no" title="statement not covered" >  const columns = rooms.map((room) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const slots = [];</span>
-<span class="cstat-no" title="statement not covered" >    let cursor = parameters.startMinute ?? 540;</span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; totalSlots; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      slots.push({</span>
-<span class="cstat-no" title="statement not covered" >        slotIndex: i,</span>
-<span class="cstat-no" title="statement not covered" >        startMinute: cursor,</span>
-<span class="cstat-no" title="statement not covered" >        endMinute: cursor + slotMinutes</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
-<span class="cstat-no" title="statement not covered" >      cursor += slotMinutes;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    return { roomId: room.roomId, roomName: room.roomName, slots };</span>
-<span class="cstat-no" title="statement not covered" >  });</span>
-<span class="cstat-no" title="statement not covered" >  return { columns, slotMinutes, totalSlots };</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function buildScheduleGrid({ rooms, parameters }) {
+  const slotMinutes = parameters.slotMinutes ?? 30;
+  const totalSlots = parameters.totalSlots ?? 4;
+  const columns = rooms.map((room) =&gt; {
+    const slots = [];
+    let cursor = parameters.startMinute ?? 540;
+    for (let i = 0; i &lt; totalSlots; i += 1) {
+      slots.push({
+        slotIndex: i,
+        startMinute: cursor,
+        endMinute: cursor + slotMinutes
+      });
+      cursor += slotMinutes;
+    }
+    return { roomId: room.roomId, roomName: room.roomName, slots };
+  });
+  return { columns, slotMinutes, totalSlots };
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -124,7 +124,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

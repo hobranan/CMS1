@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/33</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/33</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,39 +97,39 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { asSubmittedReviewRecord } from "../../models/submitted-review.js";
 import { ensureSubmittedReviewReadOnly } from "../../services/reviews/submitted-review-immutability-service.js";
@@ -137,25 +137,25 @@ import { ensureSubmittedReviewReadOnly } from "../../services/reviews/submitted-
 export function createGetSubmittedReviewController(deps) {
   return {
     get: (request) =&gt; {
-      if (!request.user?.email) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Authentication is required." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!request.user?.email) {
+        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Authentication is required." } };
+      }
       const reviewId = request.params?.reviewId;
       const review = deps.reviewSubmissionRepository.getSubmittedReview(reviewId);
-      if (!review) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 404, body: { code: "REVIEW_NOT_FOUND", message: "Submitted review not found." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!review) {
+        return { status: 404, body: { code: "REVIEW_NOT_FOUND", message: "Submitted review not found." } };
+      }
       if (request.user.role === "referee") {
         const assignment = deps.reviewSubmissionRepository.getAssignment(review.assignmentId);
-        if (!assignment || assignment.refereeId !== request.user.id) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >          return { status: 403, body: { code: "FORBIDDEN", message: "Review access denied." } };</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+        if (!assignment || assignment.refereeId !== request.user.id) {
+          return { status: 403, body: { code: "FORBIDDEN", message: "Review access denied." } };
+        }
       }
       if (request.user.role === "editor") {
         const assignment = deps.reviewSubmissionRepository.getAssignment(review.assignmentId);
-        if (!assignment || assignment.editorId !== request.user.id) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >          return { status: 403, body: { code: "FORBIDDEN", message: "Review access denied." } };</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+        if (!assignment || assignment.editorId !== request.user.id) {
+          return { status: 403, body: { code: "FORBIDDEN", message: "Review access denied." } };
+        }
       }
       return {
         status: 200,
@@ -172,7 +172,7 @@ export function createGetSubmittedReviewController(deps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

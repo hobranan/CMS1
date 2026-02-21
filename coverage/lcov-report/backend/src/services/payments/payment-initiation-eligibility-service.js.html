@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/7</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,23 +91,14 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-yes">41x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -115,25 +106,34 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">35x</span>
-<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">41x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function evaluatePaymentInitiationEligibility(store, { registrationId, userId, categoryId }) {
   const registration = store.getRegistration(registrationId);
-  if (!registration || registration.attendeeId !== userId) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    return { ok: false, status: 404, code: "REGISTRATION_NOT_FOUND", message: "Registration not found." };</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  if (!registration || registration.attendeeId !== userId) {
+    return { ok: false, status: 404, code: "REGISTRATION_NOT_FOUND", message: "Registration not found." };
+  }
 &nbsp;
-  const resolvedCategory = categoryId <span class="branch-0 cbranch-no" title="branch not covered" >?? registration.categoryId;</span>
-  if (!resolvedCategory) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-<span class="cstat-no" title="statement not covered" >      ok: false,</span>
-<span class="cstat-no" title="statement not covered" >      status: 400,</span>
-<span class="cstat-no" title="statement not covered" >      code: "REGISTRATION_CATEGORY_REQUIRED",</span>
-<span class="cstat-no" title="statement not covered" >      message: "Select a registration category before payment."</span>
-<span class="cstat-no" title="statement not covered" >    };</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  const resolvedCategory = categoryId ?? registration.categoryId;
+  if (!resolvedCategory) {
+    return {
+      ok: false,
+      status: 400,
+      code: "REGISTRATION_CATEGORY_REQUIRED",
+      message: "Select a registration category before payment."
+    };
+  }
 &nbsp;
   if (registration.state === "paid_confirmed") {
     return {
@@ -154,7 +154,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

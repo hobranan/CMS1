@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/35</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/35</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -98,49 +98,49 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">267x</span>
+<span class="cline-any cline-yes">267x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">267x</span>
+<span class="cline-any cline-yes">267x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { validateDecisionEligibility } from "../../services/decisions/paper-decision-eligibility-service.js";
 &nbsp;
 export function createGetDecisionContextController(deps) {
   return {
     get: (request) =&gt; {
-      if (!request.user?.email || request.user?.role !== "editor") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Editor authentication is required." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!request.user?.email || request.user?.role !== "editor") {
+        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Editor authentication is required." } };
+      }
 &nbsp;
       const paperId = request.params?.paperId;
       const eligibility = validateDecisionEligibility(deps.paperDecisionRepository, {
@@ -148,12 +148,12 @@ export function createGetDecisionContextController(deps) {
         editorId: request.user.id,
         allowNoReviewsOverride: true
       });
-      if (!eligibility.paper) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 404, body: { code: "PAPER_NOT_FOUND", message: "Paper not found." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      if (eligibility.paper.editorId !== request.user.id) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 403, body: { code: "FORBIDDEN", message: "Decision access denied." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!eligibility.paper) {
+        return { status: 404, body: { code: "PAPER_NOT_FOUND", message: "Paper not found." } };
+      }
+      if (eligibility.paper.editorId !== request.user.id) {
+        return { status: 403, body: { code: "FORBIDDEN", message: "Decision access denied." } };
+      }
 &nbsp;
       return {
         status: 200,
@@ -175,7 +175,7 @@ export function createGetDecisionContextController(deps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

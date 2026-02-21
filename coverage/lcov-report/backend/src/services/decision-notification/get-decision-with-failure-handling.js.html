@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.56% </span>
+                <span class="strong">91.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/23</span>
+                <span class='fraction'>21/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.56% </span>
+                <span class="strong">91.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/23</span>
+                <span class='fraction'>21/23</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -86,38 +86,38 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">68x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { DecisionRetrievalError } from "../errors/decision-retrieval-error.js";
 import { DECISION_STATES, isFinalDecision } from "../../models/decision-state.js";
 &nbsp;
 export function getDecisionWithFailureHandling(repository, paperId) {
   try {
     const paper = repository.paperDecisionRepository.getPaper(paperId);
-    if (!paper) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new DecisionRetrievalError("PAPER_NOT_FOUND", "Paper not found.");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (!paper) {
+      throw new DecisionRetrievalError("PAPER_NOT_FOUND", "Paper not found.");
+    }
     const decision = repository.getDecisionForPaper(paperId);
     if (!decision) {
       return { paper, decisionStatus: DECISION_STATES.UNDER_REVIEW, decision: null };
@@ -127,10 +127,10 @@ export function getDecisionWithFailureHandling(repository, paperId) {
 <span class="cstat-no" title="statement not covered" >      return { paper, decisionStatus: DECISION_STATES.UNDER_REVIEW, decision: null };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
     return { paper, decisionStatus: finalStatus, decision };
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    if (error.code) throw error;</span>
-<span class="cstat-no" title="statement not covered" >    throw new DecisionRetrievalError();</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  } catch (error) {
+    if (error.code) throw error;
+    throw new DecisionRetrievalError();
+  }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -139,7 +139,7 @@ export function getDecisionWithFailureHandling(repository, paperId) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/30</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/30</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,54 +94,54 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">266x</span>
+<span class="cline-any cline-yes">266x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">266x</span>
+<span class="cline-any cline-yes">266x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function createGetReviewDraftController(deps) {
   return {
     get: (request) =&gt; {
-      if (!request.user?.email || request.user?.role !== "referee") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Referee authentication is required." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!request.user?.email || request.user?.role !== "referee") {
+        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Referee authentication is required." } };
+      }
       const assignmentId = request.params?.assignmentId;
       const assignment = deps.reviewSubmissionRepository.getAssignment(assignmentId);
-      if (!assignment || assignment.refereeId !== request.user.id) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 403, body: { code: "ASSIGNMENT_INACTIVE", message: "Assignment is not active." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      const draft = deps.reviewSubmissionRepository.getDraft(assignmentId) <span class="branch-0 cbranch-no" title="branch not covered" >?? {</span>
-<span class="cstat-no" title="statement not covered" >        assignmentId,</span>
-<span class="cstat-no" title="statement not covered" >        requiredFields: {},</span>
-<span class="cstat-no" title="statement not covered" >        recommendation: "",</span>
-<span class="cstat-no" title="statement not covered" >        comments: "",</span>
-<span class="cstat-no" title="statement not covered" >        deadlineEnforced: false</span>
+      if (!assignment || assignment.refereeId !== request.user.id) {
+        return { status: 403, body: { code: "ASSIGNMENT_INACTIVE", message: "Assignment is not active." } };
+      }
+      const draft = deps.reviewSubmissionRepository.getDraft(assignmentId) ?? {
+        assignmentId,
+        requiredFields: {},
+        recommendation: "",
+        comments: "",
+        deadlineEnforced: false
       };
       return {
         status: 200,
@@ -163,7 +163,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

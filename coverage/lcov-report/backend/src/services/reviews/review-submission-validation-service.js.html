@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/32</span>
+                <span class='fraction'>32/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">94.44% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>17/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/32</span>
+                <span class='fraction'>32/32</span>
             </div>
         
             
@@ -96,8 +96,8 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">14x</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">274x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -105,29 +105,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function validateReviewSubmission({ assignment, fields, recommendation }) {
   if (!assignment || assignment.status !== "active") {
@@ -142,11 +142,11 @@
   if (!recommendation || String(recommendation).trim() === "") {
     errors.push({ field: "recommendation", code: "REQUIRED", message: "Recommendation is required." });
   }
-  if (!fields || typeof fields !== "object" || Object.keys(fields).length === 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    errors.push({ field: "fields", code: "REQUIRED", message: "Review fields are required." });</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  if (!fields || typeof fields !== "object" || Object.keys(fields).length === 0) {
+    errors.push({ field: "fields", code: "REQUIRED", message: "Review fields are required." });
+  }
   for (const [key, value] of Object.entries(fields <span class="branch-0 cbranch-no" title="branch not covered" >?? {})</span>) {
-    if (String(value <span class="branch-0 cbranch-no" title="branch not covered" >?? "")</span>.trim() === "") {
+    if (String(value ?? "").trim() === "") {
       errors.push({ field: key, code: "REQUIRED", message: `${key} is required.` });
     }
   }
@@ -169,7 +169,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

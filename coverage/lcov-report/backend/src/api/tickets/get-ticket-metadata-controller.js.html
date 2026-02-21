@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.87% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/33</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/7</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.87% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/33</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -97,39 +97,39 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { mapTicketError } from "./ticket-error-mapper.js";
 &nbsp;
@@ -137,14 +137,14 @@ export function createGetTicketMetadataController(deps) {
   return {
     get(request = {}) {
       const userId = request.user?.id;
-      if (!userId) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return mapTicketError(401, "AUTHENTICATION_REQUIRED", "Authentication is required.");</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!userId) {
+        return mapTicketError(401, "AUTHENTICATION_REQUIRED", "Authentication is required.");
+      }
       const registrationId = request.params?.registrationId;
       const registration = deps.paymentWorkflowStore.getRegistration(registrationId);
-      if (!registration || registration.attendeeId !== userId) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return mapTicketError(404, "TICKET_NOT_FOUND", "Ticket not found.");</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!registration || registration.attendeeId !== userId) {
+        return mapTicketError(404, "TICKET_NOT_FOUND", "Ticket not found.");
+      }
       const ticket = deps.ticketStore.getTicketByRegistrationId(registrationId);
       if (!ticket) {
         return mapTicketError(404, "TICKET_NOT_FOUND", "Ticket not found.");
@@ -172,7 +172,7 @@ export function createGetTicketMetadataController(deps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

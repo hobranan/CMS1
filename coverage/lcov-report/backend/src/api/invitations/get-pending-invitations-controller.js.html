@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,53 +91,53 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { projectPendingInvitations } from "../../services/invitations/invitation-list-projection-service.js";
 &nbsp;
 export function createGetPendingInvitationsController(deps) {
   return {
     get: (request) =&gt; {
-      if (!request.user?.email || request.user?.role !== "referee") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
-<span class="cstat-no" title="statement not covered" >          status: 401,</span>
-<span class="cstat-no" title="statement not covered" >          body: { code: "AUTH_REQUIRED", message: "Referee authentication is required." }</span>
-<span class="cstat-no" title="statement not covered" >        };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!request.user?.email || request.user?.role !== "referee") {
+        return {
+          status: 401,
+          body: { code: "AUTH_REQUIRED", message: "Referee authentication is required." }
+        };
+      }
       const refereeId = request.params?.refereeId;
-      if (refereeId !== request.user.id) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
-<span class="cstat-no" title="statement not covered" >          status: 401,</span>
-<span class="cstat-no" title="statement not covered" >          body: { code: "AUTH_REQUIRED", message: "Referee identity mismatch." }</span>
-<span class="cstat-no" title="statement not covered" >        };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      const now = deps.nowProvider ? deps.nowProvider() <span class="branch-0 cbranch-no" title="branch not covered" >: new Date();</span>
+      if (refereeId !== request.user.id) {
+        return {
+          status: 401,
+          body: { code: "AUTH_REQUIRED", message: "Referee identity mismatch." }
+        };
+      }
+      const now = deps.nowProvider ? deps.nowProvider() : new Date();
       const invitations = projectPendingInvitations(deps.reviewInvitationRepository, refereeId, now);
       return {
         status: 200,
@@ -154,7 +154,7 @@ export function createGetPendingInvitationsController(deps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

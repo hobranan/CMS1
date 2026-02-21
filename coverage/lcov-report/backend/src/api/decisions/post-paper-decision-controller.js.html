@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>32/36</span>
+                <span class='fraction'>36/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/9</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/36</span>
+                <span class='fraction'>36/36</span>
             </div>
         
             
@@ -99,27 +99,25 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">272x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
@@ -129,21 +127,23 @@
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">264x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">265x</span>
+<span class="cline-any cline-yes">265x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { processPaperDecision } from "../../services/decisions/process-paper-decision-service.js";
 import { mapPaperDecisionNotificationFailure } from "./paper-decision-notification-failure-mapper.js";
 &nbsp;
 export function createPostPaperDecisionController(deps) {
   return {
     post: (request) =&gt; {
-      if (!request.user?.email || request.user?.role !== "editor") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Editor authentication is required." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!request.user?.email || request.user?.role !== "editor") {
+        return { status: 401, body: { code: "AUTH_REQUIRED", message: "Editor authentication is required." } };
+      }
 &nbsp;
       const paperId = request.params?.paperId;
       const outcome = request.body?.outcome;
@@ -151,9 +151,9 @@ export function createPostPaperDecisionController(deps) {
       const confirm = request.body?.confirm === true;
       const allowNoReviewsOverride = request.body?.allowNoReviewsOverride === true;
 &nbsp;
-      if (!["accept", "reject"].includes(outcome)) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return { status: 422, body: { code: "INVALID_DECISION", message: "Outcome must be accept or reject." } };</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      if (!["accept", "reject"].includes(outcome)) {
+        return { status: 422, body: { code: "INVALID_DECISION", message: "Outcome must be accept or reject." } };
+      }
 &nbsp;
       const response = processPaperDecision(deps, {
         paperId,
@@ -178,7 +178,7 @@ export function createPostPaperDecisionController(deps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-21T19:32:09.572Z
+                at 2026-02-21T21:13:53.761Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
