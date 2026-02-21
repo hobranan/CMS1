@@ -7,5 +7,8 @@
     "test": "node --test tests/**/*.js frontend/tests/**/*.js",
     "test:coverage": "node --test --experimental-test-coverage tests/**/*.js frontend/tests/**/*.js",
     "lint": "node ./scripts/lint.mjs"
+  },
+  "devDependencies": {
+    "c8": "^10.1.3"
   }
 }

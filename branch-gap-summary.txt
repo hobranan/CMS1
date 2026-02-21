@@ -1,0 +1,26 @@
+  Yes. I pulled the exact branch gaps from your latest coverage-full.txt.
+  You’re currently at 81.76% branch overall, and the biggest blockers are these files:
+
+  1. backend/src/models/paper-metadata.js (21.05%) uncovered: 4-5, 8-9, 30, 39-40, 44-45
+  2. backend/src/api/payments/post-gateway-confirm-controller.js (30.00%) uncovered: 16-17, 21-22, 31-32, 35-36, 40-41, 45-46
+  3. backend/src/services/drafts/finalize-draft-service.js (33.33%) uncovered: 15-16, 35-46
+  4. backend/src/services/schedule-edit/schedule-edit-persistence-service.js (33.33%) uncovered: 7-8, 19-20
+  5. backend/src/services/review-view/get-completed-review-detail-service.js (40.00%) uncovered: 12-13, 16-17, 20-21
+  6. backend/src/services/decisions/get-decision-with-failure-handling.js (40.00%) uncovered: 8-9, 16-17, 20-22
+  7. backend/src/services/invitations/invitation-actionable-validation-service.js (40.00%) uncovered: 5-11, 21-27, 29-35
+  8. backend/src/services/uploads/upload-attachment-orchestrator.js (40.00%) uncovered: 9-10, 12-13, 62-72
+  9. backend/src/api/tickets/get-ticket-pdf-controller.js (42.86%) uncovered: 9-10, 14-15, 19-20, 37-38
+  10. backend/src/services/registration/resend_verification_service.js (46.15%) uncovered: 14-15, 21-22, 27-28, 31-32
+
+  Important point:
+  - Your coverage includes test files and helper files too.
+  - If your assignment expects 100% branch for production code, we should measure only source (exclude tests/** and test helpers), otherwise 100% global is much harder and often not      
+  meaningful.
+
+  How to get to 100% (practical plan):
+  1. Add focused unit tests for pure models/services with low branch (like paper-metadata.js, registration-status.js, gateway-confirmation-event.js).
+  2. Add contract/integration negative-path tests for controllers/services listed above (missing params, unavailable resources, failure branches, conflict branches).
+  3. Add one pass for frontend branch gaps (frontend/src/views/login_view.js, form_validation_view.js, etc.) with small unit tests that hit each condition.
+  4. Re-run coverage after each file batch and close remaining uncovered line numbers.
+
+  If you want, I can start now and knock out the top 10 files above first, then rerun coverage and keep iterating until branch reaches target.
