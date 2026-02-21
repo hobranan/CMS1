@@ -39,7 +39,7 @@ export function validateMetadata(metadata) {
     errors.push({ field: "main_reference_source", code: "REQUIRED", message: "Main reference source is required." });
   }
 
-  const phoneCheck = normalizePhone(metadata.authorContactPhone);
+  const phoneCheck = normalizePhone(metadata.authorContactPhone) ?? { valid: true, normalized: null };
   if (metadata.authorContactPhone && !phoneCheck.valid) {
     errors.push({ field: "author_contact_phone", code: "INVALID_PHONE", message: "Phone must normalize to 7-15 digits." });
   }

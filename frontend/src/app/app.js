@@ -70,10 +70,13 @@ const BODY_PRESETS = {
     confirmNewPassword: "NewPassword123!"
   },
   "/api/v1/submissions:POST": {
-    title: "Sample Paper",
-    abstract: "Sample abstract",
-    track: "AI",
-    keywords: ["cms", "review"],
+    author_names: "A. Author",
+    author_affiliations: "Example University",
+    author_contact_email: "author@example.com",
+    author_contact_phone: "+1 (555) 123-4567",
+    abstract_text: "Sample abstract",
+    keywords: "cms, review",
+    main_reference_source: "Demo bibliography",
     file: { fileName: "paper.pdf", sizeBytes: 102400, mimeType: "application/pdf" }
   },
   "/api/v1/submissions/:submissionId/manuscript:POST": {

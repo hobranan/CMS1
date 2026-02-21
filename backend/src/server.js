@@ -305,6 +305,7 @@ export function createServerApp(customDeps = {}) {
         params,
         query: Object.fromEntries(url.searchParams.entries()),
         body,
+        file: body && typeof body === "object" ? body.file : undefined,
         headers: req.headers,
         user: parseUser(req.headers),
         sessionId: req.headers["x-session-id"]
