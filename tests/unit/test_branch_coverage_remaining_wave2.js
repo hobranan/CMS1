@@ -92,7 +92,7 @@ test("password policy validator and decision retrieval handling cover remaining 
   assert.equal(getDecisionWithFailureHandling(repo, "none").decisionStatus, "under_review");
   assert.equal(getDecisionWithFailureHandling(repo, "accept").decisionStatus, "accepted");
   assert.equal(getDecisionWithFailureHandling(repo, "reject").decisionStatus, "rejected");
-  assert.equal(getDecisionWithFailureHandling(repo, "weird").decisionStatus, "rejected");
+  assert.equal(getDecisionWithFailureHandling(repo, "weird").decisionStatus, "under_review");
   assert.throws(() => getDecisionWithFailureHandling(repo, "missing"), /Paper not found/);
   assert.throws(() => getDecisionWithFailureHandling(repo, "errorCode"), /x/);
   assert.throws(() => getDecisionWithFailureHandling(repo, "explode"), /Decision details are temporarily unavailable\./);

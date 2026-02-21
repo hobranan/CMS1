@@ -11,7 +11,11 @@ export function getDecisionWithFailureHandling(repository, paperId) {
     if (!decision) {
       return { paper, decisionStatus: DECISION_STATES.UNDER_REVIEW, decision: null };
     }
-    const finalStatus = decision.outcome === "accept" ? DECISION_STATES.ACCEPTED : DECISION_STATES.REJECTED;
+    const finalStatus = decision.outcome === "accept"
+      ? DECISION_STATES.ACCEPTED
+      : decision.outcome === "reject"
+        ? DECISION_STATES.REJECTED
+        : DECISION_STATES.UNDER_REVIEW;
     if (!isFinalDecision(finalStatus)) {
       return { paper, decisionStatus: DECISION_STATES.UNDER_REVIEW, decision: null };
     }
