@@ -20,7 +20,6 @@ stays aligned with Speckit artifacts (`spec.md`, `plan.md`, `tasks.md`,
   - `npm run dev` -> same with file watch
 - Frontend runtime pages:
   - `/app/` -> UC dashboard (high-level interactive flow surface)
-  - `/appsimple/` -> raw endpoint tester (engineering harness)
 
 ### Architecture Boundaries
 - Backend
@@ -32,7 +31,6 @@ stays aligned with Speckit artifacts (`spec.md`, `plan.md`, `tasks.md`,
   - `frontend/src/views` -> HTML/CSS/vanilla view templates
   - `frontend/src/controllers` -> interaction orchestration
   - `frontend/src/app` -> implementation dashboard surface
-  - `frontend/src/appsimple` -> API test harness surface
 
 ## Execution Strategy
 ### Primary Product Build Target
@@ -40,7 +38,6 @@ Build a realistic user-facing CMS web UI that implements UC flows across
 author/editor/referee/public roles, while keeping strict MVC and vanilla stack.
 
 ### Transitional Surfaces
-- `/appsimple/`: low-level API exerciser (keep for diagnostics)
 - `/app/`: one-page UC coverage dashboard (keep for flow validation)
 
 These are support tools, not the final user-facing CMS UI.

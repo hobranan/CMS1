@@ -9,28 +9,10 @@
 <body>
   <header class="topbar">
     <h1>CMS1 Use Case Dashboard</h1>
-    <p>One-page view of UC-01 through UC-22 with primary flow calls and placeholder outcomes.</p>
+    <p>Scenario runner for UC-01 through UC-22 with acceptance-style success and alternative/failure actions.</p>
   </header>
 
   <main class="layout">
-    <section class="panel">
-      <h2>Session Context</h2>
-      <p>Set this once. It applies to all runnable UC calls.</p>
-      <div class="context-grid">
-        <label>User ID<input id="user-id" type="text" placeholder="author-1"></label>
-        <label>User Email<input id="user-email" type="email" placeholder="author@example.com"></label>
-        <label>User Role<input id="user-role" type="text" placeholder="author | editor | referee | admin"></label>
-        <label>Session ID<input id="session-id" type="text" placeholder="optional"></label>
-      </div>
-      <div class="actions">
-        <button id="save-context" type="button">Save Context</button>
-        <button id="clear-context" type="button">Clear Context</button>
-        <button id="seed-demo" type="button">Seed Demo Data</button>
-        <button id="run-all" type="button">Run All UCs</button>
-        <a class="ghost-link" href="/appsimple/">Open API Tester</a>
-      </div>
-    </section>
-
     <section class="panel">
       <h2>UC Sections</h2>
       <input id="uc-filter" type="search" placeholder="Filter by UC number, title, or endpoint">

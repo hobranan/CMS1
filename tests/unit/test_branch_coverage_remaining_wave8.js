@@ -186,7 +186,6 @@ test("wave8 executes frontend app entry modules under a mocked browser environme
 
   const root = process.cwd();
   await import(pathToFileURL(path.join(root, "frontend/src/app/app.js")).href);
-  await import(pathToFileURL(path.join(root, "frontend/src/appsimple/app.js")).href);
   await elements.get("save-context")?.trigger("click");
   await elements.get("clear-context")?.trigger("click");
   await elements.get("seed-demo")?.trigger("click");
@@ -194,10 +193,6 @@ test("wave8 executes frontend app entry modules under a mocked browser environme
   if (elements.get("uc-filter")) {
     elements.get("uc-filter").value = "uc-01";
     await elements.get("uc-filter").trigger("input");
-  }
-  if (elements.get("filter-input")) {
-    elements.get("filter-input").value = "schedule";
-    await elements.get("filter-input").trigger("input");
   }
   for (const el of createdElements) {
     await el.trigger("click");

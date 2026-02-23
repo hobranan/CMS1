@@ -7,18 +7,9 @@ npm start
 
 ## Open Frontends
 - UC dashboard: `http://localhost:3000/app/`
-- API tester: `http://localhost:3000/appsimple/`
 
-## Seed Demo Data (for repeatable UC flows)
-From browser (`/app/`): click `Seed Demo Data`.
-
-Or via terminal:
-```cmd
-curl -X POST http://localhost:3000/api/v1/dev/seed-demo
-```
-
-## Run All UC Actions
-From browser (`/app/`): click `Run All UCs`.
+## UC Scenario Execution
+From browser (`/app/`): run each UC scenario button (success first, then alt/fail cases).
 
 ## Restart If Port 3000 Is Busy
 ```cmd

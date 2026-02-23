@@ -1,18 +1,3 @@
-const PARAM_DEFAULTS = {
-  submissionId: "sub-1",
-  draftId: "draft-1",
-  paperId: "paper-1",
-  invitationId: "inv-1",
-  assignmentId: "assign-1",
-  reviewId: "review-1",
-  conferenceId: "conf-1",
-  registrationId: "reg-1",
-  refereeId: "ref-1",
-  announcementId: "ann-1",
-  entryId: "entry-1",
-  draftScheduleId: "sched-draft-1"
-};
-
 const USERS = {
   author: { id: "author-1", email: "author@example.com", role: "author" },
   editor: { id: "editor-1", email: "editor@example.com", role: "editor" },
@@ -25,7 +10,7 @@ const UC_ITEMS = [
     id: "UC-01",
     title: "Registration",
     goal: "Author registers and receives pending verification response.",
-    alt: "Alt path: invalid/missing fields return validation errors.",
+    alt: "",
     actor: "author",
     endpoint: {
       method: "POST",
@@ -273,11 +258,101 @@ const UC_ITEMS = [
   }
 ];
 
+const UC_SCENARIOS = {
+  "UC-01": [
+    {
+      id: "AT-UC01-01",
+      kind: "success",
+      title: "Successful Register-Verify-Login",
+      example: {
+        email: "new-user@example.com",
+        password: "Password123!",
+        confirmPassword: "Password123!"
+      }
+    },
+    {
+      id: "AT-UC01-02",
+      kind: "fail",
+      title: "Invalid Email",
+      example: { email: "not-an-email", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-03",
+      kind: "fail",
+      title: "Duplicate Email",
+      example: { email: "dup@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-04",
+      kind: "fail",
+      title: "Password Policy Failure",
+      example: { email: "weak@example.com", password: "short", confirmPassword: "short" }
+    },
+    {
+      id: "AT-UC01-05",
+      kind: "fail",
+      title: "Missing Required Fields",
+      example: { email: "", password: "", confirmPassword: "" }
+    },
+    {
+      id: "AT-UC01-06",
+      kind: "fail",
+      title: "Mixed Validation Failures",
+      example: { email: "bad", password: "short", confirmPassword: "wrong" }
+    },
+    {
+      id: "AT-UC01-07",
+      kind: "fail",
+      title: "Login Before Verification",
+      example: { email: "pending-user@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-08",
+      kind: "fail",
+      title: "Verification Link Expired",
+      example: { email: "expiring-user@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-09",
+      kind: "fail",
+      title: "Pending Registration Expired",
+      example: { email: "pending-expire@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-10",
+      kind: "fail",
+      title: "Concurrent Same-Email Registration",
+      example: { email: "concurrent@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-11",
+      kind: "fail",
+      title: "Resend Rate Limits",
+      example: { email: "resend-limit@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-12",
+      kind: "fail",
+      title: "Token Single-Use Security",
+      example: { email: "token-security@example.com", password: "Password123!", confirmPassword: "Password123!" }
+    },
+    {
+      id: "AT-UC01-13",
+      kind: "manual",
+      title: "Accessibility Validation UX (Manual)",
+      example: {
+        keyboard: "Tab through fields and submit invalid form",
+        screenReader: "Confirm error feedback is announced via aria-live"
+      }
+    }
+  ]
+};
+
 const context = {
-  userId: document.getElementById("user-id"),
-  userEmail: document.getElementById("user-email"),
-  userRole: document.getElementById("user-role"),
-  sessionId: document.getElementById("session-id")
+  userId: "",
+  userEmail: "",
+  userRole: "",
+  sessionId: ""
 };
 
 const listEl = document.getElementById("uc-list");
@@ -294,10 +369,10 @@ function parseJson(text, fallback = {}) {
 
 function saveContext() {
   const value = {
-    userId: context.userId.value.trim(),
-    userEmail: context.userEmail.value.trim(),
-    userRole: context.userRole.value.trim(),
-    sessionId: context.sessionId.value.trim()
+    userId: context.userId.trim(),
+    userEmail: context.userEmail.trim(),
+    userRole: context.userRole.trim(),
+    sessionId: context.sessionId.trim()
   };
   localStorage.setItem("cms1-uc-context", JSON.stringify(value));
 }
@@ -306,35 +381,27 @@ function loadContext() {
   const raw = localStorage.getItem("cms1-uc-context");
   if (!raw) return;
   const saved = parseJson(raw, {});
-  context.userId.value = saved.userId ?? "";
-  context.userEmail.value = saved.userEmail ?? "";
-  context.userRole.value = saved.userRole ?? "";
-  context.sessionId.value = saved.sessionId ?? "";
-}
-
-function clearContext() {
-  context.userId.value = "";
-  context.userEmail.value = "";
-  context.userRole.value = "";
-  context.sessionId.value = "";
-  localStorage.removeItem("cms1-uc-context");
+  context.userId = String(saved.userId ?? "");
+  context.userEmail = String(saved.userEmail ?? "");
+  context.userRole = String(saved.userRole ?? "");
+  context.sessionId = String(saved.sessionId ?? "");
 }
 
 function ensureActorContext(actor) {
   const user = USERS[actor];
   if (!user) return;
-  if (!context.userId.value.trim()) context.userId.value = user.id;
-  if (!context.userEmail.value.trim()) context.userEmail.value = user.email;
-  if (!context.userRole.value.trim()) context.userRole.value = user.role;
+  if (!context.userId.trim()) context.userId = user.id;
+  if (!context.userEmail.trim()) context.userEmail = user.email;
+  if (!context.userRole.trim()) context.userRole = user.role;
 }
 
 function headersFor(hasBody) {
   const headers = {};
   if (hasBody) headers["content-type"] = "application/json";
-  if (context.userId.value.trim()) headers["x-user-id"] = context.userId.value.trim();
-  if (context.userEmail.value.trim()) headers["x-user-email"] = context.userEmail.value.trim();
-  if (context.userRole.value.trim()) headers["x-user-role"] = context.userRole.value.trim();
-  if (context.sessionId.value.trim()) headers["x-session-id"] = context.sessionId.value.trim();
+  if (context.userId.trim()) headers["x-user-id"] = context.userId.trim();
+  if (context.userEmail.trim()) headers["x-user-email"] = context.userEmail.trim();
+  if (context.userRole.trim()) headers["x-user-role"] = context.userRole.trim();
+  if (context.sessionId.trim()) headers["x-session-id"] = context.sessionId.trim();
   return headers;
 }
 
@@ -352,60 +419,26 @@ function setOutput(id, text) {
   card.output.textContent = text;
 }
 
-function updateParamsFromSeed(ids = {}) {
-  if (ids.submissionId) PARAM_DEFAULTS.submissionId = ids.submissionId;
-  if (ids.draftId) PARAM_DEFAULTS.draftId = ids.draftId;
-  if (ids.paperId) PARAM_DEFAULTS.paperId = ids.paperId;
-  if (ids.invitationId) PARAM_DEFAULTS.invitationId = ids.invitationId;
-  if (ids.assignmentId) PARAM_DEFAULTS.assignmentId = ids.assignmentId;
-  if (ids.reviewId) PARAM_DEFAULTS.reviewId = ids.reviewId;
-  if (ids.conferenceId) PARAM_DEFAULTS.conferenceId = ids.conferenceId;
-  if (ids.registrationId) PARAM_DEFAULTS.registrationId = ids.registrationId;
-  if (ids.paidRegistrationId) PARAM_DEFAULTS.paidRegistrationId = ids.paidRegistrationId;
-  if (ids.refereeId) PARAM_DEFAULTS.refereeId = ids.refereeId;
-  if (ids.announcementId) PARAM_DEFAULTS.announcementId = ids.announcementId;
-  if (ids.entryId) PARAM_DEFAULTS.entryId = ids.entryId;
-  if (ids.scheduleDraftId) PARAM_DEFAULTS.draftScheduleId = ids.scheduleDraftId;
+function makeUniqueEmail(prefix = "uc01") {
+  const token = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  return `${prefix}-${token}@example.com`;
 }
 
-async function seedDemoData() {
-  const response = await fetch("/api/v1/dev/seed-demo", { method: "POST" });
-  const payload = await response.json();
-  updateParamsFromSeed(payload.ids ?? {});
-  if (payload.users?.author) {
-    context.userId.value = payload.users.author.id;
-    context.userEmail.value = payload.users.author.email;
-    context.userRole.value = payload.users.author.role;
-  }
+async function callApi({ method, path, params = {}, query = {}, body, actor = "author" }) {
+  ensureActorContext(actor);
   saveContext();
-  render(filterEl.value);
-  return payload;
-}
-
-async function executeUc(item) {
-  if (!item.endpoint) {
-    setOutput(item.id, "Placeholder only. Use alternate-path notes for manual checks.");
-    return { uc: item.id, status: "placeholder" };
-  }
-  const card = cards.get(item.id);
-  ensureActorContext(item.actor);
-  saveContext();
-
-  const params = parseJson(card.paramsArea.value, {});
-  const query = parseJson(card.queryArea.value, {});
-  const body = parseJson(card.bodyArea.value, {});
-  const path = fillPath(item.endpoint.path, params);
+  const resolvedPath = fillPath(path, params);
   const search = new URLSearchParams();
   Object.entries(query).forEach(([k, v]) => {
     if (v !== undefined && v !== null && v !== "") search.set(k, String(v));
   });
-  const url = search.size > 0 ? `${path}?${search.toString()}` : path;
-  const hasBody = item.endpoint.method !== "GET";
+  const url = search.size > 0 ? `${resolvedPath}?${search.toString()}` : resolvedPath;
+  const hasBody = method !== "GET";
   const started = performance.now();
   const response = await fetch(url, {
-    method: item.endpoint.method,
+    method,
     headers: headersFor(hasBody),
-    body: hasBody ? JSON.stringify(body) : undefined
+    body: hasBody ? JSON.stringify(body ?? {}) : undefined
   });
   const elapsed = Math.round(performance.now() - started);
   const text = await response.text();
@@ -413,34 +446,265 @@ async function executeUc(item) {
   try {
     payload = JSON.parse(text);
   } catch {
-    // keep text
+    // keep text body
   }
-  setOutput(
-    item.id,
-    `${item.endpoint.method} ${url}\nActor: ${item.actor}\nStatus: ${response.status} (${elapsed}ms)\n\n${typeof payload === "string" ? payload : JSON.stringify(payload, null, 2)}`
-  );
-  return { uc: item.id, status: response.status };
+  return { method, url, status: response.status, payload, elapsed };
 }
 
-function makeArea(labelText, value) {
-  const label = document.createElement("label");
-  label.textContent = labelText;
-  const area = document.createElement("textarea");
-  area.value = JSON.stringify(value ?? {}, null, 2);
-  label.appendChild(area);
-  return { label, area };
+function payloadCode(result) {
+  return result && typeof result.payload === "object" ? result.payload.code : undefined;
 }
 
-function defaultParamsFor(path, seeded = {}) {
-  const names = [...path.matchAll(/:([a-zA-Z0-9_]+)/g)].map((m) => m[1]);
-  const params = { ...seeded };
-  for (const name of names) {
-    if (params[name] !== undefined) continue;
-    if (name === "registrationId") params[name] = PARAM_DEFAULTS.registrationId;
-    else if (name === "draftId" && path.includes("/schedule/drafts/")) params[name] = PARAM_DEFAULTS.draftScheduleId;
-    else params[name] = PARAM_DEFAULTS[name] ?? `${name}-1`;
+function payloadErrors(result) {
+  if (!result || typeof result.payload !== "object") return [];
+  const errors = result.payload.errors;
+  return Array.isArray(errors) ? errors : [];
+}
+
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+
+function includesExpected(actual, expected) {
+  return toArray(expected).includes(actual);
+}
+
+function formatStep(index, label, result, pass, details = "") {
+  const state = pass ? "PASS" : "FAIL";
+  const tail = details ? ` | ${details}` : "";
+  return `[${index}] ${state} ${label}\n    ${result.method} ${result.url} -> ${result.status} (${result.elapsed}ms)${tail}\n    ${typeof result.payload === "string" ? result.payload : JSON.stringify(result.payload, null, 2)}`;
+}
+
+async function runUc01Scenario(scenario) {
+  const lines = [];
+  let step = 1;
+  const email = makeUniqueEmail("uc01");
+  const strong = { email, password: "Password123!", confirmPassword: "Password123!" };
+
+  const pushResult = (label, result, pass, details = "") => {
+    lines.push(formatStep(step, label, result, pass, details));
+    step += 1;
+  };
+
+  await callApi({ method: "POST", path: "/api/v1/dev/time/reset", body: {}, actor: "admin" });
+
+  if (scenario.id === "AT-UC01-01") {
+    const register = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("Register valid user", register, register.status === 202, "expected 202");
+
+    const tokenResp = await callApi({
+      method: "GET",
+      path: "/api/v1/dev/verification-token",
+      query: { email: strong.email },
+      actor: "admin"
+    });
+    pushResult("Get verification token (dev helper)", tokenResp, tokenResp.status === 200, "expected 200");
+
+    const verify = await callApi({
+      method: "GET",
+      path: "/api/v1/registrations/verify",
+      query: { token: tokenResp.payload?.token }
+    });
+    pushResult("Verify email", verify, verify.status === 200, "expected 200");
+
+    const login = await callApi({
+      method: "POST",
+      path: "/api/v1/auth/login",
+      body: { email: strong.email, password: strong.password }
+    });
+    const loginPass = login.status === 200 && login.payload?.status === "AUTHENTICATED";
+    pushResult("Login after verification", login, loginPass, "expected 200 + AUTHENTICATED");
+  } else if (scenario.id === "AT-UC01-02") {
+    const result = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations",
+      body: { email: "not-an-email", password: "Password123!", confirmPassword: "Password123!" }
+    });
+    const pass = result.status === 422 && payloadErrors(result).some((error) => error.code === "INVALID_EMAIL_FORMAT");
+    pushResult("Reject invalid email format", result, pass, "expected 422 + INVALID_EMAIL_FORMAT");
+  } else if (scenario.id === "AT-UC01-03") {
+    const first = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("First registration succeeds", first, first.status === 202, "expected 202");
+    const second = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    const secondCode = payloadCode(second);
+    const pass = includesExpected(second.status, [409, 422]) && includesExpected(secondCode, ["EMAIL_PENDING_REGISTRATION", "EMAIL_ALREADY_REGISTERED"]);
+    pushResult("Second duplicate registration rejected", second, pass, "expected 409/422 + duplicate code");
+  } else if (scenario.id === "AT-UC01-04") {
+    const result = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations",
+      body: { email, password: "short", confirmPassword: "short" }
+    });
+    const codes = payloadErrors(result).map((error) => error.code);
+    const pass = result.status === 422 && codes.some((code) => code.startsWith("PASSWORD_"));
+    pushResult("Reject weak password", result, pass, "expected 422 + password policy errors");
+  } else if (scenario.id === "AT-UC01-05") {
+    const result = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations",
+      body: { email: "", password: "", confirmPassword: "" }
+    });
+    const codes = payloadErrors(result).map((error) => error.code);
+    const pass = result.status === 422
+      && codes.includes("MISSING_EMAIL")
+      && codes.includes("MISSING_PASSWORD")
+      && codes.includes("MISSING_CONFIRM_PASSWORD");
+    pushResult("Reject missing required fields", result, pass, "expected required-field errors");
+  } else if (scenario.id === "AT-UC01-06") {
+    const result = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations",
+      body: { email: "bad", password: "short", confirmPassword: "wrong" }
+    });
+    const codes = payloadErrors(result).map((error) => error.code);
+    const expectedLeading = ["INVALID_EMAIL_FORMAT", "PASSWORD_TOO_SHORT", "PASSWORD_MISSING_UPPERCASE", "PASSWORD_MISSING_NUMBER"];
+    const pass = result.status === 422 && JSON.stringify(codes.slice(0, 4)) === JSON.stringify(expectedLeading);
+    pushResult("Return mixed errors in deterministic order", result, pass, "expected stable leading error order");
+  } else if (scenario.id === "AT-UC01-07") {
+    const register = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("Register pending account", register, register.status === 202, "expected 202");
+    const login = await callApi({
+      method: "POST",
+      path: "/api/v1/auth/login",
+      body: { email: strong.email, password: strong.password }
+    });
+    const pass = login.status === 403 && payloadCode(login) === "EMAIL_UNVERIFIED";
+    pushResult("Deny login before verification", login, pass, "expected 403 + EMAIL_UNVERIFIED");
+  } else if (scenario.id === "AT-UC01-08") {
+    const register = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("Register pending account", register, register.status === 202, "expected 202");
+    const tokenResp = await callApi({
+      method: "GET",
+      path: "/api/v1/dev/verification-token",
+      query: { email: strong.email },
+      actor: "admin"
+    });
+    pushResult("Get verification token (dev helper)", tokenResp, tokenResp.status === 200, "expected 200");
+    const advance = await callApi({
+      method: "POST",
+      path: "/api/v1/dev/time/advance",
+      body: { ms: 24 * 60 * 60 * 1000 }
+    });
+    pushResult("Advance time by 24h", advance, advance.status === 200, "expected 200");
+    const verify = await callApi({
+      method: "GET",
+      path: "/api/v1/registrations/verify",
+      query: { token: tokenResp.payload?.token }
+    });
+    const pass = verify.status === 410 && payloadCode(verify) === "TOKEN_EXPIRED";
+    pushResult("Reject expired verification token", verify, pass, "expected 410 + TOKEN_EXPIRED");
+  } else if (scenario.id === "AT-UC01-09") {
+    const register = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("Register pending account", register, register.status === 202, "expected 202");
+    const advance = await callApi({
+      method: "POST",
+      path: "/api/v1/dev/time/advance",
+      body: { ms: 7 * 24 * 60 * 60 * 1000 }
+    });
+    pushResult("Advance time by 7d", advance, advance.status === 200, "expected 200");
+    const login = await callApi({
+      method: "POST",
+      path: "/api/v1/auth/login",
+      body: { email: strong.email, password: strong.password }
+    });
+    const loginPass = login.status === 403 && payloadCode(login) === "REGISTRATION_ATTEMPT_EXPIRED";
+    pushResult("Deny login for expired pending registration", login, loginPass, "expected 403 + REGISTRATION_ATTEMPT_EXPIRED");
+    const resend = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations/resend-confirmation",
+      body: { email: strong.email }
+    });
+    const resendPass = resend.status === 410 && payloadCode(resend) === "REGISTRATION_ATTEMPT_EXPIRED";
+    pushResult("Deny resend for expired pending registration", resend, resendPass, "expected 410 + REGISTRATION_ATTEMPT_EXPIRED");
+  } else if (scenario.id === "AT-UC01-10") {
+    const requestA = callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    const requestB = callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    const [a, b] = await Promise.all([requestA, requestB]);
+    const statuses = [a.status, b.status].sort((x, y) => x - y);
+    const pass = statuses.length === 2 && statuses[0] !== statuses[1];
+    pushResult("Concurrent request A", a, pass, "expect one success and one failure");
+    pushResult("Concurrent request B", b, pass, "expect one success and one failure");
+  } else if (scenario.id === "AT-UC01-11") {
+    const register = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("Register pending account", register, register.status === 202, "expected 202");
+    const resend1 = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations/resend-confirmation",
+      body: { email: strong.email }
+    });
+    pushResult("Resend #1", resend1, resend1.status === 202, "expected 202");
+    const resendImmediate = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations/resend-confirmation",
+      body: { email: strong.email }
+    });
+    const cooldownPass = resendImmediate.status === 429 && payloadCode(resendImmediate) === "RESEND_COOLDOWN_ACTIVE";
+    pushResult("Resend immediately (cooldown)", resendImmediate, cooldownPass, "expected 429 + RESEND_COOLDOWN_ACTIVE");
+    await callApi({ method: "POST", path: "/api/v1/dev/time/advance", body: { ms: 61 * 1000 } });
+    const resend2 = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations/resend-confirmation",
+      body: { email: strong.email }
+    });
+    pushResult("Resend #2", resend2, resend2.status === 202, "expected 202");
+    await callApi({ method: "POST", path: "/api/v1/dev/time/advance", body: { ms: 61 * 1000 } });
+    const resend3 = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations/resend-confirmation",
+      body: { email: strong.email }
+    });
+    pushResult("Resend #3", resend3, resend3.status === 202, "expected 202");
+    await callApi({ method: "POST", path: "/api/v1/dev/time/advance", body: { ms: 61 * 1000 } });
+    const resend4 = await callApi({
+      method: "POST",
+      path: "/api/v1/registrations/resend-confirmation",
+      body: { email: strong.email }
+    });
+    const limitPass = resend4.status === 429 && payloadCode(resend4) === "RESEND_RATE_LIMITED";
+    pushResult("Resend #4 exceeds 24h rolling max", resend4, limitPass, "expected 429 + RESEND_RATE_LIMITED");
+  } else if (scenario.id === "AT-UC01-12") {
+    const register = await callApi({ method: "POST", path: "/api/v1/registrations", body: strong });
+    pushResult("Register pending account", register, register.status === 202, "expected 202");
+    const tokenResp = await callApi({
+      method: "GET",
+      path: "/api/v1/dev/verification-token",
+      query: { email: strong.email },
+      actor: "admin"
+    });
+    pushResult("Get verification token (dev helper)", tokenResp, tokenResp.status === 200, "expected 200");
+    const verifyFirst = await callApi({
+      method: "GET",
+      path: "/api/v1/registrations/verify",
+      query: { token: tokenResp.payload?.token }
+    });
+    pushResult("Verify token first use", verifyFirst, verifyFirst.status === 200, "expected 200");
+    const verifyReplay = await callApi({
+      method: "GET",
+      path: "/api/v1/registrations/verify",
+      query: { token: tokenResp.payload?.token }
+    });
+    const pass = verifyReplay.status === 410 && payloadCode(verifyReplay) === "TOKEN_ALREADY_USED";
+    pushResult("Replay same token is rejected", verifyReplay, pass, "expected 410 + TOKEN_ALREADY_USED");
+    lines.push("NOTE: Token hashing/log redaction checks remain code-level checks outside this API scenario runner.");
+  } else if (scenario.id === "AT-UC01-13") {
+    lines.push("Manual acceptance scenario.");
+    lines.push("1) Open registration view and submit invalid values via keyboard only.");
+    lines.push("2) Confirm each error is associated to its field and announced via aria-live.");
+    lines.push("3) Confirm unverified-login reminder text is announced and resend affordance is reachable by keyboard.");
+  } else {
+    lines.push(`Scenario ${scenario.id} is not implemented.`);
   }
-  return params;
+
+  return lines.join("\n\n");
+}
+
+async function executeScenario(item, scenario) {
+  if (item.id === "UC-01") {
+    const result = await runUc01Scenario(scenario);
+    setOutput(item.id, `Scenario ${scenario.id}: ${scenario.title}\nExample input:\n${JSON.stringify(scenario.example, null, 2)}\n\n${result}`);
+    return;
+  }
+  setOutput(item.id, `Scenario ${scenario.id} is not implemented for ${item.id} yet.`);
 }
 
 function makeCard(item) {
@@ -457,47 +721,34 @@ function makeCard(item) {
     <p class="uc-flow">${item.alt}</p>
   `;
 
-  const grid = document.createElement("div");
-  grid.className = "uc-grid";
   const output = document.createElement("pre");
   output.className = "uc-output";
   output.textContent = "No execution yet.";
 
-  let paramsArea = null;
-  let queryArea = null;
-  let bodyArea = null;
-
-  if (item.endpoint) {
-    const paramDefaults = defaultParamsFor(item.endpoint.path, item.endpoint.params ?? {});
-    const paramSection = makeArea("Path params JSON", paramDefaults);
-    const querySection = makeArea("Query JSON", item.endpoint.query ?? {});
-    const bodySection = makeArea("Body JSON", item.endpoint.body ?? {});
-    paramsArea = paramSection.area;
-    queryArea = querySection.area;
-    bodyArea = bodySection.area;
-    grid.append(paramSection.label, querySection.label, bodySection.label);
-  }
-
   const actions = document.createElement("div");
   actions.className = "actions";
-  const runBtn = document.createElement("button");
-  runBtn.type = "button";
-  runBtn.textContent = item.endpoint ? "Run Primary Action" : "Placeholder";
-  runBtn.disabled = !item.endpoint;
-  runBtn.addEventListener("click", async () => {
-    runBtn.disabled = true;
-    try {
-      await executeUc(item);
-    } catch (error) {
-      setOutput(item.id, `Request failed: ${String(error?.message ?? error)}`);
-    } finally {
-      runBtn.disabled = false;
-    }
-  });
-  actions.appendChild(runBtn);
 
-  article.append(grid, actions, output);
-  cards.set(item.id, { paramsArea, queryArea, bodyArea, output });
+  const scenarios = UC_SCENARIOS[item.id] ?? [];
+  for (const scenario of scenarios) {
+    const scenarioBtn = document.createElement("button");
+    scenarioBtn.type = "button";
+    scenarioBtn.textContent = `${scenario.kind === "success" ? "Success" : scenario.kind === "manual" ? "Manual" : "Alt"}: ${scenario.id}`;
+    scenarioBtn.title = `${scenario.title}\n\nExample:\n${JSON.stringify(scenario.example, null, 2)}`;
+    scenarioBtn.addEventListener("click", async () => {
+      scenarioBtn.disabled = true;
+      try {
+        await executeScenario(item, scenario);
+      } catch (error) {
+        setOutput(item.id, `Scenario failed: ${String(error?.message ?? error)}`);
+      } finally {
+        scenarioBtn.disabled = false;
+      }
+    });
+    actions.appendChild(scenarioBtn);
+  }
+
+  article.append(actions, output);
+  cards.set(item.id, { output });
   return article;
 }
 
@@ -513,38 +764,6 @@ function render(filter = "") {
   }
 }
 
-async function runAllUcs() {
-  const runBtn = document.getElementById("run-all");
-  const seedBtn = document.getElementById("seed-demo");
-  runBtn.disabled = true;
-  seedBtn.disabled = true;
-  try {
-    const seeded = await seedDemoData();
-    const summary = [`Seeded demo data with IDs:`, JSON.stringify(seeded.ids ?? {}, null, 2), "", "Run results:"];
-    for (const item of UC_ITEMS) {
-      const result = await executeUc(item);
-      summary.push(`${result.uc}: ${result.status}`);
-    }
-    setOutput("UC-22", `${cards.get("UC-22").output.textContent}\n\n--- RUN ALL SUMMARY ---\n${summary.join("\n")}`);
-  } catch (error) {
-    alert(`Run-all failed: ${String(error?.message ?? error)}`);
-  } finally {
-    runBtn.disabled = false;
-    seedBtn.disabled = false;
-  }
-}
-
-document.getElementById("save-context").addEventListener("click", saveContext);
-document.getElementById("clear-context").addEventListener("click", clearContext);
-document.getElementById("seed-demo").addEventListener("click", async () => {
-  try {
-    const payload = await seedDemoData();
-    alert(`Seed complete.\n\n${JSON.stringify(payload.ids ?? {}, null, 2)}`);
-  } catch (error) {
-    alert(`Seed failed: ${String(error?.message ?? error)}`);
-  }
-});
-document.getElementById("run-all").addEventListener("click", runAllUcs);
 filterEl.addEventListener("input", () => render(filterEl.value));
 
 loadContext();

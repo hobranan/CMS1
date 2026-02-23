@@ -165,7 +165,6 @@ async function tryServeFrontend(req, res, pathname) {
   const root = process.cwd();
   const viewsRoot = path.resolve(root, "frontend", "src", "views");
   const appRoot = path.resolve(root, "frontend", "src", "app");
-  const appSimpleRoot = path.resolve(root, "frontend", "src", "appsimple");
 
   if (pathname === "/") {
     const html = `<!doctype html>
@@ -176,7 +175,6 @@ async function tryServeFrontend(req, res, pathname) {
   <p>Apps:</p>
   <ul>
     <li><a href="/app/">/app (UC map)</a></li>
-    <li><a href="/appsimple/">/appsimple (API tester)</a></li>
   </ul>
   <p>Open a view directly:</p>
   <ul>
@@ -206,40 +204,10 @@ async function tryServeFrontend(req, res, pathname) {
     return true;
   }
 
-  if (pathname === "/appsimple") {
-    sendResult(res, {
-      status: 302,
-      headers: { location: "/appsimple/" }
-    });
-    return true;
-  }
-
   if (pathname === "/app/" || pathname.startsWith("/app/")) {
     const relPath = pathname === "/app/" ? "index.html" : pathname.slice("/app/".length);
     const filePath = path.resolve(appRoot, relPath);
     if (!filePath.startsWith(appRoot)) {
-      sendResult(res, { status: 403, body: "Forbidden" });
-      return true;
-    }
-
-    try {
-      const content = await fs.readFile(filePath);
-      sendResult(res, {
-        status: 200,
-        body: content,
-        headers: { "content-type": contentTypeFor(filePath) }
-      });
-      return true;
-    } catch {
-      sendResult(res, { status: 404, body: "App asset not found." });
-      return true;
-    }
-  }
-
-  if (pathname === "/appsimple/" || pathname.startsWith("/appsimple/")) {
-    const relPath = pathname === "/appsimple/" ? "index.html" : pathname.slice("/appsimple/".length);
-    const filePath = path.resolve(appSimpleRoot, relPath);
-    if (!filePath.startsWith(appSimpleRoot)) {
       sendResult(res, { status: 403, body: "Forbidden" });
       return true;
     }
@@ -547,10 +515,14 @@ function seedDemoData(deps) {
 }
 
 export function createServerApp(customDeps = {}) {
+  let clockOffsetMs = 0;
   const deps = {
     ...createDefaultDeps(),
     ...customDeps
   };
+  if (!customDeps.nowProvider) {
+    deps.nowProvider = () => new Date(Date.now() + clockOffsetMs);
+  }
   const routeMap = createRegistrationRoutes(deps);
   const routes = compileRoutes(routeMap);
 
@@ -568,6 +540,58 @@ export function createServerApp(customDeps = {}) {
       if (method === "POST" && pathname === "/api/v1/dev/seed-demo") {
         const seeded = seedDemoData(deps);
         sendResult(res, { status: 200, body: seeded });
+        return;
+      }
+
+      if (method === "GET" && pathname === "/api/v1/dev/verification-token") {
+        const email = String(url.searchParams.get("email") ?? "").trim().toLowerCase();
+        if (!email) {
+          sendResult(res, {
+            status: 400,
+            body: { code: "EMAIL_REQUIRED", message: "email query parameter is required." }
+          });
+          return;
+        }
+        const outbox = deps.verificationEmailService?.outbox ?? [];
+        const latest = [...outbox].reverse().find((entry) => String(entry.email ?? "").toLowerCase() === email);
+        if (!latest) {
+          sendResult(res, {
+            status: 404,
+            body: { code: "TOKEN_NOT_FOUND", message: "No verification token found for email." }
+          });
+          return;
+        }
+        sendResult(res, {
+          status: 200,
+          body: { email, token: latest.token, expiresAt: latest.expiresAt }
+        });
+        return;
+      }
+
+      if (method === "POST" && pathname === "/api/v1/dev/time/reset") {
+        clockOffsetMs = 0;
+        sendResult(res, {
+          status: 200,
+          body: { status: "OK", offsetMs: clockOffsetMs, now: deps.nowProvider().toISOString() }
+        });
+        return;
+      }
+
+      if (method === "POST" && pathname === "/api/v1/dev/time/advance") {
+        const body = await readBody(req);
+        const deltaMs = Number(body?.ms);
+        if (!Number.isFinite(deltaMs)) {
+          sendResult(res, {
+            status: 400,
+            body: { code: "INVALID_MS", message: "Body field 'ms' must be a finite number." }
+          });
+          return;
+        }
+        clockOffsetMs += deltaMs;
+        sendResult(res, {
+          status: 200,
+          body: { status: "OK", offsetMs: clockOffsetMs, now: deps.nowProvider().toISOString() }
+        });
         return;
       }
 
