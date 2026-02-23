@@ -74,6 +74,10 @@ import { TicketObservabilityService } from "../services/tickets/ticket-observabi
 import { createPublicAnnouncementRoutes } from "./public-announcements/routes.js";
 import { AnnouncementStore } from "../models/announcement-store.js";
 import { PublicAnnouncementsObservabilityService } from "../services/public-announcements/public-announcements-observability-service.js";
+import { createValidationRoutes } from "./validation_routes.js";
+import { FormSubmissionRepository } from "../models/form_submission_repository.js";
+import { AtomicFormPersistenceService } from "../services/persistence/atomic_form_persistence_service.js";
+import { ValidationObservabilityService } from "../services/validation/validation_observability_service.js";
 
 export function createRegistrationRoutes(deps) {
   if (!deps.credentialStoreRepository) {
@@ -245,6 +249,15 @@ export function createRegistrationRoutes(deps) {
   if (!deps.publicAnnouncementsObservabilityService) {
     deps.publicAnnouncementsObservabilityService = new PublicAnnouncementsObservabilityService();
   }
+  if (!deps.formSubmissionRepository) {
+    deps.formSubmissionRepository = new FormSubmissionRepository();
+  }
+  if (!deps.atomicPersistence) {
+    deps.atomicPersistence = new AtomicFormPersistenceService(deps.formSubmissionRepository);
+  }
+  if (!deps.observability) {
+    deps.observability = new ValidationObservabilityService();
+  }
 
   const registrationController = createRegistrationController(deps);
   const authController = createAuthController(deps);
@@ -268,6 +281,7 @@ export function createRegistrationRoutes(deps) {
   const paymentRoutes = createPaymentRoutes(deps);
   const ticketRoutes = createTicketRoutes(deps);
   const publicAnnouncementRoutes = createPublicAnnouncementRoutes(deps);
+  const validationRoutes = createValidationRoutes(deps);
 
   return {
     "/api/v1/registrations:POST": registrationController.submitRegistration,
@@ -293,7 +307,8 @@ export function createRegistrationRoutes(deps) {
     ...publicPricingRoutes,
     ...paymentRoutes,
     ...ticketRoutes,
-    ...publicAnnouncementRoutes
+    ...publicAnnouncementRoutes,
+    ...validationRoutes
   };
 }
 

@@ -412,8 +412,11 @@ function seedDemoData(deps) {
   deps.scheduleDraftRepository.seedConference({
     conferenceId: "conf-1",
     acceptedPapers: [{ paperId: "paper-1", title: "Seeded Paper 1" }],
-    rooms: ["Room A", "Room B"],
-    parameters: { dayStart: "09:00", dayEnd: "11:00", slotMinutes: 30 },
+    rooms: [
+      { roomId: "room-a", roomName: "Room A", available: true },
+      { roomId: "room-b", roomName: "Room B", available: true }
+    ],
+    parameters: { slotMinutes: 30, totalSlots: 4, startMinute: 540 },
     editorIds: ["editor-1"],
     editLocked: false,
     lockReason: null
@@ -592,6 +595,40 @@ export function createServerApp(customDeps = {}) {
           status: 200,
           body: { status: "OK", offsetMs: clockOffsetMs, now: deps.nowProvider().toISOString() }
         });
+        return;
+      }
+
+      if (method === "POST" && pathname === "/api/v1/dev/forms/force-persistence-failure") {
+        if (deps.atomicPersistence?.forceNextFailure) {
+          deps.atomicPersistence.forceNextFailure();
+          sendResult(res, { status: 200, body: { status: "OK", armed: true } });
+          return;
+        }
+        sendResult(res, {
+          status: 503,
+          body: { code: "FORM_PERSISTENCE_UNAVAILABLE", message: "Atomic persistence service is unavailable." }
+        });
+        return;
+      }
+
+      if (method === "GET" && pathname === "/api/v1/dev/forms/record") {
+        const recordId = String(url.searchParams.get("recordId") ?? "").trim();
+        if (!recordId) {
+          sendResult(res, {
+            status: 400,
+            body: { code: "RECORD_ID_REQUIRED", message: "recordId query parameter is required." }
+          });
+          return;
+        }
+        const record = deps.formSubmissionRepository?.getRecord ? deps.formSubmissionRepository.getRecord(recordId) : null;
+        if (!record) {
+          sendResult(res, {
+            status: 404,
+            body: { code: "RECORD_NOT_FOUND", message: "No form record found for recordId." }
+          });
+          return;
+        }
+        sendResult(res, { status: 200, body: { status: "OK", record } });
         return;
       }
 
