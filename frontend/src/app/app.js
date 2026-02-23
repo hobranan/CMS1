@@ -477,7 +477,7 @@ const UC_AUTOPLAY_SCENARIOS = {
               actor: "author",
               body: { email: "author@example.com", password: "Password123!" }
             },
-            expect: { status: 200, bodyStatus: "AUTHENTICATED" }
+            expect: { status: 200, bodyStatus: "AUTHENTICATED", bodyPath: "status", equals: "AUTHENTICATED" }
           }
         ]
       }
@@ -2001,8 +2001,6 @@ async function runUc01Scenario(scenario) {
     lines.push("1) Open registration view and submit invalid values via keyboard only.");
     lines.push("2) Confirm each error is associated to its field and announced via aria-live.");
     lines.push("3) Confirm unverified-login reminder text is announced and resend affordance is reachable by keyboard.");
-  } else {
-    lines.push(`Scenario ${scenario.id} is not implemented.`);
   }
 
   return lines.join("\n\n");
@@ -2167,8 +2165,6 @@ async function runUc02Scenario(scenario) {
     lines.push("1) Verify UC-02 requirements map to AT cases in UC-02.md and UC-02-AT.md.");
     lines.push("2) Verify rule ownership remains explicit in backend form definitions.");
     lines.push("3) Confirm each validation rule has a matching acceptance scenario.");
-  } else {
-    lines.push(`Scenario ${scenario.id} is not implemented.`);
   }
 
   return lines.join("\n\n");
@@ -2253,6 +2249,21 @@ function render(filter = "") {
 }
 
 filterEl.addEventListener("input", () => render(filterEl.value));
+
+export const __appTestHooks = {
+  parseJson,
+  saveContext,
+  loadContext,
+  ensureActorContext,
+  headersFor,
+  fillPath,
+  setOutput,
+  resolveValue,
+  valueAtPath,
+  checkExpectation,
+  runPlannedScenario,
+  buildUcScenarioList
+};
 
 loadContext();
 render();
