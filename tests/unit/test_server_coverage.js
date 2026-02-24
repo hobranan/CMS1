@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { createServerApp, startServer } from "../../backend/src/server.js";
+import { spawnSync } from "node:child_process";
+import { createServerApp, startServer, __serverTestHooks } from "../../backend/src/server.js";
 
 async function listen(server) {
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
@@ -57,11 +58,20 @@ test("server static/dev/routes cover core server.js branches", async (t) => {
   const viewFile = await request(baseUrl, "/views/submission-form.html");
   assert.equal(viewFile.status, 200);
 
+  const supportFile = await request(baseUrl, "/support/uc01_uc02_runner.js");
+  assert.equal(supportFile.status, 200);
+
   const traversalView = await request(baseUrl, "/views/C:/outside.txt");
   assert.equal(traversalView.status, 403);
 
+  const traversalSupport = await request(baseUrl, "/support/C:/outside.txt");
+  assert.equal(traversalSupport.status, 403);
+
   const viewMissing = await request(baseUrl, "/views/does-not-exist.html");
   assert.equal(viewMissing.status, 404);
+
+  const supportMissing = await request(baseUrl, "/support/does-not-exist.js");
+  assert.equal(supportMissing.status, 404);
 
   const nonGetView = await request(baseUrl, "/views/submission-form.html", { method: "POST" });
   assert.equal(nonGetView.status, 404);
@@ -228,4 +238,74 @@ test("startServer starts and can be cleanly closed", async () => {
   await new Promise((resolve) => setTimeout(resolve, 10));
   await new Promise((resolve) => server.close(resolve));
   assert.ok(server.listening === false);
+});
+
+test("startServer honors CMS1_EXIT_AFTER_START callback path", async () => {
+  const originalEnv = process.env.CMS1_EXIT_AFTER_START;
+  const originalExit = process.exit;
+  let exitCalled = false;
+  process.env.CMS1_EXIT_AFTER_START = "1";
+  process.exit = ((code) => {
+    exitCalled = code === 0;
+    return undefined;
+  });
+
+  try {
+    startServer({ port: 0 });
+    await new Promise((resolve) => setTimeout(resolve, 30));
+    assert.equal(exitCalled, true);
+  } finally {
+    process.exit = originalExit;
+    if (originalEnv === undefined) delete process.env.CMS1_EXIT_AFTER_START;
+    else process.env.CMS1_EXIT_AFTER_START = originalEnv;
+  }
+});
+
+test("server helper hooks cover parseRouteKey/compilePath utility branches", () => {
+  const parsed = __serverTestHooks.parseRouteKey("/x/:id:GET");
+  assert.equal(parsed.method, "GET");
+  assert.equal(parsed.pathTemplate, "/x/:id");
+
+  assert.throws(() => __serverTestHooks.parseRouteKey("/x/:id"), /Invalid route key/);
+
+  const matcher = __serverTestHooks.compilePath("/a/:id/b");
+  assert.deepEqual(matcher.match("/a/abc/b"), { id: "abc" });
+  assert.deepEqual(matcher.match("/a/a%20b/b"), { id: "a b" });
+  assert.equal(matcher.match("/a/abc/c"), null);
+  assert.equal(matcher.match("/a/abc"), null);
+
+  const compiled = __serverTestHooks.compileRoutes({
+    "/a/:id:GET": () => ({ status: 200 }),
+    "/a/static:GET": () => ({ status: 200 })
+  });
+  assert.equal(compiled[0].pathTemplate, "/a/static");
+  assert.equal(compiled[1].pathTemplate, "/a/:id");
+
+  const fromJson = __serverTestHooks.parseUser({ "x-user-json": "{\"id\":\"u1\"}" });
+  assert.equal(fromJson?.id, "u1");
+  assert.equal(__serverTestHooks.parseUser({ "x-user-json": "{" }), null);
+  const fromHeaders = __serverTestHooks.parseUser({ "x-user-id": "u2", "x-user-email": "u2@example.com", "x-user-role": "author" });
+  assert.equal(fromHeaders?.id, "u2");
+  assert.equal(__serverTestHooks.parseUser({}), null);
+
+  assert.match(__serverTestHooks.contentTypeFor("x.html"), /text\/html/);
+  assert.match(__serverTestHooks.contentTypeFor("x.js"), /text\/javascript/);
+  assert.match(__serverTestHooks.contentTypeFor("x.css"), /text\/css/);
+  assert.match(__serverTestHooks.contentTypeFor("x.json"), /application\/json/);
+  assert.match(__serverTestHooks.contentTypeFor("x.svg"), /image\/svg\+xml/);
+  assert.match(__serverTestHooks.contentTypeFor("x.png"), /image\/png/);
+  assert.match(__serverTestHooks.contentTypeFor("x.jpg"), /image\/jpeg/);
+  assert.match(__serverTestHooks.contentTypeFor("x.jpeg"), /image\/jpeg/);
+  assert.match(__serverTestHooks.contentTypeFor("x.unknown"), /text\/plain/);
+});
+
+test("server module entrypoint branch runs when executed directly", async () => {
+  const out = spawnSync(process.execPath, ["backend/src/server.js"], {
+    cwd: process.cwd(),
+    encoding: "utf8",
+    env: { ...process.env, PORT: "0", CMS1_EXIT_AFTER_START: "1" },
+    timeout: 2000
+  });
+  const output = `${out.stdout ?? ""}${out.stderr ?? ""}`;
+  assert.match(output, /CMS1 API listening on http:\/\/localhost:/);
 });

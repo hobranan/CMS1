@@ -165,6 +165,7 @@ async function tryServeFrontend(req, res, pathname) {
   const root = process.cwd();
   const viewsRoot = path.resolve(root, "frontend", "src", "views");
   const appRoot = path.resolve(root, "frontend", "src", "app");
+  const supportRoot = path.resolve(root, "frontend", "support");
 
   if (pathname === "/") {
     const html = `<!doctype html>
@@ -227,7 +228,29 @@ async function tryServeFrontend(req, res, pathname) {
   }
 
   if (!pathname.startsWith("/views/")) {
-    return false;
+    if (!pathname.startsWith("/support/")) {
+      return false;
+    }
+
+    const relPath = pathname.slice("/support/".length);
+    const filePath = path.resolve(supportRoot, relPath);
+    if (!filePath.startsWith(supportRoot)) {
+      sendResult(res, { status: 403, body: "Forbidden" });
+      return true;
+    }
+
+    try {
+      const content = await fs.readFile(filePath);
+      sendResult(res, {
+        status: 200,
+        body: content,
+        headers: { "content-type": contentTypeFor(filePath) }
+      });
+      return true;
+    } catch {
+      sendResult(res, { status: 404, body: "Support asset not found." });
+      return true;
+    }
   }
 
   const relPath = pathname.slice("/views/".length);
@@ -689,9 +712,20 @@ export function startServer({ port = Number(process.env.PORT ?? 3000) } = {}) {
     const address = server.address();
     const resolvedPort = typeof address === "object" && address ? address.port : port;
     process.stdout.write(`CMS1 API listening on http://localhost:${resolvedPort}\n`);
+    if (process.env.CMS1_EXIT_AFTER_START === "1") {
+      server.close(() => process.exit(0));
+    }
   });
   return server;
 }
+
+export const __serverTestHooks = {
+  parseRouteKey,
+  compilePath,
+  compileRoutes,
+  parseUser,
+  contentTypeFor
+};
 
 const entryPath = process.argv[1] ? path.resolve(process.argv[1]) : "";
 const thisFilePath = fileURLToPath(import.meta.url);

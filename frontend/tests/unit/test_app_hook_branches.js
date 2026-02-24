@@ -79,7 +79,16 @@ test("app hooks cover expectation maxStatus and includes failure branches", asyn
 
   const resolved = hooks.resolveValue("$ids.paperId", { ids: { paperId: "paper-1" } });
   assert.equal(resolved, "paper-1");
+  const unresolved = hooks.resolveValue("$ids.missing", { ids: {} });
+  assert.equal(unresolved, "$ids.missing");
 
   const fallback = hooks.parseJson("{", { ok: false });
   assert.deepEqual(fallback, { ok: false });
+
+  assert.equal(hooks.firstDefined(undefined, null, "x"), "x");
+  assert.equal(hooks.firstDefined(undefined, null), undefined);
+  assert.equal(hooks.allTrue([1, true, "ok"]), true);
+  assert.equal(hooks.allTrue([1, 0, true]), false);
+  assert.equal(hooks.formatError(new Error("boom")), "boom");
+  assert.match(hooks.formatError("plain"), /plain/);
 });
