@@ -285,7 +285,7 @@ function createDefaultDeps() {
 }
 
 function seedDemoData(deps) {
-  const now = deps.nowProvider ? deps.nowProvider() : new Date();
+  const now = deps.nowProvider();
 
   // Registration/auth users for login/password flows.
   const passwordHash = hashPassword("Password123!");
@@ -706,11 +706,15 @@ export function createServerApp(customDeps = {}) {
   });
 }
 
-export function startServer({ port = Number(process.env.PORT ?? 3000) } = {}) {
+function resolveStartPort(portValue) {
+  return Number(portValue ?? 3000);
+}
+
+export function startServer({ port = resolveStartPort(process.env.PORT) } = {}) {
   const server = createServerApp();
   server.listen(port, () => {
     const address = server.address();
-    const resolvedPort = typeof address === "object" && address ? address.port : port;
+    const resolvedPort = resolveListeningPort(address, port);
     process.stdout.write(`CMS1 API listening on http://localhost:${resolvedPort}\n`);
     if (process.env.CMS1_EXIT_AFTER_START === "1") {
       server.close(() => process.exit(0));
@@ -719,12 +723,21 @@ export function startServer({ port = Number(process.env.PORT ?? 3000) } = {}) {
   return server;
 }
 
+function resolveListeningPort(address, fallbackPort) {
+  return typeof address === "object" && address ? address.port : fallbackPort;
+}
+
 export const __serverTestHooks = {
   parseRouteKey,
   compilePath,
   compileRoutes,
   parseUser,
-  contentTypeFor
+  contentTypeFor,
+  readBody,
+  sendResult,
+  resolveListeningPort,
+  createDefaultDeps,
+  resolveStartPort
 };
 
 const entryPath = process.argv[1] ? path.resolve(process.argv[1]) : "";

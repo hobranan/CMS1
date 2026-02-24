@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { EventEmitter } from "node:events";
 import { createServerApp, startServer, __serverTestHooks } from "../../backend/src/server.js";
 
 async function listen(server) {
@@ -286,6 +287,14 @@ test("server helper hooks cover parseRouteKey/compilePath utility branches", () 
   assert.equal(__serverTestHooks.parseUser({ "x-user-json": "{" }), null);
   const fromHeaders = __serverTestHooks.parseUser({ "x-user-id": "u2", "x-user-email": "u2@example.com", "x-user-role": "author" });
   assert.equal(fromHeaders?.id, "u2");
+  const fromPartialHeaders = __serverTestHooks.parseUser({ "x-user-id": null, "x-user-email": "u3@example.com", "x-user-role": null });
+  assert.equal(fromPartialHeaders?.id, undefined);
+  assert.equal(fromPartialHeaders?.email, "u3@example.com");
+  assert.equal(fromPartialHeaders?.role, undefined);
+  const fromRoleOnly = __serverTestHooks.parseUser({ "x-user-id": "u4", "x-user-email": null, "x-user-role": "editor" });
+  assert.equal(fromRoleOnly?.id, "u4");
+  assert.equal(fromRoleOnly?.email, undefined);
+  assert.equal(fromRoleOnly?.role, "editor");
   assert.equal(__serverTestHooks.parseUser({}), null);
 
   assert.match(__serverTestHooks.contentTypeFor("x.html"), /text\/html/);
@@ -299,6 +308,128 @@ test("server helper hooks cover parseRouteKey/compilePath utility branches", () 
   assert.match(__serverTestHooks.contentTypeFor("x.unknown"), /text\/plain/);
 });
 
+test("server helper hooks cover readBody/sendResult and resolveListeningPort edges", async () => {
+  class MockReq extends EventEmitter {
+    constructor(headers = {}) {
+      super();
+      this.headers = headers;
+    }
+  }
+
+  const reqEmpty = new MockReq({});
+  const emptyPromise = __serverTestHooks.readBody(reqEmpty);
+  reqEmpty.emit("end");
+  assert.equal(await emptyPromise, undefined);
+
+  const reqJsonInvalid = new MockReq({ "content-type": "application/json" });
+  const jsonInvalidPromise = __serverTestHooks.readBody(reqJsonInvalid);
+  reqJsonInvalid.emit("data", Buffer.from("{"));
+  reqJsonInvalid.emit("end");
+  assert.equal(await jsonInvalidPromise, undefined);
+
+  const reqPlain = new MockReq({});
+  const plainPromise = __serverTestHooks.readBody(reqPlain);
+  reqPlain.emit("data", Buffer.from("plain-text"));
+  reqPlain.emit("end");
+  assert.equal(await plainPromise, "plain-text");
+
+  const reqError = new MockReq({});
+  const errorPromise = __serverTestHooks.readBody(reqError);
+  reqError.emit("error", new Error("stream failed"));
+  await assert.rejects(errorPromise, /stream failed/);
+
+  const writes = [];
+  const res = {
+    writeHead(status, headers) {
+      writes.push({ status, headers });
+    },
+    end(body) {
+      writes.push({ body });
+    }
+  };
+
+  __serverTestHooks.sendResult(res, undefined);
+  assert.equal(writes[0].status, 200);
+  assert.equal(writes[1].body, undefined);
+
+  __serverTestHooks.sendResult(res, { body: "ok" });
+  assert.equal(writes[2].status, 200);
+  assert.match(String(writes[2].headers["content-type"]), /text\/plain/);
+  assert.equal(writes[3].body, "ok");
+
+  assert.equal(__serverTestHooks.resolveListeningPort(null, 3000), 3000);
+  assert.equal(__serverTestHooks.resolveListeningPort({ port: 4123 }, 3000), 4123);
+
+  const defaultDeps = __serverTestHooks.createDefaultDeps();
+  assert.ok(defaultDeps.nowProvider() instanceof Date);
+  assert.equal(__serverTestHooks.resolveStartPort(undefined), 3000);
+  assert.equal(__serverTestHooks.resolveStartPort("0"), 0);
+});
+
+test("server fallback branches cover missing method/url and string error formatting", async (t) => {
+  const failingRepo = {
+    findActiveUserByEmail() {
+      throw "string failure";
+    },
+    addRegistrationAttempt() {},
+    usersByEmail: new Map(),
+    pendingByEmail: new Map(),
+    tokensByHash: new Map()
+  };
+  const server = createServerApp({ repository: failingRepo, verificationEmailService: null });
+  t.after(() => server.close());
+  const port = await listen(server);
+  const baseUrl = `http://127.0.0.1:${port}`;
+
+  const req = new EventEmitter();
+  req.method = undefined;
+  req.url = undefined;
+  req.headers = {};
+  const result = await new Promise((resolve) => {
+    const res = {
+      statusCode: 200,
+      headers: {},
+      writeHead(status, headers = {}) {
+        this.statusCode = status;
+        this.headers = headers;
+      },
+      end(body) {
+        resolve({ status: this.statusCode, body: String(body ?? "") });
+      }
+    };
+    process.nextTick(() => req.emit("end"));
+    server.emit("request", req, res);
+  });
+  assert.equal(result.status, 404);
+
+  const tokenNoService = await request(baseUrl, "/api/v1/dev/verification-token?email=nosvc%40example.com");
+  assert.equal(tokenNoService.status, 404);
+
+  const serverWithOutbox = createServerApp({
+    verificationEmailService: { outbox: [{ token: "t0", expiresAt: new Date().toISOString() }, { email: "other@example.com", token: "t1", expiresAt: new Date().toISOString() }] }
+  });
+  t.after(() => serverWithOutbox.close());
+  const portOutbox = await listen(serverWithOutbox);
+  const baseOutbox = `http://127.0.0.1:${portOutbox}`;
+  const tokenMismatch = await request(baseOutbox, "/api/v1/dev/verification-token?email=target%40example.com");
+  assert.equal(tokenMismatch.status, 404);
+
+  const serverNoRecordGetter = createServerApp({ formSubmissionRepository: {} });
+  t.after(() => serverNoRecordGetter.close());
+  const portNoRecord = await listen(serverNoRecordGetter);
+  const baseNoRecord = `http://127.0.0.1:${portNoRecord}`;
+  const noGetterRecord = await request(baseNoRecord, "/api/v1/dev/forms/record?recordId=abc");
+  assert.equal(noGetterRecord.status, 404);
+
+  const stringUnhandled = await request(baseUrl, "/api/v1/registrations", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ email: "s@example.com", password: "Password123!", confirmPassword: "Password123!" })
+  });
+  assert.equal(stringUnhandled.status, 500);
+  assert.equal(stringUnhandled.payload?.details, "string failure");
+});
+
 test("server module entrypoint branch runs when executed directly", async () => {
   const out = spawnSync(process.execPath, ["backend/src/server.js"], {
     cwd: process.cwd(),
@@ -308,4 +439,38 @@ test("server module entrypoint branch runs when executed directly", async () => 
   });
   const output = `${out.stdout ?? ""}${out.stderr ?? ""}`;
   assert.match(output, /CMS1 API listening on http:\/\/localhost:/);
+});
+
+test("server module non-entry import branch does not auto-start", () => {
+  const out = spawnSync(
+    process.execPath,
+    ["--input-type=module", "-e", "import './backend/src/server.js';"],
+    { cwd: process.cwd(), encoding: "utf8", timeout: 2000 }
+  );
+  assert.equal(out.status, 0);
+  const output = `${out.stdout ?? ""}${out.stderr ?? ""}`;
+  assert.doesNotMatch(output, /CMS1 API listening on http:\/\/localhost:/);
+});
+
+test("startServer uses default port parameter from env when omitted", async () => {
+  const originalEnv = process.env.PORT;
+  const originalExit = process.exit;
+  let exitCalled = false;
+  process.env.PORT = "0";
+  process.env.CMS1_EXIT_AFTER_START = "1";
+  process.exit = ((code) => {
+    exitCalled = code === 0;
+    return undefined;
+  });
+
+  try {
+    startServer();
+    await new Promise((resolve) => setTimeout(resolve, 30));
+    assert.equal(exitCalled, true);
+  } finally {
+    process.exit = originalExit;
+    if (originalEnv === undefined) delete process.env.PORT;
+    else process.env.PORT = originalEnv;
+    delete process.env.CMS1_EXIT_AFTER_START;
+  }
 });
