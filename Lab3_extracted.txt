@@ -1,0 +1,64 @@
+PAGES: 2
+
+
+===== PAGE 1 =====
+
+ECE 493 Software Systems Design Project  
+Winter 2026 
+Laboratory #3 
+Dr. Scott Dick 
+ 
+Due Date: Monday Mar. 2, 2026, 11:59:59pm 
+ 
+Additional Resources 
+ 
+https://nodejs.org/api/test.html 
+ 
+https://www.npmjs.com/package/supertest 
+ 
+https://github.com/bcoe/c8 
+ 
+ 
+Discussion 
+With the planning and task generation steps in Spec-kit completed in Lab #2, it’s now time to 
+generate the code and tests. Codex will generate the code as requested, as well as unit and 
+integration tests. You will also instruct it to implement the acceptance test suite that we planned 
+out in Lab #1. During testing, the Instructor observed that Codex was unwilling to implement all 
+features in a single batch (and in truth that might not have been wise anyway). Instead, the 
+Instructor’s version implemented features (each one a use case) in the same order as they were 
+planned in Lab #2.  
+ Validating generated code will most sensibly be done via testing, as usual. You are to 
+order Codex to produce unit and integration test cases that cover all branches within the code; all 
+tests must then pass. Code coverage is measured using tools besides Node.js test or Supertest; the 
+c8 tool in particular was suggested by Codex. One particularly important note: Codex runs in a  
+sandbox, for security; however, that means it cannot run code requiring network calls. You’ll 
+have to instruct Codex to run with elevated permissions in order for it to run your tests. 
+Alternatively, you can run the testing and code coverage tools yourself, saving many tokens. 
+These are already automated testing tools; there should be no need to run them from within the 
+Codex shell. (You are in fact encouraged to think about what existing tools can be used to 
+augment the AI tools; we believe there is a place for traditional software tool support even in 
+agentic software development.)  
+Note that debugging, if needed for the tests to all pass, should take place within Codex to 
+maintain the overall structure of the codebase and its relationship to the plans and tasks 
+developed in Spec-kit. 
+ 
+Requirements 
+You will submit your completed source tree (which is to include your tests), and a brief report. 
+The report should include: 
+ The procedures you followed to execute the tests (including prompts if you ran the tests 
+via Codex). 
+ A status report on tests that pass (after debugging). 
+ A coverage report that should show 100% branch coverage.
+
+===== PAGE 2 =====
+
+Submission 
+ Submit your source tree through the Department’s git server; Jesse will provide 
+instructions on this step. (This is also how your group project implemetnations will be 
+submitted.) 
+ Submit your report via the submission link in Canvas 
+ 
+Grading 
+Working code         20% 
+All tests pass         50% 
+100% branch coverage achieved      30%
